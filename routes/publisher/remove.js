@@ -1,13 +1,16 @@
 var express = require("express");
 var router = express.Router();
-const { User } = require("../../models");
-router.post("/", function(req, res, next) {
-  User.update(
+const { TypeGame } = require("../../models");
+router.delete("/:id", function(req, res, next) {
+  TypeGame.update(
     {
-      city: req.body.city,
-      age: req.body.age
+      deletedAt: new Date()
     },
-    { where: { id: req.body.id } }
+    {
+      where: {
+        id: req.params.id
+      }
+    }
   )
     .then(item => {
       res.json({ item });

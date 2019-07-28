@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-const { BoardGame } = require("../../models");
+const { LoanGame } = require("../../models");
 router.delete("/:id", function(req, res, next) {
-  BoardGame.update(
+  LoanGame.update(
     {
       deletedAt: new Date()
     },

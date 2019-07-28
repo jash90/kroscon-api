@@ -8,8 +8,12 @@ const {
   MechanicsGame
 } = require("../../models");
 router.post("/", function(req, res, next) {
-  const types = JSON.parse(req.body.types);
-  const mechanics = JSON.parse(req.body.mechanics);
+  let mechanics = [];
+  let types = [];
+  if (req.body.types)
+  types = JSON.parse(req.body.types);
+  if (req.body.mechanics)
+  mechanics = JSON.parse(req.body.mechanics);
   BoardGame.create({
     name: req.body.name,
     uuid: req.body.uuid,

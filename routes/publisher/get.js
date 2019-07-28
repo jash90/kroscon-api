@@ -1,14 +1,12 @@
 var express = require("express");
 var router = express.Router();
-const { User } = require("../../models");
-router.post("/", function(req, res, next) {
-  User.update(
-    {
-      city: req.body.city,
-      age: req.body.age
-    },
-    { where: { id: req.body.id } }
-  )
+const { TypeGame } = require("../../models");
+router.get("/:id", function(req, res, next) {
+  TypeGame.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
     .then(item => {
       res.json({ item });
     })
