@@ -2,10 +2,11 @@ var express = require("express");
 var router = express.Router();
 const { LoanGame } = require("../../models");
 router.get("/", function(req, res, next) {
+  const now =new Date();
   LoanGame.update(
     {
-      endLoan: Date.now(),
-      updatedAt: Date.now()
+      endLoan: now,
+      deletedAt: null
     },
     { where: { id: req.body.id } }
   )

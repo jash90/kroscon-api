@@ -29,6 +29,7 @@ app.use('/boardGame/remove', BoardGame.remove);
 app.use('/boardGame/add', BoardGame.add);
 app.use('/boardGame/edit', BoardGame.edit);
 app.use('/allBoardGames', BoardGame.getAllOffset);
+app.use('/allAvailableBoardGames', BoardGame.getAllAvailable);
 
 //boardGameTypeGame
 app.use('/boardGameTypeGames', BoardGameTypeGame.getAll);

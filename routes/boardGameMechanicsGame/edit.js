@@ -5,7 +5,6 @@ router.post("/", function(req, res, next) {
   BoardGameMechanicsGame.update({
     boardGameId: req.body.boardGameId,
     mechanicsGameId: req.body.mechanicsGameId,
-    updatedAt: Date.now()
   })
     .then(item => {
       res.json({item});

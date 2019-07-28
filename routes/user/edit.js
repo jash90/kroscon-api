@@ -6,8 +6,7 @@ router.post("/", function(req, res, next) {
     {
       password: req.body.password,
       city: req.body.city,
-      age: req.body.age,
-      updatedAt: Date.now()
+      age: req.body.age
     },
     { where: { id: req.body.id } }
   )

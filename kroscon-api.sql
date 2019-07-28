@@ -5,8 +5,8 @@ CREATE TABLE "users" (
   "city" varchar(255) null,
   "age" int null,
   "createdAt" timestamp NOT NULL,
-  "updatedAt" timestamp,
-  "deletedAt" timestamp
+  "updatedAt" timestamp null,
+  "deletedAt" timestamp null
 );
 
 CREATE TABLE "boardGames" (
@@ -19,8 +19,8 @@ CREATE TABLE "boardGames" (
   "minAge" int NOT NULL,
   "publisherId" int NOT NULL,
   "createdAt" timestamp NOT NULL,
-  "updatedAt" timestamp,
-  "deletedAt" timestamp
+  "updatedAt" timestamp null,
+  "deletedAt" timestamp null
 );
 
 CREATE TABLE "loanGames" (

@@ -1,9 +1,13 @@
 var express = require("express");
 var router = express.Router();
-const { BoardGame, BoardGameTypeGame, BoardGameMechanicsGame } = require("../../models");
+const {
+  BoardGame,
+  BoardGameTypeGame,
+  BoardGameMechanicsGame
+} = require("../../models");
 router.post("/", function(req, res, next) {
-//   const types = JSON.parse(req.body.types);
-//   const mechanics = JSON.parse(req.body.mechanics);
+  //   const types = JSON.parse(req.body.types);
+  //   const mechanics = JSON.parse(req.body.mechanics);
   BoardGame.update(
     {
       name: req.body.name,
@@ -12,8 +16,7 @@ router.post("/", function(req, res, next) {
       maxPlayers: req.body.maxPlayers,
       playingTime: req.body.playingTime,
       minAge: req.body.minAge,
-      publisherId: req.body.publisherId,
-      updateAt: Date.now()
+      publisherId: req.body.publisherId
     },
     {
       include: [
@@ -28,8 +31,28 @@ router.post("/", function(req, res, next) {
     }
   )
     .then(item => {
-      console.log(item);
-      res.json({ item });
+      BoardGame.findOne({
+        include: [
+          {
+            model: BoardGameTypeGame,
+            include: [TypeGame]
+          },
+          {
+            model: BoardGameMechanicsGame,
+            include: [MechanicsGame]
+          }
+        ],
+        where: {
+          id: req.body.id
+        }
+      })
+        .then(item => {
+            console.log(item);
+            res.json({ item });
+        })
+        .catch(error => {
+          res.json({ error });
+        });
     })
     .catch(error => {
       res.json({ error });
