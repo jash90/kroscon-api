@@ -27,6 +27,13 @@ app.use('/login', Auth.login);
 app.use('/register', Auth.register);
 app.use('/changePassword',Auth.changePassword);
 
+//user
+app.use('/users', User.all);
+app.use('/user/edit', User.edit);
+app.use('/user/remove', User.remove);
+app.use('/user/offset', User.offset);
+app.use('/user', User.get);
+
 //boardGame
 app.use('/boardGames', BoardGame.all);
 app.use('/boardGame', BoardGame.get);
@@ -83,13 +90,6 @@ app.use('/type/add', Type.add);
 app.use('/type/remove', Type.remove);
 app.use('/type/offset', Type.offset);
 app.use('/type', Type.get);
-
-//user
-app.use('/users', User.all);
-app.use('/user/edit', User.edit);
-app.use('/user/remove', User.remove);
-app.use('/user/offset', User.offset);
-app.use('/user', User.get);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
