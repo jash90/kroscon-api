@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-const { Type } = require("../../models");
+const { BoardGameType } = require("../../models");
 router.delete("/:id", function(req, res, next) {
-  Type.update(
+  BoardGameType.update(
     {
       deletedAt: new Date()
     },

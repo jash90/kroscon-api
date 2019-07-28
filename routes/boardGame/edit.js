@@ -2,12 +2,12 @@ var express = require("express");
 var router = express.Router();
 const {
   BoardGame,
-  BoardGameTypeGame,
-  BoardGameMechanicsGame
+  BoardGameType,
+  BoardGameMechanic
 } = require("../../models");
 router.post("/", function(req, res, next) {
   //   const types = JSON.parse(req.body.types);
-  //   const mechanics = JSON.parse(req.body.mechanics);
+  //   const mechanic = JSON.parse(req.body.mechanic);
   BoardGame.update(
     {
       name: req.body.name,
@@ -21,10 +21,10 @@ router.post("/", function(req, res, next) {
     {
       include: [
         {
-          model: BoardGameTypeGame
+          model: BoardGameType
         },
         {
-          model: BoardGameMechanicsGame
+          model: BoardGameMechanic
         }
       ],
       where: { id: req.body.id }
@@ -34,12 +34,12 @@ router.post("/", function(req, res, next) {
       BoardGame.findOne({
         include: [
           {
-            model: BoardGameTypeGame,
-            include: [TypeGame]
+            model: BoardGameType,
+            include: [Type]
           },
           {
-            model: BoardGameMechanicsGame,
-            include: [MechanicsGame]
+            model: BoardGameMechanic,
+            include: [Mechanic]
           }
         ],
         where: {

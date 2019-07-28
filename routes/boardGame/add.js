@@ -2,18 +2,18 @@ var express = require("express");
 var router = express.Router();
 const {
   BoardGame,
-  BoardGameMechanicsGame,
-  BoardGameTypeGame,
-  TypeGame,
-  MechanicsGame
+  BoardGameMechanic,
+  BoardGameType,
+  Type,
+  Mechanic
 } = require("../../models");
 router.post("/", function(req, res, next) {
-  let mechanics = [];
+  let mechanic = [];
   let types = [];
   if (req.body.types)
   types = JSON.parse(req.body.types);
-  if (req.body.mechanics)
-  mechanics = JSON.parse(req.body.mechanics);
+  if (req.body.mechanic)
+  mechanic = JSON.parse(req.body.mechanic);
   BoardGame.create({
     name: req.body.name,
     uuid: req.body.uuid,
@@ -27,8 +27,8 @@ router.post("/", function(req, res, next) {
     .then(async boardGame => {
       for (let index = 0; index < types.length; index++) {
         const type = types[index];
-        await BoardGameTypeGame.create({
-          typeGameId: type.id,
+        await BoardGameType.create({
+          typeId: type.id,
           boardGameId: boardGame.id
         })
           .then()
@@ -37,10 +37,10 @@ router.post("/", function(req, res, next) {
           });
       }
 
-      for (let index = 0; index < mechanics.length; index++) {
-        const mechanic = mechanics[index];
-        await BoardGameMechanicsGame.create({
-          mechanicsGameId: mechanic.id,
+      for (let index = 0; index < mechanic.length; index++) {
+        const mechanic = mechanic[index];
+        await BoardGameMechanic.create({
+          mechanicId: mechanic.id,
           boardGameId: boardGame.id
         })
           .then()
@@ -51,12 +51,12 @@ router.post("/", function(req, res, next) {
       BoardGame.findOne({
         include: [
           {
-            model: BoardGameTypeGame,
-            include: [TypeGame]
+            model: BoardGameType,
+            include: [Type]
           },
           {
-            model: BoardGameMechanicsGame,
-            include: [MechanicsGame]
+            model: BoardGameMechanic,
+            include: [Mechanic]
           }
         ],
         where: {

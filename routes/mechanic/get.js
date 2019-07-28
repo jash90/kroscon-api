@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-const { Type } = require("../../models");
+const { Mechanic } = require("../../models");
 router.get("/:id", function(req, res, next) {
-  Type.findOne({
+  Mechanic.findOne({
     where: {
       id: req.params.id
     }

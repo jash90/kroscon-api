@@ -42,7 +42,7 @@ CREATE TABLE "publishers" (
   "deletedAt" timestamp null
 );
 
-CREATE TABLE "typeGames" (
+CREATE TABLE "types" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar(255) NOT NULL,
   "createdAt" timestamp not null,
@@ -50,7 +50,7 @@ CREATE TABLE "typeGames" (
   "deletedAt" timestamp null
 );
 
-CREATE TABLE "mechanicsGames" (
+CREATE TABLE "mechanics" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar(255) NOT NULL,
   "createdAt" timestamp not null,
@@ -58,19 +58,19 @@ CREATE TABLE "mechanicsGames" (
   "deletedAt" timestamp null
 );
 
-CREATE TABLE "boardGamesTypeGames" (
+CREATE TABLE "boardGameTypes" (
   "id" SERIAL PRIMARY KEY,
   "boardGameId" int not null,
-  "typeGameId" int not null,
+  "typeId" int not null,
   "createdAt" timestamp not null,
   "updatedAt" timestamp null,
   "deletedAt" timestamp null
 );
 
-CREATE TABLE "boardGamesMechanicsGames" (
+CREATE TABLE "boardGameMechanics" (
   "id" SERIAL PRIMARY KEY,
   "boardGameId" int not null,
-  "mechanicsGameId" int not null,
+  "mechanicId" int not null,
   "createdAt" timestamp not null,
   "updatedAt" timestamp null,
   "deletedAt" timestamp null
@@ -82,10 +82,10 @@ ALTER TABLE "loanGames" ADD FOREIGN KEY ("boardGameId") REFERENCES "boardGames" 
 
 ALTER TABLE "boardGames" ADD FOREIGN KEY ("publisherId") REFERENCES "publishers" ("id");
 
-ALTER TABLE "boardGamesTypeGames" ADD FOREIGN KEY ("boardGameId") REFERENCES "boardGames" ("id");
+ALTER TABLE "boardGameTypes" ADD FOREIGN KEY ("boardGameId") REFERENCES "boardGames" ("id");
 
-ALTER TABLE "boardGamesTypeGames" ADD FOREIGN KEY ("typeGameId") REFERENCES "typeGames" ("id");
+ALTER TABLE "boardGameTypes" ADD FOREIGN KEY ("typeId") REFERENCES "types" ("id");
 
-ALTER TABLE "boardGamesMechanicsGames" ADD FOREIGN KEY ("boardGameId") REFERENCES "boardGames" ("id");
+ALTER TABLE "boardGameMechanics" ADD FOREIGN KEY ("boardGameId") REFERENCES "boardGames" ("id");
 
-ALTER TABLE "boardGamesMechanicsGames" ADD FOREIGN KEY ("mechanicsGameId") REFERENCES "mechanicsGames" ("id");
+ALTER TABLE "boardGameMechanics" ADD FOREIGN KEY ("mechanicId") REFERENCES "mechanics" ("id");

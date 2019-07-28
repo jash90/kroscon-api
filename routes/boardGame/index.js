@@ -1,8 +1,8 @@
-const getAll = require('./getAll');
+const all = require('./all');
 const get = require('./get');
 const remove = require('./remove');
 const add = require('./add');
 const edit = require('./edit');
-const getAllOffset = require('./getAllOffset');
-const getAllAvailable = require('./getAllAvailable');
-module.exports = { getAll, get, remove, add, edit, getAllOffset, getAllAvailable };
+const offset = require('./offset');
+const available = require('./available');
+module.exports = { all, get, remove, add, edit, offset, available};

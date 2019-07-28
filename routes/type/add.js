@@ -1,15 +1,14 @@
 var express = require("express");
 var router = express.Router();
 const { Type } = require("../../models");
-router.get("/:id", function(req, res, next) {
-  Type.findOne({
-    where: {
-      id: req.params.id
-    }
+router.post("/", function(req, res, next) {
+  Type.create({
+    name: req.body.name,
+    createdAt: Date.now()
   })
-    .then(item => {
-      res.json({ item });
-    })
+  .then(item => {
+    res.json({ item });
+  })
     .catch(error => {
       res.json({ error });
     });

@@ -1,18 +1,18 @@
 var express = require("express");
 var router = express.Router();
-const { BoardGame, BoardGameMechanicsGame, BoardGameTypeGame, TypeGame, MechanicsGame, LoanGame } = require("../../models");
+const { BoardGame, BoardGameMechanic, BoardGameType, Type, Mechanic, LoanGame } = require("../../models");
 router.get("/:id", function (req, res, next) {
   LoanGame.findOne({
     include: [{
       model: BoardGame,
       include: [
         {
-          model: BoardGameTypeGame,
-          include: [TypeGame]
+          model: BoardGameType,
+          include: [Type]
         },
         {
-          model: BoardGameMechanicsGame,
-          include: [MechanicsGame]
+          model: BoardGameMechanic,
+          include: [Mechanic]
         }
       ],
     },

@@ -5,7 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const index = require('./routes/home');
-const { Auth, BoardGame, BoardGameMechanicsGame, BoardGameTypeGame, LoanGame, MechanicsGame, Publisher, TypeGame, User } = require('./routes');
+const { Auth, BoardGame, BoardGameMechanic, BoardGameType, LoanGame, Mechanic, Publisher, Type, User } = require('./routes');
 
 var app = express();
 
@@ -28,67 +28,67 @@ app.use('/register', Auth.register);
 app.use('/changePassword',Auth.changePassword);
 
 //boardGame
-app.use('/boardGames', BoardGame.getAll);
+app.use('/boardGames', BoardGame.all);
 app.use('/boardGame', BoardGame.get);
 app.use('/boardGame/remove', BoardGame.remove);
 app.use('/boardGame/add', BoardGame.add);
 app.use('/boardGame/edit', BoardGame.edit);
-app.use('/allBoardGames', BoardGame.getAllOffset);
-app.use('/allAvailableBoardGames', BoardGame.getAllAvailable);
+app.use('/boardGame/offset', BoardGame.offset);
+app.use('/boardGame/available', BoardGame.available);
 
-//boardGameMechanicsGame
-app.use('/boardGameMechanicsGames', BoardGameMechanicsGame.getAll);
-app.use('/boardGameMechanicsGame', BoardGameMechanicsGame.get);
-app.use('/boardGameMechanicsGame/remove', BoardGame.remove);
-app.use('/boardGameMechanicsGame/add', BoardGame.add);
-app.use('/boardGameMechanicsGame/edit', BoardGame.edit);
-app.use('/allBoardGameMechanicsGames', BoardGame.getAllOffset);
+//boardGameMechanic
+app.use('/boardGameMechanics', BoardGameMechanic.all);
+app.use('/boardGameMechanic', BoardGameMechanic.get);
+app.use('/boardGameMechanic/remove', BoardGame.remove);
+app.use('/boardGameMechanic/add', BoardGame.add);
+app.use('/boardGameMechanic/edit', BoardGame.edit);
+app.use('/boardGameMechanic/offset', BoardGame.offset);
 
-//boardGameTypeGame
-app.use('/boardGameTypeGames', BoardGameTypeGame.getAll);
-app.use('/boardGameTypeGame', BoardGameTypeGame.get);
-app.use('/boardGameTypeGame/remove', BoardGameTypeGame.remove);
-app.use('/boardGameTypeGame/add', BoardGameTypeGame.add);
-app.use('/boardGameTypeGame/edit', BoardGameTypeGame.edit);
-app.use('/allBoardGameTypeGames', BoardGameTypeGame.getAllOffset);
+//boardGameType
+app.use('/boardGameTypes', BoardGameType.all);
+app.use('/boardGameType', BoardGameType.get);
+app.use('/boardGameType/remove', BoardGameType.remove);
+app.use('/boardGameType/add', BoardGameType.add);
+app.use('/boardGameType/edit', BoardGameType.edit);
+app.use('/boardGameType/offset', BoardGameType.offset);
 
 //loanGame
-app.use('/loanGames', LoanGame.getAll);
+app.use('/loanGames', LoanGame.all);
 app.use('/loanGame/edit', LoanGame.edit);
 app.use('/loanGame/add', LoanGame.add);
 app.use('/loanGame/remove', LoanGame.remove);
-app.use('/allLoanGame', LoanGame.getAllOffset);
+app.use('/loanGame/offset', LoanGame.offset);
 app.use('/loanGame', LoanGame.get);
 
-//mechanicsGame
-app.use('/mechanicsGames', MechanicsGame.getAll);
-app.use('/mechanicsGame/edit', MechanicsGame.edit);
-app.use('/mechanicsGame/add', MechanicsGame.add);
-app.use('/mechanicsGames/remove', MechanicsGame.remove);
-app.use('/allmechanicsGames', MechanicsGame.getAllOffset);
-app.use('/mechanicsGame', MechanicsGame.get);
+//mechanic
+app.use('/mechanics', Mechanic.all);
+app.use('/mechanic/edit', Mechanic.edit);
+app.use('/mechanic/add', Mechanic.add);
+app.use('/mechanic/remove', Mechanic.remove);
+app.use('/mechanic/offset', Mechanic.offset);
+app.use('/mechanic', Mechanic.get);
 
 //publisher
-app.use('/publishers', Publisher.getAll);
+app.use('/publishers', Publisher.all);
 app.use('/publisher/edit', Publisher.edit);
 app.use('/publisher/add', Publisher.add);
 app.use('/publisher/remove', Publisher.remove);
-app.use('/allPublisher', Publisher.getAllOffset);
+app.use('/publisher/offset', Publisher.offset);
 app.use('/publisher', Publisher.get);
 
-//typeGame
-app.use('/typeGames', TypeGame.getAll);
-app.use('/typeGame/edit', TypeGame.edit);
-app.use('/typeGame/add', TypeGame.add);
-app.use('/typeGame/remove', TypeGame.remove);
-app.use('/allTypeGames', TypeGame.getAllOffset);
-app.use('/typeGame', TypeGame.get);
+//type
+app.use('/types', Type.all);
+app.use('/type/edit', Type.edit);
+app.use('/type/add', Type.add);
+app.use('/type/remove', Type.remove);
+app.use('/type/offset', Type.offset);
+app.use('/type', Type.get);
 
 //user
-app.use('/users', User.getAll);
+app.use('/users', User.all);
 app.use('/user/edit', User.edit);
 app.use('/user/remove', User.remove);
-app.use('/allUser', User.getAllOffset);
+app.use('/user/offset', User.offset);
 app.use('/user', User.get);
 
 // catch 404 and forward to error handler

@@ -1,20 +1,20 @@
 const Auth = require("./auth");
 const BoardGame = require("./boardGame");
-const BoardGameTypeGame = require("./boardGameTypeGame");
-const BoardGameMechanicsGame = require("./boardGameMechanicsGame");
+const BoardGameType = require("./boardGameType");
+const BoardGameMechanic = require("./boardGameMechanic");
 const LoanGame = require("./loanGame");
 const Publisher = require('./publisher');
-const MechanicsGame = require('./mechanicsGame');
-const TypeGame = require('./typeGame');
+const Mechanic = require('./mechanic');
+const Type = require('./type');
 const User = require('./user');
 module.exports = {
     Auth,
     BoardGame,
-    BoardGameTypeGame,
-    BoardGameMechanicsGame,
+    BoardGameType,
+    BoardGameMechanic,
     LoanGame,
     Publisher,
-    MechanicsGame,
-    TypeGame,
+    Mechanic,
+    Type,
     User
 };

@@ -1,9 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const { Type } = require("../../models");
+const { Mechanic } = require("../../models");
 router.post("/", function(req, res, next) {
-  Type.update({
-    name: req.body.name
+  Mechanic.create({
+    name: req.body.name,
+    createdAt: Date.now()
   })
   .then(item => {
     res.json({ item });
