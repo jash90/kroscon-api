@@ -1,9 +1,11 @@
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
-  "email" varchar(255) NOT NULL,
+  "email" varchar(255) UNIQUE NOT NULL,
   "password" varchar(255) NOT NULL,
   "city" varchar(255) null,
   "age" int null,
+  "token" varchar(255) null,
+  "tokenExpired" timestamp null,
   "createdAt" timestamp NOT NULL,
   "updatedAt" timestamp null,
   "deletedAt" timestamp null

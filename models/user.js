@@ -29,6 +29,8 @@ User.init(
       type: Sequelize.INTEGER,
       allowNull: true,
     },
+    token:Sequelize.STRING,
+    tokenExpired: Sequelize.DATE,
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
     deletedAt: Sequelize.DATE
