@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize('kroscon', 'admin', 'postgres', {
-    host: 'localhost',
+const db = require('../db/db.json');
+const sequelize = new Sequelize(db.dbname, db.user, db.pass, {
+    host: db.host,
     dialect: 'postgres',
     operatorsAliases: false,
     pool: {
