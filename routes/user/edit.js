@@ -4,6 +4,8 @@ const { User } = require("../../models");
 router.post("/", function(req, res, next) {
   User.update(
     {
+      firstname: req.body.firstname,
+      lastname : req.body.lastname,
       city: req.body.city,
       age: req.body.age
     },

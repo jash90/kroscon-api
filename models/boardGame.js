@@ -52,7 +52,7 @@ BoardGame.init(
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,
         deletedAt: Sequelize.DATE
-    }, { sequelize, modelName: 'boardGame' });
+    }, { sequelize, modelName: 'boardGames' });
 
 Publisher.hasMany(BoardGame);
 BoardGame.belongsTo(Publisher, {foreignKey: 'publisherId'});

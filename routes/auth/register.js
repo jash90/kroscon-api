@@ -6,8 +6,10 @@ router.post("/", async (req, res, next) => {
   var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
   await User.create({
-    email: req.body.email,
-    password: hashedPassword
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    city: req.body.city,
+    age: req.body.age
   })
     .then(item => {
       res.json({ item });

@@ -14,7 +14,7 @@ LoanGame.init(
             type: Sequelize.INTEGER,
             allowNull: false,
             references: {
-                model: 'users',
+                model: 'user',
                 key: 'id'
             },
             onDelete: 'cascade',
@@ -27,8 +27,16 @@ LoanGame.init(
                 model: 'boardGame',
                 key: 'id'
             },
-            onDelete: 'cascade',
+            onDelete: 'NO ACTION',
             onUpdate: 'cascade',
+        },
+        hireUserId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'user',
+                key: 'id'
+            },
         },
         startLoan: {
             type: Sequelize.DATE,
@@ -49,4 +57,6 @@ User.hasMany(LoanGame);
 LoanGame.belongsTo(User, { foreignKey: 'userId' });
 BoardGame.hasMany(LoanGame);
 LoanGame.belongsTo(BoardGame, { foreignKey: 'boardGameId' });
+User.hasMany(LoanGame);
+LoanGame.belongsTo(User, { foreignKey: 'hireUserId' });
 module.exports = LoanGame;
