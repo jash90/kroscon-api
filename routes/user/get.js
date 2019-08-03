@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const { User } = require("../../models");
+const { User, Privilege } = require("../../models");
 router.get("/:id", function(req, res, next) {
   User.findOne({
     include: [
@@ -9,7 +9,7 @@ router.get("/:id", function(req, res, next) {
       },
     ],
     where: {
-      id: req.body.id
+      id: req.params.id
     }
   })
     .then(item => {

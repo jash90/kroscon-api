@@ -26,6 +26,7 @@ app.use('/', index);
 app.use('/login', Auth.login);
 app.use('/register', Auth.register);
 app.use('/changePassword',Auth.changePassword);
+app.use('/changePrivilege',Auth.changePrivilege);
 
 //user
 app.use('/users', User.all);

@@ -8,8 +8,8 @@ router.post("/", async (req, res, next) => {
   await User.create({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-    city: req.body.city,
-    age: req.body.age
+    email: req.body.email,
+    password: hashedPassword
   })
     .then(item => {
       res.json({ item });

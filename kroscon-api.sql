@@ -133,3 +133,6 @@ INSERT INTO public.privileges (id, name, "createdAt")
     VALUES (2, 'mod', now());
 INSERT INTO public.privileges (id, name, "createdAt")
     VALUES (3, 'admin', now());
+
+INSERT INTO "users" ("id", "firstname", "lastname", "email", "password", "privilegeId", "createdAt")
+    VALUES (1, 'Test', 'Test', 'test@test.pl', '$2a$08$tFkQLRfMovvG4uPzP7WOWOkzSs/v/e/BMONjpnncTxaNavWU.SNcG', 3, now())

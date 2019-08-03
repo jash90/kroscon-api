@@ -11,11 +11,11 @@ User.init(
     },
     firstname: {
       type: Sequelize.STRING,
-      allowNull: true
+      allowNull: false
     },
     lastname: {
       type: Sequelize.STRING,
-      allowNull: true
+      allowNull: false
     },
     email: {
       type: Sequelize.STRING,
@@ -43,6 +43,7 @@ User.init(
     privilegeId: {
       type: Sequelize.INTEGER,
       allowNull: false,
+      defaultValue: 1,
       references: {
         model: "privilege",
         key: "id"
