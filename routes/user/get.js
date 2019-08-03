@@ -3,6 +3,11 @@ var router = express.Router();
 const { User } = require("../../models");
 router.get("/:id", function(req, res, next) {
   User.findOne({
+    include: [
+      {
+        model: Privilege
+      },
+    ],
     where: {
       id: req.body.id
     }
