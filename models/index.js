@@ -6,6 +6,7 @@ const Type = require("./type");
 const Mechanic = require("./mechanic");
 const BoardGameMechanic = require("./boardGameMechanic");
 const BoardGameType = require("./boardGameType");
+const Privilege = require("./privilege");
 module.exports = {
   User,
   BoardGame,
@@ -14,5 +15,6 @@ module.exports = {
   Type,
   Mechanic,
   BoardGameMechanic,
-  BoardGameType
+  BoardGameType,
+  Privilege
 };
