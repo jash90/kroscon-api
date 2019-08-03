@@ -1,11 +1,16 @@
 var express = require("express");
 var router = express.Router();
-const { User } = require("../../models");
+const { User, Privilege } = require("../../models");
 const bcrypt = require("bcryptjs");
 const moment = require("moment");
 router.post("/", async (req, res, next) => {
   const now = moment();
   await User.findOne({
+    include: [
+      {
+        model: Privilege
+      }
+    ],
     where: {
       email: req.body.email
     }
@@ -40,12 +45,17 @@ router.post("/", async (req, res, next) => {
                 res.json({ error });
               });
             await User.findOne({
-                attributes: { exclude: ['password'] },
+              attributes: { exclude: ["password"] },
+              include: [
+                {
+                  model: Privilege
+                }
+              ],
               where: {
                 email: req.body.email
               }
             }).then(item => {
-              res.json({item});
+              res.json({ item });
             });
           }
         });
