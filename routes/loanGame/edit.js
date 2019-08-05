@@ -8,7 +8,7 @@ router.get("/", function(req, res, next) {
       endLoan: now,
       deletedAt: null
     },
-    { where: { id: req.body.id } }
+    { where: { id: req.body.loanGameId } }
   )
     .then(item => {
       res.json({ item });

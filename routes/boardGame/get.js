@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { BoardGame, BoardGameMechanic, BoardGameType, Type, Mechanic } = require("../../models");
-router.get("/:id", function(req, res, next) {
+router.get("/:boardGameId", function(req, res, next) {
   BoardGame.findOne({
     include: [
       {
@@ -14,7 +14,7 @@ router.get("/:id", function(req, res, next) {
       }
     ],
     where: {
-      id: req.params.id
+      id: req.params.boardGameId
     }
   })
     .then(item => {

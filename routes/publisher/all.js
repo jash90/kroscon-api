@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-const { Type } = require("../../models");
+const { Publisher } = require("../../models");
 router.get("/", function(req, res, next) {
-  Type.findAll({})
+  Publisher.findAll({})
     .then(items => {
       res.json({ items });
     })

@@ -6,7 +6,7 @@ router.post("/", function (req, res, next) {
         {
             privilegeId: req.body.privilegeId
         },
-        { where: { id: req.body.id } }
+        { where: { id: req.body.userId } }
     )
         .then(item => {
             res.json({ item });

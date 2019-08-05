@@ -6,10 +6,13 @@ router.get("/:id", function(req, res, next) {
     include: [
       {
         model: Type
+      },
+      {
+        model:BoardGame
       }
     ],
     where: {
-      id: req.params.id
+      id: req.params.BoardGameTypeId
     }
   })
     .then(item => {

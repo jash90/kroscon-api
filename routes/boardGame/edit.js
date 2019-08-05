@@ -27,7 +27,7 @@ router.post("/", function(req, res, next) {
           model: BoardGameMechanic
         }
       ],
-      where: { id: req.body.id }
+      where: { id: req.body.boardGameId }
     }
   )
     .then(item => {
@@ -43,7 +43,7 @@ router.post("/", function(req, res, next) {
           }
         ],
         where: {
-          id: req.body.id
+          id: req.body.boardGameId
         }
       })
         .then(item => {

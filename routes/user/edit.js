@@ -9,7 +9,7 @@ router.post("/", function(req, res, next) {
       city: req.body.city,
       age: req.body.age
     },
-    { where: { id: req.body.id } }
+    { where: { id: req.body.userId } }
   )
     .then(item => {
       res.json({ item });

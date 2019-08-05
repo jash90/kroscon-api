@@ -5,6 +5,10 @@ router.post("/", function(req, res, next) {
   BoardGameType.update({
     boardGameId: req.body.boardGameId,
     typeId: req.body.typeId,
+  },{
+    where:{
+      id: req.body.boardGameTypeId
+    }
   })
     .then(item => {
       res.json({item});

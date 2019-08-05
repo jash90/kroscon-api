@@ -1,14 +1,14 @@
 var express = require("express");
 var router = express.Router();
 const { BoardGame } = require("../../models");
-router.delete("/:id", function(req, res, next) {
+router.delete("/:boardGameId", function(req, res, next) {
   BoardGame.update(
     {
       deletedAt: new Date()
     },
     {
       where: {
-        id: req.params.id
+        id: req.params.boardGameId
       }
     }
   )

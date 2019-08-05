@@ -8,7 +8,7 @@ router.delete("/:id", function(req, res, next) {
     },
     {
       where: {
-        id: req.params.id
+        id: req.params.mechanicId
       }
     }
   )

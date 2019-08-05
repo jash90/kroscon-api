@@ -6,6 +6,9 @@ router.get("/:id", function(req, res, next) {
     include: [
       {
         model: Type
+      },
+      {
+        model:BoardGame
       }
     ],
     limit: 100,
@@ -24,6 +27,9 @@ router.get("/", function(req, res, next) {
     include: [
       {
         model: Type
+      },
+      {
+        model:BoardGame
       }
     ],
     limit: 100,

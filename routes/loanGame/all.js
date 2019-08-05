@@ -3,26 +3,18 @@ var router = express.Router();
 const { Op } = require("sequelize");
 const {
   BoardGame,
-  Type,
-  Mechanic,
-  BoardGameType,
-  BoardGameMechanic,
-  LoanGame
+  LoanGame,
+  User
 } = require("../../models");
 router.get("/", function(req, res, next) {
-  BoardGame.findAll({
+  LoanGame.findAll({
     include: [
       {
-        model: BoardGameType,
-        include: [Type]
+        model: BoardGame
       },
       {
-        model: BoardGameMechanic,
-        include: [Mechanic]
+        model: User
       },
-      {
-        model: LoanGame,
-      }
     ]
   })
     .then(items => {

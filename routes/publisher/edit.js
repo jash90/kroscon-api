@@ -1,13 +1,20 @@
 var express = require("express");
 var router = express.Router();
-const { Type } = require("../../models");
+const { Publisher } = require("../../models");
 router.post("/", function(req, res, next) {
-  Type.update({
-    name: req.body.name
-  })
-  .then(item => {
-    res.json({ item });
-  })
+  Publisher.update(
+    {
+      name: req.body.name
+    },
+    {
+      where: {
+        id: req.body.publisherId
+      }
+    }
+  )
+    .then(item => {
+      res.json({ item });
+    })
     .catch(error => {
       res.json({ error });
     });

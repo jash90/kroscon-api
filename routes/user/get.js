@@ -9,7 +9,7 @@ router.get("/:id", function(req, res, next) {
       },
     ],
     where: {
-      id: req.params.id
+      id: req.params.userId
     }
   })
     .then(item => {

@@ -1,16 +1,14 @@
 var express = require("express");
 var router = express.Router();
-const { BoardGame } = require("../../models");
+const { LoanGame } = require("../../models");
 router.get("/:id", function(req, res, next) {
-  BoardGame.findAndCountAll({
+  LoanGame.findAndCountAll({
     include: [
       {
-        model: BoardGameType,
-        include: [Type]
+        model: BoardGame
       },
       {
-        model: BoardGameMechanic,
-        include: [Mechanic]
+        model: User
       }
     ],
     limit: 100,
@@ -25,15 +23,13 @@ router.get("/:id", function(req, res, next) {
     });
 });
 router.get("/", function(req, res, next) {
-  BoardGame.findAndCountAll({
+  LoanGame.findAndCountAll({
     include: [
       {
-        model: BoardGameType,
-        include: [Type]
+        model: BoardGame
       },
       {
-        model: BoardGameMechanic,
-        include: [Mechanic]
+        model: User
       }
     ],
     limit: 100,
