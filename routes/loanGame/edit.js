@@ -1,14 +1,14 @@
 var express = require("express");
 var router = express.Router();
 const { LoanGame } = require("../../models");
-router.get("/", function(req, res, next) {
+router.get("/:loanGameId", function(req, res, next) {
   const now =new Date();
   LoanGame.update(
     {
       endLoan: now,
       deletedAt: null
     },
-    { where: { id: req.body.loanGameId } }
+    { where: { id: req.params.loanGameId } }
   )
     .then(item => {
       res.json({ item });
