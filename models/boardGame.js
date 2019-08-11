@@ -57,7 +57,7 @@ BoardGame.init(
     updatedAt: Sequelize.DATE,
     deletedAt: Sequelize.DATE
   },
-  { sequelize, modelName: "boardGames" }
+  { sequelize, modelName: "boardGames", }
 );
 
 Publisher.hasMany(BoardGame);

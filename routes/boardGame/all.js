@@ -14,16 +14,16 @@ router.get("/", function(req, res, next) {
     include: [
       {
         model: BoardGameType,
-        include: [Type]
+       include: [Type]
       },
       {
         model: BoardGameMechanic,
         include: [Mechanic]
-      },
-      {
-        model: LoanGame,
       }
-    ]
+    ],
+    where: {
+      deletedAt: null
+    }
   })
     .then(items => {
       res.json({ items });
