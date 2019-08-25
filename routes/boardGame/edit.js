@@ -33,8 +33,7 @@ router.post("/", function(req, res, next) {
         where: { boardGameId: Number(req.body.boardGameId) }
       })
         .then(item => {
-        //  if (item.length > 0)
-          oldtypes = item.map(t => t.typeId);
+          if (item.length > 0) oldtypes = item.map(t => t.typeId);
         })
         .catch(error => {
           res.json({ error });
@@ -42,11 +41,10 @@ router.post("/", function(req, res, next) {
 
       let oldmechanics = [];
       await BoardGameMechanic.findAll({
-        where: { boardGameId:  Number(req.body.boardGameId) }
+        where: { boardGameId: Number(req.body.boardGameId) }
       })
         .then(item => {
-        //  if (item.length > 0)
-          oldmechanics = item.map(m => m.mechanicId);
+          if (item.length > 0) oldmechanics = item.map(m => m.mechanicId);
         })
         .catch(error => {
           res.json({ error });
@@ -57,24 +55,21 @@ router.post("/", function(req, res, next) {
         await BoardGameType.findOrCreate({
           where: {
             typeId: type,
-            boardGameId:  Number(req.body.boardGameId)
+            boardGameId: Number(req.body.boardGameId)
           }
-        })
-          .catch(error => {
-            res.json({ error });
-          });
+        }).catch(error => {
+          res.json({ error });
+        });
       }
 
       for (let index = 0; index < oldtypes.length; index++) {
         const type = Number(oldtypes[index]);
         if (!types.includes(type)) {
-          BoardGameType.destroy(
-            {
-              where: {
-                id: type
-              }
+          BoardGameType.destroy({
+            where: {
+              id: type
             }
-          ).catch(error => {
+          }).catch(error => {
             res.json({ error });
           });
         }
@@ -84,23 +79,20 @@ router.post("/", function(req, res, next) {
         const mechanic = Number(mechanics[index]);
         await BoardGameMechanic.findOrCreate({
           mechanicId: mechanic,
-          boardGameId:  Number(req.body.boardGameId)
-        })
-          .catch(error => {
-            res.json({ error });
-          });
+          boardGameId: Number(req.body.boardGameId)
+        }).catch(error => {
+          res.json({ error });
+        });
       }
 
       for (let index = 0; index < oldmechanics.length; index++) {
         const mechanic = Number(oldmechanics[index]);
         if (!mechanics.includes(mechanic)) {
-          BoardGameMechanic.destroy(
-            {
-              where: {
-                id: mechanic
-              }
+          BoardGameMechanic.destroy({
+            where: {
+              id: mechanic
             }
-          ).catch(error => {
+          }).catch(error => {
             res.json({ error });
           });
         }
@@ -108,19 +100,18 @@ router.post("/", function(req, res, next) {
 
       BoardGame.findOne({
         where: {
-          id:  Number(req.body.boardGameId),
+          id: Number(req.body.boardGameId)
         },
         include: [
           {
             model: BoardGameType,
-           include: [Type]
+            include: [Type]
           },
           {
             model: BoardGameMechanic,
             include: [Mechanic]
           }
-        ],
-    
+        ]
       })
         .then(item => {
           res.json(item);
