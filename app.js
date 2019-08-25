@@ -43,6 +43,7 @@ app.use('/boardGame/add', BoardGame.add);
 app.use('/boardGame/edit', BoardGame.edit);
 app.use('/boardGame/offset', BoardGame.offset);
 app.use('/boardGame/available', BoardGame.available);
+app.use('/boardGame/search', BoardGame.search);
 
 //boardGameMechanic
 app.use('/boardGameMechanics', BoardGameMechanic.all);
