@@ -6,7 +6,8 @@ const {
   BoardGameMechanic,
   BoardGameType,
   Type,
-  Mechanic
+  Mechanic,
+  Publisher
 } = require("../../models");
 router.post("/", function(req, res, next) {
   var where = {};
@@ -57,6 +58,9 @@ router.post("/", function(req, res, next) {
       {
         model: BoardGameMechanic,
         include: [Mechanic]
+      },
+      {
+        model:Publisher
       }
     ],
     where: where
