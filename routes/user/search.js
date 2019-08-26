@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { User, Privilege } = require("../../models");
-router.get("/:id", function(req, res, next) {
+router.post("/", function(req, res, next) {
   User.findOne({
     attributes: { exclude: ['password'] },
     include: [
@@ -10,7 +10,7 @@ router.get("/:id", function(req, res, next) {
       }
     ],
     where: {
-      email: req.params.email
+      email: req.body.email
     }
   })
     .then(item => {
