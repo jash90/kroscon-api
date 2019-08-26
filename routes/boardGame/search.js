@@ -15,6 +15,11 @@ router.post("/", function(req, res, next) {
       [Op.iLike]: `%${req.body.name}`
     };
   }
+
+  if (req.body.uuid) {
+    where.uuid = req.body.uuid;
+  }
+
   if (req.body.minPlayers) {
     where.minPlayers = {
       [Op.gte]: req.body.minPlayers

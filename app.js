@@ -33,6 +33,7 @@ app.use('/users', User.all);
 app.use('/user/edit', User.edit);
 app.use('/user/remove', User.remove);
 app.use('/user/offset', User.offset);
+app.use('/user/search', User.search);
 app.use('/user', User.get);
 
 //boardGame
