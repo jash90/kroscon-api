@@ -7,7 +7,7 @@ const {
   Mechanic,
   BoardGameType,
   BoardGameMechanic,
-  LoanGame
+  Publisher
 } = require("../../models");
 router.get("/", function(req, res, next) {
   BoardGame.findAll({
@@ -19,6 +19,9 @@ router.get("/", function(req, res, next) {
       {
         model: BoardGameMechanic,
         include: [Mechanic]
+      },
+      {
+        model:Publisher
       }
     ],
     where: {
