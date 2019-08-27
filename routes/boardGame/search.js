@@ -65,8 +65,8 @@ router.post("/", function(req, res, next) {
     ],
     where: where
   })
-    .then(item => {
-      res.json({ item });
+    .then(items => {
+      res.json({ items });
     })
     .catch(error => {
       res.json({ error });
