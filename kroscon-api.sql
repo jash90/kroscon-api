@@ -18,7 +18,7 @@ CREATE TABLE "users" (
   "token" varchar(255) NULL,
   "tokenExpired" timestamp NULL,
   "privilegeId" int NOT NULL DEFAULT 1,
-  "createdAt" timestamp NOT NULL,
+  "createdAt" timestamp NOT NULL DEFAULT NOW(),
   "updatedAt" timestamp NULL,
   "deletedAt" timestamp NULL
 );
@@ -33,7 +33,7 @@ CREATE TABLE "boardGames" (
   "minAge" int NOT NULL,
   "publisherId" int NOT NULL,
   "description" text NULL,
-  "createdAt" timestamp NOT NULL,
+  "createdAt" timestamp NOT NULL DEFAULT NOW(),
   "updatedAt" timestamp NULL,
   "deletedAt" timestamp NULL
 );
@@ -45,7 +45,7 @@ CREATE TABLE "loanGames" (
   "hireUserId" int NOT NULL,
   "startLoan" timestamp NOT NULL,
   "endLoan" timestamp NULL,
-  "createdAt" timestamp NOT NULL,
+  "createdAt" timestamp NOT NULL DEFAULT NOW(),
   "updatedAt" timestamp,
   "deletedAt" timestamp
 );
@@ -53,7 +53,7 @@ CREATE TABLE "loanGames" (
 CREATE TABLE "publishers" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar(255) NOT NULL,
-  "createdAt" timestamp NOT NULL,
+  "createdAt" timestamp NOT NULL DEFAULT NOW(),
   "updatedAt" timestamp NULL,
   "deletedAt" timestamp NULL
 );
@@ -61,7 +61,7 @@ CREATE TABLE "publishers" (
 CREATE TABLE "types" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar(255) NOT NULL,
-  "createdAt" timestamp NOT NULL,
+  "createdAt" timestamp NOT NULL DEFAULT NOW(),
   "updatedAt" timestamp NULL,
   "deletedAt" timestamp NULL
 );
@@ -69,7 +69,7 @@ CREATE TABLE "types" (
 CREATE TABLE "mechanics" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar(255) NOT NULL,
-  "createdAt" timestamp NOT NULL,
+  "createdAt" timestamp NOT NULL DEFAULT NOW(),
   "updatedAt" timestamp NULL,
   "deletedAt" timestamp NULL
 );
@@ -78,7 +78,7 @@ CREATE TABLE "boardGameTypes" (
   "id" SERIAL PRIMARY KEY,
   "boardGameId" int NOT NULL,
   "typeId" int NOT NULL,
-  "createdAt" timestamp NOT NULL,
+  "createdAt" timestamp NOT NULL DEFAULT NOW(),
   "updatedAt" timestamp NULL,
   "deletedAt" timestamp NULL
 );
@@ -87,7 +87,7 @@ CREATE TABLE "boardGameMechanics" (
   "id" SERIAL PRIMARY KEY,
   "boardGameId" int NOT NULL,
   "mechanicId" int NOT NULL,
-  "createdAt" timestamp NOT NULL,
+  "createdAt" timestamp NOT NULL DEFAULT NOW(),
   "updatedAt" timestamp NULL,
   "deletedAt" timestamp NULL
 );
@@ -95,7 +95,7 @@ CREATE TABLE "boardGameMechanics" (
 CREATE TABLE "privileges" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar(255) NOT NULL,
-  "createdAt" timestamp NOT NULL,
+  "createdAt" timestamp NOT NULL DEFAULT NOW(),
   "updatedAt" timestamp NULL,
   "deletedAt" timestamp NULL
 );
