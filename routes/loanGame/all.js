@@ -1,11 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { Op } = require("sequelize");
-const {
-  BoardGame,
-  LoanGame,
-  User
-} = require("../../models");
+const { BoardGame, LoanGame, User } = require("../../models");
 router.get("/", function(req, res, next) {
   LoanGame.findAll({
     include: [
@@ -14,8 +10,11 @@ router.get("/", function(req, res, next) {
       },
       {
         model: User
-      },
-    ]
+      }
+    ],
+    where: {
+      deletedAt: null
+    }
   })
     .then(items => {
       res.json({ items });

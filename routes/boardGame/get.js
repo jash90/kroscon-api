@@ -14,7 +14,8 @@ router.get("/:boardGameId", function(req, res, next) {
       }
     ],
     where: {
-      id: req.params.boardGameId
+      id: req.params.boardGameId,
+      deletedAt: null
     }
   })
     .then(item => {

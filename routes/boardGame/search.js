@@ -10,7 +10,7 @@ const {
   Publisher
 } = require("../../models");
 router.post("/", function(req, res, next) {
-  var where = {};
+  var where = { deletedAt: null };
   if (req.body.name) {
     where.name = {
       [Op.iLike]: `%${req.body.name}`
@@ -60,7 +60,7 @@ router.post("/", function(req, res, next) {
         include: [Mechanic]
       },
       {
-        model:Publisher
+        model: Publisher
       }
     ],
     where: where

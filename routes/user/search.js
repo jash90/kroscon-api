@@ -3,14 +3,15 @@ var router = express.Router();
 const { User, Privilege } = require("../../models");
 router.post("/", function(req, res, next) {
   User.findOne({
-    attributes: { exclude: ['password'] },
+    attributes: { exclude: ["password"] },
     include: [
       {
         model: Privilege
       }
     ],
     where: {
-      email: req.body.email
+      email: req.body.email,
+      deletedAt: null
     }
   })
     .then(item => {

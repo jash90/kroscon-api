@@ -4,7 +4,8 @@ const { Mechanic } = require("../../models");
 router.get("/:id", function(req, res, next) {
   Mechanic.findOne({
     where: {
-      id: req.params.mechanicId
+      id: req.params.mechanicId,
+      deletedAt: null
     }
   })
     .then(item => {

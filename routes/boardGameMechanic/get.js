@@ -12,7 +12,8 @@ router.get("/:id", function(req, res, next) {
       }
     ],
     where: {
-      id: req.params.boardGameMechanicId
+      id: req.params.boardGameMechanicId,
+      deletedAt: null
     }
   })
     .then(item => {

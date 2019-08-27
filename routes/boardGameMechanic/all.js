@@ -10,7 +10,10 @@ router.get("/", function(req, res, next) {
       {
         model:BoardGame
       }
-    ]
+    ],
+    where: {
+      deletedAt: null
+    }
   })
     .then(items => {
       res.json({ items });

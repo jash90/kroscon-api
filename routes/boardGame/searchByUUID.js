@@ -25,7 +25,8 @@ router.get("/:uuid", function(req, res, next) {
       }
     ],
     where: {
-        uuid: req.params.uuid
+        uuid: req.params.uuid,
+        deletedAt: null
     }
   })
     .then(item => {

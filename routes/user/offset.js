@@ -5,7 +5,10 @@ router.get("/:id", function(req, res, next) {
   User.findAndCountAll({
     limit: 100,
     offset: req.params.id * 100,
-    order: ["id"]
+    order: ["id"],
+    where: {
+      deletedAt: null
+    }
   })
     .then(items => {
       res.json({ items });
@@ -17,7 +20,10 @@ router.get("/:id", function(req, res, next) {
 router.get("/", function(req, res, next) {
   User.findAndCountAll({
     limit: 100,
-    order: ["id"]
+    order: ["id"],
+    where: {
+      deletedAt: null
+    }
   })
     .then(items => {
       res.json({ items });

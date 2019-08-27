@@ -6,10 +6,11 @@ router.get("/:id", function(req, res, next) {
     include: [
       {
         model: Privilege
-      },
+      }
     ],
     where: {
-      id: req.params.userId
+      id: req.params.userId,
+      deletedAt: null
     }
   })
     .then(item => {

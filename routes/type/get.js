@@ -4,7 +4,8 @@ const { Type } = require("../../models");
 router.get("/:userId", function(req, res, next) {
   Type.findOne({
     where: {
-      id: req.params.typeId
+      id: req.params.typeId,
+      deletedAt: null
     }
   })
     .then(item => {

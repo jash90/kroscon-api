@@ -1,10 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const {
-  BoardGame,
-  User,
-  LoanGame
-} = require("../../models");
+const { BoardGame, User, LoanGame } = require("../../models");
 router.get("/:id", function(req, res, next) {
   LoanGame.findOne({
     include: [
@@ -16,7 +12,8 @@ router.get("/:id", function(req, res, next) {
       }
     ],
     where: {
-      id: req.params.loanGameId
+      id: req.params.loanGameId,
+      deletedAt: null
     }
   })
     .then(item => {

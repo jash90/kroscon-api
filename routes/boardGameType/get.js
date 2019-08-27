@@ -8,11 +8,12 @@ router.get("/:id", function(req, res, next) {
         model: Type
       },
       {
-        model:BoardGame
+        model: BoardGame
       }
     ],
     where: {
-      id: req.params.BoardGameTypeId
+      id: req.params.BoardGameTypeId,
+      deletedAt: null
     }
   })
     .then(item => {

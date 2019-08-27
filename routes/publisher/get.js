@@ -4,7 +4,8 @@ const { Publisher } = require("../../models");
 router.get("/:id", function(req, res, next) {
   Publisher.findOne({
     where: {
-      id: req.body.publisherId
+      id: req.body.publisherId,
+      deletedAt: null
     }
   })
     .then(item => {

@@ -8,9 +8,12 @@ router.get("/", function(req, res, next) {
         model: Type
       },
       {
-        model:BoardGame
+        model: BoardGame
       }
-    ]
+    ],
+    where: {
+      deletedAt: null
+    }
   })
     .then(items => {
       res.json({ items });

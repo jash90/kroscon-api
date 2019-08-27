@@ -12,7 +12,8 @@ router.post("/", async (req, res, next) => {
       }
     ],
     where: {
-      email: req.body.email
+      email: req.body.email,
+      deletedAt: null
     }
   })
     .then(async item => {
