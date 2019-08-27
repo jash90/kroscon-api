@@ -1,6 +1,13 @@
 var express = require("express");
 var router = express.Router();
-const { BoardGame } = require("../../models");
+const {
+  BoardGame,
+  BoardGameMechanic,
+  BoardGameType,
+  Type,
+  Mechanic,
+  Publisher
+} = require("../../models");
 router.get("/:id", function(req, res, next) {
   BoardGame.findAndCountAll({
     include: [
@@ -11,10 +18,11 @@ router.get("/:id", function(req, res, next) {
       {
         model: BoardGameMechanic,
         include: [Mechanic]
-      }
+      },
+      { model: Publisher }
     ],
-    limit: 100,
-    offset: req.params.id * 100,
+    limit: 10,
+    offset: req.params.id * 10,
     order: ["id"],
     where: {
       deletedAt: null
@@ -39,7 +47,7 @@ router.get("/", function(req, res, next) {
         include: [Mechanic]
       }
     ],
-    limit: 100,
+    limit: 10,
     order: ["id"],
     where: {
       deletedAt: null
