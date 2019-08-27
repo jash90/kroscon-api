@@ -13,7 +13,7 @@ router.post("/", function(req, res, next) {
   var where = { deletedAt: null };
   if (req.body.name) {
     where.name = {
-      [Op.iLike]: `%${req.body.name}`
+      [Op.iLike]: `%${req.body.name}%`
     };
   }
 
