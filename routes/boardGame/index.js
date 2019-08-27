@@ -6,4 +6,5 @@ const edit = require('./edit');
 const offset = require('./offset');
 const available = require('./available');
 const search = require('./search');
-module.exports = { all, get, remove, add, edit, offset, available, search};
+const searchByUUID = require('./searchByUUID');
+module.exports = { all, get, remove, add, edit, offset, available, search, searchByUUID};

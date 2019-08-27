@@ -49,7 +49,7 @@ router.post("/", function(req, res, next) {
     where.publisherId = req.body.publisherId;
   }
 
-  BoardGame.findOne({
+  BoardGame.findAll({
     include: [
       {
         model: BoardGameType,
