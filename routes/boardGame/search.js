@@ -73,7 +73,13 @@ router.post("/", function(req, res, next) {
     where: where
   })
     .then(items => {
-      res.json({ items });
+      BoardGame.count({
+        where: {
+          deletedAt: null
+        }
+      }).then(count => {
+        res.json({ count, items });
+      });
     })
     .catch(error => {
       res.json({ error });

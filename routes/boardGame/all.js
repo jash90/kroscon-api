@@ -7,7 +7,8 @@ const {
   Mechanic,
   BoardGameType,
   BoardGameMechanic,
-  Publisher
+  Publisher,
+  LoanGame
 } = require("../../models");
 router.get("/", function(req, res, next) {
   BoardGame.findAll({
@@ -22,14 +23,28 @@ router.get("/", function(req, res, next) {
       },
       {
         model:Publisher
-      }
+      },
+      {
+        model: LoanGame
+      },
+    ],
+    order: [
+      ["id"],
+      [LoanGame, "startLoan", "DESC NULLS LAST"],
+      [LoanGame, "startLoan"]
     ],
     where: {
       deletedAt: null
     }
   })
     .then(items => {
-      res.json({ items });
+      BoardGame.count({
+        where: {
+          deletedAt: null
+        }
+      }).then(count => {
+        res.json({  count, items });
+      });
     })
     .catch(error => {
       console.log(error);

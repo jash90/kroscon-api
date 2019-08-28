@@ -11,7 +11,7 @@ const {
 } = require("../../models");
 const sequelize = require("sequelize");
 router.get("/:id", function(req, res, next) {
-  BoardGame.findAndCountAll({
+  BoardGame.findAll({
     include: [
       {
         model: BoardGameType,
@@ -38,15 +38,20 @@ router.get("/:id", function(req, res, next) {
     }
   })
     .then(items => {
-      res.json({ items });
+      BoardGame.count({
+        where: {
+          deletedAt: null
+        }
+      }).then(count => {
+        res.json({ count, items });
+      });
     })
     .catch(error => {
       res.json({ error });
     });
 });
 router.get("/", function(req, res, next) {
-  BoardGame.findAndCountAll({
-    distinct: true,
+  BoardGame.findAll({
     include: [
       {
         model: BoardGameType,
@@ -72,7 +77,13 @@ router.get("/", function(req, res, next) {
     }
   })
     .then(items => {
-      res.json({ items });
+      BoardGame.count({
+        where: {
+          deletedAt: null
+        }
+      }).then(count => {
+        res.json({ count, items });
+      });
     })
     .catch(error => {
       res.json({ error });
