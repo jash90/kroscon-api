@@ -2,8 +2,9 @@ var express = require("express");
 var router = express.Router();
 const { User } = require("../../models");
 const authorization = function(req, res, next) {
+  const error = { status: "Not Autorization", code: 401 };
   if (!req.headers.authorization) {
-    res.json({ status: "Not Autorization", code: 401 });
+    res.error({ error });
   }
   User.findOne({
     where: { token: req.headers.authorization }
@@ -12,11 +13,11 @@ const authorization = function(req, res, next) {
       if (item.id === req.body.userId) {
         next();
       } else {
-        res.json({ status: "Not Autorization", code: 401 });
+        res.error({ error });
       }
     })
     .catch(error => {
-      res.json({ error });
+      res.error({ error });
     });
 };
 
