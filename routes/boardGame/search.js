@@ -60,8 +60,15 @@ router.post("/", function(req, res, next) {
         include: [Mechanic]
       },
       {
-        model: Publisher
-      }
+        model: LoanGame
+      },
+      { model: Publisher }
+    ],
+    limit: 10,
+    order: [
+      ["id"],
+      [LoanGame, "startLoan", "DESC NULLS LAST"],
+      [LoanGame, "startLoan"]
     ],
     where: where
   })

@@ -6,8 +6,10 @@ const {
   BoardGameType,
   Type,
   Mechanic,
-  Publisher
+  Publisher,
+  LoanGame
 } = require("../../models");
+const sequelize = require("sequelize");
 router.get("/:id", function(req, res, next) {
   BoardGame.findAndCountAll({
     include: [
@@ -19,11 +21,18 @@ router.get("/:id", function(req, res, next) {
         model: BoardGameMechanic,
         include: [Mechanic]
       },
+      {
+        model: LoanGame
+      },
       { model: Publisher }
     ],
     limit: 10,
     offset: req.params.id * 10,
-    order: ["id"],
+    order: [
+      ["id"],
+      [LoanGame, "startLoan", "DESC NULLS LAST"],
+      [LoanGame, "startLoan"]
+    ],
     where: {
       deletedAt: null
     }
@@ -37,6 +46,7 @@ router.get("/:id", function(req, res, next) {
 });
 router.get("/", function(req, res, next) {
   BoardGame.findAndCountAll({
+    distinct: true,
     include: [
       {
         model: BoardGameType,
@@ -45,10 +55,18 @@ router.get("/", function(req, res, next) {
       {
         model: BoardGameMechanic,
         include: [Mechanic]
-      }
+      },
+      {
+        model: LoanGame
+      },
+      { model: Publisher }
     ],
     limit: 10,
-    order: ["id"],
+    order: [
+      ["id"],
+      ["LoanGames.startLoan", "DESC NULLS LAST"],
+      ["LoanGames.startLoan"]
+    ],
     where: {
       deletedAt: null
     }
