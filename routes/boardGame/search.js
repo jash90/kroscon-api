@@ -7,7 +7,8 @@ const {
   BoardGameType,
   Type,
   Mechanic,
-  Publisher
+  Publisher,
+  LoanGame
 } = require("../../models");
 router.post("/", function(req, res, next) {
   var where = { deletedAt: null };
@@ -77,11 +78,17 @@ router.post("/", function(req, res, next) {
         where: {
           deletedAt: null
         }
-      }).then(count => {
-        res.json({ count, items });
-      });
+      })
+        .then(count => {
+          res.json({ count, items });
+        })
+        .catch(error => {
+          console.log(error);
+          res.json({ error });
+        });
     })
     .catch(error => {
+      console.log(error);
       res.json({ error });
     });
 });
