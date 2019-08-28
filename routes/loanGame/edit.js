@@ -1,15 +1,16 @@
 var express = require("express");
 var router = express.Router();
 const { LoanGame } = require("../../models");
-router.get("/:loanGameId/:hireUserId", function(req, res, next) {
+const authorization = require("../auth/authorizationModSelf");
+router.post("/", [authorization], function(req, res, next) {
   const now = new Date();
   LoanGame.update(
     {
       endLoan: now,
       deletedAt: null,
-      hireUserId: req.params.hireUserId
+      hireUserId: req.body.hireUserId
     },
-    { where: { id: req.params.loanGameId } }
+    { where: { id: req.body.loanGameId } }
   )
     .then(item => {
       res.json({ item });

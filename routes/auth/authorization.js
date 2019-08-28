@@ -1,7 +1,10 @@
 var express = require("express");
 var router = express.Router();
 const { User } = require("../../models");
-const autorization = function(req, res, next) {
+const authorization = function(req, res, next) {
+  if (!req.headers.authorization) {
+    res.json({ status: "Not Autorization", code: 401 });
+  }
   User.findOne({
     token: req.headers.authorization
   })
@@ -9,7 +12,7 @@ const autorization = function(req, res, next) {
       if (item) {
         next();
       } else {
-        res.json("Not Autorization");
+        res.json({ status: "Not Autorization", code: 401 });
       }
     })
     .catch(error => {
@@ -17,4 +20,4 @@ const autorization = function(req, res, next) {
     });
 };
 
-module.exports = autorization;
+module.exports = authorization;

@@ -2,7 +2,8 @@ var express = require("express");
 var router = express.Router();
 const { Op } = require("sequelize");
 const { BoardGame, LoanGame, User } = require("../../models");
-router.get("/", function(req, res, next) {
+const authorization = require("../auth/authorizationAdmin");
+router.get("/",  [authorization],function(req, res, next) {
   LoanGame.findAll({
     include: [
       {

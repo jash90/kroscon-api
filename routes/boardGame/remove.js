@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const { BoardGame } = require("../../models");
-router.delete("/:boardGameId", function(req, res, next) {
+const authorization = require("../auth/authorizationMod");
+router.delete("/:boardGameId", [authorization], function(req, res, next) {
   BoardGame.update(
     {
       deletedAt: new Date()

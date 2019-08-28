@@ -8,7 +8,8 @@ const {
   Mechanic
 } = require("../../models");
 const { Op } = require("sequelize");
-router.post("/", function(req, res, next) {
+const authorization = require("../auth/authorizationMod");
+router.post("/", [authorization], function(req, res, next) {
   let mechanics = [];
   let types = [];
   if (req.body.types) types = JSON.parse(req.body.types);

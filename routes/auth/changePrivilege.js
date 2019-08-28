@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const { User } = require("../../models");
-router.post("/", function(req, res, next) {
+const autorization = require("./authorizationAdmin");
+router.post("/", [autorization], function(req, res, next) {
   User.update(
     {
       privilegeId: req.body.privilegeId

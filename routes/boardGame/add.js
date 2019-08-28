@@ -7,13 +7,12 @@ const {
   Type,
   Mechanic
 } = require("../../models");
-router.post("/", function(req, res, next) {
+const authorization = require("../auth/authorizationMod");
+router.post("/", [authorization], function(req, res, next) {
   let mechanic = [];
   let types = [];
-  if (req.body.types)
-  types = JSON.parse(req.body.types);
-  if (req.body.mechanic)
-  mechanic = JSON.parse(req.body.mechanic);
+  if (req.body.types) types = JSON.parse(req.body.types);
+  if (req.body.mechanic) mechanic = JSON.parse(req.body.mechanic);
   BoardGame.create({
     name: req.body.name,
     uuid: req.body.uuid,

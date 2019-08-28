@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const { BoardGame, User, LoanGame } = require("../../models");
-router.get("/:id", function(req, res, next) {
+const authorization = require("../auth/authorizationAdmin");
+router.get("/:id", [authorization], function(req, res, next) {
   LoanGame.findOne({
     include: [
       {

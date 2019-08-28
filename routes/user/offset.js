@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const { User } = require("../../models");
-router.get("/:id", function(req, res, next) {
+const authorization = require("../auth/authorizationAdmin");
+router.get("/:id", [authorization], function(req, res, next) {
   User.findAndCountAll({
     limit: 10,
     offset: req.params.id * 10,
@@ -17,7 +18,7 @@ router.get("/:id", function(req, res, next) {
       res.json({ error });
     });
 });
-router.get("/", function(req, res, next) {
+router.get("/", [authorization], function(req, res, next) {
   User.findAndCountAll({
     limit: 10,
     order: ["id"],

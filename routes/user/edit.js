@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const { User } = require("../../models");
-router.post("/", function(req, res, next) {
+const authorization = require("../auth/authorizationUser");
+router.post("/", [authorization], function(req, res, next) {
   User.update(
     {
       firstname: req.body.firstname,

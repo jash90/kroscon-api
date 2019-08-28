@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const { User, Privilege } = require("../../models");
-router.post("/", function(req, res, next) {
+const authorization = require("../auth/authorizationAdmin");
+router.post("/", [authorization], function(req, res, next) {
   User.findOne({
     attributes: { exclude: ["password"] },
     include: [

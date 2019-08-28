@@ -3,7 +3,8 @@ var router = express.Router();
 const {
   LoanGame
 } = require("../../models");
-router.post("/", function(req, res, next) {
+const authorization = require("../auth/authorizationModSelf");
+router.post("/", [authorization],function(req, res, next) {
   LoanGame.create({
     userId: req.body.userId,
     hireUserId:req.body.hireUserId,

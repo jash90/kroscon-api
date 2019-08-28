@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const { User, Privilege } = require("../../models");
-router.get("/", function(req, res, next) {
+const authorization = require("../auth/authorizationAdmin");
+router.get("/", [authorization], function(req, res, next) {
   User.findAll({
     include: [
       {

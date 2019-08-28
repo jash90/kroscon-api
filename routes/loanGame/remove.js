@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const { LoanGame } = require("../../models");
-router.delete("/:id", function(req, res, next) {
+const authorization = require("../auth/authorizationAdmin");
+router.delete("/:id", [authorization], function(req, res, next) {
   LoanGame.update(
     {
       deletedAt: new Date()
