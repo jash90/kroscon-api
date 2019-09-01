@@ -13,7 +13,7 @@ const authorization = function(req, res, next) {
     where: { token: req.headers.authorization }
   })
     .then(item => {
-      if (item.privilegeId === 3) {
+      if (item.privilegeId === 3 && moment(item.tokenExpired).diff(now, "hours", true) > 1) {
         next();
       } else {
         res.json({ error });

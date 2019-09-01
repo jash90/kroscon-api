@@ -11,7 +11,7 @@ const authorization = function(req, res, next) {
     token: req.headers.authorization
   })
     .then(item => {
-      if (item) {
+      if (item && moment(item.tokenExpired).diff(now, "hours", true) > 1) {
         next();
       } else {
         res.json({ error });
