@@ -16,6 +16,7 @@ router.post("/", [authorization], function(req, res, next) {
   BoardGame.create({
     name: req.body.name,
     uuid: req.body.uuid,
+    description: req.body.description,
     minPlayers: req.body.minPlayers,
     maxPlayers: req.body.maxPlayers,
     playingTime: req.body.playingTime,
