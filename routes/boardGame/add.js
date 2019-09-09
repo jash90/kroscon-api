@@ -67,12 +67,10 @@ router.post("/", [authorization], function(req, res, next) {
           res.json({ item });
         })
         .catch(error => {
-          console.log({ error });
           res.json({ error });
         });
     })
     .catch(error => {
-      console.log({ error });
       res.json({ error });
     });
 });

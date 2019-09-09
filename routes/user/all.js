@@ -7,7 +7,7 @@ router.get("/", [authorization], function(req, res, next) {
     include: [
       {
         model: Privilege
-      },
+      }
     ],
     where: {
       deletedAt: null
@@ -17,7 +17,6 @@ router.get("/", [authorization], function(req, res, next) {
       res.json({ items });
     })
     .catch(error => {
-      console.log(error);
       res.json({ error });
     });
 });

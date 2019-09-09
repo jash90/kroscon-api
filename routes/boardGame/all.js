@@ -15,18 +15,18 @@ router.get("/", function(req, res, next) {
     include: [
       {
         model: BoardGameType,
-       include: [Type]
+        include: [Type]
       },
       {
         model: BoardGameMechanic,
         include: [Mechanic]
       },
       {
-        model:Publisher
+        model: Publisher
       },
       {
         model: LoanGame
-      },
+      }
     ],
     order: [
       ["id"],
@@ -43,11 +43,10 @@ router.get("/", function(req, res, next) {
           deletedAt: null
         }
       }).then(count => {
-        res.json({  count, items });
+        res.json({ count, items });
       });
     })
     .catch(error => {
-      console.log(error);
       res.json({ error });
     });
 });

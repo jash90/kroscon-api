@@ -1,11 +1,13 @@
 var express = require("express");
 var router = express.Router();
 const { User } = require("../../models");
+const bcrypt = require("bcryptjs");
 const authorization = require("../auth/authorizationUser");
-router.post("/", [authorization], function(req, res, next) {
+router.post("/", function(req, res, next) {
+  const password = bcrypt.hashSync(req.body.password, 8);
   User.update(
     {
-      password: req.body.password
+      password: password
     },
     {
       where: {

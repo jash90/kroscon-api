@@ -83,12 +83,10 @@ router.post("/", function(req, res, next) {
           res.json({ count, items });
         })
         .catch(error => {
-          console.log(error);
           res.json({ error });
         });
     })
     .catch(error => {
-      console.log(error);
       res.json({ error });
     });
 });

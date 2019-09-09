@@ -8,10 +8,9 @@ router.post("/", function(req, res, next) {
     createdAt: Date.now()
   })
     .then(item => {
-      res.json({item});
+      res.json({ item });
     })
     .catch(error => {
-      console.log({ error });
       res.json({ error });
     });
 });

@@ -18,7 +18,7 @@ router.post("/", [authorization], function(req, res, next) {
     {
       name: req.body.name,
       uuid: req.body.uuid,
-      description:req.body.description,
+      description: req.body.description,
       minPlayers: req.body.minPlayers,
       maxPlayers: req.body.maxPlayers,
       playingTime: req.body.playingTime,
@@ -116,7 +116,7 @@ router.post("/", [authorization], function(req, res, next) {
         ]
       })
         .then(item => {
-          res.json(item);
+          res.json({ item });
         })
         .catch(error => {
           res.json(error);

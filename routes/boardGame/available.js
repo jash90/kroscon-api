@@ -32,14 +32,14 @@ router.get("/", function(req, res, next) {
           {
             model: BoardGameMechanic,
             attributes: {
-                exclude: [
-                  "id",
-                  "boardGameId",
-                  "createdAt",
-                  "updatedAt",
-                  "deletedAt"
-                ]
-              },
+              exclude: [
+                "id",
+                "boardGameId",
+                "createdAt",
+                "updatedAt",
+                "deletedAt"
+              ]
+            },
             include: [Mechanic]
           }
         ]
@@ -54,7 +54,6 @@ router.get("/", function(req, res, next) {
       res.json({ items });
     })
     .catch(error => {
-      console.log(error);
       res.json({ error });
     });
 });
