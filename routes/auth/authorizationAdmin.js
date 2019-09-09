@@ -1,7 +1,9 @@
 var express = require("express");
 var router = express.Router();
 const { User } = require("../../models");
+const moment = require("moment");
 const authorization = function(req, res, next) {
+  const now = moment();
   const error = { status: "Not Autorization", code: 401 };
 
   if (!req.headers.authorization) {
@@ -13,7 +15,11 @@ const authorization = function(req, res, next) {
     where: { token: req.headers.authorization }
   })
     .then(item => {
-      if (item.privilegeId === 3 && moment(item.tokenExpired).diff(now, "hours", true) > 1) {
+      if (
+        item &&
+        item.privilegeId === 3 &&
+        moment(item.tokenExpired).diff(now, "hours", true) > 1
+      ) {
         next();
       } else {
         res.json({ error });
