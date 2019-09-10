@@ -42,7 +42,7 @@ router.post("/", function(req, res, next) {
 
   if (req.body.minAge) {
     where.minAge = {
-      [Op.lte]: req.body.minAge
+      [Op.gte]: req.body.minAge
     };
   }
 
@@ -69,7 +69,8 @@ router.post("/", function(req, res, next) {
     order: [
       ["id"],
       [LoanGame, "startLoan", "DESC NULLS LAST"],
-      [LoanGame, "startLoan"]
+      [LoanGame, "startLoan"],
+      ["minAge"]
     ],
     where: where
   })
