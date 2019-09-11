@@ -70,6 +70,7 @@ app.use('/loanGame/add', LoanGame.add);
 app.use('/loanGame/remove', LoanGame.remove);
 app.use('/loanGame/offset', LoanGame.offset);
 app.use('/loanGame', LoanGame.get);
+app.use('/loanGame/user', LoanGame.byUser);
 
 //mechanic
 app.use('/mechanics', Mechanic.all);
