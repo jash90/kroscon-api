@@ -17,17 +17,10 @@ router.post("/", async (req, res, next) => {
     }
   })
     .then(async item => {
-      await bcrypt
-        .compare(req.body.password, item.password)
-        .then(async value => {
-          if (
-            item.token &&
-            item.tokenExpired &&
-            moment(item.tokenExpired).diff(now, "hours", true) > 12
-          ) {
-            delete item.dataValues.password;
-            await res.json({ item });
-          } else {
+      if (item) {
+        await bcrypt
+          .compare(req.body.password, item.password)
+          .then(async value => {
             var token = bcrypt.hashSync(now.add(1, "days").toISOString(), 8);
             var tokenExpired = now.add(1, "days").toISOString();
             await User.update(
@@ -58,8 +51,10 @@ router.post("/", async (req, res, next) => {
             }).then(item => {
               res.json({ item });
             });
-          }
-        });
+          });
+      } else {
+        res.json({ status: "User not exist", code: 101 });
+      }
     })
     .catch(error => {
       res.json({ error });
