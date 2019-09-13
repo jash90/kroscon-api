@@ -9,7 +9,7 @@ router.get("/", async (req, res, next) => {
     },
     {
       where: {
-        token: req.headers.token,
+        token: req.headers.authorization,
         deletedAt: null
       }
     }
