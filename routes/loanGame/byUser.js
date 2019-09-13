@@ -12,7 +12,7 @@ router.post("/", [authorization], function(req, res, next) {
     ],
     where: {
       deletedAt: null,
-      userId:res.body.userId
+      userId: req.body.userId
     }
   })
     .then(items => {

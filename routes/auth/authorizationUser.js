@@ -15,7 +15,7 @@ const authorization = function(req, res, next) {
     .then(item => {
       if (
         item &&
-        item.id === req.body.userId &&
+        item.id === Number(req.body.userId) &&
         moment(item.tokenExpired).diff(now, "hours", true) > 1
       ) {
         next();
