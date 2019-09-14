@@ -137,6 +137,7 @@ CREATE TABLE "events" (
   "start" timestamp NOT NULL,
   "end" timestamp NOT NULL,
   "description" text NOT NULL,
+  "location" text NOT NULL,
   "createdAt" timestamp NOT NULL,
   "updatedAt" timestamp,
   "deletedAt" timestamp

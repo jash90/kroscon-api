@@ -28,6 +28,10 @@ Event.init(
       type: Sequelize.TEXT,
       allowNull: false
     },
+    location: {
+      type: Sequelize.TEXT,
+      allowNull: false
+    },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
     deletedAt: Sequelize.DATE
@@ -36,5 +40,5 @@ Event.init(
 );
 
 Lecture.hasMany(Event);
-Event.belongsTo(Lecture, { foreignKey: 'eventId' });
+Event.belongsTo(Lecture, { foreignKey: "eventId" });
 module.exports = Event;
