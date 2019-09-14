@@ -1,5 +1,8 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db/index");
+const User = require("./user");
+const BoardGame = require("./boardGame");
+const LoanGame = require("./loanGame");
 class Feedback extends Sequelize.Model {}
 
 Feedback.init(

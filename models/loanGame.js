@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../db/index');
 const User = require('./user');
 const BoardGame = require('./boardGame');
+const Table = require('./table');
 class LoanGame extends Sequelize.Model { }
 LoanGame.init(
     {
@@ -67,4 +68,6 @@ BoardGame.hasMany(LoanGame);
 LoanGame.belongsTo(BoardGame, { foreignKey: 'boardGameId' });
 User.hasMany(LoanGame);
 LoanGame.belongsTo(User, { foreignKey: 'hireUserId' });
+Table.hasMany(LoanGame);
+LoanGame.belongsTo(Table, { foreignKey: 'tableId' });
 module.exports = LoanGame;
