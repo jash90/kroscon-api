@@ -16,6 +16,6 @@ Publisher.init(
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,
         deletedAt: Sequelize.DATE
-    }, { sequelize, modelName: 'publisher' });
+    }, { sequelize, modelName: 'publishers' });
 
 module.exports = Publisher;

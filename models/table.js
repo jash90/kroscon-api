@@ -15,6 +15,6 @@ Table.init(
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,
         deletedAt: Sequelize.DATE
-    }, { sequelize, modelName: 'table' });
+    }, { sequelize, modelName: 'tables' });
 
 module.exports = Table;

@@ -34,7 +34,7 @@ BoardGameType.init(
         updatedAt: Sequelize.DATE,
         deletedAt: Sequelize.DATE
 
-    }, {sequelize, modelName: 'boardGameType' });
+    }, {sequelize, modelName: 'boardGameTypes' });
 
 BoardGame.hasMany(BoardGameType);
 BoardGameType.belongsTo(BoardGame, { foreignKey: 'boardGameId' });
