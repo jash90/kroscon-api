@@ -42,7 +42,7 @@ Lecture.init(
     updatedAt: Sequelize.DATE,
     deletedAt: Sequelize.DATE
   },
-  { sequelize, modelName: "lectures" }
+  { sequelize, modelName: "lecture" }
 );
 
 module.exports = Lecture;

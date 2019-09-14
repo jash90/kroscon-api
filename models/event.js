@@ -1,6 +1,5 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db/index");
-const Lecture = require("./lecture");
 class Event extends Sequelize.Model {}
 
 Event.init(
@@ -37,7 +36,7 @@ Event.init(
     updatedAt: Sequelize.DATE,
     deletedAt: Sequelize.DATE
   },
-  { sequelize, modelName: "events" }
+  { sequelize, modelName: "event" }
 );
 
 Lecture.hasMany(Event);

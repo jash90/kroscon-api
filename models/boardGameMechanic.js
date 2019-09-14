@@ -34,7 +34,7 @@ BoardGameMechanic.init(
         updatedAt: Sequelize.DATE,
         deletedAt: Sequelize.DATE
 
-    }, {sequelize, modelName: 'boardGameMechanics' });
+    }, {sequelize, modelName: 'boardGameMechanic' });
 
 BoardGame.hasMany(BoardGameMechanic);
 BoardGameMechanic.belongsTo(BoardGame, { foreignKey: 'boardGameId' });

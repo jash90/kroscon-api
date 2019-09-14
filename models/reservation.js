@@ -1,8 +1,5 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db/index");
-const User = require("./user");
-const BoardGame = require("./boardGame");
-const Table = require("./table");
 class Reservation extends Sequelize.Model {}
 
 Reservation.init(
@@ -43,14 +40,14 @@ Reservation.init(
       onUpdate: "cascade"
     },
     time: {
-      type: Sequelize.DATE,
+      type: Sequelize.Date,
       allowNull: false
     },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
     deletedAt: Sequelize.DATE
   },
-  { sequelize, modelName: "reservations" }
+  { sequelize, modelName: "reservation" }
 );
 User.hasMany(Reservation);
 Reservation.belongsTo(User, { foreignKey: 'userId' });

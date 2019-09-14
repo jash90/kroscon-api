@@ -17,7 +17,7 @@ Privilege.init(
     updatedAt: Sequelize.DATE,
     deletedAt: Sequelize.DATE
   },
-  { sequelize, modelName: "privileges" }
+  { sequelize, modelName: "privilege" }
 );
 
 module.exports = Privilege;

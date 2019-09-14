@@ -59,7 +59,7 @@ LoanGame.init(
         updatedAt: Sequelize.DATE,
         deletedAt: Sequelize.DATE
 
-    }, {sequelize, modelName: 'loanGames' });
+    }, {sequelize, modelName: 'loanGame' });
 
 User.hasMany(LoanGame);
 LoanGame.belongsTo(User, { foreignKey: 'userId' });

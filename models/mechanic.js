@@ -16,6 +16,6 @@ Mechanic.init(
         createdAt: Sequelize.DATE,
         updatedAt: Sequelize.DATE,
         deletedAt: Sequelize.DATE
-    }, { sequelize, modelName: 'mechanics' });
+    }, { sequelize, modelName: 'mechanic' });
 
 module.exports = Mechanic;
