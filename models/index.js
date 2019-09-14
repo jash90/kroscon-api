@@ -7,6 +7,11 @@ const Mechanic = require("./mechanic");
 const BoardGameMechanic = require("./boardGameMechanic");
 const BoardGameType = require("./boardGameType");
 const Privilege = require("./privilege");
+const Event = require("./event");
+const Feedback = require("./feedback");
+const Lecture = require("./lecture");
+const Reservation = require("./reservation");
+const Table = require("./table");
 module.exports = {
   User,
   BoardGame,
@@ -16,5 +21,10 @@ module.exports = {
   Mechanic,
   BoardGameMechanic,
   BoardGameType,
-  Privilege
+  Privilege,
+  Event,
+  Feedback,
+  Lecture,
+  Reservation,
+  Table
 };

@@ -1,15 +1,13 @@
 var express = require("express");
 var router = express.Router();
-const { LoanGame } = require("../../models");
-const authorization = require("../auth/authorizationModSelf");
-router.post("/", [authorization], function(req, res, next) {
-  LoanGame.create({
+const { Feedback } = require("../../models");
+
+router.post("/", function(req, res, next) {
+  Feedback.create({
     userId: req.body.userId,
-    hireUserId: req.body.hireUserId,
     boardGameId: req.body.boardGameId,
-    tableId: req.body.tableId,
-    startLoan: Date.now(),
-    endLoan: null,
+    loanGameId: req.body.loanGameId,
+    rating: req.body.rating,
     createdAt: Date.now()
   })
     .then(item => {

@@ -32,7 +32,7 @@ CREATE TABLE "boardGames" (
   "playingTime" int NOT NULL,
   "minAge" int NOT NULL,
   "publisherId" int NOT NULL,
-  "description" text NULL,
+  "image" text,
   "createdAt" timestamp NOT NULL DEFAULT NOW(),
   "updatedAt" timestamp NULL,
   "deletedAt" timestamp NULL
@@ -45,9 +45,10 @@ CREATE TABLE "loanGames" (
   "hireUserId" int NOT NULL,
   "startLoan" timestamp NOT NULL,
   "endLoan" timestamp NULL,
+  "tableId" int,
   "createdAt" timestamp NOT NULL DEFAULT NOW(),
-  "updatedAt" timestamp,
-  "deletedAt" timestamp
+  "updatedAt" timestamp NULL,
+  "deletedAt" timestamp NULL
 );
 
 CREATE TABLE "publishers" (
@@ -100,6 +101,59 @@ CREATE TABLE "privileges" (
   "deletedAt" timestamp NULL
 );
 
+CREATE TABLE "feedbacks" (
+  "id" SERIAL PRIMARY KEY,
+  "userId" int NOT NULL,
+  "boardGameId" int NOT NULL,
+  "loanGameId" int NOT NULL,
+  "feedback" int NOT NULL,
+  "createdAt" timestamp NOT NULL,
+  "updatedAt" timestamp,
+  "deletedAt" timestamp
+);
+
+CREATE TABLE "tables" (
+  "id" SERIAL PRIMARY KEY,
+  "name" text,
+  "createdAt" timestamp NOT NULL,
+  "updatedAt" timestamp,
+  "deletedAt" timestamp
+);
+
+CREATE TABLE "reservations" (
+  "id" SERIAL PRIMARY KEY,
+  "userId" int NOT NULL,
+  "boardGameId" int NOT NULL,
+  "tableId" int NOT NULL,
+  "time" timestamp NOT NULL,
+  "createdAt" timestamp NOT NULL,
+  "updatedAt" timestamp,
+  "deletedAt" timestamp
+);
+
+CREATE TABLE "events" (
+  "id" SERIAL PRIMARY KEY,
+  "name" text NOT NULL,
+  "start" timestamp NOT NULL,
+  "end" timestamp NOT NULL,
+  "description" text NOT NULL,
+  "createdAt" timestamp NOT NULL,
+  "updatedAt" timestamp,
+  "deletedAt" timestamp
+);
+
+CREATE TABLE "lectures" (
+  "id" SERIAL PRIMARY KEY,
+  "name" text NOT NULL,
+  "start" timestamp NOT NULL,
+  "end" timestamp NOT NULL,
+  "description" text NOT NULL,
+  "eventId" int NOT NULL,
+  "createdAt" timestamp NOT NULL,
+  "updatedAt" timestamp,
+  "deletedAt" timestamp
+);
+
 ALTER TABLE "users"
   ADD FOREIGN KEY ("privilegeId") REFERENCES "privileges" ("id");
 
@@ -126,6 +180,30 @@ ALTER TABLE "boardGameMechanics"
 
 ALTER TABLE "boardGameMechanics"
   ADD FOREIGN KEY ("mechanicId") REFERENCES "mechanics" ("id");
+
+ALTER TABLE "loanGames"
+  ADD FOREIGN KEY ("tableId") REFERENCES "tables" ("id");
+
+ALTER TABLE "feedbacks"
+  ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
+
+ALTER TABLE "feedbacks"
+  ADD FOREIGN KEY ("boardGameId") REFERENCES "boardGames" ("id");
+
+ALTER TABLE "feedbacks"
+  ADD FOREIGN KEY ("loanGameId") REFERENCES "loanGames" ("id");
+
+ALTER TABLE "reservations"
+  ADD FOREIGN KEY ("userId") REFERENCES "users" ("id");
+
+ALTER TABLE "reservations"
+  ADD FOREIGN KEY ("boardGameId") REFERENCES "boardGames" ("id");
+
+ALTER TABLE "reservations"
+  ADD FOREIGN KEY ("tableId") REFERENCES "tables" ("id");
+
+ALTER TABLE "lectures"
+  ADD FOREIGN KEY ("eventId") REFERENCES "events" ("id");
 
 INSERT INTO public.privileges (id, name, "createdAt")
   VALUES (1, 'user', now());

@@ -38,6 +38,14 @@ LoanGame.init(
                 key: 'id'
             },
         },
+        tableId :{
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'table',
+                key: 'id'
+            },
+        },
         startLoan: {
             type: Sequelize.DATE,
             allowNull: false,

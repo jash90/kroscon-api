@@ -53,6 +53,10 @@ BoardGame.init(
       type: Sequelize.TEXT,
       allowNull: true
     },
+    image: {
+      type: Sequelize.TEXT,
+      allowNull: true
+    },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
     deletedAt: Sequelize.DATE
