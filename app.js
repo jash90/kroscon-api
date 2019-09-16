@@ -47,6 +47,7 @@ app.use('/boardGame/offset', BoardGame.offset);
 app.use('/boardGame/available', BoardGame.available);
 app.use('/boardGame/search', BoardGame.search);
 app.use('/boardGame/search/uuid', BoardGame.searchByUUID);
+app.use('/boardGame/file', BoardGame.uploadFile);
 
 //boardGameMechanic
 app.use('/boardGameMechanics', BoardGameMechanic.all);
