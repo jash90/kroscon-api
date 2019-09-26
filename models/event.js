@@ -37,9 +37,9 @@ Event.init(
     updatedAt: Sequelize.DATE,
     deletedAt: Sequelize.DATE
   },
-  { sequelize, modelName: "event" }
+  { sequelize, modelName: "event", }
 );
 
-Lecture.hasMany(Event);
-Event.belongsTo(Lecture, { foreignKey: "eventId" });
+Event.hasMany(Lecture);
+Lecture.belongsTo(Event, { foreignKey: "eventId" });
 module.exports = Event;

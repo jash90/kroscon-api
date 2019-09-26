@@ -121,23 +121,6 @@ app.use("/table/remove", Table.remove);
 app.use("/table/offset", Table.offset);
 app.use("/table", Table.get);
 
-
-//table
-app.use("/tables", Table.all);
-app.use("/table/edit", Table.edit);
-app.use("/table/add", Table.add);
-app.use("/table/remove", Table.remove);
-app.use("/table/offset", Table.offset);
-app.use("/table", Table.get);
-
-//event
-app.use("/events", Table.all);
-app.use("/event/edit", Table.edit);
-app.use("/event/add", Table.add);
-app.use("/event/remove", Table.remove);
-app.use("/event/offset", Table.offset);
-app.use("/event", Table.get);
-
 //event
 app.use("/events", Event.all);
 app.use("/event/edit", Event.edit);
