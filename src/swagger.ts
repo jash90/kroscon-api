@@ -3,9 +3,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function setupSwagger(app: INestApplication) {
     const options = new DocumentBuilder()
-        .setTitle('MyDoctor API')
+        .setTitle('Kroscon API')
         .setLicense('MIT License', 'https://opensource.org/licenses/MIT')
-        .setContactEmail('makrzywd@metal.agh.edu.pl')
+        .setContactEmail('bartlomiejzimny@outlook.com')
         .setDescription('API Documentation')
         .setVersion('1.1')
         .addBearerAuth()
