@@ -131,6 +131,9 @@ db/db.json
 image/
 
 .idea
-dist/
+
 dist
-.dist
+
+config/db.json
+
+config/dbdebug.json
