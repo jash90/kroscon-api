@@ -1,5 +1,6 @@
-import { Column, CreatedAt, DataType, DeletedAt, IsEmail, Model, Table, Unique, UpdatedAt } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, DeletedAt, IsEmail, Model, Table, Unique, UpdatedAt, BelongsTo, ForeignKey } from 'sequelize-typescript';
 import { Gender } from '../shared/enum/enums';
+import { Privilege } from '../privilege/privilege.entity';
 
 @Table({
     tableName: 'user',
@@ -31,6 +32,13 @@ export class User extends Model<User> {
 
     @Column(DataType.DATEONLY)
     birthday: string;
+
+    @ForeignKey(() => Privilege)
+    @Column({ type: DataType.BIGINT, field: 'privilege_id' })
+    privilegeId: number;
+
+    @BelongsTo(() => Privilege)
+    privilege: Privilege;
 
     @CreatedAt
     @Column({ field: 'created_at' })

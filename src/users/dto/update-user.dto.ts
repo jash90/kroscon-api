@@ -1,6 +1,6 @@
 import { Gender } from '../../shared/enum/enums';
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, IsEnum, IsISO8601 } from 'class-validator';
+import { IsOptional, IsString, IsEnum, IsISO8601, IsNumber } from 'class-validator';
 
 export class UpdateUserDto {
     @ApiModelProperty()
@@ -22,4 +22,9 @@ export class UpdateUserDto {
     @IsOptional()
     @IsISO8601()
     readonly birthday?: string;
+
+    @ApiModelProperty()
+    @IsNumber()
+    @IsOptional()
+    readonly privilegeId?:number;
 }
