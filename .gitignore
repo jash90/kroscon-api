@@ -131,3 +131,4 @@ db/db.json
 image/
 
 .idea
+dist/
