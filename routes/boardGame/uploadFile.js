@@ -2,12 +2,14 @@ var express = require("express");
 var router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const formidable = require('formidable')
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
-  destination: './public/uploads/',
+  destination: './image/uploads/',
   filename: function(req, file, cb){
-    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    console.log(req.body);
+    cb(null,Date.now() + path.extname(file.originalname));
   }
 });
 
@@ -18,7 +20,7 @@ const upload = multer({
   fileFilter: function(req, file, cb){
     checkFileType(file, cb);
   }
-}).single('myImage');
+}).single('photo');
 
 // Check File Type
 function checkFileType(file, cb){
@@ -37,15 +39,12 @@ function checkFileType(file, cb){
 }
 
 
-
-// Public Folder
-//app.use(express.static('./public'));
-
 router.post('/', (req, res) => {
   upload(req, res, (err) => {
+    console.log(req.body);
     if(err){
       res.json({
-        msg: err
+         err
       });
     } else {
       if(req.file == undefined){
@@ -53,6 +52,7 @@ router.post('/', (req, res) => {
           msg: 'Error: No File Selected!'
         });
       } else {
+        console.log(req.file);
         res.json({
           msg: 'File Uploaded!',
           file: `uploads/${req.file.filename}`

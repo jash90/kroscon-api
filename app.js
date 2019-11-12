@@ -153,6 +153,8 @@ app.use("/reservation/remove", Reservation.remove);
 app.use("/reservation/offset", Reservation.offset);
 app.use("/reservation", Reservation.get);
 
+app.use(express.static('./image'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
