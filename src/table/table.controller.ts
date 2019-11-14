@@ -10,7 +10,7 @@ import { TableService } from './table.service';
 
 @Controller('tables')
 @ApiUseTags('tables')
-export class TablesController {
+export class TableController {
     constructor(private readonly tablesService: TableService) { }
 
     @Get()
