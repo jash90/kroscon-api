@@ -12,6 +12,7 @@ import {
     Unique,
     UpdatedAt,
 } from 'sequelize-typescript';
+import { BoardGameMechanic } from 'src/boardGameMechanic/boardGameMechanic.entity';
 
 @Table({
     tableName: 'mechanic',
@@ -24,6 +25,9 @@ export class Mechanic extends Model<Mechanic> {
 
     @Column(DataType.TEXT)
     name: string;
+
+    @HasMany(() => BoardGameMechanic)
+    BoardGameMechanics: BoardGameMechanic[];
 
     @CreatedAt
     @Column({ field: 'created_at' })
