@@ -29,11 +29,10 @@ export class Event extends Model<Event> {
     @HasMany(() => User)
     users: User[];
 
-    @Column(DataType.Date)
+    @Column(DataType.DATE)
     start: Date;
 
-
-    @Column(DataType.Date)
+    @Column(DataType.DATE)
     end: Date;
 
     @Column(DataType.TEXT)
