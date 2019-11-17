@@ -37,7 +37,6 @@ export class BoardGameTypesService {
 
     async create(createBoardGameTypeDto: CreateBoardGameTypeDto): Promise<BoardGameType> {
         const boardGameType = new BoardGameType();
-        boardGameType.name = createBoardGameTypeDto.name;
 
         try {
             return await boardGameType.save();
@@ -63,8 +62,6 @@ export class BoardGameTypesService {
         updateBoardGameTypeDto: UpdateBoardGameTypeDto,
     ): Promise<BoardGameType> {
         const boardGameType = await this.getBoardGameType(id);
-
-        boardGameType.name = updateBoardGameTypeDto.name || boardGameType.name;
 
         try {
             return await boardGameType.save();

@@ -3,8 +3,4 @@ import { IsString, } from 'class-validator';
 
 export class CreateBoardGameTypeDto {
 
-    @ApiModelProperty()
-    @IsString()
-    readonly name: string;
-
 }

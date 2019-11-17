@@ -22,13 +22,6 @@ export class BoardGameType extends Model<BoardGameType> {
     @Column(DataType.BIGINT)
     id: number;
 
-    @Column(DataType.TEXT)
-    name: string;
-
-
-    // @HasMany(() => User)
-    // users: User[];
-
     @CreatedAt
     @Column({ field: 'created_at' })
     createdAt: Date;
