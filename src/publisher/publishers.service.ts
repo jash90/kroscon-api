@@ -5,6 +5,7 @@ import { CreatePublisherDto } from 'src/publisher/dto/create-publisher.dto';
 import { UpdatePublisherDto } from 'src/publisher/dto/update-publisher.dto';
 import { PublisherOffset } from 'src/publisher/dto/publisher.offset';
 import { User } from 'src/users/user.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
 
 @Injectable()
 export class PublishersService {
@@ -15,7 +16,7 @@ export class PublishersService {
 
     async findAll(): Promise<PublisherDto[]> {
         const publishers = await this.publishersRepository.findAll<Publisher>({
-            include: [User],
+            include: [BoardGame],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return publishers.map(publisher => {
@@ -25,7 +26,7 @@ export class PublishersService {
 
     async findOne(id: number): Promise<PublisherDto> {
         const publisher = await this.publishersRepository.findByPk<Publisher>(id, {
-            include: [User],
+            include: [BoardGame],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!publisher) {
@@ -48,7 +49,7 @@ export class PublishersService {
 
     private async getPublisher(id: number): Promise<Publisher> {
         const publisher = await this.publishersRepository.findByPk<Publisher>(id, {
-            include: [User],
+            include: [BoardGame],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!publisher) {
@@ -81,7 +82,7 @@ export class PublishersService {
 
     async offset(index: number = 0): Promise<PublisherOffset> {
         const publishers = await this.publishersRepository.findAndCountAll({
-            include: [User],
+            include: [BoardGame],
             limit: 100,
             offset: index * 100,
             order: ['id'],

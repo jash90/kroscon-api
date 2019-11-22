@@ -1,4 +1,5 @@
 import {
+
     AutoIncrement,
     Column,
     CreatedAt,
@@ -12,6 +13,7 @@ import {
     Unique,
     UpdatedAt,
 } from 'sequelize-typescript';
+import { BoardGame } from "src/boardGame/boardGame.entity";
 
 @Table({
     tableName: 'publisher',
@@ -25,9 +27,8 @@ export class Publisher extends Model<Publisher> {
     @Column(DataType.TEXT)
     name: string;
 
-
-    // @HasMany(() => User)
-    // users: User[];
+    @HasMany(() => BoardGame)
+    boardGames: BoardGame[];
 
     @CreatedAt
     @Column({ field: 'created_at' })
