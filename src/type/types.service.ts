@@ -5,6 +5,8 @@ import { User } from 'src/users/user.entity';
 import { CreateTypeDto } from 'src/type/dto/create-type.dto';
 import { UpdateTypeDto } from 'src/type/dto/update-type.dto';
 import { TypeOffset } from 'src/type/dto/type.offset';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { BoardGameType } from '../boardGameType/boardGameType.entity';
 
 @Injectable()
 export class TypesService {
@@ -15,7 +17,7 @@ export class TypesService {
 
     async findAll(): Promise<TypeDto[]> {
         const types = await this.typesRepository.findAll<Type>({
-            include: [User],
+            include: [Type, BoardGameType],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return types.map(type => {
@@ -25,7 +27,7 @@ export class TypesService {
 
     async findOne(id: number): Promise<TypeDto> {
         const type = await this.typesRepository.findByPk<Type>(id, {
-            include: [User],
+            include: [Type, BoardGameType],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!type) {
@@ -48,7 +50,7 @@ export class TypesService {
 
     private async getType(id: number): Promise<Type> {
         const type = await this.typesRepository.findByPk<Type>(id, {
-            include: [User],
+            include: [Type, BoardGameType],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!type) {
@@ -81,7 +83,7 @@ export class TypesService {
 
     async offset(index: number = 0): Promise<TypeOffset> {
         const types = await this.typesRepository.findAndCountAll({
-            include: [User],
+            include: [Type, BoardGameType],
             limit: 100,
             offset: index * 100,
             order: ['id'],

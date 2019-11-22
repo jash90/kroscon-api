@@ -5,6 +5,8 @@ import { CreateBoardGameTypeDto } from 'src/boardGameType/dto/create-boardGameTy
 import { UpdateBoardGameTypeDto } from 'src/boardGameType/dto/update-boardGameType.dto';
 import { BoardGameTypeOffset } from 'src/boardGameType/dto/boardGameType.offset';
 import { User } from 'src/users/user.entity';
+import { BoardGame } from 'src/boardGame/boardGame.entity';
+import { Type } from 'src/type/type.entity';
 
 @Injectable()
 export class BoardGameTypesService {
@@ -15,7 +17,7 @@ export class BoardGameTypesService {
 
     async findAll(): Promise<BoardGameTypeDto[]> {
         const boardGameTypes = await this.boardGameTypesRepository.findAll<BoardGameType>({
-            include: [User],
+            include: [Type, BoardGame],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return boardGameTypes.map(boardGameType => {
@@ -25,7 +27,7 @@ export class BoardGameTypesService {
 
     async findOne(id: number): Promise<BoardGameTypeDto> {
         const boardGameType = await this.boardGameTypesRepository.findByPk<BoardGameType>(id, {
-            include: [User],
+            include: [Type, BoardGame],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!boardGameType) {
@@ -38,6 +40,9 @@ export class BoardGameTypesService {
     async create(createBoardGameTypeDto: CreateBoardGameTypeDto): Promise<BoardGameType> {
         const boardGameType = new BoardGameType();
 
+        boardGameType.boardGameId = createBoardGameTypeDto.boardGameId;
+        boardGameType.typeId = createBoardGameTypeDto.typeId;
+
         try {
             return await boardGameType.save();
         } catch (err) {
@@ -47,7 +52,7 @@ export class BoardGameTypesService {
 
     private async getBoardGameType(id: number): Promise<BoardGameType> {
         const boardGameType = await this.boardGameTypesRepository.findByPk<BoardGameType>(id, {
-            include: [User],
+            include: [Type, BoardGame],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!boardGameType) {
@@ -62,6 +67,9 @@ export class BoardGameTypesService {
         updateBoardGameTypeDto: UpdateBoardGameTypeDto,
     ): Promise<BoardGameType> {
         const boardGameType = await this.getBoardGameType(id);
+
+        boardGameType.boardGameId = updateBoardGameTypeDto.boardGameId || boardGameType.boardGameId;
+        boardGameType.typeId = updateBoardGameTypeDto.typeId || boardGameType.typeId;
 
         try {
             return await boardGameType.save();
@@ -78,7 +86,7 @@ export class BoardGameTypesService {
 
     async offset(index: number = 0): Promise<BoardGameTypeOffset> {
         const boardGameTypes = await this.boardGameTypesRepository.findAndCountAll({
-            include: [User],
+            include: [Type, BoardGame],
             limit: 100,
             offset: index * 100,
             order: ['id'],
