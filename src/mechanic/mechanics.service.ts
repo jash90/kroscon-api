@@ -5,6 +5,8 @@ import { User } from 'src/users/user.entity';
 import { CreateMechanicDto } from 'src/mechanic/dto/create-mechanic.dto';
 import { UpdateMechanicDto } from 'src/mechanic/dto/update-mechanic.dto';
 import { MechanicOffset } from 'src/mechanic/dto/mechanic.offset';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { BoardGameMechanic } from 'src/boardGameMechanic/boardGameMechanic.entity';
 
 @Injectable()
 export class MechanicsService {
@@ -15,7 +17,7 @@ export class MechanicsService {
 
     async findAll(): Promise<MechanicDto[]> {
         const mechanics = await this.mechanicsRepository.findAll<Mechanic>({
-            include: [User],
+            include: [BoardGame, BoardGameMechanic],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return mechanics.map(mechanic => {
@@ -25,7 +27,7 @@ export class MechanicsService {
 
     async findOne(id: number): Promise<MechanicDto> {
         const mechanic = await this.mechanicsRepository.findByPk<Mechanic>(id, {
-            include: [User],
+            include: [BoardGame, BoardGameMechanic],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!mechanic) {
@@ -48,7 +50,7 @@ export class MechanicsService {
 
     private async getMechanic(id: number): Promise<Mechanic> {
         const mechanic = await this.mechanicsRepository.findByPk<Mechanic>(id, {
-            include: [User],
+            include: [BoardGame, BoardGameMechanic],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!mechanic) {
@@ -81,7 +83,7 @@ export class MechanicsService {
 
     async offset(index: number = 0): Promise<MechanicOffset> {
         const mechanics = await this.mechanicsRepository.findAndCountAll({
-            include: [User],
+            include: [BoardGame, BoardGameMechanic],
             limit: 100,
             offset: index * 100,
             order: ['id'],
