@@ -21,6 +21,9 @@ export class EventDto {
     @ApiModelProperty()
     readonly location: string;
 
+    @ApiModelProperty()
+    readonly lectures: Lecture[];
+
     constructor(event: Event) {
         this.id = event.id;
         this.name = event.name;
@@ -28,5 +31,6 @@ export class EventDto {
         this.end = event.end;
         this.description = event.description;
         this.location = event.location;
+        this.lectures = event.lectures;
     }
 }

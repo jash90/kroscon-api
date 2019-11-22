@@ -15,7 +15,7 @@ export class EventsService {
     ) { }
 
     async findAll(): Promise<EventDto[]> {
-        const events = await this.eventsRepository.findAll<EventDto>({
+        const events = await this.eventsRepository.findAll<Event>({
             include: [Lecture],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
