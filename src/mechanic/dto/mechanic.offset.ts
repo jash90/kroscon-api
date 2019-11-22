@@ -7,8 +7,8 @@ export class MechanicOffset {
     @ApiModelProperty()
     readonly count: number;
 
-    constructor(privilegeOffset: MechanicOffset) {
-        this.rows = privilegeOffset.rows;
-        this.count = privilegeOffset.count;
+    constructor(mechanicOffset: MechanicOffset) {
+        this.rows = mechanicOffset.rows;
+        this.count = mechanicOffset.count;
     }
 }
