@@ -11,8 +11,10 @@ import {
     Table,
     Unique,
     UpdatedAt,
+    ForeignKey,
+    BelongsTo,
 } from 'sequelize-typescript';
-import { User } from 'src/users/user.entity';
+import { Event } from '../event/event.entity';
 
 @Table({
     tableName: 'lecture',
@@ -27,13 +29,20 @@ export class Lecture extends Model<Lecture> {
     name: string;
 
     @Column(DataType.DATE)
-    readonly start: Date;
+    start: Date;
 
     @Column(DataType.DATE)
-    readonly end: Date;
+    end: Date;
 
     @Column(DataType.STRING)
-    readonly description: string;
+    description: string;
+
+    @ForeignKey(() => Event)
+    @Column({ type: DataType.BIGINT, field: 'event_id' })
+    eventId: number;
+
+    @BelongsTo(() => Event)
+    event: Event;
 
     @CreatedAt
     @Column({ field: 'created_at' })

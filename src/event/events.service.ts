@@ -5,6 +5,7 @@ import { CreateEventDto } from 'src/event/dto/create-event.dto';
 import { UpdateEventDto } from 'src/event/dto/update-event.dto';
 import { EventOffset } from 'src/event/dto/event.offset';
 import { User } from 'src/users/user.entity';
+import { Lecture } from '../lecture/lecture.entity';
 
 @Injectable()
 export class EventsService {
@@ -15,7 +16,7 @@ export class EventsService {
 
     async findAll(): Promise<EventDto[]> {
         const events = await this.eventsRepository.findAll<EventDto>({
-            include: [User],
+            include: [Lecture],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return events.map(event => {
@@ -25,7 +26,7 @@ export class EventsService {
 
     async findOne(id: number): Promise<EventDto> {
         const event = await this.eventsRepository.findByPk<Event>(id, {
-            include: [User],
+            include: [Lecture],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!event) {
@@ -35,9 +36,13 @@ export class EventsService {
         return new EventDto(event);
     }
 
-    async create(CreateEventDto: CreateEventDto): Promise<Event> {
+    async create(createEventDto: CreateEventDto): Promise<Event> {
         const event = new Event();
-        event.name = CreateEventDto.name;
+        event.name = createEventDto.name;
+        event.start = createEventDto.start;
+        event.end = createEventDto.end;
+        event.description = createEventDto.description;
+        event.location = createEventDto.location;
 
         try {
             return await event.save();
@@ -48,7 +53,7 @@ export class EventsService {
 
     private async getEvent(id: number): Promise<Event> {
         const event = await this.eventsRepository.findByPk<Event>(id, {
-            include: [User],
+            include: [Lecture],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!event) {
@@ -60,12 +65,16 @@ export class EventsService {
 
     async update(
         id: number,
-        updatePrivilegeDto: UpdateEventDto,
+        updateEventDto: UpdateEventDto,
     ): Promise<Event> {
         const event = await this.getEvent(id);
 
-        event.name = updatePrivilegeDto.name || event.name;
-
+        event.name = updateEventDto.name || event.name;
+        event.start = updateEventDto.start || event.start;
+        event.end = updateEventDto.end || event.end;
+        event.description = updateEventDto.description || event.description;
+        event.location = updateEventDto.location || event.location;
+    
         try {
             return await event.save();
         } catch (err) {
@@ -81,7 +90,7 @@ export class EventsService {
 
     async offset(index: number = 0): Promise<EventOffset> {
         const events = await this.eventsRepository.findAndCountAll({
-            include: [User],
+            include: [Lecture],
             limit: 100,
             offset: index * 100,
             order: ['id'],

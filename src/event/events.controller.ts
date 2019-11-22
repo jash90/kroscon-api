@@ -6,7 +6,7 @@ import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { EventOffset } from './dto/event.offset';
 import { Event as EventEntity } from './event.entity';
-import { EventsService } from './event.service';
+import { EventsService } from './events.service';
 
 @Controller('events')
 @ApiUseTags('events')
@@ -33,7 +33,7 @@ export class EventsController {
     create(
         @Body() createEventDto: CreateEventDto,
     ): Promise<EventEntity> {
-        return this.EventsService.create(create);
+        return this.EventsService.create(createEventDto);
     }
 
     @Put(':id')
@@ -45,7 +45,7 @@ export class EventsController {
         @Param('id', new ParseIntPipe()) id: number,
         @Body() updateEventDto: UpdateEventDto,
     ): Promise<EventEntity> {
-        return this.EventsService.update(id, update);
+        return this.EventsService.update(id, updateEventDto);
     }
 
     @Delete(':id')

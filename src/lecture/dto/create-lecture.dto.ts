@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsString, IsDate, } from 'class-validator';
+import { IsString, IsDate, IsNumber, } from 'class-validator';
 
 export class CreateLectureDto {
 
@@ -18,4 +18,8 @@ export class CreateLectureDto {
     @ApiModelProperty()
     @IsString()
     readonly description: string;
+
+    @ApiModelProperty()
+    @IsNumber()
+    readonly eventId: number;
 }

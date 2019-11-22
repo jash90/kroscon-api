@@ -4,7 +4,7 @@ import { LectureDto } from 'src/lecture/dto/lecture.dto';
 import { CreateLectureDto } from 'src/lecture/dto/create-lecture.dto';
 import { UpdateLectureDto } from 'src/lecture/dto/update-lecture.dto';
 import { LectureOffset } from 'src/lecture/dto/lecture.offset';
-import { User } from 'src/users/user.entity';
+import { Event } from 'src/event/event.entity';
 
 @Injectable()
 export class LecturesService {
@@ -15,7 +15,7 @@ export class LecturesService {
 
     async findAll(): Promise<LectureDto[]> {
         const lectures = await this.lecturesRepository.findAll<Lecture>({
-            include: [User],
+            include: [Event],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return lectures.map(lecture => {
@@ -25,7 +25,7 @@ export class LecturesService {
 
     async findOne(id: number): Promise<LectureDto> {
         const lecture = await this.lecturesRepository.findByPk<Lecture>(id, {
-            include: [User],
+            include: [Event],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!lecture) {
@@ -37,7 +37,11 @@ export class LecturesService {
 
     async create(createLectureDto: CreateLectureDto): Promise<Lecture> {
         const lecture = new Lecture();
+
         lecture.name = createLectureDto.name;
+        lecture.start = createLectureDto.start;
+        lecture.end = createLectureDto.end;
+        lecture.eventId = createLectureDto.eventId;
 
         try {
             return await lecture.save();
@@ -48,7 +52,7 @@ export class LecturesService {
 
     private async getLecture(id: number): Promise<Lecture> {
         const lecture = await this.lecturesRepository.findByPk<Lecture>(id, {
-            include: [User],
+            include: [Event],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!lecture) {
@@ -65,6 +69,9 @@ export class LecturesService {
         const lecture = await this.getLecture(id);
 
         lecture.name = updateLectureDto.name || lecture.name;
+        lecture.start = updateLectureDto.start || lecture.start;
+        lecture.end = updateLectureDto.end || lecture.end;
+        lecture.eventId = updateLectureDto.eventId || lecture.eventId;
 
         try {
             return await lecture.save();
@@ -81,7 +88,7 @@ export class LecturesService {
 
     async offset(index: number = 0): Promise<LectureOffset> {
         const lectures = await this.lecturesRepository.findAndCountAll({
-            include: [User],
+            include: [Event],
             limit: 100,
             offset: index * 100,
             order: ['id'],

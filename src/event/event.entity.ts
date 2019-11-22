@@ -13,6 +13,7 @@ import {
     UpdatedAt,
 } from 'sequelize-typescript';
 import { User } from 'src/users/user.entity';
+import { Lecture } from 'src/lecture/lecture.entity';
 
 @Table({
     tableName: 'event',
@@ -26,8 +27,8 @@ export class Event extends Model<Event> {
     @Column(DataType.TEXT)
     name: string;
 
-    @HasMany(() => User)
-    users: User[];
+    @HasMany(() => Lecture)
+    lectures: Lecture[];
 
     @Column(DataType.DATE)
     start: Date;
