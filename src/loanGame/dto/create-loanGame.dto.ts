@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsString, IsDate, IsOptional } from 'class-validator';
+import { IsString, IsDate, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateLoanGameDto {
 
@@ -11,5 +11,21 @@ export class CreateLoanGameDto {
     @IsOptional()
     @IsDate()
     readonly end: Date;
+
+    @ApiModelProperty()
+    @IsNumber()
+    readonly userId: number;
+
+    @ApiModelProperty()
+    @IsNumber()
+    readonly boardGameId: number;
+
+    @ApiModelProperty()
+    @IsNumber()
+    readonly tableId: number;
+
+    @ApiModelProperty()
+    @IsNumber()
+    readonly hireUserId: number;
 
 }
