@@ -5,6 +5,8 @@ import { CreateTableDto } from 'src/table/dto/create-table.dto';
 import { UpdateTableDto } from 'src/table/dto/update-table.dto';
 import { TableOffset } from 'src/table/dto/table.offset';
 import { User } from 'src/users/user.entity';
+import { Reservation } from 'src/reservation/reservation.entity';
+import { LoanGame } from 'src/loanGame/loanGame.entity';
 
 @Injectable()
 export class TableService {
@@ -15,7 +17,7 @@ export class TableService {
 
     async findAll(): Promise<TableDto[]> {
         const tables = await this.tablesRepository.findAll<Table>({
-            include: [User],
+            include: [Reservation, LoanGame],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return tables.map(table => {
@@ -25,7 +27,7 @@ export class TableService {
 
     async findOne(id: number): Promise<TableDto> {
         const table = await this.tablesRepository.findByPk<Table>(id, {
-            include: [User],
+            include: [Reservation, LoanGame],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!table) {
@@ -48,7 +50,7 @@ export class TableService {
 
     private async getTable(id: number): Promise<Table> {
         const table = await this.tablesRepository.findByPk<Table>(id, {
-            include: [User],
+            include: [Reservation, LoanGame],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!table) {
@@ -81,7 +83,7 @@ export class TableService {
 
     async offset(index: number = 0): Promise<TableOffset> {
         const tables = await this.tablesRepository.findAndCountAll({
-            include: [User],
+            include: [Reservation, LoanGame],
             limit: 100,
             offset: index * 100,
             order: ['id'],
