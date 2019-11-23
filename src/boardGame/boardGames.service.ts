@@ -45,7 +45,13 @@ export class BoardGamesService {
     async create(createBoardGameDto: CreateBoardGameDto): Promise<BoardGame> {
         const boardGame = new BoardGame();
         boardGame.name = createBoardGameDto.name;
-
+        boardGame.uuid = createBoardGameDto.uuid;
+        boardGame.minPlayers = createBoardGameDto.minPlayers;
+        boardGame.maxPlayers = createBoardGameDto.maxPlayers;
+        boardGame.playingTime = createBoardGameDto.playingTime;
+        boardGame.minAge = createBoardGameDto.minAge;
+        boardGame.publisherId = createBoardGameDto.publisherId;
+    
         try {
             return await boardGame.save();
         } catch (err) {
@@ -72,6 +78,12 @@ export class BoardGamesService {
         const boardGame = await this.getBoardGame(id);
 
         boardGame.name = updateBoardGameDto.name || boardGame.name;
+        boardGame.uuid = updateBoardGameDto.uuid || boardGame.uuid;
+        boardGame.minPlayers = updateBoardGameDto.minPlayers || boardGame.minPlayers;
+        boardGame.maxPlayers = updateBoardGameDto.maxPlayers || boardGame.maxPlayers;
+        boardGame.playingTime = updateBoardGameDto.playingTime || boardGame.playingTime;
+        boardGame.minAge = updateBoardGameDto.minAge || boardGame.minAge;
+        boardGame.publisherId = updateBoardGameDto.publisherId || boardGame.publisherId;
 
         try {
             return await boardGame.save();
