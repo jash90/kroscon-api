@@ -1,6 +1,9 @@
-import { Column, CreatedAt, DataType, DeletedAt, IsEmail, Model, Table, Unique, UpdatedAt, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, DeletedAt, IsEmail, Model, Table, Unique, UpdatedAt, BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
 import { Gender } from '../shared/enum/enums';
 import { Privilege } from '../privilege/privilege.entity';
+import { Reservation } from 'src/reservation/reservation.entity';
+import { LoanGame } from 'src/loanGame/loanGame.entity';
+import { Feedback } from 'src/feedback/feedback.entity';
 
 @Table({
     tableName: 'user',
@@ -13,12 +16,11 @@ export class User extends Model<User> {
     })
     id: string;
 
-    @Unique
-    @IsEmail
-    @Column
+    @Unique(true)
+    @Column({ type: DataType.TEXT, validate: { IsEmail: true } })
     email: string;
 
-    @Column
+    @Column(DataType.TEXT)
     password: string;
 
     @Column({ field: 'first_name' })
@@ -39,6 +41,15 @@ export class User extends Model<User> {
 
     @BelongsTo(() => Privilege)
     privilege: Privilege;
+
+    @HasMany(() => Reservation)
+    reservations: Reservation[];
+
+    @HasMany(() => LoanGame)
+    loanGames: LoanGame[];
+
+    @HasMany(() => Feedback)
+    feedbacks: Feedback[];
 
     @CreatedAt
     @Column({ field: 'created_at' })

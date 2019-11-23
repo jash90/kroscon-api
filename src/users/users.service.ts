@@ -10,6 +10,10 @@ import { sign } from 'jsonwebtoken';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ConfigService } from './../shared/config/config.service';
 import { UserOffset } from './dto/user.offset';
+import { Privilege } from 'src/privilege/privilege.entity';
+import { Feedback } from 'src/feedback/feedback.entity';
+import { Reservation } from 'src/reservation/reservation.entity';
+import { LoanGame } from 'src/loanGame/loanGame.entity';
 
 @Injectable()
 export class UsersService {
@@ -25,6 +29,7 @@ export class UsersService {
 
     async findAll(): Promise<UserDto[]> {
         const users = await this.usersRepository.findAll<User>({
+            include: [Privilege, Reservation, LoanGame, Feedback],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return users.map(user => {
@@ -34,6 +39,7 @@ export class UsersService {
 
     async getUser(id: string): Promise<UserDto> {
         const user = await this.usersRepository.findByPk<User>(id, {
+            include: [Privilege, Reservation, LoanGame, Feedback],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!user) {
@@ -48,6 +54,7 @@ export class UsersService {
 
     async getUserByEmail(email: string): Promise<User> {
         return await this.usersRepository.findOne<User>({
+            include: [Privilege, Reservation, LoanGame, Feedback],
             where: { email },
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
@@ -143,6 +150,7 @@ export class UsersService {
     }
     async offset(index: number = 0): Promise<UserOffset> {
         const users = await this.usersRepository.findAndCountAll({
+            include: [Privilege, Reservation, LoanGame, Feedback],
             limit: 100,
             offset: index * 100,
             order: ['id'],
