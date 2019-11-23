@@ -12,8 +12,11 @@ import {
     Unique,
     UpdatedAt,
     Min,
-    Max
+    Max, BelongsTo, ForeignKey
 } from 'sequelize-typescript';
+import { LoanGame } from 'src/loanGame/loanGame.entity';
+import { User } from 'src/users/user.entity';
+import { BoardGame } from 'src/boardGame/boardGame.entity';
 
 @Table({
     tableName: 'feedback',
@@ -28,6 +31,27 @@ export class Feedback extends Model<Feedback> {
     @Min(1)
     @Max(10)
     rating: number;
+
+    @ForeignKey(() => LoanGame)
+    @Column({ type: DataType.BIGINT, field: 'loanGame_id' })
+    loanGameId: number;
+
+    @BelongsTo(() => LoanGame)
+    loanGame: LoanGame;
+
+    @ForeignKey(() => User)
+    @Column({ type: DataType.BIGINT, field: 'user_id' })
+    userId: number;
+
+    @BelongsTo(() => User)
+    user: User;
+
+    @ForeignKey(() => BoardGame)
+    @Column({ type: DataType.BIGINT, field: 'boardGame_id' })
+    boardGameId: number;
+
+    @BelongsTo(() => BoardGame)
+    boardGame: BoardGame;
 
     @CreatedAt
     @Column({ field: 'created_at' })
