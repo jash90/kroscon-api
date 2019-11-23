@@ -8,4 +8,19 @@ export class UpdateFeedbackDto {
     @Min(1)
     @Max(10)
     readonly rating: number;
+
+    @ApiModelProperty()
+    @IsNumber()
+    @IsOptional()
+    readonly userId: number;
+
+    @ApiModelProperty()
+    @IsNumber()
+    @IsOptional()
+    readonly boardGameId: number;
+
+    @ApiModelProperty()
+    @IsNumber()
+    @IsOptional()
+    readonly loanGameId: number;
 }

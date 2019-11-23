@@ -5,6 +5,18 @@ export class CreateFeedbackDto {
 
     @ApiModelProperty()
     @IsNumber()
+    readonly userId: number;
+
+    @ApiModelProperty()
+    @IsNumber()
+    readonly boardGameId: number;
+
+    @ApiModelProperty()
+    @IsNumber()
+    readonly loanGameId: number;
+
+    @ApiModelProperty()
+    @IsNumber()
     @Min(1)
     @Max(10)
     readonly rating: number;

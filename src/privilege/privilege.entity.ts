@@ -26,7 +26,6 @@ export class Privilege extends Model<Privilege> {
     @Column(DataType.TEXT)
     name: string;
 
-
     @HasMany(() => User)
     users: User[];
 
