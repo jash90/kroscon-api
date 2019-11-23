@@ -4,6 +4,14 @@ import { BoardGameDto } from 'src/boardGame/dto/boardGame.dto';
 import { CreateBoardGameDto } from 'src/boardGame/dto/create-boardGame.dto';
 import { UpdateBoardGameDto } from 'src/boardGame/dto/update-boardGame.dto';
 import { BoardGameOffset } from 'src/boardGame/dto/boardGame.offset';
+import { LoanGame } from 'src/loanGame/loanGame.entity';
+import { User } from 'src/users/user.entity';
+import { Table } from 'src/table/table.entity';
+import { BoardGameMechanic } from 'src/boardGameMechanic/boardGameMechanic.entity';
+import { BoardGameType } from 'src/boardGameType/boardGameType.entity';
+import { Feedback } from 'src/feedback/feedback.entity';
+import { Publisher } from 'src/publisher/publisher.entity';
+import { Reservation } from 'src/reservation/reservation.entity';
 
 @Injectable()
 export class BoardGamesService {
@@ -14,6 +22,7 @@ export class BoardGamesService {
 
     async findAll(): Promise<BoardGameDto[]> {
         const boardGames = await this.boardGamesRepository.findAll<BoardGame>({
+            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation, Table],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return boardGames.map(boardGame => {
@@ -23,6 +32,7 @@ export class BoardGamesService {
 
     async findOne(id: number): Promise<BoardGameDto> {
         const boardGame = await this.boardGamesRepository.findByPk<BoardGame>(id, {
+            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation, Table],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!boardGame) {
@@ -45,6 +55,7 @@ export class BoardGamesService {
 
     private async getBoardGame(id: number): Promise<BoardGame> {
         const boardGame = await this.boardGamesRepository.findByPk<BoardGame>(id, {
+            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation, Table],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!boardGame) {
@@ -77,6 +88,7 @@ export class BoardGamesService {
 
     async offset(index: number = 0): Promise<BoardGameOffset> {
         const boardGames = await this.boardGamesRepository.findAndCountAll({
+            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation, Table],
             limit: 100,
             offset: index * 100,
             order: ['id'],
