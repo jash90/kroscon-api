@@ -1,9 +1,9 @@
 import {
-    AutoIncrement,
+    AutoIncrement, BelongsTo,
     Column,
     CreatedAt,
     DataType,
-    DeletedAt,
+    DeletedAt, ForeignKey,
     HasMany,
     Length,
     Model,
@@ -13,6 +13,9 @@ import {
     UpdatedAt,
 } from 'sequelize-typescript';
 
+import { User } from '../users/user.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { Table as Tab } from '../table/table.entity';
 @Table({
     tableName: 'reservation',
 })
@@ -24,6 +27,27 @@ export class Reservation extends Model<Reservation> {
 
     @Column(DataType.DATE)
     time: Date;
+
+    @ForeignKey(() => User)
+    @Column({ type: DataType.BIGINT, field: 'user_id' })
+    userId: number;
+
+    @BelongsTo(() => User)
+    user: User;
+
+    @ForeignKey(() => BoardGame)
+    @Column({ type: DataType.BIGINT, field: 'boardGame_id' })
+    boardGameId: number;
+
+    @BelongsTo(() => BoardGame)
+    boardGame: BoardGame;
+
+    @ForeignKey(() => Tab)
+    @Column({ type: DataType.BIGINT, field: 'table_id' })
+    tableId: number;
+
+    @BelongsTo(() => Tab)
+    table: Tab;
 
     @CreatedAt
     @Column({ field: 'created_at' })

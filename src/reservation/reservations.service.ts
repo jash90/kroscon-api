@@ -5,6 +5,8 @@ import { CreateReservationDto } from 'src/reservation/dto/create-reservation.dto
 import { UpdateReservationDto } from 'src/reservation/dto/update-reservation.dto';
 import { ReservationOffset } from 'src/reservation/dto/reservation.offset';
 import { User } from 'src/users/user.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { Table } from '../table/table.entity';
 
 @Injectable()
 export class ReservationsService {
@@ -15,7 +17,7 @@ export class ReservationsService {
 
     async findAll(): Promise<ReservationDto[]> {
         const reservations = await this.reservationsRepository.findAll<Reservation>({
-            include: [User],
+            include: [User, BoardGame, Table],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return reservations.map(reservation => {
@@ -25,7 +27,7 @@ export class ReservationsService {
 
     async findOne(id: number): Promise<ReservationDto> {
         const reservation = await this.reservationsRepository.findByPk<Reservation>(id, {
-            include: [User],
+            include: [User, BoardGame, Table],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!reservation) {
@@ -38,6 +40,9 @@ export class ReservationsService {
     async create(createReservationDto: CreateReservationDto): Promise<Reservation> {
         const reservation = new Reservation();
         reservation.time = createReservationDto.time;
+        reservation.userId = createReservationDto.userId;
+        reservation.tableId = createReservationDto.tableId;
+        reservation.boardGameId = createReservationDto.boardGameId;
 
         try {
             return await reservation.save();
@@ -48,7 +53,7 @@ export class ReservationsService {
 
     private async getReservation(id: number): Promise<Reservation> {
         const reservation = await this.reservationsRepository.findByPk<Reservation>(id, {
-            include: [User],
+            include: [User, BoardGame, Table],
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!reservation) {
@@ -65,6 +70,9 @@ export class ReservationsService {
         const reservation = await this.getReservation(id);
 
         reservation.time = updateReservationDto.time || reservation.time;
+        reservation.userId = updateReservationDto.userId || reservation.userId;
+        reservation.tableId = updateReservationDto.tableId || reservation.tableId;
+        reservation.boardGameId = updateReservationDto.boardGameId || reservation.boardGameId;
 
         try {
             return await reservation.save();
@@ -81,7 +89,7 @@ export class ReservationsService {
 
     async offset(index: number = 0): Promise<ReservationOffset> {
         const reservations = await this.reservationsRepository.findAndCountAll({
-            include: [User],
+            include: [User, BoardGame, Table],
             limit: 100,
             offset: index * 100,
             order: ['id'],
