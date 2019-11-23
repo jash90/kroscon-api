@@ -5,11 +5,11 @@ export class CreateLoanGameDto {
 
     @ApiModelProperty()
     @IsDate()
-    readonly startLoan: Date;
+    readonly start: Date;
 
     @ApiModelProperty()
     @IsOptional()
     @IsDate()
-    readonly endLoan: Date;
+    readonly end: Date;
 
 }

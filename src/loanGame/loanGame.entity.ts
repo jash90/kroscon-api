@@ -23,10 +23,10 @@ export class LoanGame extends Model<LoanGame> {
     id: number;
 
     @Column(DataType.DATE)
-    startLoan: Date;
+    start: Date;
 
     @Column(DataType.DATE)
-    endLoan: Date;
+    end: Date;
 
     @CreatedAt
     @Column({ field: 'created_at' })

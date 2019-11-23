@@ -2,19 +2,14 @@ import { ApiModelProperty } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString, IsDate } from 'class-validator';
 
 export class UpdateLoanGameDto {
-    @IsOptional()
     @ApiModelProperty()
-    @IsString()
-    readonly name: string;
+    @IsDate()
+    @IsOptional()
+    readonly start: Date;
 
     @ApiModelProperty()
     @IsDate()
     @IsOptional()
-    readonly startLoan: Date;
-
-    @ApiModelProperty()
-    @IsDate()
-    @IsOptional()
-    readonly endLoan: Date;
+    readonly end: Date;
 
 }

@@ -6,14 +6,14 @@ export class LoanGameDto {
     readonly id: number;
 
     @ApiModelProperty()
-    readonly startLoan: Date;
+    readonly start: Date;
 
     @ApiModelProperty()
-    readonly endLoan: Date;
+    readonly end: Date;
 
     constructor(loanGame: LoanGame) {
         this.id = loanGame.id;
-        this.startLoan = loanGame.startLoan;
-        this.endLoan = loanGame.endLoan;
+        this.start = loanGame.start;
+        this.end = loanGame.end;
     }
 }

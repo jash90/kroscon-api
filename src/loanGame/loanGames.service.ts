@@ -37,8 +37,8 @@ export class LoanGamesService {
 
     async create(createLoanGameDto: CreateLoanGameDto): Promise<LoanGame> {
         const loanGame = new LoanGame();
-        loanGame.startLoan = createLoanGameDto.startLoan;
-        loanGame.endLoan = null;
+        loanGame.start = createLoanGameDto.start;
+        loanGame.end = null;
 
         try {
             return await loanGame.save();
@@ -65,8 +65,8 @@ export class LoanGamesService {
     ): Promise<LoanGame> {
         const loanGame = await this.getLoanGame(id);
 
-        loanGame.startLoan = updateLoanGameDto.startLoan || loanGame.startLoan;
-        loanGame.endLoan = updateLoanGameDto.endLoan || loanGame.endLoan;
+        loanGame.start = updateLoanGameDto.start || loanGame.start;
+        loanGame.end = updateLoanGameDto.end || loanGame.end;
 
         try {
             return await loanGame.save();
