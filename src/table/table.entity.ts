@@ -1,9 +1,9 @@
 import {
-    AutoIncrement,
+    AutoIncrement, BelongsTo,
     Column,
     CreatedAt,
     DataType,
-    DeletedAt,
+    DeletedAt, ForeignKey,
     HasMany,
     Length,
     Model,
@@ -12,6 +12,8 @@ import {
     Unique,
     UpdatedAt,
 } from 'sequelize-typescript';
+import { LoanGame } from '../loanGame/loanGame.entity';
+import { Reservation } from '../reservation/reservation.entity';
 
 @Tabela({
     tableName: 'table',
@@ -24,6 +26,12 @@ export class Table extends Model<Table> {
     id: number;
     @Column(DataType.TEXT)
     name: string;
+
+    @HasMany(() => Reservation)
+    reservations: Reservation[];
+
+    @HasMany(() => LoanGame)
+    loanGames: LoanGame[];
 
     @CreatedAt
     @Column({ field: 'createdAt' })
