@@ -8,8 +8,8 @@ import { CreateUserDto } from './../src/users/dto/create-user.dto';
 export const createUserDto1: CreateUserDto = {
     email: 'testemail@gmail.com',
     password: 'password123',
-    firstName: 'John',
-    lastName: 'Smith',
+    firstname: 'John',
+    lastname: 'Smith',
     gender: Gender.male,
     birthday: '1986-07-17',
     privilegeId:1,
@@ -20,7 +20,7 @@ export const createUserDto1: CreateUserDto = {
 export const createUserDto2 = {
     email: 'testemail@gmail.com',
     password: 'password123',
-    lastName: 'Smith',
+    lastname: 'Smith',
     gender: Gender.male,
     birthday: '1986-07-17',
 };
@@ -58,8 +58,8 @@ export const userLoginRequestDto3: UserLoginRequestDto = {
 export const userDto1: UserDto = {
     id: 'uuid/v4',
     email: 'testemail@gmail.com',
-    firstName: 'John',
-    lastName: 'Smith',
+    firstname: 'John',
+    lastname: 'Smith',
     gender: Gender.male,
     birthday: '1986-07-17',
     privilegeId:1,

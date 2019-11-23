@@ -24,11 +24,11 @@ export class CreateUserDto {
 
     @ApiModelProperty()
     @IsString()
-    readonly firstName: string;
+    readonly firstname: string;
 
     @ApiModelProperty()
     @IsString()
-    readonly lastName: string;
+    readonly lastname: string;
 
     @ApiModelProperty()
     @IsString()

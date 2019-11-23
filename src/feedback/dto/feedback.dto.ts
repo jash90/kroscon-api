@@ -36,8 +36,8 @@ export class FeedbackDto {
         this.id = feedback.id;
         this.rating = feedback.rating;
         this.userId = feedback.userId;
-        this.firstnameUser = feedback.user.firstName;
-        this.lastnameUser = feedback.user.lastName;
+        this.firstnameUser = feedback.user.firstname;
+        this.lastnameUser = feedback.user.lastname;
         this.boardGameId = feedback.boardGameId;
         this.nameBoardGame = feedback.boardGame.name;
         this.loanGameId = feedback.loanGameId;

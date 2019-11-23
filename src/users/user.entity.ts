@@ -22,10 +22,10 @@ export class User extends Model<User> {
     password: string;
 
     @Column({ field: 'first_name' })
-    firstName: string;
+    firstname: string;
 
     @Column({ field: 'last_name' })
-    lastName: string;
+    lastname: string;
 
     @Column({ type: DataType.ENUM(Gender.female, Gender.male) })
     gender: Gender;

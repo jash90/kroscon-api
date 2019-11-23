@@ -9,10 +9,10 @@ export class UserDto {
     readonly email: string;
 
     @ApiModelProperty()
-    readonly firstName: string;
+    readonly firstname: string;
 
     @ApiModelProperty()
-    readonly lastName: string;
+    readonly lastname: string;
 
     @ApiModelProperty()
     readonly gender: Gender;
@@ -29,8 +29,8 @@ export class UserDto {
     constructor(user: User) {
         this.id = user.id;
         this.email = user.email;
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
+        this.firstname = user.firstname;
+        this.lastname = user.lastname;
         this.gender = user.gender;
         this.birthday = user.birthday;
         this.privilegeId = user.privilegeId;
