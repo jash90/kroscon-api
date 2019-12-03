@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import {IsOptional, IsNumber, Min, Max, IsUUID} from 'class-validator';
+import { IsOptional, IsNumber, Min, Max, IsUUID } from 'class-validator';
 
 export class UpdateFeedbackDto {
     @IsOptional()

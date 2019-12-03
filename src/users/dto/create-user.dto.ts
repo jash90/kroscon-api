@@ -54,5 +54,5 @@ export class CreateUserDto {
 
     @ApiModelProperty()
     @IsNumber()
-    readonly privilegeId:number;
+    readonly privilegeId: number;
 }

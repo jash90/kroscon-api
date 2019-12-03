@@ -26,5 +26,5 @@ export class UpdateUserDto {
     @ApiModelProperty()
     @IsNumber()
     @IsOptional()
-    readonly privilegeId?:number;
+    readonly privilegeId?: number;
 }

@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import {IsString, IsNumber, Min, Max, IsUUID} from 'class-validator';
+import { IsString, IsNumber, Min, Max, IsUUID } from 'class-validator';
 
 export class CreateFeedbackDto {
 

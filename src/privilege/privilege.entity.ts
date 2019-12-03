@@ -15,7 +15,7 @@ import {
 import { User } from 'src/users/user.entity';
 
 @Table({
-    tableName: 'privilege',
+    tableName: 'privileges',
 })
 export class Privilege extends Model<Privilege> {
     @PrimaryKey

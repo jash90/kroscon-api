@@ -16,7 +16,7 @@ export class UpdateLectureDto {
     @ApiModelProperty()
     @IsDate()
     @IsOptional()
-    readonly end:Date;
+    readonly end: Date;
 
     @ApiModelProperty()
     @IsString()

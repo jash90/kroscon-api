@@ -12,9 +12,9 @@ export const createUserDto1: CreateUserDto = {
     lastname: 'Smith',
     gender: Gender.male,
     birthday: '1986-07-17',
-    privilegeId:1,
-    city:'',
-    age:1
+    privilegeId: 1,
+    city: '',
+    age: 1
 };
 
 export const createUserDto2 = {
@@ -62,8 +62,8 @@ export const userDto1: UserDto = {
     lastname: 'Smith',
     gender: Gender.male,
     birthday: '1986-07-17',
-    privilegeId:1,
-    privilegeName:'admin'
+    privilegeId: 1,
+    privilegeName: 'admin'
 };
 
 export const userLoginResponseDto1: UserLoginResponseDto = {

@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import {IsString, IsDate, IsNumber, IsUUID} from 'class-validator';
+import { IsString, IsDate, IsNumber, IsUUID } from 'class-validator';
 
 export class CreateReservationDto {
 

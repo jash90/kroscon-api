@@ -36,6 +36,6 @@ const sql = `
 `;
 
 module.exports = {
-    up: queryInterface => queryInterface.sequelize.query(sql),
-    down: () => {},
+  up: queryInterface => queryInterface.sequelize.query(sql),
+  down: () => {}
 };

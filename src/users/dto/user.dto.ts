@@ -24,7 +24,7 @@ export class UserDto {
     readonly privilegeId: number;
 
     @ApiModelProperty()
-    readonly privilegeName:string;
+    readonly privilegeName: string;
 
     constructor(user: User) {
         this.id = user.id;
