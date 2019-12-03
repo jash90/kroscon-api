@@ -13,7 +13,7 @@ import { UserOffset } from './dto/user.offset';
 import { Feedback } from 'src/feedback/feedback.entity';
 import { Reservation } from 'src/reservation/reservation.entity';
 import { LoanGame } from 'src/loanGame/loanGame.entity';
-import {Roles} from '../shared/enum/enums';
+import { Roles } from '../shared/enum/enums';
 
 @Injectable()
 export class UsersService {

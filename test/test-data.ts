@@ -2,7 +2,7 @@ import { UserLoginRequestDto } from './../src/users/dto/user-login-request.dto';
 import { UpdateUserDto } from './../src/users/dto/update-user.dto';
 import { UserLoginResponseDto } from './../src/users/dto/user-login-response.dto';
 import { UserDto } from './../src/users/dto/user.dto';
-import {Gender, Roles} from '../src/shared/enum/enums';
+import { Gender, Roles } from '../src/shared/enum/enums';
 import { CreateUserDto } from './../src/users/dto/create-user.dto';
 
 export const createUserDto1: CreateUserDto = {
@@ -12,8 +12,8 @@ export const createUserDto1: CreateUserDto = {
     lastname: 'Smith',
     gender: Gender.male,
     birthday: '1986-07-17',
-    city:'',
-    age:1
+    city: '',
+    age: 1
 };
 
 export const createUserDto2 = {
@@ -61,7 +61,7 @@ export const userDto1: UserDto = {
     lastname: 'Smith',
     gender: Gender.male,
     birthday: '1986-07-17',
-   role:Roles.USER
+    role: Roles.USER
 };
 
 export const userLoginResponseDto1: UserLoginResponseDto = {

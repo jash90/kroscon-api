@@ -74,7 +74,7 @@ export class EventsService {
         event.end = updateEventDto.end || event.end;
         event.description = updateEventDto.description || event.description;
         event.location = updateEventDto.location || event.location;
-    
+
         try {
             return await event.save();
         } catch (err) {

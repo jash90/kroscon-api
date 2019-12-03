@@ -226,3 +226,4 @@ INSERT INTO public.types (name, "createdAt")
 
 INSERT INTO public.mechanics (name, "createdAt")
   VALUES ('test', now());
+

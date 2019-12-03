@@ -5,7 +5,7 @@ export class BoardGameMechanicOffset {
 
     @ApiModelProperty()
     readonly rows: BoardGameMechanicDto[];
-    
+
     @ApiModelProperty()
     readonly count: number;
 

@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import {IsEnum, IsOptional, IsString, Length, IsDate, IsNumber, IsUUID} from 'class-validator';
+import { IsEnum, IsOptional, IsString, Length, IsDate, IsNumber, IsUUID } from 'class-validator';
 
 export class UpdateReservationDto {
 

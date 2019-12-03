@@ -41,7 +41,7 @@ export class BoardGame extends Model<BoardGame> {
     @Unique(true)
     @Column(DataType.TEXT)
     uuid: string;
-    
+
 
     @Min(1)
     @Column(DataType.INTEGER)

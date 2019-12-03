@@ -1,7 +1,7 @@
 import { UserDto } from './user.dto';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { User } from '../user.entity';
-import {Roles} from '../../shared/enum/enums';
+import { Roles } from '../../shared/enum/enums';
 
 export class UserLoginResponseDto extends UserDto {
     @ApiModelProperty()

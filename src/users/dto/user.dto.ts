@@ -1,5 +1,5 @@
 import { User } from '../user.entity';
-import {Gender, Roles} from '../../shared/enum/enums';
+import { Gender, Roles } from '../../shared/enum/enums';
 import { ApiModelProperty } from '@nestjs/swagger';
 export class UserDto {
     @ApiModelProperty()
@@ -21,7 +21,7 @@ export class UserDto {
     readonly birthday: string;
 
     @ApiModelProperty()
-    readonly role:Roles;
+    readonly role: Roles;
 
     constructor(user: User) {
         this.id = user.id;
@@ -30,6 +30,6 @@ export class UserDto {
         this.lastname = user.lastname;
         this.gender = user.gender;
         this.birthday = user.birthday;
-        this.role= user.role;
+        this.role = user.role;
     }
 }

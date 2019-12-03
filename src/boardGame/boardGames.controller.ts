@@ -7,7 +7,7 @@ import { UpdateBoardGameDto } from './dto/update-boardGame.dto';
 import { BoardGameOffset } from './dto/boardGame.offset';
 import { BoardGame as BoardGameEntity } from './boardGame.entity';
 import { BoardGamesService } from './boardGames.service';
-import {AdminGuard} from '../roles/admin.guard';
+import { AdminGuard } from '../roles/admin.guard';
 
 @Controller('boardGames')
 @ApiUseTags('boardGames')

@@ -13,7 +13,7 @@ export class CreateLectureDto {
 
     @ApiModelProperty()
     @IsDate()
-    readonly end:Date;
+    readonly end: Date;
 
     @ApiModelProperty()
     @IsString()

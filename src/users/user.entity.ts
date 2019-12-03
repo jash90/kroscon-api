@@ -1,5 +1,5 @@
 import { Column, CreatedAt, DataType, DeletedAt, IsEmail, Model, Table, Unique, UpdatedAt, BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
-import {Gender, Roles} from '../shared/enum/enums';
+import { Gender, Roles } from '../shared/enum/enums';
 import { Reservation } from 'src/reservation/reservation.entity';
 import { LoanGame } from 'src/loanGame/loanGame.entity';
 import { Feedback } from 'src/feedback/feedback.entity';

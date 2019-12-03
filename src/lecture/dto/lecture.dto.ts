@@ -12,7 +12,7 @@ export class LectureDto {
     readonly start: Date;
 
     @ApiModelProperty()
-    readonly end:Date;
+    readonly end: Date;
 
     @ApiModelProperty()
     readonly description: string;

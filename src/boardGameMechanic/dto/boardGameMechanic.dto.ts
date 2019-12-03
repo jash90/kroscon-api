@@ -5,7 +5,7 @@ import { BoardGame } from 'src/boardGame/boardGame.entity';
 import { Mechanic } from 'src/mechanic/mechanic.entity';
 
 export class BoardGameMechanicDto {
-    
+
     @ApiModelProperty()
     readonly id: number;
 

@@ -51,7 +51,7 @@ export class BoardGamesService {
         boardGame.playingTime = createBoardGameDto.playingTime;
         boardGame.minAge = createBoardGameDto.minAge;
         boardGame.publisherId = createBoardGameDto.publisherId;
-    
+
         try {
             return await boardGame.save();
         } catch (err) {
