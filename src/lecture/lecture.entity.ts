@@ -17,7 +17,7 @@ import {
 import { Event } from '../event/event.entity';
 
 @Table({
-    tableName: 'lecture',
+    tableName: 'lectures',
 })
 export class Lecture extends Model<Lecture> {
     @PrimaryKey

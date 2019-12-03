@@ -10,7 +10,7 @@ export class ReservationDto {
   readonly time: Date;
 
   @ApiModelProperty()
-  readonly userId: number;
+  readonly userId: string;
 
   @ApiModelProperty()
   readonly firstnameUser: string;

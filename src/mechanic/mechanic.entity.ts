@@ -15,7 +15,7 @@ import {
 import { BoardGameMechanic } from 'src/boardGameMechanic/boardGameMechanic.entity';
 
 @Table({
-    tableName: 'mechanic',
+    tableName: 'mechanics',
 })
 export class Mechanic extends Model<Mechanic> {
     @PrimaryKey

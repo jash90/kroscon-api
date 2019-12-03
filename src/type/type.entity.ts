@@ -15,7 +15,7 @@ import {
 import { BoardGameType } from 'src/boardGameType/boardGameType.entity';
 
 @Table({
-    tableName: 'type',
+    tableName: 'types',
 })
 export class Type extends Model<Type> {
     @PrimaryKey

@@ -6,7 +6,7 @@ import { LoanGame } from 'src/loanGame/loanGame.entity';
 import { Feedback } from 'src/feedback/feedback.entity';
 
 @Table({
-    tableName: 'user',
+    tableName: 'users',
 })
 export class User extends Model<User> {
     @Column({
@@ -29,7 +29,7 @@ export class User extends Model<User> {
     @Column({ field: 'last_name' })
     lastname: string;
 
-    @Column({ type: DataType.ENUM(Gender.female, Gender.male) })
+    @Column({ type: DataType.ENUM(Object.keys(Gender)) })
     gender: Gender;
 
     @Column(DataType.DATEONLY)

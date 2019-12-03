@@ -10,4 +10,4 @@ import { eventsProviders } from './events.providers';
     providers: [EventsService, ...eventsProviders],
     exports: [],
 })
-export class EventssModule { }
+export class EventsModule { }

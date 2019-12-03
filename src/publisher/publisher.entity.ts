@@ -16,7 +16,7 @@ import {
 import { BoardGame } from "src/boardGame/boardGame.entity";
 
 @Table({
-    tableName: 'publisher',
+    tableName: 'publishers',
 })
 export class Publisher extends Model<Publisher> {
     @PrimaryKey

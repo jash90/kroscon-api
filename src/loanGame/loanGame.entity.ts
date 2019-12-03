@@ -19,7 +19,7 @@ import { BoardGame } from '../boardGame/boardGame.entity';
 import { Table as Tab } from '../table/table.entity';
 
 @Table({
-    tableName: 'loanGame',
+    tableName: 'loanGames',
 })
 export class LoanGame extends Model<LoanGame> {
     @PrimaryKey

@@ -16,7 +16,7 @@ import { LoanGame } from '../loanGame/loanGame.entity';
 import { Reservation } from '../reservation/reservation.entity';
 
 @Tabela({
-    tableName: 'table',
+    tableName: 'tables',
 })
 
 export class Table extends Model<Table> {

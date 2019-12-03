@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { IsOptional, IsNumber, Min, Max } from 'class-validator';
+import {IsOptional, IsNumber, Min, Max, IsUUID} from 'class-validator';
 
 export class UpdateFeedbackDto {
     @IsOptional()
@@ -10,9 +10,9 @@ export class UpdateFeedbackDto {
     readonly rating: number;
 
     @ApiModelProperty()
-    @IsNumber()
+    @IsUUID()
     @IsOptional()
-    readonly userId: number;
+    readonly userId: string;
 
     @ApiModelProperty()
     @IsNumber()

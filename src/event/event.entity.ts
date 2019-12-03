@@ -16,7 +16,7 @@ import { User } from 'src/users/user.entity';
 import { Lecture } from 'src/lecture/lecture.entity';
 
 @Table({
-    tableName: 'event',
+    tableName: 'events',
 })
 export class Event extends Model<Event> {
     @PrimaryKey

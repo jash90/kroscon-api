@@ -19,7 +19,7 @@ import { User } from 'src/users/user.entity';
 import { BoardGame } from 'src/boardGame/boardGame.entity';
 
 @Table({
-    tableName: 'feedback',
+    tableName: 'feedbacks',
 })
 export class Feedback extends Model<Feedback> {
     @PrimaryKey
@@ -27,9 +27,10 @@ export class Feedback extends Model<Feedback> {
     @Column(DataType.BIGINT)
     id: number;
 
-    @Column(DataType.NUMBER)
+
     @Min(1)
     @Max(10)
+    @Column(DataType.INTEGER)
     rating: number;
 
     @ForeignKey(() => LoanGame)
@@ -40,8 +41,8 @@ export class Feedback extends Model<Feedback> {
     loanGame: LoanGame;
 
     @ForeignKey(() => User)
-    @Column({ type: DataType.BIGINT, field: 'user_id' })
-    userId: number;
+    @Column({ type: DataType.UUID, field: 'user_id' })
+    userId: string;
 
     @BelongsTo(() => User)
     user: User;

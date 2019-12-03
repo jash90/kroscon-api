@@ -27,7 +27,7 @@ import { Feedback } from 'src/feedback/feedback.entity';
 import { Table as Tab } from 'src/table/table.entity';
 
 @Table({
-    tableName: 'boardGame',
+    tableName: 'boardGames',
 })
 export class BoardGame extends Model<BoardGame> {
     @PrimaryKey
@@ -38,25 +38,29 @@ export class BoardGame extends Model<BoardGame> {
     @Column(DataType.TEXT)
     name: string;
 
-    @Column(DataType.TEXT)
     @Unique(true)
+    @Column(DataType.TEXT)
     uuid: string;
     
-    @Column(DataType.NUMBER)
+
     @Min(1)
+    @Column(DataType.INTEGER)
     minPlayers: number;
 
-    @Column(DataType.NUMBER)
+
     @Min(2)
+    @Column(DataType.INTEGER)
     maxPlayers: number;
 
-    @Column(DataType.NUMBER)
+
     @Min(1)
+    @Column(DataType.INTEGER)
     playingTime: number;
 
-    @Column(DataType.NUMBER)
+
     @Min(1)
     @Max(99)
+    @Column(DataType.INTEGER)
     minAge: number;
 
     @HasMany(() => BoardGameMechanic)
@@ -73,9 +77,6 @@ export class BoardGame extends Model<BoardGame> {
 
     @HasMany(() => Feedback)
     feedbacks: Feedback[];
-
-    @HasMany(() => Tab)
-    tables: Tab[];
 
     @ForeignKey(() => Publisher)
     @Column({ type: DataType.BIGINT, field: 'publisher_id' })

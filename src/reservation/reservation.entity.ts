@@ -17,7 +17,7 @@ import { User } from '../users/user.entity';
 import { BoardGame } from '../boardGame/boardGame.entity';
 import { Table as Tab } from '../table/table.entity';
 @Table({
-    tableName: 'reservation',
+    tableName: 'reservations',
 })
 export class Reservation extends Model<Reservation> {
     @PrimaryKey
@@ -29,8 +29,8 @@ export class Reservation extends Model<Reservation> {
     time: Date;
 
     @ForeignKey(() => User)
-    @Column({ type: DataType.BIGINT, field: 'user_id' })
-    userId: number;
+    @Column({ type: DataType.UUID, field: 'user_id' })
+    userId: string;
 
     @BelongsTo(() => User)
     user: User;
