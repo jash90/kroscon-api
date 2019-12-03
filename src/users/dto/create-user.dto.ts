@@ -51,8 +51,4 @@ export class CreateUserDto {
     @IsOptional()
     @IsISO8601()
     readonly birthday: string;
-
-    @ApiModelProperty()
-    @IsNumber()
-    readonly privilegeId:number;
 }

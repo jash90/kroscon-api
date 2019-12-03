@@ -7,6 +7,7 @@ import { UpdateBoardGameDto } from './dto/update-boardGame.dto';
 import { BoardGameOffset } from './dto/boardGame.offset';
 import { BoardGame as BoardGameEntity } from './boardGame.entity';
 import { BoardGamesService } from './boardGames.service';
+import {AdminGuard} from '../roles/admin.guard';
 
 @Controller('boardGames')
 @ApiUseTags('boardGames')
@@ -15,6 +16,7 @@ export class BoardGamesController {
 
     @Get()
     @ApiOkResponse({ type: [BoardGameDto] })
+    @UseGuards(new AdminGuard())
     findAll(): Promise<BoardGameDto[]> {
         return this.boardGamesService.findAll();
     }
@@ -30,6 +32,7 @@ export class BoardGamesController {
     @ApiCreatedResponse({ type: BoardGameEntity })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
+    @UseGuards(new AdminGuard())
     create(
         @Body() createBoardGameDto: CreateBoardGameDto,
     ): Promise<BoardGameEntity> {

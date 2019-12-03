@@ -1,6 +1,5 @@
 import { Column, CreatedAt, DataType, DeletedAt, IsEmail, Model, Table, Unique, UpdatedAt, BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
-import { Gender } from '../shared/enum/enums';
-import { Privilege } from '../privilege/privilege.entity';
+import {Gender, Roles} from '../shared/enum/enums';
 import { Reservation } from 'src/reservation/reservation.entity';
 import { LoanGame } from 'src/loanGame/loanGame.entity';
 import { Feedback } from 'src/feedback/feedback.entity';
@@ -35,12 +34,8 @@ export class User extends Model<User> {
     @Column(DataType.DATEONLY)
     birthday: string;
 
-    @ForeignKey(() => Privilege)
-    @Column({ type: DataType.BIGINT, field: 'privilege_id' })
-    privilegeId: number;
-
-    @BelongsTo(() => Privilege)
-    privilege: Privilege;
+    @Column({ type: DataType.ENUM(Object.keys(Roles)) })
+    role: Roles;
 
     @HasMany(() => Reservation)
     reservations: Reservation[];
