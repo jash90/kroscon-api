@@ -218,6 +218,12 @@ INSERT INTO public.privileges (id, name, "createdAt")
 INSERT INTO "users" ("id", "firstname", "lastname", "email", "password", "privilegeId", "createdAt")
   VALUES (1, 'Test', 'Test', 'test@test.pl', '$2a$08$tFkQLRfMovvG4uPzP7WOWOkzSs/v/e/BMONjpnncTxaNavWU.SNcG', 3, now());
 
+INSERT INTO "users" ("firstname", "lastname", "email", "password", "privilegeId", "createdAt")
+  VALUES ('Test', 'Test', 'mod@test.pl', '$2a$08$mSEgMq87evKGPSv968FbIuAk5L2lP3gOU.Vesjtgl8yaAL.ZyM2Vu', 2, now());
+
+INSERT INTO "users" ("firstname", "lastname", "email", "password", "privilegeId", "createdAt")
+  VALUES ('Test', 'Test', 'user@test.pl', '$2a$08$tamwxkf8dS3xl2pjA9J8rOvM8kUn4YGGlbcjxMjoKESu0FaL7t0fG', 1, now());
+
 INSERT INTO public.publishers (name, "createdAt")
   VALUES ('text', now());
 
