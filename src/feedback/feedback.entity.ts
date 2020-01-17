@@ -27,9 +27,9 @@ export class Feedback extends Model<Feedback> {
     @Column(DataType.BIGINT)
     id: number;
 
-    @Column(DataType.NUMBER)
     @Min(1)
     @Max(10)
+    @Column(DataType.INTEGER)
     rating: number;
 
     @ForeignKey(() => LoanGame)
@@ -40,7 +40,7 @@ export class Feedback extends Model<Feedback> {
     loanGame: LoanGame;
 
     @ForeignKey(() => User)
-    @Column({ type: DataType.BIGINT, field: 'user_id' })
+    @Column({ type: DataType.UUID, field: 'user_id' })
     userId: number;
 
     @BelongsTo(() => User)

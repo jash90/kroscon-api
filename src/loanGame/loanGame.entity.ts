@@ -34,7 +34,7 @@ export class LoanGame extends Model<LoanGame> {
     end: Date;
 
     @ForeignKey(() => User)
-    @Column({ type: DataType.BIGINT, field: 'user_id' })
+    @Column({ type: DataType.UUID, field: 'user_id' })
     userId: number;
 
     @BelongsTo(() => User)
@@ -55,7 +55,7 @@ export class LoanGame extends Model<LoanGame> {
     table: Tab;
 
     @ForeignKey(() => User)
-    @Column({ type: DataType.BIGINT, field: 'user_id' })
+    @Column({ type: DataType.UUID, field: 'hireuser_id' })
     hireUserId: number;
 
     @BelongsTo(() => User)

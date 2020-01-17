@@ -14,6 +14,7 @@ import {
 } from 'sequelize-typescript';
 import { LoanGame } from '../loanGame/loanGame.entity';
 import { Reservation } from '../reservation/reservation.entity';
+import { BoardGame } from 'src/boardGame/boardGame.entity';
 
 @Tabela({
     tableName: 'table',
@@ -32,6 +33,10 @@ export class Table extends Model<Table> {
 
     @HasMany(() => LoanGame)
     loanGames: LoanGame[];
+
+    @ForeignKey(() => BoardGame)
+    @Column({ type: DataType.BIGINT, field: 'boardGame_id' })
+    boardGameId: number;
 
     @CreatedAt
     @Column({ field: 'createdAt' })

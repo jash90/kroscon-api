@@ -6,7 +6,7 @@ export const config = {
         port: 5533,
         username: db.user,
         password: db.pass,
-        database: 'kroscon',
+        database: db.dbname,
         logging: false,
     },
     jwtPrivateKey: 'jwtPrivateKey',

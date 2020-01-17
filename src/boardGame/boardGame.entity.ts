@@ -38,25 +38,28 @@ export class BoardGame extends Model<BoardGame> {
     @Column(DataType.TEXT)
     name: string;
 
-    @Column(DataType.TEXT)
+
     @Unique(true)
+    @Column(DataType.TEXT)
     uuid: string;
-    
-    @Column(DataType.NUMBER)
+
     @Min(1)
+    @Column(DataType.INTEGER)
     minPlayers: number;
 
-    @Column(DataType.NUMBER)
+
     @Min(2)
+    @Column(DataType.INTEGER)
     maxPlayers: number;
 
-    @Column(DataType.NUMBER)
     @Min(1)
+    @Column(DataType.INTEGER)
     playingTime: number;
 
-    @Column(DataType.NUMBER)
+
     @Min(1)
     @Max(99)
+    @Column(DataType.INTEGER)
     minAge: number;
 
     @HasMany(() => BoardGameMechanic)

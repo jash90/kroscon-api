@@ -5,7 +5,6 @@ import {
     DataType,
     DeletedAt, ForeignKey,
     HasMany,
-    Length,
     Model,
     PrimaryKey,
     Table,
@@ -29,7 +28,7 @@ export class Reservation extends Model<Reservation> {
     time: Date;
 
     @ForeignKey(() => User)
-    @Column({ type: DataType.BIGINT, field: 'user_id' })
+    @Column({ type: DataType.UUID, field: 'user_id' })
     userId: number;
 
     @BelongsTo(() => User)
