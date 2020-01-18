@@ -16,15 +16,15 @@ import {
     Min,
     Max,
 } from 'sequelize-typescript';
-import { User } from 'src/users/user.entity';
+import { User } from '../users/user.entity';
 import { BoardGameMechanic } from '../boardGameMechanic/boardGameMechanic.entity';
-import { Publisher } from 'src/publisher/publisher.entity';
-import { Mechanic } from 'src/mechanic/mechanic.entity';
-import { BoardGameType } from 'src/boardGameType/boardGameType.entity';
-import { LoanGame } from 'src/loanGame/loanGame.entity';
-import { Reservation } from 'src/reservation/reservation.entity';
-import { Feedback } from 'src/feedback/feedback.entity';
-import { Table as Tab } from 'src/table/table.entity';
+import { Publisher } from '../publisher/publisher.entity';
+import { Mechanic } from '../mechanic/mechanic.entity';
+import { BoardGameType } from '../boardGameType/boardGameType.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
+import { Reservation } from '../reservation/reservation.entity';
+import { Feedback } from '../feedback/feedback.entity';
+import { Table as Tab } from '../table/table.entity';
 
 @Table({
     tableName: 'boardGame',

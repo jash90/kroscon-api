@@ -1,17 +1,17 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { BoardGame } from 'src/boardGame/boardGame.entity';
-import { BoardGameDto } from 'src/boardGame/dto/boardGame.dto';
-import { CreateBoardGameDto } from 'src/boardGame/dto/create-boardGame.dto';
-import { UpdateBoardGameDto } from 'src/boardGame/dto/update-boardGame.dto';
-import { BoardGameOffset } from 'src/boardGame/dto/boardGame.offset';
-import { LoanGame } from 'src/loanGame/loanGame.entity';
-import { User } from 'src/users/user.entity';
-import { Table } from 'src/table/table.entity';
-import { BoardGameMechanic } from 'src/boardGameMechanic/boardGameMechanic.entity';
-import { BoardGameType } from 'src/boardGameType/boardGameType.entity';
-import { Feedback } from 'src/feedback/feedback.entity';
-import { Publisher } from 'src/publisher/publisher.entity';
-import { Reservation } from 'src/reservation/reservation.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { BoardGameDto } from '../boardGame/dto/boardGame.dto';
+import { CreateBoardGameDto } from '../boardGame/dto/create-boardGame.dto';
+import { UpdateBoardGameDto } from '../boardGame/dto/update-boardGame.dto';
+import { BoardGameOffset } from '../boardGame/dto/boardGame.offset';
+import { LoanGame } from '../loanGame/loanGame.entity';
+import { User } from '../users/user.entity';
+import { Table } from '../table/table.entity';
+import { BoardGameMechanic } from '../boardGameMechanic/boardGameMechanic.entity';
+import { BoardGameType } from '../boardGameType/boardGameType.entity';
+import { Feedback } from '../feedback/feedback.entity';
+import { Publisher } from '../publisher/publisher.entity';
+import { Reservation } from '../reservation/reservation.entity';
 
 @Injectable()
 export class BoardGamesService {

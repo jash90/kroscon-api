@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Table } from 'src/table/table.entity';
-import { TableDto } from 'src/table/dto/table.dto';
-import { CreateTableDto } from 'src/table/dto/create-table.dto';
-import { UpdateTableDto } from 'src/table/dto/update-table.dto';
-import { TableOffset } from 'src/table/dto/table.offset';
-import { User } from 'src/users/user.entity';
-import { Reservation } from 'src/reservation/reservation.entity';
-import { LoanGame } from 'src/loanGame/loanGame.entity';
+import { Table } from '../table/table.entity';
+import { TableDto } from '../table/dto/table.dto';
+import { CreateTableDto } from '../table/dto/create-table.dto';
+import { UpdateTableDto } from '../table/dto/update-table.dto';
+import { TableOffset } from '../table/dto/table.offset';
+import { User } from '../users/user.entity';
+import { Reservation } from '../reservation/reservation.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
 
 @Injectable()
 export class TableService {

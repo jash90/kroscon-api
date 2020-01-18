@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Publisher } from 'src/publisher/publisher.entity';
-import { PublisherDto } from 'src/publisher/dto/publisher.dto';
-import { CreatePublisherDto } from 'src/publisher/dto/create-publisher.dto';
-import { UpdatePublisherDto } from 'src/publisher/dto/update-publisher.dto';
-import { PublisherOffset } from 'src/publisher/dto/publisher.offset';
-import { User } from 'src/users/user.entity';
+import { Publisher } from '../publisher/publisher.entity';
+import { PublisherDto } from '../publisher/dto/publisher.dto';
+import { CreatePublisherDto } from '../publisher/dto/create-publisher.dto';
+import { UpdatePublisherDto } from '../publisher/dto/update-publisher.dto';
+import { PublisherOffset } from '../publisher/dto/publisher.offset';
+import { User } from '../users/user.entity';
 import { BoardGame } from '../boardGame/boardGame.entity';
 
 @Injectable()

@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Reservation } from 'src/reservation/reservation.entity';
-import { ReservationDto } from 'src/reservation/dto/reservation.dto';
-import { CreateReservationDto } from 'src/reservation/dto/create-reservation.dto';
-import { UpdateReservationDto } from 'src/reservation/dto/update-reservation.dto';
-import { ReservationOffset } from 'src/reservation/dto/reservation.offset';
-import { User } from 'src/users/user.entity';
+import { Reservation } from '../reservation/reservation.entity';
+import { ReservationDto } from '../reservation/dto/reservation.dto';
+import { CreateReservationDto } from '../reservation/dto/create-reservation.dto';
+import { UpdateReservationDto } from '../reservation/dto/update-reservation.dto';
+import { ReservationOffset } from '../reservation/dto/reservation.offset';
+import { User } from '../users/user.entity';
 import { BoardGame } from '../boardGame/boardGame.entity';
 import { Table } from '../table/table.entity';
 

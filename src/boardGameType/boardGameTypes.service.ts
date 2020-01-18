@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { BoardGameType } from 'src/boardGameType/boardGameType.entity';
-import { BoardGameTypeDto } from 'src/boardGameType/dto/boardGameType.dto';
-import { CreateBoardGameTypeDto } from 'src/boardGameType/dto/create-boardGameType.dto';
-import { UpdateBoardGameTypeDto } from 'src/boardGameType/dto/update-boardGameType.dto';
-import { BoardGameTypeOffset } from 'src/boardGameType/dto/boardGameType.offset';
-import { User } from 'src/users/user.entity';
-import { BoardGame } from 'src/boardGame/boardGame.entity';
-import { Type } from 'src/type/type.entity';
+import { BoardGameType } from '../boardGameType/boardGameType.entity';
+import { BoardGameTypeDto } from '../boardGameType/dto/boardGameType.dto';
+import { CreateBoardGameTypeDto } from '../boardGameType/dto/create-boardGameType.dto';
+import { UpdateBoardGameTypeDto } from '../boardGameType/dto/update-boardGameType.dto';
+import { BoardGameTypeOffset } from '../boardGameType/dto/boardGameType.offset';
+import { User } from '../users/user.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { Type } from '../type/type.entity';
 
 @Injectable()
 export class BoardGameTypesService {

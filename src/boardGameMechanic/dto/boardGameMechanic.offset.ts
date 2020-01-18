@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { BoardGameMechanicDto } from 'src/boardGameMechanic/dto/boardGameMechanic.dto';
+import { BoardGameMechanicDto } from '../../boardGameMechanic/dto/boardGameMechanic.dto';
 
 export class BoardGameMechanicOffset {
 

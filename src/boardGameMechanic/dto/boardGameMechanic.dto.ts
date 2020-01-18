@@ -1,8 +1,8 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { BoardGameMechanic } from '../boardGameMechanic.entity';
 import { IsNumber } from 'class-validator';
-import { BoardGame } from 'src/boardGame/boardGame.entity';
-import { Mechanic } from 'src/mechanic/mechanic.entity';
+import { BoardGame } from '../../boardGame/boardGame.entity';
+import { Mechanic } from '../../mechanic/mechanic.entity';
 
 export class BoardGameMechanicDto {
     

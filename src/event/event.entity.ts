@@ -12,8 +12,8 @@ import {
     Unique,
     UpdatedAt,
 } from 'sequelize-typescript';
-import { User } from 'src/users/user.entity';
-import { Lecture } from 'src/lecture/lecture.entity';
+import { User } from '../users/user.entity';
+import { Lecture } from '../lecture/lecture.entity';
 
 @Table({
     tableName: 'event',

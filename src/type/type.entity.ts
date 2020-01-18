@@ -12,7 +12,7 @@ import {
     Unique,
     UpdatedAt,
 } from 'sequelize-typescript';
-import { BoardGameType } from 'src/boardGameType/boardGameType.entity';
+import { BoardGameType } from '../boardGameType/boardGameType.entity';
 
 @Table({
     tableName: 'type',

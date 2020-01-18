@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { ReservationDto } from 'src/reservation/dto/reservation.dto';
+import { ReservationDto } from '../../reservation/dto/reservation.dto';
 
 export class ReservationOffset {
     @ApiModelProperty()

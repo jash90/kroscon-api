@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { TypeDto } from 'src/type/dto/type.dto';
+import { TypeDto } from '../../type/dto/type.dto';
 
 export class TypeOffset {
     @ApiModelProperty()

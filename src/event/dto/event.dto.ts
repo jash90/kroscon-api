@@ -1,6 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { Event } from '../event.entity';
-import { Lecture } from 'src/lecture/lecture.entity';
+import { Lecture } from '../../lecture/lecture.entity';
 
 export class EventDto {
     @ApiModelProperty()

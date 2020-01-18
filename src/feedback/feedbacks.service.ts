@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Feedback } from 'src/feedback/feedback.entity';
-import { FeedbackDto } from 'src/feedback/dto/feedback.dto';
-import { CreateFeedbackDto } from 'src/feedback/dto/create-feedback.dto';
-import { UpdateFeedbackDto } from 'src/feedback/dto/update-feedback.dto';
-import { FeedbackOffset } from 'src/feedback/dto/feedback.offset';
-import { User } from 'src/users/user.entity';
-import { BoardGame } from 'src/boardGame/boardGame.entity';
-import { LoanGame } from 'src/loanGame/loanGame.entity';
+import { Feedback } from '../feedback/feedback.entity';
+import { FeedbackDto } from '../feedback/dto/feedback.dto';
+import { CreateFeedbackDto } from '../feedback/dto/create-feedback.dto';
+import { UpdateFeedbackDto } from '../feedback/dto/update-feedback.dto';
+import { FeedbackOffset } from '../feedback/dto/feedback.offset';
+import { User } from '../users/user.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
 
 @Injectable()
 export class FeedbacksService {

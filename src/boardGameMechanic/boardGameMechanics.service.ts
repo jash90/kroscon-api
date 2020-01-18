@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { BoardGameMechanic } from 'src/boardGameMechanic/boardGameMechanic.entity';
-import { BoardGameMechanicDto } from 'src/boardGameMechanic/dto/boardGameMechanic.dto';
-import { CreateBoardGameMechanicDto } from 'src/boardGameMechanic/dto/create-boardGameMechanic.dto';
-import { UpdateBoardGameMechanicDto } from 'src/boardGameMechanic/dto/update-boardGameMechanic.dto';
-import { BoardGameMechanicOffset } from 'src/boardGameMechanic/dto/boardGameMechanic.offset';
-import { User } from 'src/users/user.entity';
-import { BoardGame } from 'src/boardGame/boardGame.entity';
-import { Mechanic } from 'src/mechanic/mechanic.entity';
+import { BoardGameMechanic } from '../boardGameMechanic/boardGameMechanic.entity';
+import { BoardGameMechanicDto } from '../boardGameMechanic/dto/boardGameMechanic.dto';
+import { CreateBoardGameMechanicDto } from '../boardGameMechanic/dto/create-boardGameMechanic.dto';
+import { UpdateBoardGameMechanicDto } from '../boardGameMechanic/dto/update-boardGameMechanic.dto';
+import { BoardGameMechanicOffset } from '../boardGameMechanic/dto/boardGameMechanic.offset';
+import { User } from '../users/user.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { Mechanic } from '../mechanic/mechanic.entity';
 
 @Injectable()
 export class BoardGameMechanicsService {

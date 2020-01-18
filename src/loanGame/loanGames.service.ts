@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { LoanGame } from 'src/loanGame/loanGame.entity';
-import { LoanGameDto } from 'src/loanGame/dto/loanGame.dto';
-import { CreateLoanGameDto } from 'src/loanGame/dto/create-loanGame.dto';
-import { UpdateLoanGameDto } from 'src/loanGame/dto/update-loanGame.dto';
-import { LoanGameOffset } from 'src/loanGame/dto/loanGame.offset';
-import { User } from 'src/users/user.entity';
-import { BoardGame } from 'src/boardGame/boardGame.entity';
-import { Table } from 'src/table/table.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
+import { LoanGameDto } from '../loanGame/dto/loanGame.dto';
+import { CreateLoanGameDto } from '../loanGame/dto/create-loanGame.dto';
+import { UpdateLoanGameDto } from '../loanGame/dto/update-loanGame.dto';
+import { LoanGameOffset } from '../loanGame/dto/loanGame.offset';
+import { User } from '../users/user.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { Table } from '../table/table.entity';
 
 @Injectable()
 export class LoanGamesService {

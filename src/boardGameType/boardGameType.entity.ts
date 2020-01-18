@@ -14,8 +14,8 @@ import {
     ForeignKey,
     BelongsTo,
 } from 'sequelize-typescript';
-import { BoardGame } from 'src/boardGame/boardGame.entity';
-import { Type } from 'src/type/type.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { Type } from '../type/type.entity';
 
 @Table({
     tableName: 'boardGameType',

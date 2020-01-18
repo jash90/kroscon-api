@@ -12,7 +12,7 @@ import {
     Unique,
     UpdatedAt,
 } from 'sequelize-typescript';
-import { BoardGameMechanic } from 'src/boardGameMechanic/boardGameMechanic.entity';
+import { BoardGameMechanic } from '../boardGameMechanic/boardGameMechanic.entity';
 
 @Table({
     tableName: 'mechanic',

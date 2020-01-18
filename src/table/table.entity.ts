@@ -14,7 +14,7 @@ import {
 } from 'sequelize-typescript';
 import { LoanGame } from '../loanGame/loanGame.entity';
 import { Reservation } from '../reservation/reservation.entity';
-import { BoardGame } from 'src/boardGame/boardGame.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
 
 @Tabela({
     tableName: 'table',

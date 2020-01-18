@@ -1,5 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { BoardGameTypeDto } from 'src/boardGameType/dto/boardGameType.dto';
+import { BoardGameTypeDto } from '../../boardGameType/dto/boardGameType.dto';
 
 export class BoardGameTypeOffset {
     @ApiModelProperty()

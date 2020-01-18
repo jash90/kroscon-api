@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Type } from 'src/type/type.entity';
-import { TypeDto } from 'src/type/dto/type.dto';
-import { User } from 'src/users/user.entity';
-import { CreateTypeDto } from 'src/type/dto/create-type.dto';
-import { UpdateTypeDto } from 'src/type/dto/update-type.dto';
-import { TypeOffset } from 'src/type/dto/type.offset';
+import { Type } from '../type/type.entity';
+import { TypeDto } from '../type/dto/type.dto';
+import { User } from '../users/user.entity';
+import { CreateTypeDto } from '../type/dto/create-type.dto';
+import { UpdateTypeDto } from '../type/dto/update-type.dto';
+import { TypeOffset } from '../type/dto/type.offset';
 import { BoardGame } from '../boardGame/boardGame.entity';
 import { BoardGameType } from '../boardGameType/boardGameType.entity';
 

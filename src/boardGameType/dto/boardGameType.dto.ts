@@ -1,7 +1,7 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { BoardGameType } from '../boardGameType.entity';
-import { BoardGame } from 'src/boardGame/boardGame.entity';
-import { Type } from 'src/type/type.entity';
+import { BoardGame } from '../../boardGame/boardGame.entity';
+import { Type } from '../../type/type.entity';
 
 export class BoardGameTypeDto {
     @ApiModelProperty()

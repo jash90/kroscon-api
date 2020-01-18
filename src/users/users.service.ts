@@ -10,10 +10,10 @@ import { sign } from 'jsonwebtoken';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ConfigService } from './../shared/config/config.service';
 import { UserOffset } from './dto/user.offset';
-import { Privilege } from 'src/privilege/privilege.entity';
-import { Feedback } from 'src/feedback/feedback.entity';
-import { Reservation } from 'src/reservation/reservation.entity';
-import { LoanGame } from 'src/loanGame/loanGame.entity';
+import { Privilege } from '../privilege/privilege.entity';
+import { Feedback } from '../feedback/feedback.entity';
+import { Reservation } from '../reservation/reservation.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
 
 @Injectable()
 export class UsersService {
