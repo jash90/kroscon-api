@@ -8,6 +8,7 @@ export function setupSwagger(app: INestApplication) {
         .setContactEmail('bartlomiejzimny@outlook.com')
         .setDescription('API Documentation')
         .setVersion('1.1')
+        .setSchemes('https')
         .addBearerAuth()
         .build();
 
