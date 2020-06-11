@@ -36,7 +36,7 @@ export class User extends Model<User> {
     birthday: string;
 
     @ForeignKey(() => Privilege)
-    @Column({ type: DataType.BIGINT})
+    @Column({ type: DataType.BIGINT })
     privilegeId: number;
 
     @BelongsTo(() => Privilege)
