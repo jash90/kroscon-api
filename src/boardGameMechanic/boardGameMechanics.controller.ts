@@ -59,7 +59,7 @@ export class BoardGameMechanicsController {
         return this.boardGameMechanicsService.delete(id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: BoardGameMechanicOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<BoardGameMechanicOffset> {
         return this.boardGameMechanicsService.offset(index);

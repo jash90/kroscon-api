@@ -59,7 +59,7 @@ export class EventsController {
         return this.EventsService.delete(id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: EventOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<EventOffset> {
         return this.EventsService.offset(index);

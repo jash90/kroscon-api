@@ -59,7 +59,7 @@ export class ReservationsController {
         return this.reservationsService.delete(id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: ReservationOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<ReservationOffset> {
         return this.reservationsService.offset(index);

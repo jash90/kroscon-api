@@ -50,7 +50,7 @@ export class UsersController {
         return this.usersService.delete(request.user.id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: UserOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<UserOffset> {
         return this.usersService.offset(index);

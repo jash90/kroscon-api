@@ -59,7 +59,7 @@ export class FeedbacksController {
         return this.feedbacksService.delete(id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: FeedbackOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<FeedbackOffset> {
         return this.feedbacksService.offset(index);

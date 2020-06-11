@@ -59,7 +59,7 @@ export class TableController {
         return this.tablesService.delete(id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: TableOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<TableOffset> {
         return this.tablesService.offset(index);

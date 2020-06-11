@@ -59,7 +59,7 @@ export class LecturesController {
         return this.lecturesService.delete(id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: LectureOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<LectureOffset> {
         return this.lecturesService.offset(index);

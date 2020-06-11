@@ -58,8 +58,8 @@ export class PublishersController {
     ): Promise<PublisherEntity> {
         return this.publishersService.delete(id);
     }
-
-    @Get(':id')
+    
+    @Get('offset/:id')
     @ApiOkResponse({ type: PublisherOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<PublisherOffset> {
         return this.publishersService.offset(index);

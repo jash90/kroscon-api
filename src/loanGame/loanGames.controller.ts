@@ -59,7 +59,7 @@ export class LoanGamesController {
         return this.loanGamesService.delete(id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: LoanGameOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<LoanGameOffset> {
         return this.loanGamesService.offset(index);

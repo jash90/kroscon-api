@@ -59,7 +59,7 @@ export class PrivilegesController {
         return this.privilegesService.delete(id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: PrivilegeOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<PrivilegeOffset> {
         return this.privilegesService.offset(index);

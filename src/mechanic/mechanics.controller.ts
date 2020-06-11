@@ -59,7 +59,7 @@ export class MechanicsController {
         return this.mechanicsService.delete(id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: MechanicOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<MechanicOffset> {
         return this.mechanicsService.offset(index);

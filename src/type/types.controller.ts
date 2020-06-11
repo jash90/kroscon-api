@@ -59,7 +59,7 @@ export class TypesController {
         return this.typesService.delete(id);
     }
 
-    @Get(':id')
+    @Get('offset/:id')
     @ApiOkResponse({ type: TypeOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<TypeOffset> {
         return this.typesService.offset(index);
