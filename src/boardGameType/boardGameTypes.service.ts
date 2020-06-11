@@ -18,7 +18,6 @@ export class BoardGameTypesService {
     async findAll(): Promise<BoardGameTypeDto[]> {
         const boardGameTypes = await this.boardGameTypesRepository.findAll<BoardGameType>({
             include: [Type, BoardGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return boardGameTypes.map(boardGameType => {
             return new BoardGameTypeDto(boardGameType);
@@ -28,7 +27,6 @@ export class BoardGameTypesService {
     async findOne(id: number): Promise<BoardGameTypeDto> {
         const boardGameType = await this.boardGameTypesRepository.findByPk<BoardGameType>(id, {
             include: [Type, BoardGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!boardGameType) {
             throw new HttpException('No boardGameType found', HttpStatus.NOT_FOUND);
@@ -53,7 +51,6 @@ export class BoardGameTypesService {
     private async getBoardGameType(id: number): Promise<BoardGameType> {
         const boardGameType = await this.boardGameTypesRepository.findByPk<BoardGameType>(id, {
             include: [Type, BoardGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!boardGameType) {
             throw new HttpException('No boardGameType found', HttpStatus.NOT_FOUND);
@@ -90,7 +87,6 @@ export class BoardGameTypesService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const BoardGameTypesDto = boardGameTypes.rows.map(boardGameType => {

@@ -17,7 +17,6 @@ export class PublishersService {
     async findAll(): Promise<PublisherDto[]> {
         const publishers = await this.publishersRepository.findAll<Publisher>({
             include: [BoardGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return publishers.map(publisher => {
             return new PublisherDto(publisher);
@@ -27,7 +26,6 @@ export class PublishersService {
     async findOne(id: number): Promise<PublisherDto> {
         const publisher = await this.publishersRepository.findByPk<Publisher>(id, {
             include: [BoardGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!publisher) {
             throw new HttpException('No publisher found', HttpStatus.NOT_FOUND);
@@ -50,7 +48,6 @@ export class PublishersService {
     private async getPublisher(id: number): Promise<Publisher> {
         const publisher = await this.publishersRepository.findByPk<Publisher>(id, {
             include: [BoardGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!publisher) {
             throw new HttpException('No publisher found', HttpStatus.NOT_FOUND);
@@ -86,7 +83,6 @@ export class PublishersService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const PublishersDto = publishers.rows.map(publisher => {

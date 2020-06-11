@@ -16,7 +16,6 @@ export class PrivilegesService {
     async findAll(): Promise<PrivilegeDto[]> {
         const privileges = await this.privilegesRepository.findAll<Privilege>({
             include: [User],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return privileges.map(privilege => {
             return new PrivilegeDto(privilege);
@@ -26,7 +25,6 @@ export class PrivilegesService {
     async findOne(id: number): Promise<PrivilegeDto> {
         const privilege = await this.privilegesRepository.findByPk<Privilege>(id, {
             include: [User],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!privilege) {
             throw new HttpException('No privilege found', HttpStatus.NOT_FOUND);
@@ -49,7 +47,6 @@ export class PrivilegesService {
     private async getPrivilege(id: number): Promise<Privilege> {
         const privilege = await this.privilegesRepository.findByPk<Privilege>(id, {
             include: [User],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!privilege) {
             throw new HttpException('No privilege found', HttpStatus.NOT_FOUND);
@@ -85,7 +82,6 @@ export class PrivilegesService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const PrivilegesDto = privileges.rows.map(privilege => {

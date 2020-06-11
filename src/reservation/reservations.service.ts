@@ -18,7 +18,6 @@ export class ReservationsService {
     async findAll(): Promise<ReservationDto[]> {
         const reservations = await this.reservationsRepository.findAll<Reservation>({
             include: [User, BoardGame, Table],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return reservations.map(reservation => {
             return new ReservationDto(reservation);
@@ -28,7 +27,6 @@ export class ReservationsService {
     async findOne(id: number): Promise<ReservationDto> {
         const reservation = await this.reservationsRepository.findByPk<Reservation>(id, {
             include: [User, BoardGame, Table],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!reservation) {
             throw new HttpException('No reservation found', HttpStatus.NOT_FOUND);
@@ -54,7 +52,6 @@ export class ReservationsService {
     private async getReservation(id: number): Promise<Reservation> {
         const reservation = await this.reservationsRepository.findByPk<Reservation>(id, {
             include: [User, BoardGame, Table],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!reservation) {
             throw new HttpException('No reservation found', HttpStatus.NOT_FOUND);
@@ -93,7 +90,6 @@ export class ReservationsService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const ReservationsDto = reservations.rows.map(reservation => {

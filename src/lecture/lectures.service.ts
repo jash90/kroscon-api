@@ -16,7 +16,6 @@ export class LecturesService {
     async findAll(): Promise<LectureDto[]> {
         const lectures = await this.lecturesRepository.findAll<Lecture>({
             include: [Event],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return lectures.map(lecture => {
             return new LectureDto(lecture);
@@ -26,7 +25,6 @@ export class LecturesService {
     async findOne(id: number): Promise<LectureDto> {
         const lecture = await this.lecturesRepository.findByPk<Lecture>(id, {
             include: [Event],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!lecture) {
             throw new HttpException('No lecture found', HttpStatus.NOT_FOUND);
@@ -53,7 +51,6 @@ export class LecturesService {
     private async getLecture(id: number): Promise<Lecture> {
         const lecture = await this.lecturesRepository.findByPk<Lecture>(id, {
             include: [Event],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!lecture) {
             throw new HttpException('No lecture found', HttpStatus.NOT_FOUND);
@@ -92,7 +89,6 @@ export class LecturesService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const LecturesDto = lectures.rows.map(lecture => {

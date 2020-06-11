@@ -18,7 +18,6 @@ export class TableService {
     async findAll(): Promise<TableDto[]> {
         const tables = await this.tablesRepository.findAll<Table>({
             include: [Reservation, LoanGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return tables.map(table => {
             return new TableDto(table);
@@ -28,7 +27,6 @@ export class TableService {
     async findOne(id: number): Promise<TableDto> {
         const table = await this.tablesRepository.findByPk<Table>(id, {
             include: [Reservation, LoanGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!table) {
             throw new HttpException('No table found', HttpStatus.NOT_FOUND);
@@ -51,7 +49,6 @@ export class TableService {
     private async getTable(id: number): Promise<Table> {
         const table = await this.tablesRepository.findByPk<Table>(id, {
             include: [Reservation, LoanGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!table) {
             throw new HttpException('No table found', HttpStatus.NOT_FOUND);
@@ -87,7 +84,6 @@ export class TableService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const TableDto = tables.rows.map(privilege => {

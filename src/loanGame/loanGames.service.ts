@@ -18,7 +18,6 @@ export class LoanGamesService {
     async findAll(): Promise<LoanGameDto[]> {
         const loanGames = await this.loanGamesRepository.findAll<LoanGame>({
             include: [User, BoardGame, Table],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return loanGames.map(loanGame => {
             return new LoanGameDto(loanGame);
@@ -28,7 +27,6 @@ export class LoanGamesService {
     async findOne(id: number): Promise<LoanGameDto> {
         const loanGame = await this.loanGamesRepository.findByPk<LoanGame>(id, {
             include: [User, BoardGame, Table],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!loanGame) {
             throw new HttpException('No loanGame found', HttpStatus.NOT_FOUND);
@@ -56,7 +54,6 @@ export class LoanGamesService {
     private async getLoanGame(id: number): Promise<LoanGame> {
         const loanGame = await this.loanGamesRepository.findByPk<LoanGame>(id, {
             include: [User, BoardGame, Table],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!loanGame) {
             throw new HttpException('No loanGame found', HttpStatus.NOT_FOUND);
@@ -97,7 +94,6 @@ export class LoanGamesService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const LoanGamesDto = loanGames.rows.map(loanGame => {

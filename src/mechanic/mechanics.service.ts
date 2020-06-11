@@ -18,7 +18,6 @@ export class MechanicsService {
     async findAll(): Promise<MechanicDto[]> {
         const mechanics = await this.mechanicsRepository.findAll<Mechanic>({
             include: [BoardGame, BoardGameMechanic],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return mechanics.map(mechanic => {
             return new MechanicDto(mechanic);
@@ -28,7 +27,6 @@ export class MechanicsService {
     async findOne(id: number): Promise<MechanicDto> {
         const mechanic = await this.mechanicsRepository.findByPk<Mechanic>(id, {
             include: [BoardGame, BoardGameMechanic],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!mechanic) {
             throw new HttpException('No mechanic found', HttpStatus.NOT_FOUND);
@@ -51,7 +49,6 @@ export class MechanicsService {
     private async getMechanic(id: number): Promise<Mechanic> {
         const mechanic = await this.mechanicsRepository.findByPk<Mechanic>(id, {
             include: [BoardGame, BoardGameMechanic],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!mechanic) {
             throw new HttpException('No mechanic found', HttpStatus.NOT_FOUND);
@@ -87,7 +84,6 @@ export class MechanicsService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const MechanicsDto = mechanics.rows.map(mechanic => {

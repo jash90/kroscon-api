@@ -18,7 +18,6 @@ export class FeedbacksService {
     async findAll(): Promise<FeedbackDto[]> {
         const feedbacks = await this.feedbacksRepository.findAll<Feedback>({
             include: [User, BoardGame, LoanGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return feedbacks.map(feedback => {
             return new FeedbackDto(feedback);
@@ -28,7 +27,6 @@ export class FeedbacksService {
     async findOne(id: number): Promise<FeedbackDto> {
         const feedback = await this.feedbacksRepository.findByPk<Feedback>(id, {
             include: [User, BoardGame, LoanGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!feedback) {
             throw new HttpException('No feedback found', HttpStatus.NOT_FOUND);
@@ -54,7 +52,6 @@ export class FeedbacksService {
     private async getFeedback(id: number): Promise<Feedback> {
         const feedback = await this.feedbacksRepository.findByPk<Feedback>(id, {
             include: [User, BoardGame, LoanGame],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!feedback) {
             throw new HttpException('No feedback found', HttpStatus.NOT_FOUND);
@@ -93,7 +90,6 @@ export class FeedbacksService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const FeedbacksDto = feedbacks.rows.map(feedback => {

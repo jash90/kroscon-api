@@ -17,7 +17,6 @@ export class EventsService {
     async findAll(): Promise<EventDto[]> {
         const events = await this.eventsRepository.findAll<Event>({
             include: [Lecture],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return events.map(event => {
             return new EventDto(event);
@@ -27,7 +26,6 @@ export class EventsService {
     async findOne(id: number): Promise<EventDto> {
         const event = await this.eventsRepository.findByPk<Event>(id, {
             include: [Lecture],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!event) {
             throw new HttpException('No event found', HttpStatus.NOT_FOUND);
@@ -54,7 +52,6 @@ export class EventsService {
     private async getEvent(id: number): Promise<Event> {
         const event = await this.eventsRepository.findByPk<Event>(id, {
             include: [Lecture],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!event) {
             throw new HttpException('No event found', HttpStatus.NOT_FOUND);
@@ -94,7 +91,6 @@ export class EventsService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const EventDto = events.rows.map(event => {
