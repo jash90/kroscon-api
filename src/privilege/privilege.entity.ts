@@ -30,15 +30,15 @@ export class Privilege extends Model<Privilege> {
     users: User[];
 
     @CreatedAt
-    @Column({ field: 'created_at' })
+    @Column
     createdAt: Date;
 
     @UpdatedAt
-    @Column({ field: 'updated_at' })
+    @Column
     updatedAt: Date;
 
     @DeletedAt
-    @Column({ field: 'deleted_at' })
+    @Column
     deletedAt: Date;
 
 }

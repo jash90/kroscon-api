@@ -11,7 +11,7 @@ import { Feedback } from 'src/feedback/feedback.entity';
 export class User extends Model<User> {
     @Column({
         type: DataType.UUID,
-        defaultValue: DataType.UUIDV4,
+        defaultValue: DataType.UUID,
         primaryKey: true,
     })
     id: string;
@@ -23,10 +23,10 @@ export class User extends Model<User> {
     @Column(DataType.TEXT)
     password: string;
 
-    @Column({ field: 'first_name' })
+    @Column
     firstname: string;
 
-    @Column({ field: 'last_name' })
+    @Column
     lastname: string;
 
     @Column({ type: DataType.ENUM(Object.keys(Gender)) })
@@ -36,7 +36,7 @@ export class User extends Model<User> {
     birthday: string;
 
     @ForeignKey(() => Privilege)
-    @Column({ type: DataType.BIGINT, field: 'privilege_id' })
+    @Column({ type: DataType.BIGINT})
     privilegeId: number;
 
     @BelongsTo(() => Privilege)
@@ -52,14 +52,14 @@ export class User extends Model<User> {
     feedbacks: Feedback[];
 
     @CreatedAt
-    @Column({ field: 'created_at' })
+    @Column
     createdAt: Date;
 
     @UpdatedAt
-    @Column({ field: 'updated_at' })
+    @Column
     updatedAt: Date;
 
     @DeletedAt
-    @Column({ field: 'deleted_at' })
+    @Column
     deletedAt: Date;
 }

@@ -27,29 +27,29 @@ export class BoardGameType extends Model<BoardGameType> {
     id: number;
 
     @ForeignKey(() => BoardGame)
-    @Column({ type: DataType.BIGINT, field: 'boardGame_id' })
+    @Column({ type: DataType.BIGINT })
     boardGameId: number;
 
     @BelongsTo(() => BoardGame)
     boardGame: BoardGame;
 
     @ForeignKey(() => Type)
-    @Column({ type: DataType.BIGINT, field: 'type_id' })
+    @Column({ type: DataType.BIGINT })
     typeId: number;
 
     @BelongsTo(() => Type)
     type: Type;
 
     @CreatedAt
-    @Column({ field: 'created_at' })
+    @Column
     createdAt: Date;
 
     @UpdatedAt
-    @Column({ field: 'updated_at' })
+    @Column
     updatedAt: Date;
 
     @DeletedAt
-    @Column({ field: 'deleted_at' })
+    @Column
     deletedAt: Date;
 
 }

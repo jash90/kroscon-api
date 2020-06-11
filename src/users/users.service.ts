@@ -98,7 +98,7 @@ export class UsersService {
         if (!user) {
             throw new HttpException(
                 'Invalid email or password.',
-                HttpStatus.BAD_REQUEST,
+                HttpStatus.FORBIDDEN,
             );
         }
 
@@ -106,7 +106,7 @@ export class UsersService {
         if (!isMatch) {
             throw new HttpException(
                 'Invalid email or password.',
-                HttpStatus.BAD_REQUEST,
+                HttpStatus.FORBIDDEN,
             );
         }
 

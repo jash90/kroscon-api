@@ -38,22 +38,22 @@ export class Lecture extends Model<Lecture> {
     description: string;
 
     @ForeignKey(() => Event)
-    @Column({ type: DataType.BIGINT, field: 'event_id' })
+    @Column({ type: DataType.BIGINT })
     eventId: number;
 
     @BelongsTo(() => Event)
     event: Event;
 
     @CreatedAt
-    @Column({ field: 'created_at' })
+    @Column
     createdAt: Date;
 
     @UpdatedAt
-    @Column({ field: 'updated_at' })
+    @Column
     updatedAt: Date;
 
     @DeletedAt
-    @Column({ field: 'deleted_at' })
+    @Column
     deletedAt: Date;
 
 }

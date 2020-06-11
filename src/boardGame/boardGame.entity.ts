@@ -79,22 +79,22 @@ export class BoardGame extends Model<BoardGame> {
     feedbacks: Feedback[];
 
     @ForeignKey(() => Publisher)
-    @Column({ type: DataType.BIGINT, field: 'publisher_id' })
+    @Column({ type: DataType.BIGINT })
     publisherId: number;
 
     @BelongsTo(() => Publisher)
     publisher: Publisher;
 
     @CreatedAt
-    @Column({ field: 'created_at' })
+    @Column
     createdAt: Date;
 
     @UpdatedAt
-    @Column({ field: 'updated_at' })
+    @Column
     updatedAt: Date;
 
     @DeletedAt
-    @Column({ field: 'deleted_at' })
+    @Column
     deletedAt: Date;
 
 }

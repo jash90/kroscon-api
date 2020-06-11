@@ -29,36 +29,36 @@ export class Reservation extends Model<Reservation> {
     time: Date;
 
     @ForeignKey(() => User)
-    @Column({ type: DataType.UUID, field: 'user_id' })
+    @Column({ type: DataType.UUID })
     userId: string;
 
     @BelongsTo(() => User)
     user: User;
 
     @ForeignKey(() => BoardGame)
-    @Column({ type: DataType.BIGINT, field: 'boardGame_id' })
+    @Column({ type: DataType.BIGINT })
     boardGameId: number;
 
     @BelongsTo(() => BoardGame)
     boardGame: BoardGame;
 
     @ForeignKey(() => Tab)
-    @Column({ type: DataType.BIGINT, field: 'table_id' })
+    @Column({ type: DataType.BIGINT })
     tableId: number;
 
     @BelongsTo(() => Tab)
     table: Tab;
 
     @CreatedAt
-    @Column({ field: 'created_at' })
+    @Column
     createdAt: Date;
 
     @UpdatedAt
-    @Column({ field: 'updated_at' })
+    @Column
     updatedAt: Date;
 
     @DeletedAt
-    @Column({ field: 'deleted_at' })
+    @Column
     deletedAt: Date;
 
 }
