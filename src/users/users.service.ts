@@ -30,7 +30,6 @@ export class UsersService {
     async findAll(): Promise<UserDto[]> {
         const users = await this.usersRepository.findAll<User>({
             include: [Privilege, Reservation, LoanGame, Feedback],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         return users.map(user => {
             return new UserDto(user);
@@ -40,7 +39,6 @@ export class UsersService {
     async getUser(id: string): Promise<UserDto> {
         const user = await this.usersRepository.findByPk<User>(id, {
             include: [Privilege, Reservation, LoanGame, Feedback],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
         if (!user) {
             throw new HttpException(
@@ -56,7 +54,6 @@ export class UsersService {
         return await this.usersRepository.findOne<User>({
             include: [Privilege, Reservation, LoanGame, Feedback],
             where: { email },
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
     }
 
@@ -115,7 +112,7 @@ export class UsersService {
     }
 
     async update(id: string, updateUserDto: UpdateUserDto): Promise<UserDto> {
-        const user = await this.usersRepository.findByPk<User>(id, { attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] } });
+        const user = await this.usersRepository.findByPk<User>(id);
         if (!user) {
             throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
         }
@@ -134,9 +131,7 @@ export class UsersService {
     }
 
     async delete(id: string): Promise<UserDto> {
-        const user = await this.usersRepository.findByPk<User>(id, {
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-        });
+        const user = await this.usersRepository.findByPk<User>(id);
         await user.destroy();
         return new UserDto(user);
     }
@@ -154,7 +149,6 @@ export class UsersService {
             limit: 100,
             offset: index * 100,
             order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
         });
 
         const usersDto = users.rows.map(user => {
