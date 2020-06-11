@@ -14,23 +14,6 @@ import { UserOffset } from './dto/user.offset';
 export class UsersController {
     constructor(private readonly usersService: UsersService) { }
 
-    @Post()
-    @ApiOkResponse({ type: UserLoginResponseDto })
-    register(
-        @Body() createUserDto: CreateUserDto,
-    ): Promise<UserLoginResponseDto> {
-        return this.usersService.create(createUserDto);
-    }
-
-    @Post('auth')
-    @HttpCode(200)
-    @ApiOkResponse({ type: UserLoginResponseDto })
-    login(
-        @Body() userLoginRequestDto: UserLoginRequestDto,
-    ): Promise<UserLoginResponseDto> {
-        return this.usersService.login(userLoginRequestDto);
-    }
-
     @Get()
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
