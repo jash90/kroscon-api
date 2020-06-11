@@ -29,7 +29,7 @@ export class Reservation extends Model<Reservation> {
     time: Date;
 
     @ForeignKey(() => User)
-    @Column({ type: DataType.UUID })
+    @Column({ type: DataType.BIGINT })
     userId: string;
 
     @BelongsTo(() => User)

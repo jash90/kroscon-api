@@ -27,7 +27,6 @@ export class Feedback extends Model<Feedback> {
     @Column(DataType.BIGINT)
     id: number;
 
-
     @Min(1)
     @Max(10)
     @Column(DataType.INTEGER)
@@ -41,7 +40,7 @@ export class Feedback extends Model<Feedback> {
     loanGame: LoanGame;
 
     @ForeignKey(() => User)
-    @Column({ type: DataType.UUID })
+    @Column({ type: DataType.BIGINT })
     userId: string;
 
     @BelongsTo(() => User)

@@ -10,7 +10,7 @@ export class UpdateFeedbackDto {
     readonly rating: number;
 
     @ApiModelProperty()
-    @IsUUID()
+    @IsNumber()
     @IsOptional()
     readonly userId: string;
 

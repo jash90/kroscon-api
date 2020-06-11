@@ -10,7 +10,7 @@ export class UpdateReservationDto {
 
     @IsOptional()
     @ApiModelProperty()
-    @IsUUID()
+    @IsNumber()
     readonly userId: string;
 
     @IsOptional()

@@ -4,7 +4,7 @@ import { IsString, IsNumber, Min, Max, IsUUID } from 'class-validator';
 export class CreateFeedbackDto {
 
     @ApiModelProperty()
-    @IsUUID()
+    @IsNumber()
     readonly userId: string;
 
     @ApiModelProperty()

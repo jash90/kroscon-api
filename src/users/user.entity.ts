@@ -1,4 +1,4 @@
-import { Column, CreatedAt, DataType, DeletedAt, IsEmail, Model, Table, Unique, UpdatedAt, BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
+import { Column, CreatedAt, DataType, DeletedAt, IsEmail, Model, Table, Unique, UpdatedAt, BelongsTo, ForeignKey, HasMany, AutoIncrement, PrimaryKey } from 'sequelize-typescript';
 import { Gender } from '../shared/enum/enums';
 import { Privilege } from '../privilege/privilege.entity';
 import { Reservation } from 'src/reservation/reservation.entity';
@@ -9,15 +9,13 @@ import { Feedback } from 'src/feedback/feedback.entity';
     tableName: 'users',
 })
 export class User extends Model<User> {
-    @Column({
-        type: DataType.UUID,
-        defaultValue: DataType.UUID,
-        primaryKey: true,
-    })
+    @AutoIncrement
+    @PrimaryKey
+    @Column({ type: DataType.BIGINT })
     id: string;
 
     @Unique(true)
-    @Column({ type: DataType.TEXT, validate: { IsEmail: true } })
+    @Column({ type: DataType.TEXT })
     email: string;
 
     @Column(DataType.TEXT)

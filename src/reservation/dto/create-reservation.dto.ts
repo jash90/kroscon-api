@@ -4,7 +4,7 @@ import { IsString, IsDate, IsNumber, IsUUID } from 'class-validator';
 export class CreateReservationDto {
 
     @ApiModelProperty()
-    @IsUUID()
+    @IsNumber()
     readonly userId: string;
 
     @ApiModelProperty()
