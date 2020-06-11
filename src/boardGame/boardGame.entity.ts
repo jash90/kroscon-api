@@ -52,11 +52,9 @@ export class BoardGame extends Model<BoardGame> {
     @Column(DataType.INTEGER)
     maxPlayers: number;
 
-
     @Min(1)
     @Column(DataType.INTEGER)
     playingTime: number;
-
 
     @Min(1)
     @Max(99)

@@ -5,5 +5,5 @@ export class UpdatePublisherDto {
     @IsOptional()
     @ApiModelProperty()
     @IsString()
-    readonly name: string;
+    name: string;
 }

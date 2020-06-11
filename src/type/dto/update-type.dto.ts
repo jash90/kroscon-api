@@ -5,5 +5,5 @@ export class UpdateTypeDto {
     @IsOptional()
     @ApiModelProperty()
     @IsString()
-    readonly name: string;
+    name: string;
 }

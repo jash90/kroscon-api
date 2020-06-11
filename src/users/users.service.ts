@@ -36,7 +36,7 @@ export class UsersService {
         });
     }
 
-    async getUser(id: string): Promise<UserDto> {
+    async getUser(id: number): Promise<UserDto> {
         const user = await this.usersRepository.findByPk<User>(id, {
             include: [Privilege, Reservation, LoanGame, Feedback],
         });
@@ -65,6 +65,7 @@ export class UsersService {
             user.lastname = createUserDto.lastname;
             user.gender = createUserDto.gender;
             user.birthday = createUserDto.birthday;
+            user.privilegeId = createUserDto.privilegeId;
 
             const salt = await genSalt(10);
             user.password = await hash(createUserDto.password, salt);
@@ -111,7 +112,7 @@ export class UsersService {
         return new UserLoginResponseDto(user, token);
     }
 
-    async update(id: string, updateUserDto: UpdateUserDto): Promise<UserDto> {
+    async update(id: number, updateUserDto: UpdateUserDto): Promise<UserDto> {
         const user = await this.usersRepository.findByPk<User>(id);
         if (!user) {
             throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
@@ -130,7 +131,7 @@ export class UsersService {
         }
     }
 
-    async delete(id: string): Promise<UserDto> {
+    async delete(id: number): Promise<UserDto> {
         const user = await this.usersRepository.findByPk<User>(id);
         await user.destroy();
         return new UserDto(user);

@@ -6,21 +6,21 @@ export class UpdateReservationDto {
     @IsOptional()
     @ApiModelProperty()
     @IsDate()
-    readonly time: Date;
+    time: Date;
 
     @IsOptional()
     @ApiModelProperty()
     @IsNumber()
-    readonly userId: string;
+    userId: number;
 
     @IsOptional()
     @ApiModelProperty()
     @IsNumber()
-    readonly boardGameId: number;
+    boardGameId: number;
 
     @IsOptional()
     @ApiModelProperty()
     @IsNumber()
-    readonly tableId: number;
+    tableId: number;
 
 }

@@ -41,7 +41,7 @@ export class Feedback extends Model<Feedback> {
 
     @ForeignKey(() => User)
     @Column({ type: DataType.BIGINT })
-    userId: string;
+    userId: number;
 
     @BelongsTo(() => User)
     user: User;

@@ -6,26 +6,26 @@ export class UpdateLectureDto {
     @ApiModelProperty()
     @IsString()
     @IsOptional()
-    readonly name: string;
+    name: string;
 
     @ApiModelProperty()
     @IsDate()
     @IsOptional()
-    readonly start: Date;
+    start: Date;
 
     @ApiModelProperty()
     @IsDate()
     @IsOptional()
-    readonly end: Date;
+    end: Date;
 
     @ApiModelProperty()
     @IsString()
     @IsOptional()
-    readonly description: string;
+    description: string;
 
     @ApiModelProperty()
     @IsNumber()
     @IsOptional()
-    readonly eventId: number;
+    eventId: number;
 }
 

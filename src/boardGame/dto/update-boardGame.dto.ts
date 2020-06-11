@@ -5,40 +5,41 @@ export class UpdateBoardGameDto {
     @IsOptional()
     @ApiModelProperty()
     @IsString()
-    readonly name: string;
+    name: string;
 
     @ApiModelProperty()
+    @IsOptional()
     @IsString()
-    readonly uuid: string;
+    uuid: string;
 
     @IsOptional()
     @ApiModelProperty()
     @IsNumber()
     @Min(1)
-    readonly minPlayers: number;
+    minPlayers: number;
 
     @IsOptional()
     @ApiModelProperty()
     @IsNumber()
     @Min(2)
-    readonly maxPlayers: number;
+    maxPlayers: number;
 
     @IsOptional()
     @ApiModelProperty()
     @IsNumber()
     @Min(1)
-    readonly playingTime: number;
+    playingTime: number;
 
     @IsOptional()
     @ApiModelProperty()
     @IsNumber()
     @Min(1)
     @Max(99)
-    readonly minAge: number;
+    minAge: number;
 
     @IsOptional()
     @ApiModelProperty()
     @IsNumber()
-    readonly publisherId: number;
+    publisherId: number;
 
 }

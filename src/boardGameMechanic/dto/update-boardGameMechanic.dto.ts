@@ -6,10 +6,10 @@ export class UpdateBoardGameMechanicDto {
     @ApiModelProperty()
     @IsNumber()
     @IsOptional()
-    readonly boardGameId: number;
+    boardGameId: number;
 
     @ApiModelProperty()
     @IsNumber()
     @IsOptional()
-    readonly mechanicId: number;
+    mechanicId: number;
 }

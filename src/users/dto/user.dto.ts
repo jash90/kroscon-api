@@ -3,7 +3,7 @@ import { Gender } from '../../shared/enum/enums';
 import { ApiModelProperty } from '@nestjs/swagger';
 export class UserDto {
     @ApiModelProperty()
-    id: string;
+    readonly id: number;
 
     @ApiModelProperty()
     readonly email: string;

@@ -20,7 +20,7 @@ import {
 describe('/', () => {
     let app: INestApplication;
     let sequelize: Sequelize;
-    let userId: string;
+    let userId: number;
     let token: string;
 
     beforeAll(async () => {

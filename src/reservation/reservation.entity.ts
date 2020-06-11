@@ -30,7 +30,7 @@ export class Reservation extends Model<Reservation> {
 
     @ForeignKey(() => User)
     @Column({ type: DataType.BIGINT })
-    userId: string;
+    userId: number;
 
     @BelongsTo(() => User)
     user: User;

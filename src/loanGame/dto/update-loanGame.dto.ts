@@ -5,31 +5,31 @@ export class UpdateLoanGameDto {
     @ApiModelProperty()
     @IsDate()
     @IsOptional()
-    readonly start: Date;
+    start: Date;
 
     @ApiModelProperty()
     @IsDate()
     @IsOptional()
-    readonly end: Date;
+    end: Date;
 
     @ApiModelProperty()
     @IsNumber()
     @IsOptional()
-    readonly userId: number;
+    userId: number;
 
     @ApiModelProperty()
     @IsNumber()
     @IsOptional()
-    readonly boardGameId: number;
+    boardGameId: number;
 
     @ApiModelProperty()
     @IsNumber()
     @IsOptional()
-    readonly tableId: number;
+    tableId: number;
 
     @ApiModelProperty()
     @IsNumber()
     @IsOptional()
-    readonly hireUserId: number;
+    hireUserId: number;
 
 }

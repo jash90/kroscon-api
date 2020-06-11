@@ -9,10 +9,10 @@ import { Feedback } from 'src/feedback/feedback.entity';
     tableName: 'users',
 })
 export class User extends Model<User> {
-    @AutoIncrement
     @PrimaryKey
+    @AutoIncrement
     @Column({ type: DataType.BIGINT })
-    id: string;
+    id: number;
 
     @Unique(true)
     @Column({ type: DataType.TEXT })

@@ -5,5 +5,5 @@ export class UpdatePrivilegeDto {
     @IsOptional()
     @ApiModelProperty()
     @IsString()
-    readonly name: string;
+    name: string;
 }

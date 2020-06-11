@@ -9,7 +9,7 @@ export class FeedbackDto {
     readonly rating: number;
 
     @ApiModelProperty()
-    readonly userId: string;
+    readonly userId: number;
 
     @ApiModelProperty()
     readonly firstnameUser: string;

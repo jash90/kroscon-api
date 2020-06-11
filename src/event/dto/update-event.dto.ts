@@ -5,25 +5,25 @@ export class UpdateEventDto {
     @IsOptional()
     @ApiModelProperty()
     @IsString()
-    readonly name: string;
+    name: string;
 
     @ApiModelProperty()
     @IsDate()
     @IsOptional()
-    readonly start: Date;
+    start: Date;
 
     @ApiModelProperty()
     @IsDate()
     @IsOptional()
-    readonly end: Date;
+    end: Date;
 
     @ApiModelProperty()
     @IsString()
     @IsOptional()
-    readonly description: string;
+    description: string;
 
     @ApiModelProperty()
     @IsString()
     @IsOptional()
-    readonly location: string;
+    location: string;
 }

@@ -5,5 +5,5 @@ export class UpdateMechanicDto {
     @IsOptional()
     @ApiModelProperty()
     @IsString()
-    readonly name: string;
+    name: string;
 }

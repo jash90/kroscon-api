@@ -5,7 +5,7 @@ export class CreateReservationDto {
 
     @ApiModelProperty()
     @IsNumber()
-    readonly userId: string;
+    readonly userId: number;
 
     @ApiModelProperty()
     @IsNumber()
