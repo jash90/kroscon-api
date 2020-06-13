@@ -22,7 +22,7 @@ export class BoardGamesService {
 
     async findAll(): Promise<BoardGameDto[]> {
         const boardGames = await this.boardGamesRepository.findAll<BoardGame>({
-            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation, Table],
+            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation],
         });
         return boardGames.map(boardGame => {
             return new BoardGameDto(boardGame);
@@ -31,7 +31,7 @@ export class BoardGamesService {
 
     async findOne(id: number): Promise<BoardGameDto> {
         const boardGame = await this.boardGamesRepository.findByPk<BoardGame>(id, {
-            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation, Table],
+            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation],
         });
         if (!boardGame) {
             throw new HttpException('No boardGame found', HttpStatus.NOT_FOUND);
@@ -40,7 +40,7 @@ export class BoardGamesService {
         return new BoardGameDto(boardGame);
     }
 
-    async create(createBoardGameDto: CreateBoardGameDto): Promise<BoardGame> {
+    async create(createBoardGameDto: CreateBoardGameDto): Promise<BoardGameDto> {
         const boardGame = new BoardGame();
         boardGame.name = createBoardGameDto.name;
         boardGame.uuid = createBoardGameDto.uuid;
@@ -51,7 +51,8 @@ export class BoardGamesService {
         boardGame.publisherId = createBoardGameDto.publisherId;
 
         try {
-            return await boardGame.save();
+            const boardGameData = await boardGame.save();
+            return new BoardGameDto(boardGameData);
         } catch (err) {
             throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -59,7 +60,7 @@ export class BoardGamesService {
 
     private async getBoardGame(id: number): Promise<BoardGame> {
         const boardGame = await this.boardGamesRepository.findByPk<BoardGame>(id, {
-            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation, Table],
+            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation],
         });
         if (!boardGame) {
             throw new HttpException('No boardGame found', HttpStatus.NOT_FOUND);
@@ -71,7 +72,7 @@ export class BoardGamesService {
     async update(
         id: number,
         updateBoardGameDto: UpdateBoardGameDto,
-    ): Promise<BoardGame> {
+    ): Promise<BoardGameDto> {
         const boardGame = await this.getBoardGame(id);
 
         boardGame.name = updateBoardGameDto.name || boardGame.name;
@@ -83,28 +84,29 @@ export class BoardGamesService {
         boardGame.publisherId = updateBoardGameDto.publisherId || boardGame.publisherId;
 
         try {
-            return await boardGame.save();
+            const boardGameData = await boardGame.save();
+            return new BoardGameDto(boardGameData);
         } catch (err) {
             throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    async delete(id: number): Promise<BoardGame> {
+    async delete(id: number): Promise<BoardGameDto> {
         const boardGame = await this.getBoardGame(id);
         await boardGame.destroy();
-        return boardGame;
+        return new BoardGameDto(boardGame);
     }
 
     async offset(index: number = 0): Promise<BoardGameOffset> {
         const boardGames = await this.boardGamesRepository.findAndCountAll({
-            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation, Table],
+            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation],
             limit: 100,
             offset: index * 100,
             order: ['id'],
         });
 
         const BoardGamesDto = boardGames.rows.map(boardGame => {
-            return new BoardGamesDto(boardGame);
+            return new BoardGameDto(boardGame);
         });
 
         return { rows: BoardGamesDto, count: boardGames.count };

@@ -74,14 +74,9 @@ export class UsersService {
 
             // when registering then log user in automatically by returning a token
             const token = await this.signToken(userData);
+
             return new UserLoginResponseDto(userData, token);
         } catch (err) {
-            if (err.original.constraint === 'user_email_key') {
-                throw new HttpException(
-                    `User with email already exists`,
-                    HttpStatus.CONFLICT,
-                );
-            }
             throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

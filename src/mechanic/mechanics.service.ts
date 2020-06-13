@@ -17,7 +17,7 @@ export class MechanicsService {
 
     async findAll(): Promise<MechanicDto[]> {
         const mechanics = await this.mechanicsRepository.findAll<Mechanic>({
-            include: [BoardGame, BoardGameMechanic],
+            include: [BoardGameMechanic],
         });
         return mechanics.map(mechanic => {
             return new MechanicDto(mechanic);
@@ -26,7 +26,7 @@ export class MechanicsService {
 
     async findOne(id: number): Promise<MechanicDto> {
         const mechanic = await this.mechanicsRepository.findByPk<Mechanic>(id, {
-            include: [BoardGame, BoardGameMechanic],
+            include: [BoardGameMechanic],
         });
         if (!mechanic) {
             throw new HttpException('No mechanic found', HttpStatus.NOT_FOUND);
@@ -35,12 +35,13 @@ export class MechanicsService {
         return new MechanicDto(mechanic);
     }
 
-    async create(createMechanicDto: CreateMechanicDto): Promise<Mechanic> {
+    async create(createMechanicDto: CreateMechanicDto): Promise<MechanicDto> {
         const mechanic = new Mechanic();
         mechanic.name = createMechanicDto.name;
 
         try {
-            return await mechanic.save();
+            const mechanicData = await mechanic.save();
+            return new MechanicDto(mechanicData);
         } catch (err) {
             throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -48,7 +49,7 @@ export class MechanicsService {
 
     private async getMechanic(id: number): Promise<Mechanic> {
         const mechanic = await this.mechanicsRepository.findByPk<Mechanic>(id, {
-            include: [BoardGame, BoardGameMechanic],
+            include: [BoardGameMechanic],
         });
         if (!mechanic) {
             throw new HttpException('No mechanic found', HttpStatus.NOT_FOUND);
@@ -60,34 +61,35 @@ export class MechanicsService {
     async update(
         id: number,
         updateMechanicDto: UpdateMechanicDto,
-    ): Promise<Mechanic> {
+    ): Promise<MechanicDto> {
         const mechanic = await this.getMechanic(id);
 
         mechanic.name = updateMechanicDto.name || mechanic.name;
 
         try {
-            return await mechanic.save();
+            const mechanicData = await mechanic.save();
+            return new MechanicDto(mechanicData);
         } catch (err) {
             throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    async delete(id: number): Promise<Mechanic> {
+    async delete(id: number): Promise<MechanicDto> {
         const mechanic = await this.getMechanic(id);
         await mechanic.destroy();
-        return mechanic;
+        return new MechanicDto(mechanic);
     }
 
     async offset(index: number = 0): Promise<MechanicOffset> {
         const mechanics = await this.mechanicsRepository.findAndCountAll({
-            include: [BoardGame, BoardGameMechanic],
+            include: [BoardGameMechanic],
             limit: 100,
             offset: index * 100,
             order: ['id'],
         });
 
         const MechanicsDto = mechanics.rows.map(mechanic => {
-            return new MechanicsDto(mechanic);
+            return new MechanicDto(mechanic);
         });
 
         return { rows: MechanicsDto, count: mechanics.count };

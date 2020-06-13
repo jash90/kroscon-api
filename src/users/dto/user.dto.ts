@@ -34,6 +34,5 @@ export class UserDto {
         this.gender = user.gender;
         this.birthday = user.birthday;
         this.privilegeId = user.privilegeId;
-        this.privilegeName = user.privilege.name;
     }
 }

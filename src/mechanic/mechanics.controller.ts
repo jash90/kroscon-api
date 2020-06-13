@@ -32,7 +32,7 @@ export class MechanicsController {
     @UseGuards(AuthGuard('jwt'))
     create(
         @Body() createMechanicDto: CreateMechanicDto,
-    ): Promise<MechanicEntity> {
+    ): Promise<MechanicDto> {
         return this.mechanicsService.create(createMechanicDto);
     }
 
@@ -44,7 +44,7 @@ export class MechanicsController {
     update(
         @Param('id', new ParseIntPipe()) id: number,
         @Body() updateMechanicDto: UpdateMechanicDto,
-    ): Promise<MechanicEntity> {
+    ): Promise<MechanicDto> {
         return this.mechanicsService.update(id, updateMechanicDto);
     }
 
@@ -55,7 +55,7 @@ export class MechanicsController {
     @UseGuards(AuthGuard('jwt'))
     delete(
         @Param('id', new ParseIntPipe()) id: number,
-    ): Promise<MechanicEntity> {
+    ): Promise<MechanicDto> {
         return this.mechanicsService.delete(id);
     }
 

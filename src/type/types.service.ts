@@ -17,7 +17,7 @@ export class TypesService {
 
     async findAll(): Promise<TypeDto[]> {
         const types = await this.typesRepository.findAll<Type>({
-            include: [Type, BoardGameType],
+            include: [BoardGameType],
         });
         return types.map(type => {
             return new TypeDto(type);
@@ -26,7 +26,7 @@ export class TypesService {
 
     async findOne(id: number): Promise<TypeDto> {
         const type = await this.typesRepository.findByPk<Type>(id, {
-            include: [Type, BoardGameType],
+            include: [BoardGameType],
         });
         if (!type) {
             throw new HttpException('No type found', HttpStatus.NOT_FOUND);
@@ -35,12 +35,13 @@ export class TypesService {
         return new TypeDto(type);
     }
 
-    async create(createTypeDto: CreateTypeDto): Promise<Type> {
+    async create(createTypeDto: CreateTypeDto): Promise<TypeDto> {
         const type = new Type();
         type.name = createTypeDto.name;
 
         try {
-            return await type.save();
+            const typeData = await type.save();
+            return new TypeDto(typeData);
         } catch (err) {
             throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -48,7 +49,7 @@ export class TypesService {
 
     private async getType(id: number): Promise<Type> {
         const type = await this.typesRepository.findByPk<Type>(id, {
-            include: [Type, BoardGameType],
+            include: [BoardGameType],
         });
         if (!type) {
             throw new HttpException('No type found', HttpStatus.NOT_FOUND);
@@ -60,34 +61,35 @@ export class TypesService {
     async update(
         id: number,
         updateTypeDto: UpdateTypeDto,
-    ): Promise<Type> {
+    ): Promise<TypeDto> {
         const type = await this.getType(id);
 
         type.name = updateTypeDto.name || type.name;
 
         try {
-            return await type.save();
+            const typeData = await type.save();
+            return new TypeDto(typeData);
         } catch (err) {
             throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    async delete(id: number): Promise<Type> {
+    async delete(id: number): Promise<TypeDto> {
         const type = await this.getType(id);
         await type.destroy();
-        return type;
+        return new TypeDto(type);
     }
 
     async offset(index: number = 0): Promise<TypeOffset> {
         const types = await this.typesRepository.findAndCountAll({
-            include: [Type, BoardGameType],
+            include: [BoardGameType],
             limit: 100,
             offset: index * 100,
             order: ['id'],
         });
 
         const TypesDto = types.rows.map(type => {
-            return new TypesDto(type);
+            return new TypeDto(type);
         });
 
         return { rows: TypesDto, count: types.count };

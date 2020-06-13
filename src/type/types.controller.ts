@@ -5,7 +5,7 @@ import { TypeDto } from './dto/type.dto';
 import { CreateTypeDto } from './dto/create-type.dto';
 import { UpdateTypeDto } from './dto/update-type.dto';
 import { TypeOffset } from './dto/type.offset';
-import { Type as TypeEntity } from './type.entity';
+import { Type } from './type.entity';
 import { TypesService } from './types.service';
 
 @Controller('types')
@@ -27,35 +27,35 @@ export class TypesController {
     }
 
     @Post()
-    @ApiCreatedResponse({ type: TypeEntity })
+    @ApiCreatedResponse({ type: TypeDto })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
     create(
         @Body() createTypeDto: CreateTypeDto,
-    ): Promise<TypeEntity> {
+    ): Promise<TypeDto> {
         return this.typesService.create(createTypeDto);
     }
 
     @Put(':id')
-    @ApiOkResponse({ type: TypeEntity })
+    @ApiOkResponse({ type: TypeDto })
     @ApiImplicitParam({ name: 'id', required: true })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
     update(
         @Param('id', new ParseIntPipe()) id: number,
         @Body() updateTypeDto: UpdateTypeDto,
-    ): Promise<TypeEntity> {
+    ): Promise<TypeDto> {
         return this.typesService.update(id, updateTypeDto);
     }
 
     @Delete(':id')
-    @ApiOkResponse({ type: TypeEntity })
+    @ApiOkResponse({ type: TypeDto })
     @ApiImplicitParam({ name: 'id', required: true })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
     delete(
         @Param('id', new ParseIntPipe()) id: number,
-    ): Promise<TypeEntity> {
+    ): Promise<TypeDto> {
         return this.typesService.delete(id);
     }
 

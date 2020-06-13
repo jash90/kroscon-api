@@ -3,7 +3,7 @@ export const config = {
     database: {
         dialect: 'postgres',
         host: db.host,
-        port: 5533,
+        port: db.port,
         username: db.user,
         password: db.pass,
         database: 'kroscon',

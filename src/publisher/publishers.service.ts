@@ -34,12 +34,13 @@ export class PublishersService {
         return new PublisherDto(publisher);
     }
 
-    async create(createPublisherDto: CreatePublisherDto): Promise<Publisher> {
+    async create(createPublisherDto: CreatePublisherDto): Promise<PublisherDto> {
         const publisher = new Publisher();
         publisher.name = createPublisherDto.name;
 
         try {
-            return await publisher.save();
+            const publisherData = await publisher.save();
+            return new PublisherDto(publisherData);
         } catch (err) {
             throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -59,22 +60,23 @@ export class PublishersService {
     async update(
         id: number,
         updatePublisherDto: UpdatePublisherDto,
-    ): Promise<Publisher> {
+    ): Promise<PublisherDto> {
         const publisher = await this.getPublisher(id);
 
         publisher.name = updatePublisherDto.name || publisher.name;
 
         try {
-            return await publisher.save();
+            const publisherData = await publisher.save();
+            return new PublisherDto(publisherData);
         } catch (err) {
             throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    async delete(id: number): Promise<Publisher> {
+    async delete(id: number): Promise<PublisherDto> {
         const publisher = await this.getPublisher(id);
         await publisher.destroy();
-        return publisher;
+        return new PublisherDto(publisher);
     }
 
     async offset(index: number = 0): Promise<PublisherOffset> {
@@ -86,7 +88,7 @@ export class PublishersService {
         });
 
         const PublishersDto = publishers.rows.map(publisher => {
-            return new PublishersDto(publisher);
+            return new PublisherDto(publisher);
         });
 
         return { rows: PublishersDto, count: publishers.count };

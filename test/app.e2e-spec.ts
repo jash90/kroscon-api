@@ -14,7 +14,7 @@ import {
     createUserDto5,
     userLoginRequestDto1,
     userLoginRequestDto2,
-    userLoginRequestDto3
+    userLoginRequestDto3,
 } from './test-data';
 
 describe('/', () => {
@@ -24,7 +24,6 @@ describe('/', () => {
     let token: string;
 
     beforeAll(async () => {
-        //     process.env.NODE_ENV = 'test';
         const module = await Test.createTestingModule({
             imports: [AppModule],
 

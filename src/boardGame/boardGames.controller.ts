@@ -64,6 +64,4 @@ export class BoardGamesController {
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<BoardGameOffset> {
         return this.boardGamesService.offset(index);
     }
-
-
 }

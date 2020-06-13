@@ -5,7 +5,7 @@ import { PublisherDto } from './dto/publisher.dto';
 import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { UpdatePublisherDto } from './dto/update-publisher.dto';
 import { PublisherOffset } from './dto/publisher.offset';
-import { Publisher as PublisherEntity } from './publisher.entity';
+import { Publisher } from './publisher.entity';
 import { PublishersService } from './publishers.service';
 
 @Controller('publishers')
@@ -27,38 +27,38 @@ export class PublishersController {
     }
 
     @Post()
-    @ApiCreatedResponse({ type: PublisherEntity })
+    @ApiCreatedResponse({ type: PublisherDto })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
     create(
         @Body() createPublisherDto: CreatePublisherDto,
-    ): Promise<PublisherEntity> {
+    ): Promise<PublisherDto> {
         return this.publishersService.create(createPublisherDto);
     }
 
     @Put(':id')
-    @ApiOkResponse({ type: PublisherEntity })
+    @ApiOkResponse({ type: PublisherDto })
     @ApiImplicitParam({ name: 'id', required: true })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
     update(
         @Param('id', new ParseIntPipe()) id: number,
         @Body() updatePublisherDto: UpdatePublisherDto,
-    ): Promise<PublisherEntity> {
+    ): Promise<PublisherDto> {
         return this.publishersService.update(id, updatePublisherDto);
     }
 
     @Delete(':id')
-    @ApiOkResponse({ type: PublisherEntity })
+    @ApiOkResponse({ type: PublisherDto })
     @ApiImplicitParam({ name: 'id', required: true })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
     delete(
         @Param('id', new ParseIntPipe()) id: number,
-    ): Promise<PublisherEntity> {
+    ): Promise<PublisherDto> {
         return this.publishersService.delete(id);
     }
-    
+
     @Get('offset/:id')
     @ApiOkResponse({ type: PublisherOffset })
     offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<PublisherOffset> {

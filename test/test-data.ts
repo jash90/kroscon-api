@@ -14,7 +14,7 @@ export const createUserDto1: CreateUserDto = {
     birthday: '1986-07-17',
     privilegeId: 1,
     city: '',
-    age: 1
+    age: 1,
 };
 
 export const createUserDto2 = {
@@ -56,14 +56,14 @@ export const userLoginRequestDto3: UserLoginRequestDto = {
 };
 
 export const userDto1: UserDto = {
-    id: 'uuid/v4',
+    id: 12,
     email: 'testemail@gmail.com',
     firstname: 'John',
     lastname: 'Smith',
     gender: Gender.male,
     birthday: '1986-07-17',
     privilegeId: 1,
-    privilegeName: 'admin'
+    privilegeName: 'admin',
 };
 
 export const userLoginResponseDto1: UserLoginResponseDto = {

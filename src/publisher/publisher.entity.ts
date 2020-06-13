@@ -13,7 +13,7 @@ import {
     Unique,
     UpdatedAt,
 } from 'sequelize-typescript';
-import { BoardGame } from "src/boardGame/boardGame.entity";
+import { BoardGame } from '../boardGame/boardGame.entity';
 
 @Table({
     tableName: 'publishers',
