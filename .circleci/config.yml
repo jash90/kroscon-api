@@ -1,4 +1,4 @@
-22222version: 2.1
+version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
@@ -10,7 +10,7 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-            - run: npm test
+            - run: npm run prestart:prod
 workflows:
     build-and-test:
       jobs:
