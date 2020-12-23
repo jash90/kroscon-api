@@ -1,45 +1,23 @@
-import {
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-} from 'sequelize-typescript';
-import { BoardGame } from '../boardGame/boardGame.entity';
-
-@Table({
-    tableName: 'publishers',
-})
-export class Publisher extends Model<Publisher> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
+@Entity('publishers')
+export class Publisher {
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Column(DataType.TEXT)
+    @Column('text')
     name: string;
 
-    @HasMany(() => BoardGame)
-    boardGames: BoardGame[];
+    // @HasMany(() => BoardGame)
+    // boardGames: BoardGame[];
 
-    @CreatedAt
-    @Column
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdatedAt
-    @Column
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @DeletedAt
-    @Column
+    @DeleteDateColumn()
     deletedAt: Date;
 
 }

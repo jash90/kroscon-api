@@ -1,68 +1,45 @@
-import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-    Min,
-    Max, BelongsTo, ForeignKey
-} from 'sequelize-typescript';
-import { LoanGame } from 'src/loanGame/loanGame.entity';
-import { User } from 'src/users/user.entity';
-import { BoardGame } from 'src/boardGame/boardGame.entity';
+import {LoanGame} from 'src/loanGame/loanGame.entity';
+import {User} from 'src/users/user.entity';
+import {BoardGame} from 'src/boardGame/boardGame.entity';
+import {Check, Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
-@Table({
-    tableName: 'feedbacks',
-})
-export class Feedback extends Model<Feedback> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
+@Entity('feedbacks')
+@Check(`"rating" > 1 AND "rating" < 10`)
+export class Feedback {
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Min(1)
-    @Max(10)
-    @Column(DataType.INTEGER)
+    @Column('integer')
     rating: number;
 
-    @ForeignKey(() => LoanGame)
-    @Column({ type: DataType.BIGINT })
-    loanGameId: number;
+    // @ForeignKey(() => LoanGame)
+    // @Column({type: DataType.BIGINT})
+    // loanGameId: number;
+    //
+    // @BelongsTo(() => LoanGame)
+    // loanGame: LoanGame;
+    //
+    // @ForeignKey(() => User)
+    // @Column({type: DataType.BIGINT})
+    // userId: number;
+    //
+    // @BelongsTo(() => User)
+    // user: User;
+    //
+    // @ForeignKey(() => BoardGame)
+    // @Column({type: DataType.BIGINT})
+    // boardGameId: number;
+    //
+    // @BelongsTo(() => BoardGame)
+    // boardGame: BoardGame;
 
-    @BelongsTo(() => LoanGame)
-    loanGame: LoanGame;
-
-    @ForeignKey(() => User)
-    @Column({ type: DataType.BIGINT })
-    userId: number;
-
-    @BelongsTo(() => User)
-    user: User;
-
-    @ForeignKey(() => BoardGame)
-    @Column({ type: DataType.BIGINT })
-    boardGameId: number;
-
-    @BelongsTo(() => BoardGame)
-    boardGame: BoardGame;
-
-    @CreatedAt
-    @Column
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdatedAt
-    @Column
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @DeletedAt
-    @Column
+    @DeleteDateColumn()
     deletedAt: Date;
 
 }

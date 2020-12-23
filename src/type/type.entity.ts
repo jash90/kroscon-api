@@ -1,44 +1,24 @@
-import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-} from 'sequelize-typescript';
-import { BoardGameType } from 'src/boardGameType/boardGameType.entity';
 
-@Table({
-    tableName: 'types',
-})
-export class Type extends Model<Type> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+
+@Entity('types')
+export class Type {
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Column(DataType.TEXT)
+    @Column('text')
     name: string;
 
-    @HasMany(() => BoardGameType)
-    BoardGameTypes: BoardGameType[];
+    // @HasMany(() => BoardGameType)
+    // BoardGameTypes: BoardGameType[];
 
-    @CreatedAt
-    @Column
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdatedAt
-    @Column
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @DeletedAt
-    @Column
+    @DeleteDateColumn()
     deletedAt: Date;
 
 }

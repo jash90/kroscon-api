@@ -1,57 +1,37 @@
-import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-} from 'sequelize-typescript';
 import { User } from 'src/users/user.entity';
 import { Lecture } from 'src/lecture/lecture.entity';
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
-@Table({
-    tableName: 'events',
-})
-export class Event extends Model<Event> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
+@Entity('events')
+export class Event {
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Column(DataType.TEXT)
+    @Column('text')
     name: string;
 
-    @HasMany(() => Lecture)
-    lectures: Lecture[];
+    // @HasMany(() => Lecture)
+    // lectures: Lecture[];
 
-    @Column(DataType.DATE)
+    @Column('date')
     start: Date;
 
-    @Column(DataType.DATE)
+    @Column('date')
     end: Date;
 
-    @Column(DataType.TEXT)
+    @Column('text')
     description: string;
 
-    @Column(DataType.TEXT)
+    @Column('text')
     location: string;
 
-    @CreatedAt
-    @Column
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdatedAt
-    @Column
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @DeletedAt
-    @Column
+    @DeleteDateColumn()
     deletedAt: Date;
 
 }

@@ -1,98 +1,67 @@
-import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-    ForeignKey,
-    BelongsTo,
-    Min,
-    Max,
-} from 'sequelize-typescript';
-import { User } from 'src/users/user.entity';
-import { BoardGameMechanic } from '../boardGameMechanic/boardGameMechanic.entity';
-import { Publisher } from 'src/publisher/publisher.entity';
-import { Mechanic } from 'src/mechanic/mechanic.entity';
-import { BoardGameType } from 'src/boardGameType/boardGameType.entity';
-import { LoanGame } from 'src/loanGame/loanGame.entity';
-import { Reservation } from 'src/reservation/reservation.entity';
-import { Feedback } from 'src/feedback/feedback.entity';
-import { Table as Tab } from 'src/table/table.entity';
+import {User} from 'src/users/user.entity';
+import {Publisher} from 'src/publisher/publisher.entity';
+import {Mechanic} from 'src/mechanic/mechanic.entity';
+import {LoanGame} from 'src/loanGame/loanGame.entity';
+import {Reservation} from 'src/reservation/reservation.entity';
+import {Feedback} from 'src/feedback/feedback.entity';
+import {Table as Tab} from 'src/table/table.entity';
+import {Check, Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
-@Table({
-    tableName: 'boardGames',
-})
-export class BoardGame extends Model<BoardGame> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
+@Entity('boardGames')
+@Check(`"minPlayer" > 0`)
+@Check(`"maxPlayer" > 1`)
+@Check(`"minAge" > 1 AND "minAge" < 99`)
+export class BoardGame {
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Column(DataType.TEXT)
+    @Column({type: 'text', unique: true})
     name: string;
 
-    @Unique(true)
-    @Column(DataType.TEXT)
+    @Column({type: 'text', unique: true})
     uuid: string;
 
-
-    @Min(1)
-    @Column(DataType.INTEGER)
+    @Column('integer')
     minPlayers: number;
 
-
-    @Min(2)
-    @Column(DataType.INTEGER)
+    @Column('integer')
     maxPlayers: number;
 
-    @Min(1)
-    @Column(DataType.INTEGER)
+    @Column('smallint')
     playingTime: number;
 
-    @Min(1)
-    @Max(99)
-    @Column(DataType.INTEGER)
+    @Column('smallint')
     minAge: number;
 
-    @HasMany(() => BoardGameMechanic)
-    boardGameMechanics: BoardGameMechanic[];
+    // @HasMany(() => BoardGameMechanic)
+    // boardGameMechanics: BoardGameMechanic[];
+    //
+    // @HasMany(() => BoardGameType)
+    // boardGameTypes: BoardGameType[];
+    //
+    // @HasMany(() => LoanGame)
+    // loanGames: LoanGame[];
+    //
+    // @HasMany(() => Reservation)
+    // reservations: Reservation[];
+    //
+    // @HasMany(() => Feedback)
+    // feedbacks: Feedback[];
+    //
+    // @ForeignKey(() => Publisher)
+    // @Column({ type: DataType.BIGINT })
+    // publisherId: number;
+    //
+    // @BelongsTo(() => Publisher)
+    // publisher: Publisher;
 
-    @HasMany(() => BoardGameType)
-    boardGameTypes: BoardGameType[];
-
-    @HasMany(() => LoanGame)
-    loanGames: LoanGame[];
-
-    @HasMany(() => Reservation)
-    reservations: Reservation[];
-
-    @HasMany(() => Feedback)
-    feedbacks: Feedback[];
-
-    @ForeignKey(() => Publisher)
-    @Column({ type: DataType.BIGINT })
-    publisherId: number;
-
-    @BelongsTo(() => Publisher)
-    publisher: Publisher;
-
-    @CreatedAt
-    @Column
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdatedAt
-    @Column
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @DeletedAt
-    @Column
+    @DeleteDateColumn()
     deletedAt: Date;
 
 }

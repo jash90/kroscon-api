@@ -27,35 +27,35 @@ export class BoardGamesController {
     }
 
     @Post()
-    @ApiCreatedResponse({ type: BoardGameEntity })
+    @ApiCreatedResponse({ type: BoardGameDto })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
     create(
         @Body() createBoardGameDto: CreateBoardGameDto,
-    ): Promise<BoardGameEntity> {
+    ): Promise<BoardGameDto> {
         return this.boardGamesService.create(createBoardGameDto);
     }
 
     @Put(':id')
-    @ApiOkResponse({ type: BoardGameEntity })
+    @ApiOkResponse({ type: BoardGameDto })
     @ApiImplicitParam({ name: 'id', required: true })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
     update(
         @Param('id', new ParseIntPipe()) id: number,
         @Body() updateBoardGameDto: UpdateBoardGameDto,
-    ): Promise<BoardGameEntity> {
+    ): Promise<BoardGameDto> {
         return this.boardGamesService.update(id, updateBoardGameDto);
     }
 
     @Delete(':id')
-    @ApiOkResponse({ type: BoardGameEntity })
+    @ApiOkResponse({ type: BoardGameDto })
     @ApiImplicitParam({ name: 'id', required: true })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
     delete(
         @Param('id', new ParseIntPipe()) id: number,
-    ): Promise<BoardGameEntity> {
+    ): Promise<BoardGameDto> {
         return this.boardGamesService.delete(id);
     }
 

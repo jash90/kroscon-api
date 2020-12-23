@@ -98,18 +98,22 @@ export class BoardGamesService {
     }
 
     async offset(index: number = 0): Promise<BoardGameOffset> {
-        const boardGames = await this.boardGamesRepository.findAndCountAll({
-            include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation],
-            limit: 100,
-            offset: index * 100,
-            order: ['id'],
-        });
+        try {
+            const boardGames = await this.boardGamesRepository.findAndCountAll({
+                include: [BoardGameMechanic, BoardGameType, Feedback, LoanGame, Publisher, Reservation],
+                limit: 100,
+                offset: index * 100,
+                order: ['id'],
+            });
 
-        const BoardGamesDto = boardGames.rows.map(boardGame => {
-            return new BoardGameDto(boardGame);
-        });
+            const BoardGamesDto = boardGames.rows.map(boardGame => {
+                return new BoardGameDto(boardGame);
+            });
 
-        return { rows: BoardGamesDto, count: boardGames.count };
+            return { rows: BoardGamesDto, count: boardGames.count };
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 }

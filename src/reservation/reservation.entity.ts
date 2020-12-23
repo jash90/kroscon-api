@@ -1,64 +1,44 @@
-import {
-    AutoIncrement, BelongsTo,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt, ForeignKey,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-} from 'sequelize-typescript';
-
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import { User } from '../users/user.entity';
 import { BoardGame } from '../boardGame/boardGame.entity';
 import { Table as Tab } from '../table/table.entity';
-@Table({
-    tableName: 'reservations',
-})
-export class Reservation extends Model<Reservation> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
+
+@Entity( 'reservations')
+export class Reservation {
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Column(DataType.DATE)
+    @Column('date')
     time: Date;
 
-    @ForeignKey(() => User)
-    @Column({ type: DataType.BIGINT })
-    userId: number;
+    // @ForeignKey(() => User)
+    // @Column({ type: DataType.BIGINT })
+    // userId: number;
+    //
+    // @BelongsTo(() => User)
+    // user: User;
+    //
+    // @ForeignKey(() => BoardGame)
+    // @Column({ type: DataType.BIGINT })
+    // boardGameId: number;
+    //
+    // @BelongsTo(() => BoardGame)
+    // boardGame: BoardGame;
+    //
+    // @ForeignKey(() => Tab)
+    // @Column({ type: DataType.BIGINT })
+    // tableId: number;
+    //
+    // @BelongsTo(() => Tab)
+    // table: Tab;
 
-    @BelongsTo(() => User)
-    user: User;
-
-    @ForeignKey(() => BoardGame)
-    @Column({ type: DataType.BIGINT })
-    boardGameId: number;
-
-    @BelongsTo(() => BoardGame)
-    boardGame: BoardGame;
-
-    @ForeignKey(() => Tab)
-    @Column({ type: DataType.BIGINT })
-    tableId: number;
-
-    @BelongsTo(() => Tab)
-    table: Tab;
-
-    @CreatedAt
-    @Column
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdatedAt
-    @Column
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @DeletedAt
-    @Column
+    @DeleteDateColumn()
     deletedAt: Date;
 
 }

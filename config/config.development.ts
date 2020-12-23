@@ -1,13 +1,15 @@
-import db from './dbdebug.json';
-export const config = {
-    database: {
-        dialect: 'postgres',
-        host: db.host,
-        port: db.port,
-        username: db.user,
-        password: db.pass,
-        database: 'kroscon',
-        logging: false,
-    },
-    jwtPrivateKey: 'jwtPrivateKey',
+import {ConnectionOptions} from 'typeorm/connection/ConnectionOptions';
+import {development} from './config.json';
+
+export const config: ConnectionOptions = {
+    type: 'postgres',
+    host: development.host,
+    port: development.port,
+    username: development.username,
+    password: development.password,
+    database: development.database,
+    entities: [
+        __dirname + '/../**/*.entity{.ts,.js}',
+    ],
+    synchronize: true
 };

@@ -4,7 +4,7 @@ export enum Gender {
 }
 
 export enum Roles {
-    "ADMIN" = 3,
-    "MOD" = 2,
-    "USER" = 1,
+    'ADMIN' = 3,
+    'MOD' = 2,
+    'USER' = 1,
 }

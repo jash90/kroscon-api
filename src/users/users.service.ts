@@ -14,6 +14,7 @@ import { Privilege } from 'src/privilege/privilege.entity';
 import { Feedback } from 'src/feedback/feedback.entity';
 import { Reservation } from 'src/reservation/reservation.entity';
 import { LoanGame } from 'src/loanGame/loanGame.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
@@ -21,14 +22,14 @@ export class UsersService {
 
     constructor(
         @Inject('UsersRepository')
-        private readonly usersRepository: typeof User,
+        private readonly usersRepository: Repository<User>,
         private readonly configService: ConfigService,
     ) {
         this.jwtPrivateKey = this.configService.jwtConfig.privateKey;
     }
 
     async findAll(): Promise<UserDto[]> {
-        const users = await this.usersRepository.findAll<User>({
+        const users = await this.usersRepository.find<User>({
             include: [Privilege, Reservation, LoanGame, Feedback],
         });
         return users.map(user => {

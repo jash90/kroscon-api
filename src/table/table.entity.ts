@@ -1,48 +1,30 @@
-import {
-    AutoIncrement, BelongsTo,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt, ForeignKey,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table as Tabela,
-    Unique,
-    UpdatedAt,
-} from 'sequelize-typescript';
+
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import { LoanGame } from '../loanGame/loanGame.entity';
 import { Reservation } from '../reservation/reservation.entity';
 
-@Tabela({
-    tableName: 'tables',
-})
+@Entity('tables')
 
-export class Table extends Model<Table> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
+export class Table {
+    @PrimaryGeneratedColumn()
     id: number;
-    @Column(DataType.TEXT)
+
+    @Column('text')
     name: string;
 
-    @HasMany(() => Reservation)
-    reservations: Reservation[];
+    // @HasMany(() => Reservation)
+    // reservations: Reservation[];
+    //
+    // @HasMany(() => LoanGame)
+    // loanGames: LoanGame[];
 
-    @HasMany(() => LoanGame)
-    loanGames: LoanGame[];
-
-    @CreatedAt
-    @Column({ field: 'createdAt' })
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdatedAt
-    @Column({ field: 'updatedAt' })
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @DeletedAt
-    @Column({ field: 'deletedAt' })
+    @DeleteDateColumn()
     deletedAt: Date;
 
 }

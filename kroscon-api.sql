@@ -219,11 +219,11 @@ INSERT INTO "users" ("id", "firstname", "lastname", "email", "password", "privil
   VALUES (1, 'Test', 'Test', 'test@test.pl', '$2a$08$tFkQLRfMovvG4uPzP7WOWOkzSs/v/e/BMONjpnncTxaNavWU.SNcG', 3, now());
 
 INSERT INTO public.publishers (name, "createdAt")
-  VALUES ('text', now());
+  VALUES ('Rebel', now());
 
 INSERT INTO public.types (name, "createdAt")
-  VALUES ('test', now());
+  VALUES ('przygodowa', now());
 
 INSERT INTO public.mechanics (name, "createdAt")
-  VALUES ('test', now());
+  VALUES ('rzut kością', now());
 

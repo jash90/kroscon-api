@@ -1,44 +1,23 @@
-import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-} from 'sequelize-typescript';
-import { BoardGameMechanic } from 'src/boardGameMechanic/boardGameMechanic.entity';
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
-@Table({
-    tableName: 'mechanics',
-})
-export class Mechanic extends Model<Mechanic> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
+@Entity('mechanics')
+export class Mechanic {
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Column(DataType.TEXT)
+    @Column('text')
     name: string;
 
-    @HasMany(() => BoardGameMechanic)
-    BoardGameMechanics: BoardGameMechanic[];
+    // @HasMany(() => BoardGameMechanic)
+    // BoardGameMechanics: BoardGameMechanic[];
 
-    @CreatedAt
-    @Column
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdatedAt
-    @Column
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @DeletedAt
-    @Column
+    @DeleteDateColumn()
     deletedAt: Date;
 
 }
