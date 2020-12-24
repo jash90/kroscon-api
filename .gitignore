@@ -136,4 +136,4 @@ dist
 
 config/db.json
 
-config/dbdebug.json
+config/config.json
