@@ -4,9 +4,6 @@ import { TableDto } from "../table/dto/table.dto";
 import { CreateTableDto } from "../table/dto/create-table.dto";
 import { UpdateTableDto } from "../table/dto/update-table.dto";
 import { TableOffset } from "../table/dto/table.offset";
-import { User } from "../users/user.entity";
-import { Reservation } from "../reservation/reservation.entity";
-import { LoanGame } from "../loanGame/loanGame.entity";
 import { getRepository, Repository } from "typeorm";
 
 @Injectable()
