@@ -1,101 +1,100 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Lecture } from 'src/lecture/lecture.entity';
-import { LectureDto } from 'src/lecture/dto/lecture.dto';
-import { CreateLectureDto } from 'src/lecture/dto/create-lecture.dto';
-import { UpdateLectureDto } from 'src/lecture/dto/update-lecture.dto';
-import { LectureOffset } from 'src/lecture/dto/lecture.offset';
-import { Event } from 'src/event/event.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { Lecture } from "src/lecture/lecture.entity";
+import { LectureDto } from "src/lecture/dto/lecture.dto";
+import { CreateLectureDto } from "src/lecture/dto/create-lecture.dto";
+import { UpdateLectureDto } from "src/lecture/dto/update-lecture.dto";
+import { LectureOffset } from "src/lecture/dto/lecture.offset";
+import { Event } from "src/event/event.entity";
+import { getRepository, Repository } from "typeorm";
 
 @Injectable()
 export class LecturesService {
-    constructor(
-        @Inject('LecturesRepository')
-        private readonly lecturesRepository: typeof Lecture,
-    ) { }
+  constructor(
+    @Inject("LecturesRepository")
+    private readonly lecturesRepository: Repository<Lecture>
+  ) {}
 
-    async findAll(): Promise<LectureDto[]> {
-        const lectures = await this.lecturesRepository.findAll<Lecture>({
-            include: [Event],
-        });
-        return lectures.map(lecture => {
-            return new LectureDto(lecture);
-        });
+  async findAll(): Promise<LectureDto[]> {
+    const lectures = await this.lecturesRepository.find({
+      relations: ["event"]
+    });
+    return lectures.map(lecture => {
+      return new LectureDto(lecture);
+    });
+  }
+
+  async findOne(id: number): Promise<LectureDto> {
+    const lecture = await this.lecturesRepository.findOne(id, {
+      relations: ["event"]
+    });
+    if (!lecture) {
+      throw new HttpException("No lecture found", HttpStatus.NOT_FOUND);
     }
 
-    async findOne(id: number): Promise<LectureDto> {
-        const lecture = await this.lecturesRepository.findByPk<Lecture>(id, {
-            include: [Event],
-        });
-        if (!lecture) {
-            throw new HttpException('No lecture found', HttpStatus.NOT_FOUND);
-        }
+    return new LectureDto(lecture);
+  }
 
-        return new LectureDto(lecture);
+  async create(createLectureDto: CreateLectureDto): Promise<LectureDto> {
+    const lecture = new Lecture();
+
+    lecture.name = createLectureDto.name;
+    lecture.start = createLectureDto.start;
+    lecture.end = createLectureDto.end;
+
+    try {
+      return new LectureDto(await getRepository(Lecture).save(lecture));
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  private async getLecture(id: number): Promise<Lecture> {
+    const lecture = await this.lecturesRepository.findOne(id, {
+      relations: ["event"]
+    });
+    if (!lecture) {
+      throw new HttpException("No lecture found", HttpStatus.NOT_FOUND);
     }
 
-    async create(createLectureDto: CreateLectureDto): Promise<Lecture> {
-        const lecture = new Lecture();
+    return lecture;
+  }
 
-        lecture.name = createLectureDto.name;
-        lecture.start = createLectureDto.start;
-        lecture.end = createLectureDto.end;
-        lecture.eventId = createLectureDto.eventId;
+  async update(
+    id: number,
+    updateLectureDto: UpdateLectureDto
+  ): Promise<LectureDto> {
+    const lecture = await this.getLecture(id);
 
-        try {
-            return await lecture.save();
-        } catch (err) {
-            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    lecture.name = updateLectureDto.name || lecture.name;
+    lecture.start = updateLectureDto.start || lecture.start;
+    lecture.end = updateLectureDto.end || lecture.end;
+
+    try {
+      return new LectureDto(await getRepository(Lecture).save(lecture));
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
 
-    private async getLecture(id: number): Promise<Lecture> {
-        const lecture = await this.lecturesRepository.findByPk<Lecture>(id, {
-            include: [Event],
-        });
-        if (!lecture) {
-            throw new HttpException('No lecture found', HttpStatus.NOT_FOUND);
-        }
+  async delete(id: number): Promise<LectureDto> {
+    const lecture = await this.getLecture(id);
+    return new LectureDto(await getRepository(Lecture).remove(lecture));
+  }
 
-        return lecture;
-    }
+  async offset(index: number = 0): Promise<LectureOffset> {
+    const lectures = await this.lecturesRepository.findAndCount({
+      relations: ["event"],
+      take: 100,
+      skip: index * 100,
+      order: {
+        id: "ASC"
+      }
+    });
 
-    async update(
-        id: number,
-        updateLectureDto: UpdateLectureDto,
-    ): Promise<Lecture> {
-        const lecture = await this.getLecture(id);
+    const LecturesDto = lectures[0].map(lecture => {
+      return new LecturesDto(lecture);
+    });
 
-        lecture.name = updateLectureDto.name || lecture.name;
-        lecture.start = updateLectureDto.start || lecture.start;
-        lecture.end = updateLectureDto.end || lecture.end;
-        lecture.eventId = updateLectureDto.eventId || lecture.eventId;
-
-        try {
-            return await lecture.save();
-        } catch (err) {
-            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    async delete(id: number): Promise<Lecture> {
-        const lecture = await this.getLecture(id);
-        await lecture.destroy();
-        return lecture;
-    }
-
-    async offset(index: number = 0): Promise<LectureOffset> {
-        const lectures = await this.lecturesRepository.findAndCountAll({
-            include: [Event],
-            limit: 100,
-            offset: index * 100,
-            order: ['id'],
-        });
-
-        const LecturesDto = lectures.rows.map(lecture => {
-            return new LecturesDto(lecture);
-        });
-
-        return { rows: LecturesDto, count: lectures.count };
-    }
-
+    return { rows: LecturesDto, count: lectures[1] };
+  }
 }

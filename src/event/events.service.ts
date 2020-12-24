@@ -1,103 +1,99 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Event } from 'src/event/event.entity';
-import { EventDto } from 'src/event/dto/event.dto';
-import { CreateEventDto } from 'src/event/dto/create-event.dto';
-import { UpdateEventDto } from 'src/event/dto/update-event.dto';
-import { EventOffset } from 'src/event/dto/event.offset';
-import { User } from 'src/users/user.entity';
-import { Lecture } from '../lecture/lecture.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { Event } from "src/event/event.entity";
+import { EventDto } from "src/event/dto/event.dto";
+import { CreateEventDto } from "src/event/dto/create-event.dto";
+import { UpdateEventDto } from "src/event/dto/update-event.dto";
+import { EventOffset } from "src/event/dto/event.offset";
+import { getRepository, Repository } from "typeorm";
 
 @Injectable()
 export class EventsService {
-    constructor(
-        @Inject('EventsRepository')
-        private readonly eventsRepository: typeof Event,
-    ) { }
+  constructor(
+    @Inject("EventsRepository")
+    private readonly eventsRepository: Repository<Event>
+  ) {}
 
-    async findAll(): Promise<EventDto[]> {
-        const events = await this.eventsRepository.findAll<Event>({
-            include: [Lecture],
-        });
-        return events.map(event => {
-            return new EventDto(event);
-        });
+  async findAll(): Promise<EventDto[]> {
+    const events = await this.eventsRepository.find({
+      relations: ["lecture"]
+    });
+    return events.map(event => {
+      return new EventDto(event);
+    });
+  }
+
+  async findOne(id: number): Promise<EventDto> {
+    const event = await this.eventsRepository.findOne(id, {
+      relations: ["lecture"]
+    });
+    if (!event) {
+      throw new HttpException("No event found", HttpStatus.NOT_FOUND);
     }
 
-    async findOne(id: number): Promise<EventDto> {
-        const event = await this.eventsRepository.findByPk<Event>(id, {
-            include: [Lecture],
-        });
-        if (!event) {
-            throw new HttpException('No event found', HttpStatus.NOT_FOUND);
-        }
+    return new EventDto(event);
+  }
 
-        return new EventDto(event);
+  async create(createEventDto: CreateEventDto): Promise<EventDto> {
+    const event = new Event();
+    event.name = createEventDto.name;
+    event.start = createEventDto.start;
+    event.end = createEventDto.end;
+    event.description = createEventDto.description;
+    event.location = createEventDto.location;
+
+    try {
+      return new EventDto(await getRepository(Event).save(event));
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  private async getEvent(id: number): Promise<Event> {
+    const event = await this.eventsRepository.findOne(id, {
+      relations: ["lecture"]
+    });
+    if (!event) {
+      throw new HttpException("No event found", HttpStatus.NOT_FOUND);
     }
 
-    async create(createEventDto: CreateEventDto): Promise<Event> {
-        const event = new Event();
-        event.name = createEventDto.name;
-        event.start = createEventDto.start;
-        event.end = createEventDto.end;
-        event.description = createEventDto.description;
-        event.location = createEventDto.location;
+    return event;
+  }
 
-        try {
-            return await event.save();
-        } catch (err) {
-            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+  async update(id: number, updateEventDto: UpdateEventDto): Promise<EventDto> {
+    const event = await this.getEvent(id);
+
+    event.name = updateEventDto.name || event.name;
+    event.start = updateEventDto.start || event.start;
+    event.end = updateEventDto.end || event.end;
+    event.description = updateEventDto.description || event.description;
+    event.location = updateEventDto.location || event.location;
+
+    try {
+      return new EventDto(await getRepository(Event).save(event));
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
 
-    private async getEvent(id: number): Promise<Event> {
-        const event = await this.eventsRepository.findByPk<Event>(id, {
-            include: [Lecture],
-        });
-        if (!event) {
-            throw new HttpException('No event found', HttpStatus.NOT_FOUND);
-        }
+  async delete(id: number): Promise<EventDto> {
+    const event = await this.getEvent(id);
+    return new EventDto(await getRepository(Event).remove(event));
+  }
 
-        return event;
-    }
+  async offset(index: number = 0): Promise<EventOffset> {
+    const events = await this.eventsRepository.findAndCount({
+      relations: ["lecture"],
+      take: 100,
+      skip: index * 100,
+      order: {
+        id: "ASC"
+      }
+    });
 
-    async update(
-        id: number,
-        updateEventDto: UpdateEventDto,
-    ): Promise<Event> {
-        const event = await this.getEvent(id);
+    const EventDto = events[0].map(event => {
+      return new EventDto(event);
+    });
 
-        event.name = updateEventDto.name || event.name;
-        event.start = updateEventDto.start || event.start;
-        event.end = updateEventDto.end || event.end;
-        event.description = updateEventDto.description || event.description;
-        event.location = updateEventDto.location || event.location;
-
-        try {
-            return await event.save();
-        } catch (err) {
-            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    async delete(id: number): Promise<Event> {
-        const event = await this.getEvent(id);
-        await event.destroy();
-        return event;
-    }
-
-    async offset(index: number = 0): Promise<EventOffset> {
-        const events = await this.eventsRepository.findAndCountAll({
-            include: [Lecture],
-            limit: 100,
-            offset: index * 100,
-            order: ['id'],
-        });
-
-        const EventDto = events.rows.map(event => {
-            return new EventDto(event);
-        });
-
-        return { rows: EventDto, count: events.count };
-    }
-
+    return { rows: EventDto, count: events[1] };
+  }
 }

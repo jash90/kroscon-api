@@ -1,44 +1,44 @@
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import { User } from '../users/user.entity';
-import { BoardGame } from '../boardGame/boardGame.entity';
-import { Table as Tab } from '../table/table.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
+import { User } from "../users/user.entity";
+import { BoardGame } from "../boardGame/boardGame.entity";
+import { Table } from "../table/table.entity";
+import { Publisher } from "../publisher/publisher.entity";
 
-@Entity( 'reservations')
+@Entity("reservations")
 export class Reservation {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('date')
-    time: Date;
+  @Column("date")
+  time: Date;
 
-    // @ForeignKey(() => User)
-    // @Column({ type: DataType.BIGINT })
-    // userId: number;
-    //
-    // @BelongsTo(() => User)
-    // user: User;
-    //
-    // @ForeignKey(() => BoardGame)
-    // @Column({ type: DataType.BIGINT })
-    // boardGameId: number;
-    //
-    // @BelongsTo(() => BoardGame)
-    // boardGame: BoardGame;
-    //
-    // @ForeignKey(() => Tab)
-    // @Column({ type: DataType.BIGINT })
-    // tableId: number;
-    //
-    // @BelongsTo(() => Tab)
-    // table: Tab;
+  @ManyToOne(() => User, user => user.reservations)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @ManyToOne(() => BoardGame, boardGame => boardGame.reservations)
+  @JoinColumn({ name: "boardGame_id" })
+  boardGame: BoardGame;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @ManyToOne(() => Table, table => table.reservations)
+  @JoinColumn({ name: "table_id" })
+  table: Table;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

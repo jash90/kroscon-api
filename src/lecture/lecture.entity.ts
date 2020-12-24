@@ -1,38 +1,42 @@
 import {
-    Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn
-} from 'typeorm';
-import { Event } from '../event/event.entity';
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
+import { Event } from "../event/event.entity";
 
-@Entity( 'lectures')
+@Entity("lectures")
 export class Lecture {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('text')
-    name: string;
+  @Column("text")
+  name: string;
 
-    @Column('date')
-    start: Date;
+  @Column("date")
+  start: Date;
 
-    @Column('date')
-    end: Date;
+  @Column("date")
+  end: Date;
 
-    @Column('string')
-    description: string;
+  @Column("string")
+  description: string;
 
-    // @ForeignKey(() => Event)
-    // @Column({ type: DataType.BIGINT })
-    // eventId: number;
-    //
-    // @BelongsTo(() => Event)
-    // event: Event;
+  @ManyToOne(() => Event, event => event.lectures)
+  @JoinColumn({ name: "event_id" })
+  event: Event;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

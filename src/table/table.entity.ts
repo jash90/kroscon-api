@@ -1,30 +1,37 @@
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
+import { LoanGame } from "../loanGame/loanGame.entity";
+import { Reservation } from "../reservation/reservation.entity";
+import { Feedback } from "../feedback/feedback.entity";
+import { Res } from "@nestjs/common";
 
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import { LoanGame } from '../loanGame/loanGame.entity';
-import { Reservation } from '../reservation/reservation.entity';
-
-@Entity('tables')
-
+@Entity("tables")
 export class Table {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('text')
-    name: string;
+  @Column("text")
+  name: string;
 
-    // @HasMany(() => Reservation)
-    // reservations: Reservation[];
-    //
-    // @HasMany(() => LoanGame)
-    // loanGames: LoanGame[];
+  @OneToMany(() => Reservation, reservation => reservation.table)
+  reservations: Reservation[];
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @OneToMany(() => LoanGame, loanGame => loanGame.table)
+  loanGames: LoanGame[];
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

@@ -1,3 +1,10 @@
-import { LoanGame } from './loanGame.entity';
+import { Connection } from "typeorm";
+import { LoanGame } from "./loanGame.entity";
 
-export const loanGamesProviders = [{ provide: 'LoanGamesRepository', useValue: LoanGame }];
+export const loanGamesProviders = [
+  {
+    provide: "LoanGamesRepository",
+    useFactory: (connection: Connection) => connection.getRepository(LoanGame),
+    inject: ["DatabaseConnection"]
+  }
+];

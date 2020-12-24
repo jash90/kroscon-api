@@ -1,56 +1,56 @@
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
+import { User } from "../users/user.entity";
+import { BoardGame } from "../boardGame/boardGame.entity";
+import { Table } from "../table/table.entity";
+import { Feedback } from "../feedback/feedback.entity";
+import { Publisher } from "../publisher/publisher.entity";
 
-import {DataType} from 'sequelize-typescript';
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import { User } from '../users/user.entity';
-import { BoardGame } from '../boardGame/boardGame.entity';
-import { Table as Tab } from '../table/table.entity';
-
-@Entity('loanGames')
+@Entity("loanGames")
 export class LoanGame {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('date')
-    start: Date;
+  @Column("date")
+  start: Date;
 
-    @Column('date')
-    end: Date;
+  @Column("date")
+  end: Date;
 
-    // @ForeignKey(() => User)
-    // @Column({ type: DataType.BIGINT })
-    // userId: number;
-    //
-    // @BelongsTo(() => User)
-    // user: User;
-    //
-    // @ForeignKey(() => BoardGame)
-    // @Column({ type: DataType.BIGINT })
-    // boardGameId: number;
-    //
-    // @BelongsTo(() => BoardGame)
-    // boardGame: BoardGame;
-    //
-    // @ForeignKey(() => Tab)
-    // @Column({ type: DataType.BIGINT })
-    // tableId: number;
-    //
-    // @BelongsTo(() => Tab)
-    // table: Tab;
-    //
-    // @ForeignKey(() => User)
-    // @Column({ type: DataType.BIGINT })
-    // hireUserId: number;
-    //
-    // @BelongsTo(() => User)
-    // hireUser: User;
+  @ManyToOne(() => User, user => user.hireGames)
+  @JoinColumn({ name: "hireUser_id" })
+  hireUser: User;
 
-   @CreateDateColumn()
-    createdAt: Date;
+  @ManyToOne(() => User, user => user.loanGames)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @ManyToOne(() => Table, table => table.loanGames)
+  @JoinColumn({ name: "table_id" })
+  table: Table;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
+  @ManyToOne(() => BoardGame, boardGame => boardGame.loanGames)
+  @JoinColumn({ name: "boardGame_id" })
+  boardGame: BoardGame;
 
+  @OneToMany(() => Feedback, feedback => feedback.loanGame)
+  feedbacks: Feedback[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

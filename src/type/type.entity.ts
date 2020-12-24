@@ -1,24 +1,31 @@
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
+import { BoardGame } from "../boardGame/boardGame.entity";
 
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-
-@Entity('types')
+@Entity("types")
 export class Type {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('text')
-    name: string;
+  @Column("text")
+  name: string;
 
-    // @HasMany(() => BoardGameType)
-    // BoardGameTypes: BoardGameType[];
+  @ManyToMany(() => BoardGame, boardGame => boardGame.types)
+  boardGames: BoardGame[];
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

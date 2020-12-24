@@ -1,23 +1,32 @@
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
+import { Type } from "../type/type.entity";
+import { BoardGame } from "../boardGame/boardGame.entity";
 
-@Entity('mechanics')
+@Entity("mechanics")
 export class Mechanic {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('text')
-    name: string;
+  @Column("text")
+  name: string;
 
-    // @HasMany(() => BoardGameMechanic)
-    // BoardGameMechanics: BoardGameMechanic[];
+  @ManyToMany(() => BoardGame, boardGame => boardGame.mechanics)
+  boardGames: BoardGame[];
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

@@ -5,8 +5,6 @@ import { UsersModule } from "./users/users.module";
 import { SharedModule } from "./shared/shared.module";
 import { ReservationsModule } from "./reservation/reservations.module";
 import { BoardGamesModule } from "./boardGame/boardGames.module";
-import { BoardGameMechanicsModule } from "./boardGameMechanic/boardGameMechanics.module";
-import { BoardGameTypesModule } from "./boardGameType/boardGameTypes.module";
 import { EventsModule } from "./event/events.module";
 import { LoanGamesModule } from "./loanGame/loanGames.module";
 import { MechanicsModule } from "./mechanic/mechanics.module";
@@ -20,8 +18,6 @@ import { PrivilegesModule } from "./privilege/privileges.module";
     UsersModule,
     SharedModule,
     BoardGamesModule,
-    BoardGameMechanicsModule,
-    BoardGameTypesModule,
     EventsModule,
     FeedbacksModule,
     LecturesModule,
@@ -36,4 +32,4 @@ import { PrivilegesModule } from "./privilege/privileges.module";
   controllers: [],
   providers: []
 })
-export class AppModule { }
+export class AppModule {}

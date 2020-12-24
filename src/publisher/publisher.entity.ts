@@ -1,23 +1,33 @@
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
+import { User } from "../users/user.entity";
+import { BoardGame } from "../boardGame/boardGame.entity";
 
-@Entity('publishers')
+@Entity("publishers")
 export class Publisher {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('text')
-    name: string;
+  @Column("text")
+  name: string;
 
-    // @HasMany(() => BoardGame)
-    // boardGames: BoardGame[];
+  @ManyToOne(() => BoardGame, publisher => publisher.publisher)
+  boardGames: BoardGame[];
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

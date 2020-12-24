@@ -1,45 +1,45 @@
-import {LoanGame} from 'src/loanGame/loanGame.entity';
-import {User} from 'src/users/user.entity';
-import {BoardGame} from 'src/boardGame/boardGame.entity';
-import {Check, Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import { LoanGame } from "src/loanGame/loanGame.entity";
+import { User } from "src/users/user.entity";
+import { BoardGame } from "src/boardGame/boardGame.entity";
+import {
+  Check,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
 
-@Entity('feedbacks')
+@Entity("feedbacks")
 @Check(`"rating" > 1 AND "rating" < 10`)
 export class Feedback {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('integer')
-    rating: number;
+  @Column("integer")
+  rating: number;
 
-    // @ForeignKey(() => LoanGame)
-    // @Column({type: DataType.BIGINT})
-    // loanGameId: number;
-    //
-    // @BelongsTo(() => LoanGame)
-    // loanGame: LoanGame;
-    //
-    // @ForeignKey(() => User)
-    // @Column({type: DataType.BIGINT})
-    // userId: number;
-    //
-    // @BelongsTo(() => User)
-    // user: User;
-    //
-    // @ForeignKey(() => BoardGame)
-    // @Column({type: DataType.BIGINT})
-    // boardGameId: number;
-    //
-    // @BelongsTo(() => BoardGame)
-    // boardGame: BoardGame;
+  @ManyToOne(() => LoanGame, loanGame => loanGame.feedbacks)
+  @JoinColumn({ name: "loanGame_id" })
+  loanGame: LoanGame;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @ManyToOne(() => User, user => user.feedbacks)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @ManyToOne(() => BoardGame, boardgame => boardgame.feedbacks)
+  @JoinColumn({ name: "boardGame_id" })
+  boardGame: BoardGame;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

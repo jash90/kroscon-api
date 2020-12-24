@@ -1,56 +1,66 @@
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
+import { Gender } from "../shared/enum/enums";
+import { Privilege } from "../privilege/privilege.entity";
+import { Reservation } from "src/reservation/reservation.entity";
+import { LoanGame } from "src/loanGame/loanGame.entity";
+import { Feedback } from "src/feedback/feedback.entity";
+import { Publisher } from "../publisher/publisher.entity";
 
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import { Gender } from '../shared/enum/enums';
-import { Privilege } from '../privilege/privilege.entity';
-import { Reservation } from 'src/reservation/reservation.entity';
-import { LoanGame } from 'src/loanGame/loanGame.entity';
-import { Feedback } from 'src/feedback/feedback.entity';
-
-@Entity('users')
+@Entity("users")
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('text')
-    email: string;
+  @Column("text")
+  email: string;
 
-    @Column('text')
-    password: string;
+  @Column("text")
+  password: string;
 
-    @Column('text')
-    firstname: string;
+  @Column("text")
+  firstname: string;
 
-    @Column('text')
-    lastname: string;
+  @Column("text")
+  lastname: string;
 
-    @Column('text')
-    gender: Gender;
+  @Column("text")
+  gender: Gender;
 
-    @Column('date')
-    birthday: string;
+  @Column("date")
+  birthday: string;
 
-    // @ForeignKey(() => Privilege)
-    // @Column({ type: DataType.BIGINT })
-    // privilegeId: number;
-    //
-    // @BelongsTo(() => Privilege)
-    // privilege: Privilege;
-    //
-    // @HasMany(() => Reservation)
-    // reservations: Reservation[];
-    //
-    // @HasMany(() => LoanGame)
-    // loanGames: LoanGame[];
-    //
-    // @HasMany(() => Feedback)
-    // feedbacks: Feedback[];
+  @ManyToOne(() => Privilege, privilege => privilege.users)
+  @JoinColumn({ name: "privilege_id" })
+  privilege: Privilege;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @OneToMany(() => LoanGame, loanGame => loanGame.user)
+  loanGames: LoanGame[];
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @OneToMany(() => LoanGame, loanGame => loanGame.hireUser)
+  hireGames: LoanGame[];
 
-    @DeleteDateColumn()
-    deletedAt: Date;
+  @OneToMany(() => Reservation, reservation => reservation.user)
+  reservations: Reservation[];
+
+  @OneToMany(() => Feedback, feedback => feedback.user)
+  feedbacks: Feedback[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

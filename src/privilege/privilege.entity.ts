@@ -1,24 +1,32 @@
-import { User } from 'src/users/user.entity';
-import {Entity, PrimaryGeneratedColumn, Column, DeleteDateColumn, UpdateDateColumn, CreateDateColumn} from 'typeorm';
+import { User } from "src/users/user.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  DeleteDateColumn,
+  UpdateDateColumn,
+  CreateDateColumn,
+  OneToMany
+} from "typeorm";
+import { LoanGame } from "../loanGame/loanGame.entity";
 
-@Entity('privileges')
+@Entity("privileges")
 export class Privilege {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column('text')
-    name: string;
+  @Column("text")
+  name: string;
 
-    // @HasMany(() => User)
-    // users: User[];
+  @OneToMany(() => User, user => user.privilege)
+  users: User[];
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }
