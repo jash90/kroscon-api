@@ -1,5 +1,5 @@
 import { ApiModelProperty } from "@nestjs/swagger";
-import { MechanicDto } from "src/mechanic/dto/mechanic.dto";
+import { MechanicDto } from "./mechanic.dto";
 
 export class MechanicOffset {
   @ApiModelProperty()

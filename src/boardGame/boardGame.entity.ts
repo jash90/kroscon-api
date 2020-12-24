@@ -1,8 +1,8 @@
-import { Publisher } from "src/publisher/publisher.entity";
-import { Mechanic } from "src/mechanic/mechanic.entity";
-import { LoanGame } from "src/loanGame/loanGame.entity";
-import { Reservation } from "src/reservation/reservation.entity";
-import { Feedback } from "src/feedback/feedback.entity";
+import { Publisher } from "../publisher/publisher.entity";
+import { Mechanic } from "../mechanic/mechanic.entity";
+import { LoanGame } from "../loanGame/loanGame.entity";
+import { Reservation } from "../reservation/reservation.entity";
+import { Feedback } from "../feedback/feedback.entity";
 import {
   Check,
   Column,

@@ -1,6 +1,6 @@
-import { LoanGame } from "src/loanGame/loanGame.entity";
-import { User } from "src/users/user.entity";
-import { BoardGame } from "src/boardGame/boardGame.entity";
+import { LoanGame } from "../loanGame/loanGame.entity";
+import { User } from "../users/user.entity";
+import { BoardGame } from "../boardGame/boardGame.entity";
 import {
   Check,
   Column,

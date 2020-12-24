@@ -11,9 +11,9 @@ import {
 } from "typeorm";
 import { Gender } from "../shared/enum/enums";
 import { Privilege } from "../privilege/privilege.entity";
-import { Reservation } from "src/reservation/reservation.entity";
-import { LoanGame } from "src/loanGame/loanGame.entity";
-import { Feedback } from "src/feedback/feedback.entity";
+import { Reservation } from "../reservation/reservation.entity";
+import { LoanGame } from "../loanGame/loanGame.entity";
+import { Feedback } from "../feedback/feedback.entity";
 
 @Entity("users")
 export class User {

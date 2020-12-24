@@ -1,4 +1,4 @@
-import { Lecture } from "src/lecture/lecture.entity";
+import { Lecture } from "../lecture/lecture.entity";
 import {
   Column,
   CreateDateColumn,

@@ -1,5 +1,5 @@
 import { ApiModelProperty } from "@nestjs/swagger";
-import { LoanGameDto } from "src/loanGame/dto/loanGame.dto";
+import { LoanGameDto } from "./loanGame.dto";
 
 export class LoanGameOffset {
   @ApiModelProperty()

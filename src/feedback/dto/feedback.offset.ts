@@ -1,5 +1,5 @@
 import { ApiModelProperty } from "@nestjs/swagger";
-import { FeedbackDto } from "src/feedback/dto/feedback.dto";
+import { FeedbackDto } from "./feedback.dto";
 
 export class FeedbackOffset {
   @ApiModelProperty()

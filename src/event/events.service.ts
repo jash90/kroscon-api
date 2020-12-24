@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { Event } from "src/event/event.entity";
-import { EventDto } from "src/event/dto/event.dto";
-import { CreateEventDto } from "src/event/dto/create-event.dto";
-import { UpdateEventDto } from "src/event/dto/update-event.dto";
-import { EventOffset } from "src/event/dto/event.offset";
+import { Event } from "../event/event.entity";
+import { EventDto } from "../event/dto/event.dto";
+import { CreateEventDto } from "../event/dto/create-event.dto";
+import { UpdateEventDto } from "../event/dto/update-event.dto";
+import { EventOffset } from "../event/dto/event.offset";
 import { getRepository, Repository } from "typeorm";
 
 @Injectable()
