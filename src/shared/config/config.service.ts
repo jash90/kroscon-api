@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import {ConnectionOptions} from 'typeorm/connection/ConnectionOptions';
-import { JwtConfig } from './interfaces/jwt-config.interface';
-import config from '../../../config';
+import { Injectable } from "@nestjs/common";
+import { ConnectionOptions } from "typeorm/connection/ConnectionOptions";
+import { JwtConfig } from "./interfaces/jwt-config.interface";
+import config from "../../../config";
 
 @Injectable()
 export class ConfigService {

@@ -10,10 +10,6 @@ import { sign } from "jsonwebtoken";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { ConfigService } from "../shared/config/config.service";
 import { UserOffset } from "./dto/user.offset";
-import { Privilege } from "../privilege/privilege.entity";
-import { Feedback } from "../feedback/feedback.entity";
-import { Reservation } from "../reservation/reservation.entity";
-import { LoanGame } from "../loanGame/loanGame.entity";
 import { getRepository, Repository } from "typeorm";
 
 @Injectable()

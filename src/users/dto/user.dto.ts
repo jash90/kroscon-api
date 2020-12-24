@@ -1,6 +1,7 @@
 import { User } from "../user.entity";
 import { Gender } from "../../shared/enum/enums";
 import { ApiModelProperty } from "@nestjs/swagger";
+
 export class UserDto {
   @ApiModelProperty()
   readonly id: number;

@@ -21,7 +21,6 @@ import { LoanGameDto } from "./dto/loanGame.dto";
 import { CreateLoanGameDto } from "./dto/create-loanGame.dto";
 import { UpdateLoanGameDto } from "./dto/update-loanGame.dto";
 import { LoanGameOffset } from "./dto/loanGame.offset";
-import { LoanGame as LoanGameEntity } from "./loanGame.entity";
 import { LoanGamesService } from "./loanGames.service";
 
 @Controller("loanGames")

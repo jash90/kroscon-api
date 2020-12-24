@@ -1,9 +1,9 @@
-import { ApiModelProperty } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString, Length } from 'class-validator';
+import { ApiModelProperty } from "@nestjs/swagger";
+import { IsOptional, IsString } from "class-validator";
 
 export class UpdatePublisherDto {
-    @IsOptional()
-    @ApiModelProperty()
-    @IsString()
-    name: string;
+  @IsOptional()
+  @ApiModelProperty()
+  @IsString()
+  name: string;
 }

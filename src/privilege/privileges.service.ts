@@ -4,7 +4,6 @@ import { PrivilegeDto } from "src/privilege/dto/privilege.dto";
 import { CreatePrivilegeDto } from "src/privilege/dto/create-privilege.dto";
 import { UpdatePrivilegeDto } from "src/privilege/dto/update-privilege.dto";
 import { PrivilegeOffset } from "src/privilege/dto/privilege.offset";
-import { User } from "src/users/user.entity";
 import { getRepository, Repository } from "typeorm";
 
 @Injectable()

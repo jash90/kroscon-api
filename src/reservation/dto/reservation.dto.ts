@@ -1,6 +1,5 @@
 import { ApiModelProperty } from "@nestjs/swagger";
 import { Reservation } from "../reservation.entity";
-import { IsNumber, IsOptional } from "class-validator";
 
 export class ReservationDto {
   @ApiModelProperty()

@@ -1,12 +1,28 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { MechanicDto } from './dto/mechanic.dto';
-import { CreateMechanicDto } from './dto/create-mechanic.dto';
-import { UpdateMechanicDto } from './dto/update-mechanic.dto';
-import { MechanicOffset } from './dto/mechanic.offset';
-import { Mechanic as MechanicEntity } from './mechanic.entity';
-import { MechanicsService } from './mechanics.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards
+} from "@nestjs/common";
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags
+} from "@nestjs/swagger";
+import { AuthGuard } from "@nestjs/passport";
+import { MechanicDto } from "./dto/mechanic.dto";
+import { CreateMechanicDto } from "./dto/create-mechanic.dto";
+import { UpdateMechanicDto } from "./dto/update-mechanic.dto";
+import { MechanicOffset } from "./dto/mechanic.offset";
+import { Mechanic as MechanicEntity } from "./mechanic.entity";
+import { MechanicsService } from "./mechanics.service";
 
 @Controller('mechanics')
 @ApiUseTags('mechanics')

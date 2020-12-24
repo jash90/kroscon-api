@@ -9,8 +9,6 @@ import {
 } from "typeorm";
 import { LoanGame } from "../loanGame/loanGame.entity";
 import { Reservation } from "../reservation/reservation.entity";
-import { Feedback } from "../feedback/feedback.entity";
-import { Res } from "@nestjs/common";
 
 @Entity("tables")
 export class Table {

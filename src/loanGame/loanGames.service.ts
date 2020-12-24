@@ -4,9 +4,6 @@ import { LoanGameDto } from "../loanGame/dto/loanGame.dto";
 import { CreateLoanGameDto } from "../loanGame/dto/create-loanGame.dto";
 import { UpdateLoanGameDto } from "../loanGame/dto/update-loanGame.dto";
 import { LoanGameOffset } from "../loanGame/dto/loanGame.offset";
-import { User } from "../users/user.entity";
-import { BoardGame } from "../boardGame/boardGame.entity";
-import { Table } from "../table/table.entity";
 import { getRepository, Repository } from "typeorm";
 
 @Injectable()

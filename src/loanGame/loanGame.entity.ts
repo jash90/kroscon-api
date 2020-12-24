@@ -13,7 +13,6 @@ import { User } from "../users/user.entity";
 import { BoardGame } from "../boardGame/boardGame.entity";
 import { Table } from "../table/table.entity";
 import { Feedback } from "../feedback/feedback.entity";
-import { Publisher } from "../publisher/publisher.entity";
 
 @Entity("loanGames")
 export class LoanGame {

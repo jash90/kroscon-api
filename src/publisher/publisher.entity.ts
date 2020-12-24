@@ -3,12 +3,10 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
-import { User } from "../users/user.entity";
 import { BoardGame } from "../boardGame/boardGame.entity";
 
 @Entity("publishers")

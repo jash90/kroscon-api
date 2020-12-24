@@ -1,14 +1,13 @@
 import { User } from "src/users/user.entity";
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  DeleteDateColumn,
-  UpdateDateColumn,
   CreateDateColumn,
-  OneToMany
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from "typeorm";
-import { LoanGame } from "../loanGame/loanGame.entity";
 
 @Entity("privileges")
 export class Privilege {

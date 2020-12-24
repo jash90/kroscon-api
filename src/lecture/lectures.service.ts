@@ -4,7 +4,6 @@ import { LectureDto } from "src/lecture/dto/lecture.dto";
 import { CreateLectureDto } from "src/lecture/dto/create-lecture.dto";
 import { UpdateLectureDto } from "src/lecture/dto/update-lecture.dto";
 import { LectureOffset } from "src/lecture/dto/lecture.offset";
-import { Event } from "src/event/event.entity";
 import { getRepository, Repository } from "typeorm";
 
 @Injectable()

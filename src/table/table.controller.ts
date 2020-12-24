@@ -21,7 +21,6 @@ import { TableDto } from "./dto/table.dto";
 import { CreateTableDto } from "./dto/create-table.dto";
 import { UpdateTableDto } from "./dto/update-table.dto";
 import { TableOffset } from "./dto/table.offset";
-import { Table } from "./table.entity";
 import { TableService } from "./table.service";
 
 @Controller("tables")

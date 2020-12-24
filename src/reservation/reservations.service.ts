@@ -4,9 +4,6 @@ import { ReservationDto } from "src/reservation/dto/reservation.dto";
 import { CreateReservationDto } from "src/reservation/dto/create-reservation.dto";
 import { UpdateReservationDto } from "src/reservation/dto/update-reservation.dto";
 import { ReservationOffset } from "src/reservation/dto/reservation.offset";
-import { User } from "src/users/user.entity";
-import { BoardGame } from "../boardGame/boardGame.entity";
-import { Table } from "../table/table.entity";
 import { getRepository, Repository } from "typeorm";
 
 @Injectable()

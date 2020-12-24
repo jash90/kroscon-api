@@ -14,7 +14,6 @@ import { Privilege } from "../privilege/privilege.entity";
 import { Reservation } from "src/reservation/reservation.entity";
 import { LoanGame } from "src/loanGame/loanGame.entity";
 import { Feedback } from "src/feedback/feedback.entity";
-import { Publisher } from "../publisher/publisher.entity";
 
 @Entity("users")
 export class User {

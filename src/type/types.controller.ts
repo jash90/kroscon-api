@@ -1,12 +1,27 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { TypeDto } from './dto/type.dto';
-import { CreateTypeDto } from './dto/create-type.dto';
-import { UpdateTypeDto } from './dto/update-type.dto';
-import { TypeOffset } from './dto/type.offset';
-import { Type } from './type.entity';
-import { TypesService } from './types.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards
+} from "@nestjs/common";
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags
+} from "@nestjs/swagger";
+import { AuthGuard } from "@nestjs/passport";
+import { TypeDto } from "./dto/type.dto";
+import { CreateTypeDto } from "./dto/create-type.dto";
+import { UpdateTypeDto } from "./dto/update-type.dto";
+import { TypeOffset } from "./dto/type.offset";
+import { TypesService } from "./types.service";
 
 @Controller('types')
 @ApiUseTags('types')

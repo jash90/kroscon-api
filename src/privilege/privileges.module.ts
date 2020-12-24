@@ -1,8 +1,8 @@
-import { DatabaseModule } from '../database/database.module';
-import { Module } from '@nestjs/common';
-import { PrivilegesController } from './privileges.controller';
-import { PrivilegesService } from './privileges.service';
-import { privilegesProviders } from './privileges.providers';
+import { DatabaseModule } from "../database/database.module";
+import { Module } from "@nestjs/common";
+import { PrivilegesController } from "./privileges.controller";
+import { PrivilegesService } from "./privileges.service";
+import { privilegesProviders } from "./privileges.providers";
 
 @Module({
     imports: [DatabaseModule],

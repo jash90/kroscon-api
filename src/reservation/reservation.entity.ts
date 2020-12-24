@@ -11,7 +11,6 @@ import {
 import { User } from "../users/user.entity";
 import { BoardGame } from "../boardGame/boardGame.entity";
 import { Table } from "../table/table.entity";
-import { Publisher } from "../publisher/publisher.entity";
 
 @Entity("reservations")
 export class Reservation {

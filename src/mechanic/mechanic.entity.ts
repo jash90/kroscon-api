@@ -7,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
-import { Type } from "../type/type.entity";
 import { BoardGame } from "../boardGame/boardGame.entity";
 
 @Entity("mechanics")

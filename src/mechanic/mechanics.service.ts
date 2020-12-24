@@ -1,11 +1,9 @@
 import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { Mechanic } from "src/mechanic/mechanic.entity";
 import { MechanicDto } from "src/mechanic/dto/mechanic.dto";
-import { User } from "src/users/user.entity";
 import { CreateMechanicDto } from "src/mechanic/dto/create-mechanic.dto";
 import { UpdateMechanicDto } from "src/mechanic/dto/update-mechanic.dto";
 import { MechanicOffset } from "src/mechanic/dto/mechanic.offset";
-import { BoardGame } from "../boardGame/boardGame.entity";
 import { getRepository, Repository } from "typeorm";
 
 @Injectable()

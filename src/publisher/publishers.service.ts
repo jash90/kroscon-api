@@ -4,8 +4,6 @@ import { PublisherDto } from "src/publisher/dto/publisher.dto";
 import { CreatePublisherDto } from "src/publisher/dto/create-publisher.dto";
 import { UpdatePublisherDto } from "src/publisher/dto/update-publisher.dto";
 import { PublisherOffset } from "src/publisher/dto/publisher.offset";
-import { User } from "src/users/user.entity";
-import { BoardGame } from "../boardGame/boardGame.entity";
 import { getRepository, Repository } from "typeorm";
 
 @Injectable()
