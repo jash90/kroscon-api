@@ -1,0 +1,10 @@
+{
+  "type": "postgres",
+  "username": "bzimny",
+  "password": "75GentleGuitars",
+  "database": "kroscon",
+  "host": "185.238.75.93",
+  "port":5533,
+  "entities": ["./**/*.entity{.ts,.js}"],
+  "synchronize": true
+}

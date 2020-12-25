@@ -1,17 +1,22 @@
 import { Injectable } from "@nestjs/common";
-import { ConnectionOptions } from "typeorm/connection/ConnectionOptions";
 import { JwtConfig } from "./interfaces/jwt-config.interface";
 import config from "../../../config";
+import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { ConnectionOptions } from "typeorm/connection/ConnectionOptions";
 
 @Injectable()
 export class ConfigService {
-    get typeOrmConfig(): ConnectionOptions {
-        return config.database;
-    }
+  get typeOrmConfig(): ConnectionOptions | TypeOrmModuleOptions {
+    return config;
+  }
 
-    get jwtConfig(): JwtConfig {
-        return {
-            privateKey: config.jwtPrivateKey,
-        };
-    }
+  get connectionConfig(): ConnectionOptions {
+    return config;
+  }
+
+  get jwtConfig(): JwtConfig {
+    return {
+      privateKey: config.jwtPrivateKey
+    };
+  }
 }

@@ -3,6 +3,7 @@ import { Mechanic } from "../mechanic/mechanic.entity";
 import { LoanGame } from "../loanGame/loanGame.entity";
 import { Reservation } from "../reservation/reservation.entity";
 import { Feedback } from "../feedback/feedback.entity";
+import { Type } from "../type/type.entity";
 import {
   Check,
   Column,
@@ -16,7 +17,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
-import { Type } from "../type/type.entity";
 
 @Entity("boardGames")
 @Check(`"minPlayer" > 0`)

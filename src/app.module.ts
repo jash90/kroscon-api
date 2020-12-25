@@ -12,9 +12,12 @@ import { PublishersModule } from "./publisher/publishers.module";
 import { TableModule } from "./table/table.module";
 import { TypesModule } from "./type/types.module";
 import { PrivilegesModule } from "./privilege/privileges.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { ConfigService } from "./shared/config/config.service";
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot(new ConfigService().typeOrmConfig),
     UsersModule,
     SharedModule,
     BoardGamesModule,

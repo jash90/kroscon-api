@@ -24,7 +24,7 @@ export class Lecture {
   @Column("date")
   end: Date;
 
-  @Column("string")
+  @Column("text")
   description: string;
 
   @ManyToOne(() => Event, event => event.lectures)
