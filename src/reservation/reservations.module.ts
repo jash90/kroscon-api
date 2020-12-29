@@ -5,9 +5,9 @@ import { ReservationsService } from "./reservations.service";
 import { reservationsProviders } from "./reservations.providers";
 
 @Module({
-    imports: [DatabaseModule],
-    controllers: [ReservationsController],
-    providers: [ReservationsService, ...reservationsProviders],
-    exports: [],
+  imports: [DatabaseModule],
+  controllers: [ReservationsController],
+  providers: [ReservationsService],
+  exports: []
 })
-export class ReservationsModule { }
+export class ReservationsModule {}

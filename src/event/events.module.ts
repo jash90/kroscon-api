@@ -5,9 +5,9 @@ import { EventsService } from "./events.service";
 import { eventsProviders } from "./events.providers";
 
 @Module({
-    imports: [DatabaseModule],
-    controllers: [EventsController],
-    providers: [EventsService, ...eventsProviders],
-    exports: [],
+  imports: [DatabaseModule],
+  controllers: [EventsController],
+  providers: [EventsService],
+  exports: []
 })
-export class EventsModule { }
+export class EventsModule {}

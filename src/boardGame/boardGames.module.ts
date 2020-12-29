@@ -25,7 +25,7 @@ import { Type } from "../type/type.entity";
     ])
   ],
   controllers: [BoardGamesController],
-  providers: [BoardGamesService, ...boardGamesProviders],
+  providers: [BoardGamesService],
   exports: []
 })
 export class BoardGamesModule {}

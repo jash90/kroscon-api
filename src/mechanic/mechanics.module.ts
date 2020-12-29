@@ -5,9 +5,9 @@ import { MechanicsService } from "./mechanics.service";
 import { mechanicsProviders } from "./mechanics.providers";
 
 @Module({
-    imports: [DatabaseModule],
-    controllers: [MechanicsController],
-    providers: [MechanicsService, ...mechanicsProviders],
-    exports: [],
+  imports: [DatabaseModule],
+  controllers: [MechanicsController],
+  providers: [MechanicsService],
+  exports: []
 })
-export class MechanicsModule { }
+export class MechanicsModule {}

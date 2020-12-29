@@ -5,9 +5,9 @@ import { PrivilegesService } from "./privileges.service";
 import { privilegesProviders } from "./privileges.providers";
 
 @Module({
-    imports: [DatabaseModule],
-    controllers: [PrivilegesController],
-    providers: [PrivilegesService, ...privilegesProviders],
-    exports: [],
+  imports: [DatabaseModule],
+  controllers: [PrivilegesController],
+  providers: [PrivilegesService],
+  exports: []
 })
-export class PrivilegesModule { }
+export class PrivilegesModule {}

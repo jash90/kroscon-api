@@ -5,9 +5,9 @@ import { TableService } from "./table.service";
 import { tableProviders } from "./table.providers";
 
 @Module({
-    imports: [DatabaseModule],
-    controllers: [TableController],
-    providers: [TableService, ...tableProviders],
-    exports: [],
+  imports: [DatabaseModule],
+  controllers: [TableController],
+  providers: [TableService],
+  exports: []
 })
-export class TableModule { }
+export class TableModule {}

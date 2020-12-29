@@ -5,9 +5,9 @@ import { LoanGamesService } from "./loanGames.service";
 import { loanGamesProviders } from "./loanGames.providers";
 
 @Module({
-    imports: [DatabaseModule],
-    controllers: [LoanGamesController],
-    providers: [LoanGamesService, ...loanGamesProviders],
-    exports: [],
+  imports: [DatabaseModule],
+  controllers: [LoanGamesController],
+  providers: [LoanGamesService],
+  exports: []
 })
-export class LoanGamesModule { }
+export class LoanGamesModule {}
