@@ -14,7 +14,7 @@ import {
 } from "typeorm";
 
 @Entity("feedbacks")
-@Check(`"rating" > 1 AND "rating" < 10`)
+@Check(`rating > 1 AND rating < 10`)
 export class Feedback {
   @PrimaryGeneratedColumn()
   id: number;

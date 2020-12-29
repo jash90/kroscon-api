@@ -1,10 +1,19 @@
 {
   "type": "postgres",
-  "username": "bzimny",
-  "password": "75GentleGuitars",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "postgres",
   "database": "kroscon",
-  "host": "185.238.75.93",
-  "port":5533,
-  "entities": ["./**/*.entity{.ts,.js}"],
-  "synchronize": true
+  "entities": [
+    "dist/**/*.entity.js"
+  ],
+  "migrationsTableName": "migration",
+  "migrations": [
+    "migration/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "migration"
+  },
+  "ssl": false
 }

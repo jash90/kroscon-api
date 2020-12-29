@@ -1,25 +1,23 @@
-import { Module } from "@nestjs/common";
-import { FeedbacksModule } from "./feedback/feedbacks.module";
-import { LecturesModule } from "./lecture/lectures.module";
-import { UsersModule } from "./users/users.module";
-import { SharedModule } from "./shared/shared.module";
-import { ReservationsModule } from "./reservation/reservations.module";
-import { BoardGamesModule } from "./boardGame/boardGames.module";
-import { EventsModule } from "./event/events.module";
-import { LoanGamesModule } from "./loanGame/loanGames.module";
-import { MechanicsModule } from "./mechanic/mechanics.module";
-import { PublishersModule } from "./publisher/publishers.module";
-import { TableModule } from "./table/table.module";
-import { TypesModule } from "./type/types.module";
-import { PrivilegesModule } from "./privilege/privileges.module";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { ConfigService } from "./shared/config/config.service";
+import {HttpModule, Module} from "@nestjs/common";
+import {TypeOrmModule} from "@nestjs/typeorm";
+import { BoardGamesModule } from "src/boardGame/boardGames.module";
+import { EventsModule } from "src/event/events.module";
+import { FeedbacksModule } from "src/feedback/feedbacks.module";
+import { LecturesModule } from "src/lecture/lectures.module";
+import { LoanGamesModule } from "src/loanGame/loanGames.module";
+import { MechanicsModule } from "src/mechanic/mechanics.module";
+import { PrivilegesModule } from "src/privilege/privileges.module";
+import { PublishersModule } from "src/publisher/publishers.module";
+import { ReservationsModule } from "src/reservation/reservations.module";
+import { TableModule } from "src/table/table.module";
+import { TypesModule } from "src/type/types.module";
+import { UsersModule } from "src/users/users.module";
+import {configService} from "./config/config.service";
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(new ConfigService().typeOrmConfig),
+    TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
     UsersModule,
-    SharedModule,
     BoardGamesModule,
     EventsModule,
     FeedbacksModule,
@@ -33,6 +31,6 @@ import { ConfigService } from "./shared/config/config.service";
     PrivilegesModule
   ],
   controllers: [],
-  providers: []
+  providers: [],
 })
 export class AppModule {}

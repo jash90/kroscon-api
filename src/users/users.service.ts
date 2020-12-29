@@ -8,20 +8,16 @@ import { UserLoginResponseDto } from "./dto/user-login-response.dto";
 import { JwtPayload } from "./auth/jwt-payload.model";
 import { sign } from "jsonwebtoken";
 import { UpdateUserDto } from "./dto/update-user.dto";
-import { ConfigService } from "../shared/config/config.service";
 import { UserOffset } from "./dto/user.offset";
 import { getRepository, Repository } from "typeorm";
 
 @Injectable()
 export class UsersService {
-  private readonly jwtPrivateKey: string;
 
   constructor(
     @Inject("UsersRepository")
     private readonly usersRepository: Repository<User>,
-    private readonly configService: ConfigService
   ) {
-    this.jwtPrivateKey = this.configService.jwtConfig.privateKey;
   }
 
   async findAll(): Promise<UserDto[]> {
@@ -60,8 +56,8 @@ export class UsersService {
       user.email = createUserDto.email.trim().toLowerCase();
       user.firstname = createUserDto.firstname;
       user.lastname = createUserDto.lastname;
-      user.gender = createUserDto.gender;
-      user.birthday = createUserDto.birthday;
+      // user.gender = createUserDto.gender;
+      // user.birthday = createUserDto.birthday;
 
       const salt = await genSalt(10);
       user.password = await hash(createUserDto.password, salt);
@@ -111,8 +107,8 @@ export class UsersService {
 
     user.firstname = updateUserDto.firstname || user.firstname;
     user.lastname = updateUserDto.lastname || user.lastname;
-    user.gender = updateUserDto.gender || user.gender;
-    user.birthday = updateUserDto.birthday || user.birthday;
+    // user.gender = updateUserDto.gender || user.gender;
+    // user.birthday = updateUserDto.birthday || user.birthday;
 
     try {
       return new UserDto(await getRepository(User).save(user));
@@ -131,7 +127,9 @@ export class UsersService {
       email: user.email
     };
 
-    return sign(payload, this.jwtPrivateKey, {});
+    return sign(payload, process.env.SECRET_KEY, {
+      expiresIn: process.env.EXPIRES_RESET,
+    });
   }
   async offset(index: number = 0): Promise<UserOffset> {
     const users = await this.usersRepository.findAndCount({

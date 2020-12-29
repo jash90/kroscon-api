@@ -1,8 +1,7 @@
-import { DatabaseModule } from "../database/database.module";
 import { Module } from "@nestjs/common";
 import { BoardGamesController } from "./boardGames.controller";
 import { BoardGamesService } from "./boardGames.service";
-import { boardGamesProviders } from "./boardGames.providers";
+
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { BoardGame } from "./boardGame.entity";
 import { Publisher } from "../publisher/publisher.entity";
@@ -11,6 +10,7 @@ import { LoanGame } from "../loanGame/loanGame.entity";
 import { Reservation } from "../reservation/reservation.entity";
 import { Feedback } from "../feedback/feedback.entity";
 import { Type } from "../type/type.entity";
+import { boardGamesProviders } from './boardGames.providers';
 
 @Module({
   imports: [
@@ -25,7 +25,6 @@ import { Type } from "../type/type.entity";
     ])
   ],
   controllers: [BoardGamesController],
-  providers: [BoardGamesService],
-  exports: []
+  providers: [boardGamesProviders,BoardGamesService],
 })
 export class BoardGamesModule {}

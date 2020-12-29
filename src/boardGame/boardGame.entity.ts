@@ -19,9 +19,9 @@ import {
 } from "typeorm";
 
 @Entity("boardGames")
-@Check(`"minPlayer" > 0`)
-@Check(`"maxPlayer" > 1`)
-@Check(`"minAge" > 1 AND "minAge" < 99`)
+@Check(`min_players > 0`)
+@Check(`max_players > 1`)
+@Check(`min_age > 1 AND min_age < 99`)
 export class BoardGame {
   @PrimaryGeneratedColumn()
   id: number;
@@ -32,16 +32,16 @@ export class BoardGame {
   @Column({ type: "text", unique: true })
   uuid: string;
 
-  @Column("integer")
+  @Column({ type: "smallint", name: "min_players" })
   minPlayers: number;
 
-  @Column("integer")
+  @Column({ type: "smallint", name: "max_players" })
   maxPlayers: number;
 
-  @Column("smallint")
+  @Column({ type: "smallint", name: "playing_time" })
   playingTime: number;
 
-  @Column("smallint")
+  @Column({ type: "smallint", name: "min_age" })
   minAge: number;
 
   @ManyToMany(() => Mechanic, mechanic => mechanic.boardGames)

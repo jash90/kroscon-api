@@ -1,13 +1,14 @@
-import { DatabaseModule } from "../database/database.module";
 import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
 import { PrivilegesController } from "./privileges.controller";
 import { PrivilegesService } from "./privileges.service";
-import { privilegesProviders } from "./privileges.providers";
+import { Privilege } from './privilege.entity';
+import { User } from '../users/user.entity';
+import { privilegesProviders } from './privileges.providers';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [TypeOrmModule.forFeature([Privilege, User])],
   controllers: [PrivilegesController],
-  providers: [PrivilegesService],
-  exports: []
+  providers: [privilegesProviders, PrivilegesService]
 })
-export class PrivilegesModule {}
+export class PrivilegesModule { }

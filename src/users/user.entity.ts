@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
-import { Gender } from "../shared/enum/enums";
+// import { Gender } from "../shared/enum/enums";
 import { Privilege } from "../privilege/privilege.entity";
 import { Reservation } from "../reservation/reservation.entity";
 import { LoanGame } from "../loanGame/loanGame.entity";
@@ -32,11 +32,11 @@ export class User {
   @Column("text")
   lastname: string;
 
-  @Column("text")
-  gender: Gender;
+  @Column("smallint")
+  age: number;
 
-  @Column("date")
-  birthday: string;
+  @Column("text")
+  city: string;
 
   @ManyToOne(() => Privilege, privilege => privilege.users)
   @JoinColumn({ name: "privilege_id" })

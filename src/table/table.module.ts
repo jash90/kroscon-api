@@ -1,13 +1,16 @@
-import { DatabaseModule } from "../database/database.module";
 import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { BoardGame } from "../boardGame/boardGame.entity";
+import { Reservation } from "../reservation/reservation.entity";
+import { User } from "../users/user.entity";
+import { Table } from "./table.entity";
 import { TableController } from "./table.controller";
 import { TableService } from "./table.service";
-import { tableProviders } from "./table.providers";
+import { tablesProviders } from './tables.providers';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [TypeOrmModule.forFeature([Reservation, BoardGame, User, Table, ])],
   controllers: [TableController],
-  providers: [TableService],
-  exports: []
+  providers: [tablesProviders,TableService],
 })
 export class TableModule {}
