@@ -1,21 +1,21 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { Lecture } from "../lecture/lecture.entity";
-import { LectureDto } from "../lecture/dto/lecture.dto";
-import { CreateLectureDto } from "../lecture/dto/create-lecture.dto";
-import { UpdateLectureDto } from "../lecture/dto/update-lecture.dto";
-import { LectureOffset } from "../lecture/dto/lecture.offset";
-import { getRepository, Repository } from "typeorm";
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {getRepository, Repository} from 'typeorm';
+import {CreateLectureDto} from './dto/create-lecture.dto';
+import {LectureDto} from './dto/lecture.dto';
+import {LectureOffset} from './dto/lecture.offset';
+import {UpdateLectureDto} from './dto/update-lecture.dto';
+import {Lecture} from './lecture.entity';
 
 @Injectable()
 export class LecturesService {
   constructor(
-    @Inject("LecturesRepository")
-    private readonly lecturesRepository: Repository<Lecture>
+    @Inject('LecturesRepository')
+    private readonly lecturesRepository: Repository<Lecture>,
   ) {}
 
   async findAll(): Promise<LectureDto[]> {
     const lectures = await this.lecturesRepository.find({
-      relations: ["event"]
+      relations: ['event'],
     });
     return lectures.map(lecture => {
       return new LectureDto(lecture);
@@ -24,10 +24,10 @@ export class LecturesService {
 
   async findOne(id: number): Promise<LectureDto> {
     const lecture = await this.lecturesRepository.findOne(id, {
-      relations: ["event"]
+      relations: ['event'],
     });
     if (!lecture) {
-      throw new HttpException("No lecture found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No lecture found', HttpStatus.NOT_FOUND);
     }
 
     return new LectureDto(lecture);
@@ -49,10 +49,10 @@ export class LecturesService {
 
   private async getLecture(id: number): Promise<Lecture> {
     const lecture = await this.lecturesRepository.findOne(id, {
-      relations: ["event"]
+      relations: ['event'],
     });
     if (!lecture) {
-      throw new HttpException("No lecture found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No lecture found', HttpStatus.NOT_FOUND);
     }
 
     return lecture;
@@ -60,7 +60,7 @@ export class LecturesService {
 
   async update(
     id: number,
-    updateLectureDto: UpdateLectureDto
+    updateLectureDto: UpdateLectureDto,
   ): Promise<LectureDto> {
     const lecture = await this.getLecture(id);
 
@@ -82,12 +82,12 @@ export class LecturesService {
 
   async offset(index: number = 0): Promise<LectureOffset> {
     const lectures = await this.lecturesRepository.findAndCount({
-      relations: ["event"],
+      relations: ['event'],
       take: 100,
       skip: index * 100,
       order: {
-        id: "ASC"
-      }
+        id: 'ASC',
+      },
     });
 
     const LecturesDto = lectures[0].map(lecture => {

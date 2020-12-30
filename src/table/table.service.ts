@@ -1,21 +1,21 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { Table } from "../table/table.entity";
-import { TableDto } from "../table/dto/table.dto";
-import { CreateTableDto } from "../table/dto/create-table.dto";
-import { UpdateTableDto } from "../table/dto/update-table.dto";
-import { TableOffset } from "../table/dto/table.offset";
-import { getRepository, Repository } from "typeorm";
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {getRepository, Repository} from 'typeorm';
+import {CreateTableDto} from './dto/create-table.dto';
+import {TableDto} from './dto/table.dto';
+import {TableOffset} from './dto/table.offset';
+import {UpdateTableDto} from './dto/update-table.dto';
+import {Table} from './table.entity';
 
 @Injectable()
 export class TableService {
   constructor(
-    @Inject("TablesRepository")
-    private readonly tablesRepository: Repository<Table>
+    @Inject('TablesRepository')
+    private readonly tablesRepository: Repository<Table>,
   ) {}
 
   async findAll(): Promise<TableDto[]> {
     const tables = await this.tablesRepository.find({
-      relations: ["reservation", "loanGame"]
+      relations: ['reservation', 'loanGame'],
     });
     return tables.map(table => {
       return new TableDto(table);
@@ -24,18 +24,18 @@ export class TableService {
 
   async findOne(id: number): Promise<TableDto> {
     const table = await this.tablesRepository.findOne(id, {
-      relations: ["reservation", "loanGame"]
+      relations: ['reservation', 'loanGame'],
     });
     if (!table) {
-      throw new HttpException("No table found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No table found', HttpStatus.NOT_FOUND);
     }
 
     return new TableDto(table);
   }
 
-  async create(CreateTableDto: CreateTableDto): Promise<TableDto> {
+  async create(createTableDto: CreateTableDto): Promise<TableDto> {
     const table = new Table();
-    table.name = CreateTableDto.name;
+    table.name = createTableDto.name;
 
     try {
       return new TableDto(await getRepository(Table).save(table));
@@ -46,19 +46,19 @@ export class TableService {
 
   private async getTable(id: number): Promise<Table> {
     const table = await this.tablesRepository.findOne(id, {
-      relations: ["reservation", "loanGame"]
+      relations: ['reservation', 'loanGame'],
     });
     if (!table) {
-      throw new HttpException("No table found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No table found', HttpStatus.NOT_FOUND);
     }
 
     return table;
   }
 
-  async update(id: number, UpdateTableDto: UpdateTableDto): Promise<TableDto> {
+  async update(id: number, updateTableDto: UpdateTableDto): Promise<TableDto> {
     const table = await this.getTable(id);
 
-    table.name = UpdateTableDto.name || table.name;
+    table.name = updateTableDto.name || table.name;
 
     try {
       return new TableDto(await getRepository(Table).save(table));
@@ -74,12 +74,12 @@ export class TableService {
 
   async offset(index: number = 0): Promise<TableOffset> {
     const tables = await this.tablesRepository.findAndCount({
-      relations: ["reservation", "loanGame"],
+      relations: ['reservation', 'loanGame'],
       take: 100,
       skip: index * 100,
       order: {
-        id: "ASC"
-      }
+        id: 'ASC',
+      },
     });
 
     const tablesDto = tables[0].map(privilege => {

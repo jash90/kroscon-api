@@ -1,16 +1,16 @@
-import { Module } from "@nestjs/common";
-import { BoardGamesController } from "./boardGames.controller";
-import { BoardGamesService } from "./boardGames.service";
+import {Module} from '@nestjs/common';
 
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { BoardGame } from "./boardGame.entity";
-import { Publisher } from "../publisher/publisher.entity";
-import { Mechanic } from "../mechanic/mechanic.entity";
-import { LoanGame } from "../loanGame/loanGame.entity";
-import { Reservation } from "../reservation/reservation.entity";
-import { Feedback } from "../feedback/feedback.entity";
-import { Type } from "../type/type.entity";
-import { boardGamesProviders } from './boardGames.providers';
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {Feedback} from '../feedback/feedback.entity';
+import {LoanGame} from '../loanGame/loanGame.entity';
+import {Mechanic} from '../mechanic/mechanic.entity';
+import {Publisher} from '../publisher/publisher.entity';
+import {Reservation} from '../reservation/reservation.entity';
+import {Type} from '../type/type.entity';
+import {BoardGame} from './boardGame.entity';
+import {BoardGamesController} from './boardGames.controller';
+import {boardGamesProviders} from './boardGames.providers';
+import {BoardGamesService} from './boardGames.service';
 
 @Module({
   imports: [
@@ -21,10 +21,10 @@ import { boardGamesProviders } from './boardGames.providers';
       LoanGame,
       Reservation,
       Feedback,
-      Type
-    ])
+      Type,
+    ]),
   ],
   controllers: [BoardGamesController],
-  providers: [boardGamesProviders,BoardGamesService],
+  providers: [boardGamesProviders, BoardGamesService],
 })
 export class BoardGamesModule {}

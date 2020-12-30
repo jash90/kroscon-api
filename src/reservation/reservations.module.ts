@@ -1,15 +1,15 @@
-import { Module } from "@nestjs/common";
-import { ReservationsController } from "./reservations.controller";
-import { ReservationsService } from "./reservations.service";
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from "../users/user.entity";
-import { BoardGame } from "../boardGame/boardGame.entity";
-import { Table } from "../table/table.entity";
-import { Reservation } from './reservation.entity';
-import { reservationsProviders } from './reservations.providers';
+import {Module} from '@nestjs/common';
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {BoardGame} from '../boardGame/boardGame.entity';
+import {Table} from '../table/table.entity';
+import {User} from '../users/user.entity';
+import {Reservation} from './reservation.entity';
+import {ReservationsController} from './reservations.controller';
+import {reservationsProviders} from './reservations.providers';
+import {ReservationsService} from './reservations.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Reservation, BoardGame, User, Table, ])],
+  imports: [TypeOrmModule.forFeature([Reservation, BoardGame, User, Table])],
   controllers: [ReservationsController],
   providers: [reservationsProviders, ReservationsService],
 })

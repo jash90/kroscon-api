@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { Privilege } from "../privilege.entity";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {Privilege} from '../privilege.entity';
 
 export class PrivilegeDto {
   @ApiModelProperty()

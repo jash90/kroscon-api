@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { IsDate, IsNumber, IsOptional } from "class-validator";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {IsDate, IsNumber, IsOptional} from 'class-validator';
 
 export class UpdateLoanGameDto {
   @ApiModelProperty()

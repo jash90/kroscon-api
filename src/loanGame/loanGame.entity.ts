@@ -1,47 +1,62 @@
 import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn
-} from "typeorm";
-import { User } from "../users/user.entity";
-import { BoardGame } from "../boardGame/boardGame.entity";
-import { Table } from "../table/table.entity";
-import { Feedback } from "../feedback/feedback.entity";
+    Column,
+    CreateDateColumn,
+    DeleteDateColumn,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from 'typeorm';
+import {BoardGame} from '../boardGame/boardGame.entity';
+import {Feedback} from '../feedback/feedback.entity';
+import {Table} from '../table/table.entity';
+import {User} from '../users/user.entity';
 
-@Entity("loanGames")
+@Entity('loanGames')
 export class LoanGame {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("date")
+  @Column('date')
   start: Date;
 
-  @Column("date")
+  @Column('date')
   end: Date;
 
-  @ManyToOne(() => User, user => user.hireGames)
-  @JoinColumn({ name: "hireUser_id" })
+  @ManyToOne(
+    () => User,
+    user => user.hireGames,
+  )
+  @JoinColumn({ name: 'hireUser_id' })
   hireUser: User;
 
-  @ManyToOne(() => User, user => user.loanGames)
-  @JoinColumn({ name: "user_id" })
+  @ManyToOne(
+    () => User,
+    user => user.loanGames,
+  )
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @ManyToOne(() => Table, table => table.loanGames)
-  @JoinColumn({ name: "table_id" })
+  @ManyToOne(
+    () => Table,
+    table => table.loanGames,
+  )
+  @JoinColumn({ name: 'table_id' })
   table: Table;
 
-  @ManyToOne(() => BoardGame, boardGame => boardGame.loanGames)
-  @JoinColumn({ name: "boardGame_id" })
+  @ManyToOne(
+    () => BoardGame,
+    boardGame => boardGame.loanGames,
+  )
+  @JoinColumn({ name: 'boardGame_id' })
   boardGame: BoardGame;
 
-  @OneToMany(() => Feedback, feedback => feedback.loanGame)
+  @OneToMany(
+    () => Feedback,
+    feedback => feedback.loanGame,
+  )
   feedbacks: Feedback[];
 
   @CreateDateColumn()

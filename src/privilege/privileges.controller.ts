@@ -1,30 +1,14 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseIntPipe,
-  Post,
-  Put,
-  UseGuards
-} from "@nestjs/common";
-import {
-  ApiBearerAuth,
-  ApiCreatedResponse,
-  ApiImplicitParam,
-  ApiOkResponse,
-  ApiUseTags
-} from "@nestjs/swagger";
-import { AuthGuard } from "@nestjs/passport";
-import { PrivilegeDto } from "./dto/privilege.dto";
-import { CreatePrivilegeDto } from "./dto/create-privilege.dto";
-import { UpdatePrivilegeDto } from "./dto/update-privilege.dto";
-import { PrivilegeOffset } from "./dto/privilege.offset";
-import { PrivilegesService } from "./privileges.service";
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
+import {AuthGuard} from '@nestjs/passport';
+import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
+import {CreatePrivilegeDto} from './dto/create-privilege.dto';
+import {PrivilegeDto} from './dto/privilege.dto';
+import {PrivilegeOffset} from './dto/privilege.offset';
+import {UpdatePrivilegeDto} from './dto/update-privilege.dto';
+import {PrivilegesService} from './privileges.service';
 
-@Controller("privileges")
-@ApiUseTags("privileges")
+@Controller('privileges')
+@ApiUseTags('privileges')
 export class PrivilegesController {
   constructor(private readonly privilegesService: PrivilegesService) {}
 
@@ -34,48 +18,48 @@ export class PrivilegesController {
     return this.privilegesService.findAll();
   }
 
-  @Get(":id")
+  @Get(':id')
   @ApiOkResponse({ type: PrivilegeDto })
-  @ApiImplicitParam({ name: "id", required: true })
-  findOne(@Param("id", new ParseIntPipe()) id: number): Promise<PrivilegeDto> {
+  @ApiImplicitParam({ name: 'id', required: true })
+  findOne(@Param('id', new ParseIntPipe()) id: number): Promise<PrivilegeDto> {
     return this.privilegesService.findOne(id);
   }
 
   @Post()
   @ApiCreatedResponse({ type: PrivilegeDto })
   @ApiBearerAuth()
-  @UseGuards(AuthGuard("jwt"))
+  @UseGuards(AuthGuard('jwt'))
   create(
-    @Body() createPrivilegeDto: CreatePrivilegeDto
+    @Body() createPrivilegeDto: CreatePrivilegeDto,
   ): Promise<PrivilegeDto> {
     return this.privilegesService.create(createPrivilegeDto);
   }
 
-  @Put(":id")
+  @Put(':id')
   @ApiOkResponse({ type: PrivilegeDto })
-  @ApiImplicitParam({ name: "id", required: true })
+  @ApiImplicitParam({ name: 'id', required: true })
   @ApiBearerAuth()
-  @UseGuards(AuthGuard("jwt"))
+  @UseGuards(AuthGuard('jwt'))
   update(
-    @Param("id", new ParseIntPipe()) id: number,
-    @Body() updatePrivilegeDto: UpdatePrivilegeDto
+    @Param('id', new ParseIntPipe()) id: number,
+    @Body() updatePrivilegeDto: UpdatePrivilegeDto,
   ): Promise<PrivilegeDto> {
     return this.privilegesService.update(id, updatePrivilegeDto);
   }
 
-  @Delete(":id")
+  @Delete(':id')
   @ApiOkResponse({ type: PrivilegeDto })
-  @ApiImplicitParam({ name: "id", required: true })
+  @ApiImplicitParam({ name: 'id', required: true })
   @ApiBearerAuth()
-  @UseGuards(AuthGuard("jwt"))
-  delete(@Param("id", new ParseIntPipe()) id: number): Promise<PrivilegeDto> {
+  @UseGuards(AuthGuard('jwt'))
+  delete(@Param('id', new ParseIntPipe()) id: number): Promise<PrivilegeDto> {
     return this.privilegesService.delete(id);
   }
 
-  @Get("offset/:id")
+  @Get('offset/:id')
   @ApiOkResponse({ type: PrivilegeOffset })
   offset(
-    @Param("id", new ParseIntPipe()) index: number = 0
+    @Param('id', new ParseIntPipe()) index: number = 0,
   ): Promise<PrivilegeOffset> {
     return this.privilegesService.offset(index);
   }

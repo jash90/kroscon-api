@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { LoanGame } from "../loanGame.entity";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {LoanGame} from '../loanGame.entity';
 
 export class LoanGameDto {
   @ApiModelProperty()

@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { BoardGame } from "../boardGame.entity";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {BoardGame} from '../boardGame.entity';
 
 export class BoardGameDto {
   @ApiModelProperty()

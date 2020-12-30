@@ -1,6 +1,6 @@
-import { User } from "../user.entity";
 // import { Gender } from "../../shared/enum/enums";
-import { ApiModelProperty } from "@nestjs/swagger";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {User} from '../user.entity';
 
 export class UserDto {
   @ApiModelProperty()

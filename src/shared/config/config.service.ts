@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { JwtConfig } from "./interfaces/jwt-config.interface";
-import config from "../../../config";
-import { TypeOrmModuleOptions } from "@nestjs/typeorm";
-import { ConnectionOptions } from "typeorm/connection/ConnectionOptions";
+import {Injectable} from '@nestjs/common';
+import {TypeOrmModuleOptions} from '@nestjs/typeorm';
+import {ConnectionOptions} from 'typeorm/connection/ConnectionOptions';
+import config from '../../../config';
+import {JwtConfig} from './interfaces/jwt-config.interface';
 
 @Injectable()
 export class ConfigService {
@@ -16,7 +16,7 @@ export class ConfigService {
 
   get jwtConfig(): JwtConfig {
     return {
-      privateKey: config.jwtPrivateKey
+      privateKey: config.jwtPrivateKey,
     };
   }
 }

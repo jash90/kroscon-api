@@ -1,23 +1,18 @@
-import { User } from "../users/user.entity";
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn
-} from "typeorm";
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {User} from '../users/user.entity';
 
-@Entity("privileges")
+@Entity('privileges')
 export class Privilege {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("text")
+  @Column('text')
   name: string;
 
-  @OneToMany(() => User, user => user.privilege)
+  @OneToMany(
+    () => User,
+    user => user.privilege,
+  )
   users: User[];
 
   @CreateDateColumn()

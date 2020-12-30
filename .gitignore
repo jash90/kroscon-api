@@ -118,3 +118,5 @@ temp/
 lib
 ormconfig.json
 uploads
+.vscode
+.idea

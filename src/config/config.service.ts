@@ -1,11 +1,10 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import {TypeOrmModuleOptions} from '@nestjs/typeorm';
 
 // tslint:disable-next-line: no-var-requires
 require('dotenv').config();
 
 class ConfigService {
-
-  constructor(private env: { [k: string]: string | undefined }) { }
+  constructor(private env: { [k: string]: string | undefined }) {}
 
   private getValue(key: string, throwOnMissing = true): string {
     const value = this.env[key];
@@ -27,7 +26,7 @@ class ConfigService {
 
   public isProduction() {
     const mode = this.getValue('APP_MODE', false);
-    return mode != 'DEV';
+    return mode !== 'DEV';
   }
 
   public getTypeOrmConfig(): TypeOrmModuleOptions {
@@ -40,7 +39,7 @@ class ConfigService {
       password: this.getValue('DB_PASSWORD'),
       database: this.getValue('DB_NAME'),
 
-      entities: ["dist/**/*.entity.js"],
+      entities: ['dist/**/*.entity.js'],
 
       migrationsTableName: 'migration',
 
@@ -53,18 +52,14 @@ class ConfigService {
       ssl: this.isProduction(),
     };
   }
-
 }
 
+const configService = new ConfigService(process.env).ensureValues([
+  'DB_HOST',
+  'DB_PORT',
+  'DB_USERNAME',
+  'DB_PASSWORD',
+  'DB_NAME',
+]);
 
-
-const configService = new ConfigService(process.env)
-  .ensureValues([
-    'DB_HOST',
-    'DB_PORT',
-    'DB_USERNAME',
-    'DB_PASSWORD',
-    'DB_NAME',
-  ]);
-
-export { configService, ConfigService }
+export { configService, ConfigService };

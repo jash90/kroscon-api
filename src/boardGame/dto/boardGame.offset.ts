@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { BoardGameDto } from "./boardGame.dto";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {BoardGameDto} from './boardGame.dto';
 
 export class BoardGameOffset {
   @ApiModelProperty()

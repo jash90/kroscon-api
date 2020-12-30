@@ -1,14 +1,6 @@
 // import { Gender } from "../../shared/enum/enums";
-import { ApiModelProperty } from "@nestjs/swagger";
-import {
-  IsEnum,
-  IsISO8601,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Max,
-  Min
-} from "class-validator";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {IsNumber, IsOptional, IsString, Max, Min} from 'class-validator';
 
 export class UpdateUserDto {
   @ApiModelProperty()

@@ -1,30 +1,14 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseIntPipe,
-  Post,
-  Put,
-  UseGuards
-} from "@nestjs/common";
-import {
-  ApiBearerAuth,
-  ApiCreatedResponse,
-  ApiImplicitParam,
-  ApiOkResponse,
-  ApiUseTags
-} from "@nestjs/swagger";
-import { AuthGuard } from "@nestjs/passport";
-import { LoanGameDto } from "./dto/loanGame.dto";
-import { CreateLoanGameDto } from "./dto/create-loanGame.dto";
-import { UpdateLoanGameDto } from "./dto/update-loanGame.dto";
-import { LoanGameOffset } from "./dto/loanGame.offset";
-import { LoanGamesService } from "./loanGames.service";
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
+import {AuthGuard} from '@nestjs/passport';
+import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
+import {CreateLoanGameDto} from './dto/create-loanGame.dto';
+import {LoanGameDto} from './dto/loanGame.dto';
+import {LoanGameOffset} from './dto/loanGame.offset';
+import {UpdateLoanGameDto} from './dto/update-loanGame.dto';
+import {LoanGamesService} from './loanGames.service';
 
-@Controller("loanGames")
-@ApiUseTags("loanGames")
+@Controller('loanGames')
+@ApiUseTags('loanGames')
 export class LoanGamesController {
   constructor(private readonly loanGamesService: LoanGamesService) {}
 
@@ -34,46 +18,46 @@ export class LoanGamesController {
     return this.loanGamesService.findAll();
   }
 
-  @Get(":id")
+  @Get(':id')
   @ApiOkResponse({ type: LoanGameDto })
-  @ApiImplicitParam({ name: "id", required: true })
-  findOne(@Param("id", new ParseIntPipe()) id: number): Promise<LoanGameDto> {
+  @ApiImplicitParam({ name: 'id', required: true })
+  findOne(@Param('id', new ParseIntPipe()) id: number): Promise<LoanGameDto> {
     return this.loanGamesService.findOne(id);
   }
 
   @Post()
   @ApiCreatedResponse({ type: LoanGameDto })
   @ApiBearerAuth()
-  @UseGuards(AuthGuard("jwt"))
+  @UseGuards(AuthGuard('jwt'))
   create(@Body() createLoanGameDto: CreateLoanGameDto): Promise<LoanGameDto> {
     return this.loanGamesService.create(createLoanGameDto);
   }
 
-  @Put(":id")
+  @Put(':id')
   @ApiOkResponse({ type: LoanGameDto })
-  @ApiImplicitParam({ name: "id", required: true })
+  @ApiImplicitParam({ name: 'id', required: true })
   @ApiBearerAuth()
-  @UseGuards(AuthGuard("jwt"))
+  @UseGuards(AuthGuard('jwt'))
   update(
-    @Param("id", new ParseIntPipe()) id: number,
-    @Body() updateLoanGameDto: UpdateLoanGameDto
+    @Param('id', new ParseIntPipe()) id: number,
+    @Body() updateLoanGameDto: UpdateLoanGameDto,
   ): Promise<LoanGameDto> {
     return this.loanGamesService.update(id, updateLoanGameDto);
   }
 
-  @Delete(":id")
+  @Delete(':id')
   @ApiOkResponse({ type: LoanGameDto })
-  @ApiImplicitParam({ name: "id", required: true })
+  @ApiImplicitParam({ name: 'id', required: true })
   @ApiBearerAuth()
-  @UseGuards(AuthGuard("jwt"))
-  delete(@Param("id", new ParseIntPipe()) id: number): Promise<LoanGameDto> {
+  @UseGuards(AuthGuard('jwt'))
+  delete(@Param('id', new ParseIntPipe()) id: number): Promise<LoanGameDto> {
     return this.loanGamesService.delete(id);
   }
 
-  @Get("offset/:id")
+  @Get('offset/:id')
   @ApiOkResponse({ type: LoanGameOffset })
   offset(
-    @Param("id", new ParseIntPipe()) index: number = 0
+    @Param('id', new ParseIntPipe()) index: number = 0,
   ): Promise<LoanGameOffset> {
     return this.loanGamesService.offset(index);
   }

@@ -1,8 +1,8 @@
-import { Connection } from "typeorm";
-import { Lecture } from "./lecture.entity";
+import {Connection} from 'typeorm';
+import {Lecture} from './lecture.entity';
 
 export const lecturesProviders = {
-  provide: "LecturesRepository",
+  provide: 'LecturesRepository',
   useFactory: (connection: Connection) => connection.getRepository(Lecture),
-  inject: [Connection]
+  inject: [Connection],
 };

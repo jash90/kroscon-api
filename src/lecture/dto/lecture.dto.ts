@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { Lecture } from "../lecture.entity";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {Lecture} from '../lecture.entity';
 
 export class LectureDto {
   @ApiModelProperty()

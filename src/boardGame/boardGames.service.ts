@@ -1,21 +1,21 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { BoardGame } from "../boardGame/boardGame.entity";
-import { BoardGameDto } from "../boardGame/dto/boardGame.dto";
-import { CreateBoardGameDto } from "../boardGame/dto/create-boardGame.dto";
-import { UpdateBoardGameDto } from "../boardGame/dto/update-boardGame.dto";
-import { BoardGameOffset } from "../boardGame/dto/boardGame.offset";
-import { getRepository, Repository } from "typeorm";
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {getRepository, Repository} from 'typeorm';
+import {BoardGame} from './boardGame.entity';
+import {BoardGameDto} from './dto/boardGame.dto';
+import {BoardGameOffset} from './dto/boardGame.offset';
+import {CreateBoardGameDto} from './dto/create-boardGame.dto';
+import {UpdateBoardGameDto} from './dto/update-boardGame.dto';
 
 @Injectable()
 export class BoardGamesService {
   constructor(
-    @Inject("BoardGamesRepository")
-    private readonly boardGamesRepository: Repository<BoardGame>
+    @Inject('BoardGamesRepository')
+    private readonly boardGamesRepository: Repository<BoardGame>,
   ) {}
 
   async findAll(): Promise<BoardGameDto[]> {
     const boardGames = await this.boardGamesRepository.find({
-      relations: ["feedback", "loanGame", "publisher", "reservation"]
+      relations: ['feedback', 'loanGame', 'publisher', 'reservation'],
     });
     return boardGames.map(boardGame => {
       return new BoardGameDto(boardGame);
@@ -24,10 +24,10 @@ export class BoardGamesService {
 
   async findOne(id: number): Promise<BoardGameDto> {
     const boardGame = await this.boardGamesRepository.findOne(id, {
-      relations: ["feedback", "loanGame", "publisher", "reservation"]
+      relations: ['feedback', 'loanGame', 'publisher', 'reservation'],
     });
     if (!boardGame) {
-      throw new HttpException("No boardGame found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No boardGame found', HttpStatus.NOT_FOUND);
     }
 
     return new BoardGameDto(boardGame);
@@ -51,10 +51,10 @@ export class BoardGamesService {
 
   private async getBoardGame(id: number): Promise<BoardGame> {
     const boardGame = await this.boardGamesRepository.findOne(id, {
-      relations: ["feedback", "loanGame", "publisher", "reservation"]
+      relations: ['feedback', 'loanGame', 'publisher', 'reservation'],
     });
     if (!boardGame) {
-      throw new HttpException("No boardGame found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No boardGame found', HttpStatus.NOT_FOUND);
     }
 
     return boardGame;
@@ -62,7 +62,7 @@ export class BoardGamesService {
 
   async update(
     id: number,
-    updateBoardGameDto: UpdateBoardGameDto
+    updateBoardGameDto: UpdateBoardGameDto,
   ): Promise<BoardGameDto> {
     const boardGame = await this.getBoardGame(id);
 
@@ -91,12 +91,12 @@ export class BoardGamesService {
   async offset(index: number = 0): Promise<BoardGameOffset> {
     try {
       const boardGames = await this.boardGamesRepository.findAndCount({
-        relations: ["feedback", "loanGame", "publisher", "reservation"],
+        relations: ['feedback', 'loanGame', 'publisher', 'reservation'],
         take: 100,
         skip: index * 100,
         order: {
-          id: "ASC"
-        }
+          id: 'ASC',
+        },
       });
 
       const BoardGamesDto = boardGames[0].map(boardGame => {

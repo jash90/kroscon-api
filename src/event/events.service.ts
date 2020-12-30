@@ -1,21 +1,21 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { Event } from "../event/event.entity";
-import { EventDto } from "../event/dto/event.dto";
-import { CreateEventDto } from "../event/dto/create-event.dto";
-import { UpdateEventDto } from "../event/dto/update-event.dto";
-import { EventOffset } from "../event/dto/event.offset";
-import { getRepository, Repository } from "typeorm";
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {getRepository, Repository} from 'typeorm';
+import {CreateEventDto} from './dto/create-event.dto';
+import {EventDto} from './dto/event.dto';
+import {EventOffset} from './dto/event.offset';
+import {UpdateEventDto} from './dto/update-event.dto';
+import {Event} from './event.entity';
 
 @Injectable()
 export class EventsService {
   constructor(
-    @Inject("EventsRepository")
-    private readonly eventsRepository: Repository<Event>
+    @Inject('EventsRepository')
+    private readonly eventsRepository: Repository<Event>,
   ) {}
 
   async findAll(): Promise<EventDto[]> {
     const events = await this.eventsRepository.find({
-      relations: ["lecture"]
+      relations: ['lecture'],
     });
     return events.map(event => {
       return new EventDto(event);
@@ -24,10 +24,10 @@ export class EventsService {
 
   async findOne(id: number): Promise<EventDto> {
     const event = await this.eventsRepository.findOne(id, {
-      relations: ["lecture"]
+      relations: ['lecture'],
     });
     if (!event) {
-      throw new HttpException("No event found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No event found', HttpStatus.NOT_FOUND);
     }
 
     return new EventDto(event);
@@ -50,10 +50,10 @@ export class EventsService {
 
   private async getEvent(id: number): Promise<Event> {
     const event = await this.eventsRepository.findOne(id, {
-      relations: ["lecture"]
+      relations: ['lecture'],
     });
     if (!event) {
-      throw new HttpException("No event found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No event found', HttpStatus.NOT_FOUND);
     }
 
     return event;
@@ -82,18 +82,18 @@ export class EventsService {
 
   async offset(index: number = 0): Promise<EventOffset> {
     const events = await this.eventsRepository.findAndCount({
-      relations: ["lecture"],
+      relations: ['lecture'],
       take: 100,
       skip: index * 100,
       order: {
-        id: "ASC"
-      }
+        id: 'ASC',
+      },
     });
 
-    const EventDto = events[0].map(event => {
+    const Events = events[0].map(event => {
       return new EventDto(event);
     });
 
-    return { rows: EventDto, count: events[1] };
+    return { rows: Events, count: events[1] };
   }
 }

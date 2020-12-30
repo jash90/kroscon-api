@@ -1,8 +1,8 @@
-import { Connection } from "typeorm";
-import { Event } from "./event.entity";
+import {Connection} from 'typeorm';
+import {Event} from './event.entity';
 
 export const eventsProviders = {
-  provide: "EventsRepository",
+  provide: 'EventsRepository',
   useFactory: (connection: Connection) => connection.getRepository(Event),
-  inject: [Connection]
+  inject: [Connection],
 };

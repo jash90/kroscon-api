@@ -1,21 +1,21 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { LoanGame } from "../loanGame/loanGame.entity";
-import { LoanGameDto } from "../loanGame/dto/loanGame.dto";
-import { CreateLoanGameDto } from "../loanGame/dto/create-loanGame.dto";
-import { UpdateLoanGameDto } from "../loanGame/dto/update-loanGame.dto";
-import { LoanGameOffset } from "../loanGame/dto/loanGame.offset";
-import { getRepository, Repository } from "typeorm";
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {getRepository, Repository} from 'typeorm';
+import {CreateLoanGameDto} from './dto/create-loanGame.dto';
+import {LoanGameDto} from './dto/loanGame.dto';
+import {LoanGameOffset} from './dto/loanGame.offset';
+import {UpdateLoanGameDto} from './dto/update-loanGame.dto';
+import {LoanGame} from './loanGame.entity';
 
 @Injectable()
 export class LoanGamesService {
   constructor(
-    @Inject("LoanGamesRepository")
-    private readonly loanGamesRepository: Repository<LoanGame>
+    @Inject('LoanGamesRepository')
+    private readonly loanGamesRepository: Repository<LoanGame>,
   ) {}
 
   async findAll(): Promise<LoanGameDto[]> {
     const loanGames = await this.loanGamesRepository.find({
-      relations: ["user", "boardGame", "table"]
+      relations: ['user', 'boardGame', 'table'],
     });
     return loanGames.map(loanGame => {
       return new LoanGameDto(loanGame);
@@ -24,10 +24,10 @@ export class LoanGamesService {
 
   async findOne(id: number): Promise<LoanGameDto> {
     const loanGame = await this.loanGamesRepository.findOne(id, {
-      relations: ["user", "boardGame", "table"]
+      relations: ['user', 'boardGame', 'table'],
     });
     if (!loanGame) {
-      throw new HttpException("No loanGame found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No loanGame found', HttpStatus.NOT_FOUND);
     }
 
     return new LoanGameDto(loanGame);
@@ -47,10 +47,10 @@ export class LoanGamesService {
 
   private async getLoanGame(id: number): Promise<LoanGame> {
     const loanGame = await this.loanGamesRepository.findOne(id, {
-      relations: ["user", "boardGame", "table"]
+      relations: ['user', 'boardGame', 'table'],
     });
     if (!loanGame) {
-      throw new HttpException("No loanGame found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No loanGame found', HttpStatus.NOT_FOUND);
     }
 
     return loanGame;
@@ -58,7 +58,7 @@ export class LoanGamesService {
 
   async update(
     id: number,
-    updateLoanGameDto: UpdateLoanGameDto
+    updateLoanGameDto: UpdateLoanGameDto,
   ): Promise<LoanGameDto> {
     const loanGame = await this.getLoanGame(id);
 
@@ -79,12 +79,12 @@ export class LoanGamesService {
 
   async offset(index: number = 0): Promise<LoanGameOffset> {
     const loanGames = await this.loanGamesRepository.findAndCount({
-      relations: ["user", "boardGame", "table"],
+      relations: ['user', 'boardGame', 'table'],
       take: 100,
       skip: index * 100,
       order: {
-        id: "ASC"
-      }
+        id: 'ASC',
+      },
     });
 
     const LoanGamesDto = loanGames[0].map(loanGame => {

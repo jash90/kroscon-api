@@ -1,21 +1,21 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { Type } from "../type/type.entity";
-import { TypeDto } from "../type/dto/type.dto";
-import { CreateTypeDto } from "../type/dto/create-type.dto";
-import { UpdateTypeDto } from "../type/dto/update-type.dto";
-import { TypeOffset } from "../type/dto/type.offset";
-import { getRepository, Repository } from "typeorm";
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {getRepository, Repository} from 'typeorm';
+import {CreateTypeDto} from './dto/create-type.dto';
+import {TypeDto} from './dto/type.dto';
+import {TypeOffset} from './dto/type.offset';
+import {UpdateTypeDto} from './dto/update-type.dto';
+import {Type} from './type.entity';
 
 @Injectable()
 export class TypesService {
   constructor(
-    @Inject("TypesRepository")
-    private readonly typesRepository: Repository<Type>
+    @Inject('TypesRepository')
+    private readonly typesRepository: Repository<Type>,
   ) {}
 
   async findAll(): Promise<TypeDto[]> {
     const types = await this.typesRepository.find({
-      relations: ["boardGame"]
+      relations: ['boardGame'],
     });
     return types.map(type => {
       return new TypeDto(type);
@@ -24,10 +24,10 @@ export class TypesService {
 
   async findOne(id: number): Promise<TypeDto> {
     const type = await this.typesRepository.findOne(id, {
-      relations: ["boardGame"]
+      relations: ['boardGame'],
     });
     if (!type) {
-      throw new HttpException("No type found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No type found', HttpStatus.NOT_FOUND);
     }
 
     return new TypeDto(type);
@@ -46,10 +46,10 @@ export class TypesService {
 
   private async getType(id: number): Promise<Type> {
     const type = await this.typesRepository.findOne(id, {
-      relations: ["boardGame"]
+      relations: ['boardGame'],
     });
     if (!type) {
-      throw new HttpException("No type found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No type found', HttpStatus.NOT_FOUND);
     }
 
     return type;
@@ -74,12 +74,12 @@ export class TypesService {
 
   async offset(index: number = 0): Promise<TypeOffset> {
     const types = await this.typesRepository.findAndCount({
-      relations: ["boardGame"],
+      relations: ['boardGame'],
       take: 100,
       skip: index * 100,
       order: {
-        id: "ASC"
-      }
+        id: 'ASC',
+      },
     });
 
     const TypesDto = types[0].map(type => {

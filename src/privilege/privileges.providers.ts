@@ -1,8 +1,8 @@
-import { Connection } from "typeorm";
-import { Privilege } from "./privilege.entity";
+import {Connection} from 'typeorm';
+import {Privilege} from './privilege.entity';
 
 export const privilegesProviders = {
-  provide: "PrivilegesRepository",
+  provide: 'PrivilegesRepository',
   useFactory: (connection: Connection) => connection.getRepository(Privilege),
-  inject: [Connection]
+  inject: [Connection],
 };

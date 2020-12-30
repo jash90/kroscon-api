@@ -1,35 +1,30 @@
-import { Lecture } from "../lecture/lecture.entity";
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn
-} from "typeorm";
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {Lecture} from '../lecture/lecture.entity';
 
-@Entity("events")
+@Entity('events')
 export class Event {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("text")
+  @Column('text')
   name: string;
 
-  @OneToMany(() => Lecture, lecture => lecture.event)
+  @OneToMany(
+    () => Lecture,
+    lecture => lecture.event,
+  )
   lectures: Lecture[];
 
-  @Column("date")
+  @Column('date')
   start: Date;
 
-  @Column("date")
+  @Column('date')
   end: Date;
 
-  @Column("text")
+  @Column('text')
   description: string;
 
-  @Column("text")
+  @Column('text')
   location: string;
 
   @CreateDateColumn()

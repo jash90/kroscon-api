@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { EventDto } from "./event.dto";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {EventDto} from './event.dto';
 
 export class EventOffset {
   @ApiModelProperty()

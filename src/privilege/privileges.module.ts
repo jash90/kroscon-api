@@ -1,14 +1,14 @@
-import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { PrivilegesController } from "./privileges.controller";
-import { PrivilegesService } from "./privileges.service";
-import { Privilege } from './privilege.entity';
-import { User } from '../users/user.entity';
-import { privilegesProviders } from './privileges.providers';
+import {Module} from '@nestjs/common';
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {User} from '../users/user.entity';
+import {Privilege} from './privilege.entity';
+import {PrivilegesController} from './privileges.controller';
+import {privilegesProviders} from './privileges.providers';
+import {PrivilegesService} from './privileges.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Privilege, User])],
   controllers: [PrivilegesController],
-  providers: [privilegesProviders, PrivilegesService]
+  providers: [privilegesProviders, PrivilegesService],
 })
-export class PrivilegesModule { }
+export class PrivilegesModule {}

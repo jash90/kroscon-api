@@ -1,28 +1,26 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { User } from "./user.entity";
-import { compare, genSalt, hash } from "bcrypt";
-import { UserDto } from "./dto/user.dto";
-import { UserLoginRequestDto } from "./dto/user-login-request.dto";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { UserLoginResponseDto } from "./dto/user-login-response.dto";
-import { JwtPayload } from "./auth/jwt-payload.model";
-import { sign } from "jsonwebtoken";
-import { UpdateUserDto } from "./dto/update-user.dto";
-import { UserOffset } from "./dto/user.offset";
-import { getRepository, Repository } from "typeorm";
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {compare, genSalt, hash} from 'bcrypt';
+import {sign} from 'jsonwebtoken';
+import {getRepository, Repository} from 'typeorm';
+import {JwtPayload} from './auth/jwt-payload.model';
+import {CreateUserDto} from './dto/create-user.dto';
+import {UpdateUserDto} from './dto/update-user.dto';
+import {UserLoginRequestDto} from './dto/user-login-request.dto';
+import {UserLoginResponseDto} from './dto/user-login-response.dto';
+import {UserDto} from './dto/user.dto';
+import {UserOffset} from './dto/user.offset';
+import {User} from './user.entity';
 
 @Injectable()
 export class UsersService {
-
   constructor(
-    @Inject("UsersRepository")
+    @Inject('UsersRepository')
     private readonly usersRepository: Repository<User>,
-  ) {
-  }
+  ) {}
 
   async findAll(): Promise<UserDto[]> {
     const users = await this.usersRepository.find({
-      relations: ["privilege", "reservation", "loanGame", "feedback"]
+      relations: ['privilege', 'reservation', 'loanGame', 'feedback'],
     });
     return users.map(user => {
       return new UserDto(user);
@@ -31,12 +29,12 @@ export class UsersService {
 
   async getUser(id: number): Promise<UserDto> {
     const user = await this.usersRepository.findOne(id, {
-      relations: ["privilege", "reservation", "loanGame", "feedback"]
+      relations: ['privilege', 'reservation', 'loanGame', 'feedback'],
     });
     if (!user) {
       throw new HttpException(
-        "User with given id not found",
-        HttpStatus.NOT_FOUND
+        'User with given id not found',
+        HttpStatus.NOT_FOUND,
       );
     }
 
@@ -45,8 +43,8 @@ export class UsersService {
 
   async getUserByEmail(email: string): Promise<User> {
     return await this.usersRepository.findOne({
-      relations: ["privilege", "reservation", "loanGame", "feedback"],
-      where: { email }
+      relations: ['privilege', 'reservation', 'loanGame', 'feedback'],
+      where: { email },
     });
   }
 
@@ -74,7 +72,7 @@ export class UsersService {
   }
 
   async login(
-    userLoginRequestDto: UserLoginRequestDto
+    userLoginRequestDto: UserLoginRequestDto,
   ): Promise<UserLoginResponseDto> {
     const email = userLoginRequestDto.email;
     const password = userLoginRequestDto.password;
@@ -82,16 +80,16 @@ export class UsersService {
     const user = await this.getUserByEmail(email);
     if (!user) {
       throw new HttpException(
-        "Invalid email or password.",
-        HttpStatus.FORBIDDEN
+        'Invalid email or password.',
+        HttpStatus.FORBIDDEN,
       );
     }
 
     const isMatch = await compare(password, user.password);
     if (!isMatch) {
       throw new HttpException(
-        "Invalid email or password.",
-        HttpStatus.FORBIDDEN
+        'Invalid email or password.',
+        HttpStatus.FORBIDDEN,
       );
     }
 
@@ -102,7 +100,7 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto): Promise<UserDto> {
     const user = await this.usersRepository.findOne(id);
     if (!user) {
-      throw new HttpException("User not found.", HttpStatus.NOT_FOUND);
+      throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
     }
 
     user.firstname = updateUserDto.firstname || user.firstname;
@@ -124,7 +122,7 @@ export class UsersService {
 
   async signToken(user: User): Promise<string> {
     const payload: JwtPayload = {
-      email: user.email
+      email: user.email,
     };
 
     return sign(payload, process.env.SECRET_KEY, {
@@ -133,12 +131,12 @@ export class UsersService {
   }
   async offset(index: number = 0): Promise<UserOffset> {
     const users = await this.usersRepository.findAndCount({
-      relations: ["privilege", "reservation", "loanGame", "feedback"],
+      relations: ['privilege', 'reservation', 'loanGame', 'feedback'],
       take: 100,
       skip: index * 100,
       order: {
-        id: "ASC"
-      }
+        id: 'ASC',
+      },
     });
 
     const usersDto = users[0].map(user => {

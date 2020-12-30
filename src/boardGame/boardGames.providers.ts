@@ -1,8 +1,8 @@
-import { Connection } from "typeorm";
-import { BoardGame } from "./boardGame.entity";
+import {Connection} from 'typeorm';
+import {BoardGame} from './boardGame.entity';
 
 export const boardGamesProviders = {
-  provide: "BoardGamesRepository",
+  provide: 'BoardGamesRepository',
   useFactory: (connection: Connection) => connection.getRepository(BoardGame),
-  inject: [Connection]
+  inject: [Connection],
 };

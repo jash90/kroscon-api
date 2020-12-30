@@ -1,29 +1,29 @@
-import { UserLoginRequestDto } from "./dto/user-login-request.dto";
-import { Body, Controller, HttpCode, Post } from "@nestjs/common";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { UsersService } from "./users.service";
-import { ApiOkResponse, ApiUseTags } from "@nestjs/swagger";
-import { UserLoginResponseDto } from "./dto/user-login-response.dto";
+import {Body, Controller, HttpCode, Post} from '@nestjs/common';
+import {ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
+import {CreateUserDto} from './dto/create-user.dto';
+import {UserLoginRequestDto} from './dto/user-login-request.dto';
+import {UserLoginResponseDto} from './dto/user-login-response.dto';
+import {UsersService} from './users.service';
 
 @Controller('')
 @ApiUseTags('users')
 export class UsersAuthController {
-    constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
-    @Post('register')
-    @ApiOkResponse({ type: UserLoginResponseDto })
-    register(
-        @Body() createUserDto: CreateUserDto,
-    ): Promise<UserLoginResponseDto> {
-        return this.usersService.create(createUserDto);
-    }
+  @Post('register')
+  @ApiOkResponse({ type: UserLoginResponseDto })
+  register(
+    @Body() createUserDto: CreateUserDto,
+  ): Promise<UserLoginResponseDto> {
+    return this.usersService.create(createUserDto);
+  }
 
-    @Post('login')
-    @HttpCode(200)
-    @ApiOkResponse({ type: UserLoginResponseDto })
-    login(
-        @Body() userLoginRequestDto: UserLoginRequestDto,
-    ): Promise<UserLoginResponseDto> {
-        return this.usersService.login(userLoginRequestDto);
-    }
+  @Post('login')
+  @HttpCode(200)
+  @ApiOkResponse({ type: UserLoginResponseDto })
+  login(
+    @Body() userLoginRequestDto: UserLoginRequestDto,
+  ): Promise<UserLoginResponseDto> {
+    return this.usersService.login(userLoginRequestDto);
+  }
 }

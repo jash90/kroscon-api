@@ -1,21 +1,21 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { Publisher } from "../publisher/publisher.entity";
-import { PublisherDto } from "../publisher/dto/publisher.dto";
-import { CreatePublisherDto } from "../publisher/dto/create-publisher.dto";
-import { UpdatePublisherDto } from "../publisher/dto/update-publisher.dto";
-import { PublisherOffset } from "../publisher/dto/publisher.offset";
-import { getRepository, Repository } from "typeorm";
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {getRepository, Repository} from 'typeorm';
+import {CreatePublisherDto} from './dto/create-publisher.dto';
+import {PublisherDto} from './dto/publisher.dto';
+import {PublisherOffset} from './dto/publisher.offset';
+import {UpdatePublisherDto} from './dto/update-publisher.dto';
+import {Publisher} from './publisher.entity';
 
 @Injectable()
 export class PublishersService {
   constructor(
-    @Inject("PublishersRepository")
-    private readonly publishersRepository: Repository<Publisher>
+    @Inject('PublishersRepository')
+    private readonly publishersRepository: Repository<Publisher>,
   ) {}
 
   async findAll(): Promise<PublisherDto[]> {
     const publishers = await this.publishersRepository.find({
-      relations: ["boardGame"]
+      relations: ['boardGame'],
     });
     return publishers.map(publisher => {
       return new PublisherDto(publisher);
@@ -24,10 +24,10 @@ export class PublishersService {
 
   async findOne(id: number): Promise<PublisherDto> {
     const publisher = await this.publishersRepository.findOne(id, {
-      relations: ["boardGame"]
+      relations: ['boardGame'],
     });
     if (!publisher) {
-      throw new HttpException("No publisher found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No publisher found', HttpStatus.NOT_FOUND);
     }
 
     return new PublisherDto(publisher);
@@ -46,10 +46,10 @@ export class PublishersService {
 
   private async getPublisher(id: number): Promise<Publisher> {
     const publisher = await this.publishersRepository.findOne(id, {
-      relations: ["boardGame"]
+      relations: ['boardGame'],
     });
     if (!publisher) {
-      throw new HttpException("No publisher found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No publisher found', HttpStatus.NOT_FOUND);
     }
 
     return publisher;
@@ -57,7 +57,7 @@ export class PublishersService {
 
   async update(
     id: number,
-    updatePublisherDto: UpdatePublisherDto
+    updatePublisherDto: UpdatePublisherDto,
   ): Promise<PublisherDto> {
     const publisher = await this.getPublisher(id);
 
@@ -77,12 +77,12 @@ export class PublishersService {
 
   async offset(index: number = 0): Promise<PublisherOffset> {
     const publishers = await this.publishersRepository.findAndCount({
-      relations: ["boardGame"],
+      relations: ['boardGame'],
       take: 100,
       skip: index * 100,
       order: {
-        id: "ASC"
-      }
+        id: 'ASC',
+      },
     });
 
     const PublishersDto = publishers[0].map(publisher => {

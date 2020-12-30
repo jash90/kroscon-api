@@ -1,22 +1,22 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { Feedback } from "../feedback/feedback.entity";
-import { FeedbackDto } from "../feedback/dto/feedback.dto";
-import { CreateFeedbackDto } from "../feedback/dto/create-feedback.dto";
-import { UpdateFeedbackDto } from "../feedback/dto/update-feedback.dto";
-import { FeedbackOffset } from "../feedback/dto/feedback.offset";
-import { BoardGame } from "../boardGame/boardGame.entity";
-import { getRepository, Repository } from "typeorm";
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {getRepository, Repository} from 'typeorm';
+import {BoardGame} from '../boardGame/boardGame.entity';
+import {CreateFeedbackDto} from './dto/create-feedback.dto';
+import {FeedbackDto} from './dto/feedback.dto';
+import {FeedbackOffset} from './dto/feedback.offset';
+import {UpdateFeedbackDto} from './dto/update-feedback.dto';
+import {Feedback} from './feedback.entity';
 
 @Injectable()
 export class FeedbacksService {
   constructor(
-    @Inject("FeedbacksRepository")
-    private readonly feedbacksRepository: Repository<Feedback>
+    @Inject('FeedbacksRepository')
+    private readonly feedbacksRepository: Repository<Feedback>,
   ) {}
 
   async findAll(): Promise<FeedbackDto[]> {
     const feedbacks = await this.feedbacksRepository.find({
-      relations: ["user", "boardGame", "loanGame"]
+      relations: ['user', 'boardGame', 'loanGame'],
     });
     return feedbacks.map(feedback => {
       return new FeedbackDto(feedback);
@@ -25,10 +25,10 @@ export class FeedbacksService {
 
   async findOne(id: number): Promise<FeedbackDto> {
     const feedback = await this.feedbacksRepository.findOne(id, {
-      relations: ["user", "boardGame", "loanGame"]
+      relations: ['user', 'boardGame', 'loanGame'],
     });
     if (!feedback) {
-      throw new HttpException("No feedback found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No feedback found', HttpStatus.NOT_FOUND);
     }
 
     return new FeedbackDto(feedback);
@@ -47,10 +47,10 @@ export class FeedbacksService {
 
   private async getFeedback(id: number): Promise<Feedback> {
     const feedback = await this.feedbacksRepository.findOne(id, {
-      relations: ["user", "boardGame", "loanGame"]
+      relations: ['user', 'boardGame', 'loanGame'],
     });
     if (!feedback) {
-      throw new HttpException("No feedback found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No feedback found', HttpStatus.NOT_FOUND);
     }
 
     return feedback;
@@ -58,7 +58,7 @@ export class FeedbacksService {
 
   async update(
     id: number,
-    updateFeedbackDto: UpdateFeedbackDto
+    updateFeedbackDto: UpdateFeedbackDto,
   ): Promise<FeedbackDto> {
     const feedback = await this.getFeedback(id);
 
@@ -78,12 +78,12 @@ export class FeedbacksService {
 
   async offset(index: number = 0): Promise<FeedbackOffset> {
     const feedbacks = await this.feedbacksRepository.findAndCount({
-      relations: ["user", "BoardGame", "loanGame"],
+      relations: ['user', 'BoardGame', 'loanGame'],
       take: 100,
       skip: index * 100,
       order: {
-        id: "ASC"
-      }
+        id: 'ASC',
+      },
     });
 
     const FeedbacksDto = feedbacks[0].map(feedback => {

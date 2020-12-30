@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { Type } from "../type.entity";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {Type} from '../type.entity';
 
 export class TypeDto {
   @ApiModelProperty()

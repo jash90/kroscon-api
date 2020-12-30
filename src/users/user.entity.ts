@@ -7,51 +7,66 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
-} from "typeorm";
+  UpdateDateColumn,
+} from 'typeorm';
+import {Feedback} from '../feedback/feedback.entity';
+import {LoanGame} from '../loanGame/loanGame.entity';
 // import { Gender } from "../shared/enum/enums";
-import { Privilege } from "../privilege/privilege.entity";
-import { Reservation } from "../reservation/reservation.entity";
-import { LoanGame } from "../loanGame/loanGame.entity";
-import { Feedback } from "../feedback/feedback.entity";
+import {Privilege} from '../privilege/privilege.entity';
+import {Reservation} from '../reservation/reservation.entity';
 
-@Entity("users")
+@Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("text")
+  @Column('text')
   email: string;
 
-  @Column("text")
+  @Column('text')
   password: string;
 
-  @Column("text")
+  @Column('text')
   firstname: string;
 
-  @Column("text")
+  @Column('text')
   lastname: string;
 
-  @Column("smallint")
+  @Column('smallint')
   age: number;
 
-  @Column("text")
+  @Column('text')
   city: string;
 
-  @ManyToOne(() => Privilege, privilege => privilege.users)
-  @JoinColumn({ name: "privilege_id" })
+  @ManyToOne(
+    () => Privilege,
+    privilege => privilege.users,
+  )
+  @JoinColumn({ name: 'privilege_id' })
   privilege: Privilege;
 
-  @OneToMany(() => LoanGame, loanGame => loanGame.user)
+  @OneToMany(
+    () => LoanGame,
+    loanGame => loanGame.user,
+  )
   loanGames: LoanGame[];
 
-  @OneToMany(() => LoanGame, loanGame => loanGame.hireUser)
+  @OneToMany(
+    () => LoanGame,
+    loanGame => loanGame.hireUser,
+  )
   hireGames: LoanGame[];
 
-  @OneToMany(() => Reservation, reservation => reservation.user)
+  @OneToMany(
+    () => Reservation,
+    reservation => reservation.user,
+  )
   reservations: Reservation[];
 
-  @OneToMany(() => Feedback, feedback => feedback.user)
+  @OneToMany(
+    () => Feedback,
+    feedback => feedback.user,
+  )
   feedbacks: Feedback[];
 
   @CreateDateColumn()

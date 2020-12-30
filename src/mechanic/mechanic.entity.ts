@@ -1,23 +1,18 @@
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn
-} from "typeorm";
-import { BoardGame } from "../boardGame/boardGame.entity";
+import {Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {BoardGame} from '../boardGame/boardGame.entity';
 
-@Entity("mechanics")
+@Entity('mechanics')
 export class Mechanic {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("text")
+  @Column('text')
   name: string;
 
-  @ManyToMany(() => BoardGame, boardGame => boardGame.mechanics)
+  @ManyToMany(
+    () => BoardGame,
+    boardGame => boardGame.mechanics,
+  )
   boardGames: BoardGame[];
 
   @CreateDateColumn()

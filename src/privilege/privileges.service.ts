@@ -1,21 +1,21 @@
-import { HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
-import { Privilege } from "../privilege/privilege.entity";
-import { PrivilegeDto } from "../privilege/dto/privilege.dto";
-import { CreatePrivilegeDto } from "../privilege/dto/create-privilege.dto";
-import { UpdatePrivilegeDto } from "../privilege/dto/update-privilege.dto";
-import { PrivilegeOffset } from "../privilege/dto/privilege.offset";
-import { getRepository, Repository } from "typeorm";
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {getRepository, Repository} from 'typeorm';
+import {CreatePrivilegeDto} from './dto/create-privilege.dto';
+import {PrivilegeDto} from './dto/privilege.dto';
+import {PrivilegeOffset} from './dto/privilege.offset';
+import {UpdatePrivilegeDto} from './dto/update-privilege.dto';
+import {Privilege} from './privilege.entity';
 
 @Injectable()
 export class PrivilegesService {
   constructor(
-    @Inject("PrivilegesRepository")
-    private readonly privilegesRepository: Repository<Privilege>
+    @Inject('PrivilegesRepository')
+    private readonly privilegesRepository: Repository<Privilege>,
   ) {}
 
   async findAll(): Promise<PrivilegeDto[]> {
     const privileges = await this.privilegesRepository.find({
-      relations: ["user"]
+      relations: ['user'],
     });
     return privileges.map(privilege => {
       return new PrivilegeDto(privilege);
@@ -24,10 +24,10 @@ export class PrivilegesService {
 
   async findOne(id: number): Promise<PrivilegeDto> {
     const privilege = await this.privilegesRepository.findOne(id, {
-      relations: ["user"]
+      relations: ['user'],
     });
     if (!privilege) {
-      throw new HttpException("No privilege found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No privilege found', HttpStatus.NOT_FOUND);
     }
 
     return new PrivilegeDto(privilege);
@@ -46,10 +46,10 @@ export class PrivilegesService {
 
   private async getPrivilege(id: number): Promise<Privilege> {
     const privilege = await this.privilegesRepository.findOne(id, {
-      relations: ["user"]
+      relations: ['user'],
     });
     if (!privilege) {
-      throw new HttpException("No privilege found", HttpStatus.NOT_FOUND);
+      throw new HttpException('No privilege found', HttpStatus.NOT_FOUND);
     }
 
     return privilege;
@@ -57,7 +57,7 @@ export class PrivilegesService {
 
   async update(
     id: number,
-    updatePrivilegeDto: UpdatePrivilegeDto
+    updatePrivilegeDto: UpdatePrivilegeDto,
   ): Promise<PrivilegeDto> {
     const privilege = await this.getPrivilege(id);
 
@@ -77,12 +77,12 @@ export class PrivilegesService {
 
   async offset(index: number = 0): Promise<PrivilegeOffset> {
     const privileges = await this.privilegesRepository.findAndCount({
-      relations: ["user"],
+      relations: ['user'],
       take: 100,
       skip: index * 100,
       order: {
-        id: "ASC"
-      }
+        id: 'ASC',
+      },
     });
 
     const PrivilegesDto = privileges[0].map(privilege => {

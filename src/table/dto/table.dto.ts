@@ -1,5 +1,5 @@
-import { ApiModelProperty } from "@nestjs/swagger";
-import { Table } from "../table.entity";
+import {ApiModelProperty} from '@nestjs/swagger';
+import {Table} from '../table.entity';
 
 export class TableDto {
   @ApiModelProperty()
