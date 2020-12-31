@@ -30,8 +30,4 @@ export class CreateUserDto {
   @Min(1)
   @Max(99)
   readonly age: number;
-
-  @ApiModelProperty()
-  @IsNumber()
-  readonly privilegeId: number;
 }

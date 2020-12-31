@@ -3,6 +3,7 @@ import {NestFactory} from '@nestjs/core';
 import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 import helmet from 'helmet';
 import {AppModule} from './app.module';
+import {setupSwagger} from './swagger';
 
 require('dotenv').config();
 
@@ -16,14 +17,7 @@ async function bootstrap() {
   app.use(helmet());
   app.enableCors();
 
-  const options = new DocumentBuilder()
-    .setTitle('MyNetflix Api')
-    .setDescription('API description')
-    .setVersion('1.0')
-    .build();
-
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+  setupSwagger(app);
 
   await app.listen(port);
   Logger.log(`Server running on http://localhost:${port}`, 'Bootstrap');

@@ -1,22 +1,25 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import {compare, genSalt, hash} from 'bcrypt';
-import {sign} from 'jsonwebtoken';
-import {getRepository, Repository} from 'typeorm';
-import {JwtPayload} from './auth/jwt-payload.model';
-import {CreateUserDto} from './dto/create-user.dto';
-import {UpdateUserDto} from './dto/update-user.dto';
-import {UserLoginRequestDto} from './dto/user-login-request.dto';
-import {UserLoginResponseDto} from './dto/user-login-response.dto';
-import {UserDto} from './dto/user.dto';
-import {UserOffset} from './dto/user.offset';
-import {User} from './user.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { compare, genSalt, hash } from 'bcrypt';
+import { sign } from 'jsonwebtoken';
+import { getRepository, Repository } from 'typeorm';
+import { JwtPayload } from './auth/jwt-payload.model';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserLoginRequestDto } from './dto/user-login-request.dto';
+import { UserLoginResponseDto } from './dto/user-login-response.dto';
+import { UserDto } from './dto/user.dto';
+import { UserOffset } from './dto/user.offset';
+import { User } from './user.entity';
+import { Privilege } from '../privilege/privilege.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @Inject('UsersRepository')
     private readonly usersRepository: Repository<User>,
-  ) {}
+    @Inject('PrivilegesRepository')
+    private readonly privilegesRepository: Repository<Privilege>,
+  ) { }
 
   async findAll(): Promise<UserDto[]> {
     const users = await this.usersRepository.find({
@@ -54,6 +57,9 @@ export class UsersService {
       user.email = createUserDto.email.trim().toLowerCase();
       user.firstname = createUserDto.firstname;
       user.lastname = createUserDto.lastname;
+
+      user.privilege = await this.privilegesRepository.findOne("1");
+
       // user.gender = createUserDto.gender;
       // user.birthday = createUserDto.birthday;
 
@@ -67,6 +73,7 @@ export class UsersService {
 
       return new UserLoginResponseDto(userData, token);
     } catch (err) {
+      console.log( err.message );
       throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

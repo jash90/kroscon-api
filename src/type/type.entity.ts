@@ -1,12 +1,12 @@
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {BoardGame} from '../boardGame/boardGame.entity';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BoardGame } from '../boardGame/boardGame.entity';
 
 @Entity('types')
 export class Type {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('text')
+  @Column({ type: 'text', unique: true })
   name: string;
 
   @ManyToMany(

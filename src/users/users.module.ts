@@ -1,15 +1,16 @@
-import {Module} from '@nestjs/common';
-import {TypeOrmModule} from '@nestjs/typeorm';
-import {Feedback} from '../feedback/feedback.entity';
-import {LoanGame} from '../loanGame/loanGame.entity';
-import {Privilege} from '../privilege/privilege.entity';
-import {Reservation} from '../reservation/reservation.entity';
-import {JwtStrategy} from './auth/jwt-strategy';
-import {User} from './user.entity';
-import {UsersAuthController} from './users.auth.controller';
-import {UsersController} from './users.controller';
-import {usersProviders} from './users.providers';
-import {UsersService} from './users.service';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Feedback } from '../feedback/feedback.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
+import { Privilege } from '../privilege/privilege.entity';
+import { Reservation } from '../reservation/reservation.entity';
+import { JwtStrategy } from './auth/jwt-strategy';
+import { User } from './user.entity';
+import { UsersAuthController } from './users.auth.controller';
+import { UsersController } from './users.controller';
+import { usersProviders } from './users.providers';
+import { UsersService } from './users.service';
+import { privilegesProviders } from '../privilege/privileges.providers';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import {UsersService} from './users.service';
     ]),
   ],
   controllers: [UsersController, UsersAuthController],
-  providers: [usersProviders, UsersService, JwtStrategy],
+  providers: [usersProviders, privilegesProviders, UsersService, JwtStrategy],
   exports: [UsersService],
 })
-export class UsersModule {}
+export class UsersModule { }

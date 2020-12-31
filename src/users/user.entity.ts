@@ -20,7 +20,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('text')
+  @Column({type:'text', unique:true})
   email: string;
 
   @Column('text')

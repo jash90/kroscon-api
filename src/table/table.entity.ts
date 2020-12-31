@@ -1,13 +1,13 @@
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {LoanGame} from '../loanGame/loanGame.entity';
-import {Reservation} from '../reservation/reservation.entity';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { LoanGame } from '../loanGame/loanGame.entity';
+import { Reservation } from '../reservation/reservation.entity';
 
 @Entity('tables')
 export class Table {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('text')
+  @Column({ type: 'text', unique: true })
   name: string;
 
   @OneToMany(
