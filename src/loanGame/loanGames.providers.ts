@@ -1,5 +1,5 @@
-import {Connection} from 'typeorm';
-import {LoanGame} from './loanGame.entity';
+import { Connection } from 'typeorm';
+import { LoanGame } from './loanGame.entity';
 
 export const loanGamesProviders = {
   provide: 'LoanGamesRepository',

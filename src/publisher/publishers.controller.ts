@@ -1,11 +1,27 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
-import {CreatePublisherDto} from './dto/create-publisher.dto';
-import {PublisherDto} from './dto/publisher.dto';
-import {PublisherOffset} from './dto/publisher.offset';
-import {UpdatePublisherDto} from './dto/update-publisher.dto';
-import {PublishersService} from './publishers.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
+import { CreatePublisherDto } from './dto/create-publisher.dto';
+import { PublisherDto } from './dto/publisher.dto';
+import { PublisherOffset } from './dto/publisher.offset';
+import { UpdatePublisherDto } from './dto/update-publisher.dto';
+import { PublishersService } from './publishers.service';
 
 @Controller('publishers')
 @ApiUseTags('publishers')

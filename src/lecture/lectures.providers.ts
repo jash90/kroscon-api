@@ -1,5 +1,5 @@
-import {Connection} from 'typeorm';
-import {Lecture} from './lecture.entity';
+import { Connection } from 'typeorm';
+import { Lecture } from './lecture.entity';
 
 export const lecturesProviders = {
   provide: 'LecturesRepository',

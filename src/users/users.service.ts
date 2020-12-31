@@ -19,7 +19,7 @@ export class UsersService {
     private readonly usersRepository: Repository<User>,
     @Inject('PrivilegesRepository')
     private readonly privilegesRepository: Repository<Privilege>,
-  ) { }
+  ) {}
 
   async findAll(): Promise<UserDto[]> {
     const users = await this.usersRepository.find({
@@ -58,7 +58,7 @@ export class UsersService {
       user.firstname = createUserDto.firstname;
       user.lastname = createUserDto.lastname;
 
-      user.privilege = await this.privilegesRepository.findOne("1");
+      user.privilege = await this.privilegesRepository.findOne('1');
 
       // user.gender = createUserDto.gender;
       // user.birthday = createUserDto.birthday;
@@ -73,7 +73,7 @@ export class UsersService {
 
       return new UserLoginResponseDto(userData, token);
     } catch (err) {
-      console.log( err.message );
+      console.log(err.message);
       throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

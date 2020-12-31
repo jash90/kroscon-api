@@ -1,7 +1,17 @@
-import {Check, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {BoardGame} from '../boardGame/boardGame.entity';
-import {LoanGame} from '../loanGame/loanGame.entity';
-import {User} from '../users/user.entity';
+import {
+  Check,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
+import { User } from '../users/user.entity';
 
 @Entity('feedbacks')
 @Check(`rating > 1 AND rating < 10`)

@@ -1,5 +1,5 @@
-import {Connection} from 'typeorm';
-import {Type} from './type.entity';
+import { Connection } from 'typeorm';
+import { Type } from './type.entity';
 
 export const typesProviders = {
   provide: 'TypesRepository',

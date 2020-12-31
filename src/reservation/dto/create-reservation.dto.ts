@@ -1,5 +1,5 @@
-import {ApiModelProperty} from '@nestjs/swagger';
-import {IsDate, IsNumber} from 'class-validator';
+import { ApiModelProperty } from '@nestjs/swagger';
+import { IsDate, IsNumber } from 'class-validator';
 
 export class CreateReservationDto {
   @ApiModelProperty()

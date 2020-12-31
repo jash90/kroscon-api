@@ -1,5 +1,5 @@
-import {Connection} from 'typeorm';
-import {BoardGame} from './boardGame.entity';
+import { Connection } from 'typeorm';
+import { BoardGame } from './boardGame.entity';
 
 export const boardGamesProviders = {
   provide: 'BoardGamesRepository',

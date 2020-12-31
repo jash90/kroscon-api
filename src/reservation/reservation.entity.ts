@@ -1,7 +1,16 @@
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {BoardGame} from '../boardGame/boardGame.entity';
-import {Table} from '../table/table.entity';
-import {User} from '../users/user.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { Table } from '../table/table.entity';
+import { User } from '../users/user.entity';
 
 @Entity('reservations')
 export class Reservation {

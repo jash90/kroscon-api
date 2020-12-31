@@ -1,11 +1,27 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
-import {CreateTableDto} from './dto/create-table.dto';
-import {TableDto} from './dto/table.dto';
-import {TableOffset} from './dto/table.offset';
-import {UpdateTableDto} from './dto/update-table.dto';
-import {TableService} from './table.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
+import { CreateTableDto } from './dto/create-table.dto';
+import { TableDto } from './dto/table.dto';
+import { TableOffset } from './dto/table.offset';
+import { UpdateTableDto } from './dto/update-table.dto';
+import { TableService } from './table.service';
 
 @Controller('tables')
 @ApiUseTags('tables')

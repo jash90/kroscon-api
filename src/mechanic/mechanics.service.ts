@@ -1,10 +1,10 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import {getRepository, Repository} from 'typeorm';
-import {CreateMechanicDto} from './dto/create-mechanic.dto';
-import {MechanicDto} from './dto/mechanic.dto';
-import {MechanicOffset} from './dto/mechanic.offset';
-import {UpdateMechanicDto} from './dto/update-mechanic.dto';
-import {Mechanic} from './mechanic.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { getRepository, Repository } from 'typeorm';
+import { CreateMechanicDto } from './dto/create-mechanic.dto';
+import { MechanicDto } from './dto/mechanic.dto';
+import { MechanicOffset } from './dto/mechanic.offset';
+import { UpdateMechanicDto } from './dto/update-mechanic.dto';
+import { Mechanic } from './mechanic.entity';
 
 @Injectable()
 export class MechanicsService {

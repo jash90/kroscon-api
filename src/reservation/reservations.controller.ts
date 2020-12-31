@@ -1,11 +1,27 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
-import {CreateReservationDto} from './dto/create-reservation.dto';
-import {ReservationDto} from './dto/reservation.dto';
-import {ReservationOffset} from './dto/reservation.offset';
-import {UpdateReservationDto} from './dto/update-reservation.dto';
-import {ReservationsService} from './reservations.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
+import { CreateReservationDto } from './dto/create-reservation.dto';
+import { ReservationDto } from './dto/reservation.dto';
+import { ReservationOffset } from './dto/reservation.offset';
+import { UpdateReservationDto } from './dto/update-reservation.dto';
+import { ReservationsService } from './reservations.service';
 
 @Controller('reservations')
 @ApiUseTags('reservations')

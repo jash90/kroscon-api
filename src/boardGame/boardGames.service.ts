@@ -1,10 +1,10 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import {getRepository, Repository} from 'typeorm';
-import {BoardGame} from './boardGame.entity';
-import {BoardGameDto} from './dto/boardGame.dto';
-import {BoardGameOffset} from './dto/boardGame.offset';
-import {CreateBoardGameDto} from './dto/create-boardGame.dto';
-import {UpdateBoardGameDto} from './dto/update-boardGame.dto';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { getRepository, Repository } from 'typeorm';
+import { BoardGame } from './boardGame.entity';
+import { BoardGameDto } from './dto/boardGame.dto';
+import { BoardGameOffset } from './dto/boardGame.offset';
+import { CreateBoardGameDto } from './dto/create-boardGame.dto';
+import { UpdateBoardGameDto } from './dto/update-boardGame.dto';
 
 @Injectable()
 export class BoardGamesService {

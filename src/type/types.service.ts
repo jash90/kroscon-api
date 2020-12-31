@@ -1,10 +1,10 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import {getRepository, Repository} from 'typeorm';
-import {CreateTypeDto} from './dto/create-type.dto';
-import {TypeDto} from './dto/type.dto';
-import {TypeOffset} from './dto/type.offset';
-import {UpdateTypeDto} from './dto/update-type.dto';
-import {Type} from './type.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { getRepository, Repository } from 'typeorm';
+import { CreateTypeDto } from './dto/create-type.dto';
+import { TypeDto } from './dto/type.dto';
+import { TypeOffset } from './dto/type.offset';
+import { UpdateTypeDto } from './dto/update-type.dto';
+import { Type } from './type.entity';
 
 @Injectable()
 export class TypesService {

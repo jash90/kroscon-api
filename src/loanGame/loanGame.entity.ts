@@ -1,18 +1,18 @@
 import {
-    Column,
-    CreateDateColumn,
-    DeleteDateColumn,
-    Entity,
-    JoinColumn,
-    ManyToOne,
-    OneToMany,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-import {BoardGame} from '../boardGame/boardGame.entity';
-import {Feedback} from '../feedback/feedback.entity';
-import {Table} from '../table/table.entity';
-import {User} from '../users/user.entity';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { Feedback } from '../feedback/feedback.entity';
+import { Table } from '../table/table.entity';
+import { User } from '../users/user.entity';
 
 @Entity('loanGames')
 export class LoanGame {

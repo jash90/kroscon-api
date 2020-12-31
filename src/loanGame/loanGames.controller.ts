@@ -1,11 +1,27 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
-import {CreateLoanGameDto} from './dto/create-loanGame.dto';
-import {LoanGameDto} from './dto/loanGame.dto';
-import {LoanGameOffset} from './dto/loanGame.offset';
-import {UpdateLoanGameDto} from './dto/update-loanGame.dto';
-import {LoanGamesService} from './loanGames.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
+import { CreateLoanGameDto } from './dto/create-loanGame.dto';
+import { LoanGameDto } from './dto/loanGame.dto';
+import { LoanGameOffset } from './dto/loanGame.offset';
+import { UpdateLoanGameDto } from './dto/update-loanGame.dto';
+import { LoanGamesService } from './loanGames.service';
 
 @Controller('loanGames')
 @ApiUseTags('loanGames')

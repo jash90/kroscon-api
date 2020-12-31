@@ -9,18 +9,18 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {Feedback} from '../feedback/feedback.entity';
-import {LoanGame} from '../loanGame/loanGame.entity';
+import { Feedback } from '../feedback/feedback.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
 // import { Gender } from "../shared/enum/enums";
-import {Privilege} from '../privilege/privilege.entity';
-import {Reservation} from '../reservation/reservation.entity';
+import { Privilege } from '../privilege/privilege.entity';
+import { Reservation } from '../reservation/reservation.entity';
 
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({type:'text', unique:true})
+  @Column({ type: 'text', unique: true })
   email: string;
 
   @Column('text')
@@ -32,10 +32,10 @@ export class User {
   @Column('text')
   lastname: string;
 
-  @Column('smallint')
+  @Column({ type: 'smallint', nullable: true })
   age: number;
 
-  @Column('text')
+  @Column({ type: 'text', nullable: true })
   city: string;
 
   @ManyToOne(

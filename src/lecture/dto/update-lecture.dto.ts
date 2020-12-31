@@ -1,5 +1,5 @@
-import {ApiModelProperty} from '@nestjs/swagger';
-import {IsDate, IsNumber, IsOptional, IsString} from 'class-validator';
+import { ApiModelProperty } from '@nestjs/swagger';
+import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateLectureDto {
   @ApiModelProperty()

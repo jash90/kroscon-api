@@ -1,10 +1,10 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import {getRepository, Repository} from 'typeorm';
-import {CreatePublisherDto} from './dto/create-publisher.dto';
-import {PublisherDto} from './dto/publisher.dto';
-import {PublisherOffset} from './dto/publisher.offset';
-import {UpdatePublisherDto} from './dto/update-publisher.dto';
-import {Publisher} from './publisher.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { getRepository, Repository } from 'typeorm';
+import { CreatePublisherDto } from './dto/create-publisher.dto';
+import { PublisherDto } from './dto/publisher.dto';
+import { PublisherOffset } from './dto/publisher.offset';
+import { UpdatePublisherDto } from './dto/update-publisher.dto';
+import { Publisher } from './publisher.entity';
 
 @Injectable()
 export class PublishersService {

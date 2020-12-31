@@ -6,7 +6,7 @@
   "password": "postgres",
   "database": "kroscon",
   "entities": [
-    "dist/**/*.entity.js"
+    "./**/*.entity.ts"
   ],
   "migrationsTableName": "migration",
   "migrations": [

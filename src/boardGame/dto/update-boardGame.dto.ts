@@ -1,5 +1,5 @@
-import {ApiModelProperty} from '@nestjs/swagger';
-import {IsNumber, IsOptional, IsString, Max, Min} from 'class-validator';
+import { ApiModelProperty } from '@nestjs/swagger';
+import { IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
 
 export class UpdateBoardGameDto {
   @IsOptional()

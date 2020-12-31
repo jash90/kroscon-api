@@ -1,11 +1,27 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
-import {CreateLectureDto} from './dto/create-lecture.dto';
-import {LectureDto} from './dto/lecture.dto';
-import {LectureOffset} from './dto/lecture.offset';
-import {UpdateLectureDto} from './dto/update-lecture.dto';
-import {LecturesService} from './lectures.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
+import { CreateLectureDto } from './dto/create-lecture.dto';
+import { LectureDto } from './dto/lecture.dto';
+import { LectureOffset } from './dto/lecture.offset';
+import { UpdateLectureDto } from './dto/update-lecture.dto';
+import { LecturesService } from './lectures.service';
 
 @Controller('lectures')
 @ApiUseTags('lectures')

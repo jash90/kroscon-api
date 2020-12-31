@@ -1,10 +1,10 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import {getRepository, Repository} from 'typeorm';
-import {CreateReservationDto} from './dto/create-reservation.dto';
-import {ReservationDto} from './dto/reservation.dto';
-import {ReservationOffset} from './dto/reservation.offset';
-import {UpdateReservationDto} from './dto/update-reservation.dto';
-import {Reservation} from './reservation.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { getRepository, Repository } from 'typeorm';
+import { CreateReservationDto } from './dto/create-reservation.dto';
+import { ReservationDto } from './dto/reservation.dto';
+import { ReservationOffset } from './dto/reservation.offset';
+import { UpdateReservationDto } from './dto/update-reservation.dto';
+import { Reservation } from './reservation.entity';
 
 @Injectable()
 export class ReservationsService {

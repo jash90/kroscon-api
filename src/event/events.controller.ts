@@ -1,11 +1,27 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
-import {CreateEventDto} from './dto/create-event.dto';
-import {EventDto} from './dto/event.dto';
-import {EventOffset} from './dto/event.offset';
-import {UpdateEventDto} from './dto/update-event.dto';
-import {EventsService} from './events.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
+import { CreateEventDto } from './dto/create-event.dto';
+import { EventDto } from './dto/event.dto';
+import { EventOffset } from './dto/event.offset';
+import { UpdateEventDto } from './dto/update-event.dto';
+import { EventsService } from './events.service';
 
 @Controller('events')
 @ApiUseTags('events')

@@ -1,11 +1,27 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
-import {CreateFeedbackDto} from './dto/create-feedback.dto';
-import {FeedbackDto} from './dto/feedback.dto';
-import {FeedbackOffset} from './dto/feedback.offset';
-import {UpdateFeedbackDto} from './dto/update-feedback.dto';
-import {FeedbacksService} from './feedbacks.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
+import { CreateFeedbackDto } from './dto/create-feedback.dto';
+import { FeedbackDto } from './dto/feedback.dto';
+import { FeedbackOffset } from './dto/feedback.offset';
+import { UpdateFeedbackDto } from './dto/update-feedback.dto';
+import { FeedbacksService } from './feedbacks.service';
 
 @Controller('feedbacks')
 @ApiUseTags('feedbacks')

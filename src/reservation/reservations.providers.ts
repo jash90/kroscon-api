@@ -1,5 +1,5 @@
-import {Connection} from 'typeorm';
-import {Reservation} from './reservation.entity';
+import { Connection } from 'typeorm';
+import { Reservation } from './reservation.entity';
 
 export const reservationsProviders = {
   provide: 'ReservationsRepository',

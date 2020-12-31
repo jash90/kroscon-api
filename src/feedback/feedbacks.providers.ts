@@ -1,5 +1,5 @@
-import {Connection} from 'typeorm';
-import {Feedback} from './feedback.entity';
+import { Connection } from 'typeorm';
+import { Feedback } from './feedback.entity';
 
 export const feedbacksProviders = {
   provide: 'FeedbacksRepository',

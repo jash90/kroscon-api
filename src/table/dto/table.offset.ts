@@ -1,5 +1,5 @@
-import {ApiModelProperty} from '@nestjs/swagger';
-import {TableDto} from './table.dto';
+import { ApiModelProperty } from '@nestjs/swagger';
+import { TableDto } from './table.dto';
 
 export class TableOffset {
   @ApiModelProperty()

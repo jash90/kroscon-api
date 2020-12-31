@@ -1,10 +1,25 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Put, Req, UseGuards} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
-import {UpdateUserDto} from './dto/update-user.dto';
-import {UserDto} from './dto/user.dto';
-import {UserOffset} from './dto/user.offset';
-import {UsersService} from './users.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Put,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiBearerAuth,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserDto } from './dto/user.dto';
+import { UserOffset } from './dto/user.offset';
+import { UsersService } from './users.service';
 
 @Controller('users')
 @ApiUseTags('users')

@@ -1,11 +1,27 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
-import {CreatePrivilegeDto} from './dto/create-privilege.dto';
-import {PrivilegeDto} from './dto/privilege.dto';
-import {PrivilegeOffset} from './dto/privilege.offset';
-import {UpdatePrivilegeDto} from './dto/update-privilege.dto';
-import {PrivilegesService} from './privileges.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
+import { CreatePrivilegeDto } from './dto/create-privilege.dto';
+import { PrivilegeDto } from './dto/privilege.dto';
+import { PrivilegeOffset } from './dto/privilege.offset';
+import { UpdatePrivilegeDto } from './dto/update-privilege.dto';
+import { PrivilegesService } from './privileges.service';
 
 @Controller('privileges')
 @ApiUseTags('privileges')

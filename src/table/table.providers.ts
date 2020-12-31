@@ -1,5 +1,5 @@
-import {Connection} from 'typeorm';
-import {Table} from './table.entity';
+import { Connection } from 'typeorm';
+import { Table } from './table.entity';
 
 export const tableProviders = [
   {

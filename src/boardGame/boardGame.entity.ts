@@ -1,22 +1,22 @@
 import {
-    Check,
-    Column,
-    CreateDateColumn,
-    DeleteDateColumn,
-    Entity,
-    JoinColumn,
-    ManyToMany,
-    ManyToOne,
-    OneToMany,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  Check,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-import {Feedback} from '../feedback/feedback.entity';
-import {LoanGame} from '../loanGame/loanGame.entity';
-import {Mechanic} from '../mechanic/mechanic.entity';
-import {Publisher} from '../publisher/publisher.entity';
-import {Reservation} from '../reservation/reservation.entity';
-import {Type} from '../type/type.entity';
+import { Feedback } from '../feedback/feedback.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
+import { Mechanic } from '../mechanic/mechanic.entity';
+import { Publisher } from '../publisher/publisher.entity';
+import { Reservation } from '../reservation/reservation.entity';
+import { Type } from '../type/type.entity';
 
 @Entity('boardGames')
 @Check(`min_players > 0`)

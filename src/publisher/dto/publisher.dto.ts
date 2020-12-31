@@ -1,6 +1,6 @@
-import {ApiModelProperty} from '@nestjs/swagger';
-import {BoardGameDto} from '../../boardGame/dto/boardGame.dto';
-import {Publisher} from '../publisher.entity';
+import { ApiModelProperty } from '@nestjs/swagger';
+import { BoardGameDto } from '../../boardGame/dto/boardGame.dto';
+import { Publisher } from '../publisher.entity';
 
 export class PublisherDto {
   @ApiModelProperty()

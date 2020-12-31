@@ -1,10 +1,10 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import {getRepository, Repository} from 'typeorm';
-import {CreateLectureDto} from './dto/create-lecture.dto';
-import {LectureDto} from './dto/lecture.dto';
-import {LectureOffset} from './dto/lecture.offset';
-import {UpdateLectureDto} from './dto/update-lecture.dto';
-import {Lecture} from './lecture.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { getRepository, Repository } from 'typeorm';
+import { CreateLectureDto } from './dto/create-lecture.dto';
+import { LectureDto } from './dto/lecture.dto';
+import { LectureOffset } from './dto/lecture.offset';
+import { UpdateLectureDto } from './dto/update-lecture.dto';
+import { Lecture } from './lecture.entity';
 
 @Injectable()
 export class LecturesService {

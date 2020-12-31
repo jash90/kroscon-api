@@ -1,5 +1,5 @@
-import {Connection} from 'typeorm';
-import {Publisher} from './publisher.entity';
+import { Connection } from 'typeorm';
+import { Publisher } from './publisher.entity';
 
 export const publishersProviders = {
   provide: 'PublishersRepository',

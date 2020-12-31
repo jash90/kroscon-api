@@ -1,5 +1,5 @@
-import {ApiModelProperty} from '@nestjs/swagger';
-import {PublisherDto} from './publisher.dto';
+import { ApiModelProperty } from '@nestjs/swagger';
+import { PublisherDto } from './publisher.dto';
 
 export class PublisherOffset {
   @ApiModelProperty()

@@ -1,5 +1,13 @@
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Lecture} from '../lecture/lecture.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Lecture } from '../lecture/lecture.entity';
 
 @Entity('events')
 export class Event {

@@ -26,4 +26,4 @@ import { privilegesProviders } from '../privilege/privileges.providers';
   providers: [usersProviders, privilegesProviders, UsersService, JwtStrategy],
   exports: [UsersService],
 })
-export class UsersModule { }
+export class UsersModule {}

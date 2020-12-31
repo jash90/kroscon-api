@@ -1,12 +1,28 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards} from '@nestjs/common';
-import {AuthGuard} from '@nestjs/passport';
-import {ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags} from '@nestjs/swagger';
-import {BoardGame} from './boardGame.entity';
-import {BoardGamesService} from './boardGames.service';
-import {BoardGameDto} from './dto/boardGame.dto';
-import {BoardGameOffset} from './dto/boardGame.offset';
-import {CreateBoardGameDto} from './dto/create-boardGame.dto';
-import {UpdateBoardGameDto} from './dto/update-boardGame.dto';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiImplicitParam,
+  ApiOkResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
+import { BoardGame } from './boardGame.entity';
+import { BoardGamesService } from './boardGames.service';
+import { BoardGameDto } from './dto/boardGame.dto';
+import { BoardGameOffset } from './dto/boardGame.offset';
+import { CreateBoardGameDto } from './dto/create-boardGame.dto';
+import { UpdateBoardGameDto } from './dto/update-boardGame.dto';
 
 @Controller('boardGames')
 @ApiUseTags('boardGames')

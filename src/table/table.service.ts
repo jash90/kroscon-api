@@ -1,10 +1,10 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import {getRepository, Repository} from 'typeorm';
-import {CreateTableDto} from './dto/create-table.dto';
-import {TableDto} from './dto/table.dto';
-import {TableOffset} from './dto/table.offset';
-import {UpdateTableDto} from './dto/update-table.dto';
-import {Table} from './table.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { getRepository, Repository } from 'typeorm';
+import { CreateTableDto } from './dto/create-table.dto';
+import { TableDto } from './dto/table.dto';
+import { TableOffset } from './dto/table.offset';
+import { UpdateTableDto } from './dto/update-table.dto';
+import { Table } from './table.entity';
 
 @Injectable()
 export class TableService {

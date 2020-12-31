@@ -1,5 +1,5 @@
-import {ApiModelProperty} from '@nestjs/swagger';
-import {Mechanic} from '../mechanic.entity';
+import { ApiModelProperty } from '@nestjs/swagger';
+import { Mechanic } from '../mechanic.entity';
 
 export class MechanicDto {
   @ApiModelProperty()

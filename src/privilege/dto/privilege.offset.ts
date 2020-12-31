@@ -1,5 +1,5 @@
-import {ApiModelProperty} from '@nestjs/swagger';
-import {PrivilegeDto} from './privilege.dto';
+import { ApiModelProperty } from '@nestjs/swagger';
+import { PrivilegeDto } from './privilege.dto';
 
 export class PrivilegeOffset {
   @ApiModelProperty()

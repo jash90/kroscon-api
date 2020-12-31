@@ -1,10 +1,10 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import {getRepository, Repository} from 'typeorm';
-import {CreateLoanGameDto} from './dto/create-loanGame.dto';
-import {LoanGameDto} from './dto/loanGame.dto';
-import {LoanGameOffset} from './dto/loanGame.offset';
-import {UpdateLoanGameDto} from './dto/update-loanGame.dto';
-import {LoanGame} from './loanGame.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { getRepository, Repository } from 'typeorm';
+import { CreateLoanGameDto } from './dto/create-loanGame.dto';
+import { LoanGameDto } from './dto/loanGame.dto';
+import { LoanGameOffset } from './dto/loanGame.offset';
+import { UpdateLoanGameDto } from './dto/update-loanGame.dto';
+import { LoanGame } from './loanGame.entity';
 
 @Injectable()
 export class LoanGamesService {

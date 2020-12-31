@@ -1,10 +1,10 @@
-import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
-import {getRepository, Repository} from 'typeorm';
-import {CreatePrivilegeDto} from './dto/create-privilege.dto';
-import {PrivilegeDto} from './dto/privilege.dto';
-import {PrivilegeOffset} from './dto/privilege.offset';
-import {UpdatePrivilegeDto} from './dto/update-privilege.dto';
-import {Privilege} from './privilege.entity';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { getRepository, Repository } from 'typeorm';
+import { CreatePrivilegeDto } from './dto/create-privilege.dto';
+import { PrivilegeDto } from './dto/privilege.dto';
+import { PrivilegeOffset } from './dto/privilege.offset';
+import { UpdatePrivilegeDto } from './dto/update-privilege.dto';
+import { Privilege } from './privilege.entity';
 
 @Injectable()
 export class PrivilegesService {
