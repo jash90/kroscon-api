@@ -104,8 +104,8 @@ export class BoardGamesService {
       });
 
       return { rows: BoardGamesDto, count: boardGames[1] };
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   }
 }

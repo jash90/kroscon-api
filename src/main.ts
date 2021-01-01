@@ -1,9 +1,11 @@
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationError, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { setupSwagger } from './swagger';
+import { ValidationFilter } from './validation/validation.filter';
+import { ValidationException } from './validation/validation.exception';
 
 require('dotenv').config();
 
@@ -13,7 +15,15 @@ const port = process.env.APP_PORT;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({
+    skipMissingProperties:true,
+    exceptionFactory: (errors: ValidationError[]) =>{
+      const properties = errors.map(error => error.property);
+      const messages = errors.map(error =>Object.values(error.constraints))
+      return new ValidationException({properties, messages})
+    }
+  }));
+  app.useGlobalFilters(new ValidationFilter());
   app.use(helmet());
   app.enableCors();
 

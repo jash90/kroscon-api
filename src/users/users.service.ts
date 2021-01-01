@@ -19,7 +19,7 @@ export class UsersService {
     private readonly usersRepository: Repository<User>,
     @Inject('PrivilegesRepository')
     private readonly privilegesRepository: Repository<Privilege>,
-  ) {}
+  ) { }
 
   async findAll(): Promise<UserDto[]> {
     const users = await this.usersRepository.find({
@@ -74,6 +74,7 @@ export class UsersService {
       return new UserLoginResponseDto(userData, token);
     } catch (err) {
       console.log(err.message);
+      err.status = 500;
       throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
