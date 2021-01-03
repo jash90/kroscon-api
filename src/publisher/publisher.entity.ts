@@ -4,6 +4,7 @@ import {
   DeleteDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -17,7 +18,7 @@ export class Publisher {
   @Column({ type: 'text', unique: true })
   name: string;
 
-  @ManyToOne(
+  @OneToMany(
     () => BoardGame,
     publisher => publisher.publisher,
   )
