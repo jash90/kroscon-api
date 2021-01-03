@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -21,6 +22,11 @@ export class Type {
     () => BoardGame,
     boardGame => boardGame.types,
   )
+  @JoinTable({
+    name: "boardGame_type",
+    joinColumns: [{ name: "type_id" }],
+    inverseJoinColumns: [{ name: "boardGame_id" }]
+  })
   boardGames: BoardGame[];
 
   @CreateDateColumn()

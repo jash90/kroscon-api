@@ -5,6 +5,7 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -48,12 +49,22 @@ export class BoardGame {
     () => Mechanic,
     mechanic => mechanic.boardGames,
   )
+  @JoinTable({
+    name: "boardGame_mechanic",
+    joinColumns: [{ name: "boardGame_id" }],
+    inverseJoinColumns: [{ name: "mechanic_id" }]
+  })
   mechanics: Mechanic[];
 
   @ManyToMany(
     () => Type,
     type => type.boardGames,
   )
+  @JoinTable({
+    name: "boardGame_type",
+    joinColumns: [{ name: "boardGame_id" }],
+    inverseJoinColumns: [{ name: "type_id" }]
+  })
   types: Type[];
 
   @OneToMany(

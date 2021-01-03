@@ -15,7 +15,7 @@ export class TypesService {
 
   async findAll(): Promise<TypeDto[]> {
     const types = await this.typesRepository.find({
-      relations: ['boardGame'],
+      relations: ['boardGames'],
     });
     return types.map(type => {
       return new TypeDto(type);
@@ -24,7 +24,7 @@ export class TypesService {
 
   async findOne(id: number): Promise<TypeDto> {
     const type = await this.typesRepository.findOne(id, {
-      relations: ['boardGame'],
+      relations: ['boardGames'],
     });
     if (!type) {
       throw new HttpException('No type found', HttpStatus.NOT_FOUND);
@@ -46,7 +46,7 @@ export class TypesService {
 
   private async getType(id: number): Promise<Type> {
     const type = await this.typesRepository.findOne(id, {
-      relations: ['boardGame'],
+      relations: ['boardGames'],
     });
     if (!type) {
       throw new HttpException('No type found', HttpStatus.NOT_FOUND);
@@ -74,7 +74,7 @@ export class TypesService {
 
   async offset(index: number = 0): Promise<TypeOffset> {
     const types = await this.typesRepository.findAndCount({
-      relations: ['boardGame'],
+      relations: ['boardGames'],
       take: 100,
       skip: index * 100,
       order: {
@@ -82,10 +82,10 @@ export class TypesService {
       },
     });
 
-    const TypesDto = types[0].map(type => {
+    const typesDto = types[0].map(type => {
       return new TypeDto(type);
     });
 
-    return { rows: TypesDto, count: types[1] };
+    return { rows: typesDto, count: types[1] };
   }
 }
