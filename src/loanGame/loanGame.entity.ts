@@ -22,7 +22,7 @@ export class LoanGame {
   @Column('date')
   start: Date;
 
-  @Column('date')
+  @Column({ type: 'date', nullable: true })
   end: Date;
 
   @ManyToOne(
