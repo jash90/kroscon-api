@@ -15,7 +15,7 @@ export class MechanicsService {
 
   async findAll(): Promise<MechanicDto[]> {
     const mechanics = await this.mechanicsRepository.find({
-      relations: ['boardGame'],
+      relations: ['boardGames'],
     });
     return mechanics.map(mechanic => {
       return new MechanicDto(mechanic);
@@ -24,7 +24,7 @@ export class MechanicsService {
 
   async findOne(id: number): Promise<MechanicDto> {
     const mechanic = await this.mechanicsRepository.findOne(id, {
-      relations: ['boardGame'],
+      relations: ['boardGames'],
     });
     if (!mechanic) {
       throw new HttpException('No mechanic found', HttpStatus.NOT_FOUND);
@@ -46,7 +46,7 @@ export class MechanicsService {
 
   private async getMechanic(id: number): Promise<Mechanic> {
     const mechanic = await this.mechanicsRepository.findOne(id, {
-      relations: ['boardGame'],
+      relations: ['boardGames'],
     });
     if (!mechanic) {
       throw new HttpException('No mechanic found', HttpStatus.NOT_FOUND);
@@ -77,7 +77,7 @@ export class MechanicsService {
 
   async offset(index: number = 0): Promise<MechanicOffset> {
     const mechanics = await this.mechanicsRepository.findAndCount({
-      relations: ['boardGame'],
+      relations: ['boardGames'],
       take: 100,
       skip: index * 100,
       order: {

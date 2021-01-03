@@ -15,7 +15,7 @@ export class PublishersService {
 
   async findAll(): Promise<PublisherDto[]> {
     const publishers = await this.publishersRepository.find({
-      relations: ['boardGame'],
+      relations: ['boardGames'],
     });
     return publishers.map(publisher => {
       return new PublisherDto(publisher);
@@ -24,7 +24,7 @@ export class PublishersService {
 
   async findOne(id: number): Promise<PublisherDto> {
     const publisher = await this.publishersRepository.findOne(id, {
-      relations: ['boardGame'],
+      relations: ['boardGames'],
     });
     if (!publisher) {
       throw new HttpException('No publisher found', HttpStatus.NOT_FOUND);
@@ -46,7 +46,7 @@ export class PublishersService {
 
   private async getPublisher(id: number): Promise<Publisher> {
     const publisher = await this.publishersRepository.findOne(id, {
-      relations: ['boardGame'],
+      relations: ['boardGames'],
     });
     if (!publisher) {
       throw new HttpException('No publisher found', HttpStatus.NOT_FOUND);
@@ -77,7 +77,7 @@ export class PublishersService {
 
   async offset(index: number = 0): Promise<PublisherOffset> {
     const publishers = await this.publishersRepository.findAndCount({
-      relations: ['boardGame'],
+      relations: ['boardGames'],
       take: 100,
       skip: index * 100,
       order: {
