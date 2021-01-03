@@ -180,51 +180,6 @@ export class seeds1609258651869 implements MigrationInterface {
         await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (7, 8)`)
         await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (8, 8)`)
 
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (1, 2)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (2, 2)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (3, 3)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (4, 3)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (3, 4)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (4, 4)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (5, 5)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (6, 5)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (5, 6)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (6, 6)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (7, 7)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (8, 7)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (7, 8)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (8, 8)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (1, 1)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (2, 1)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (1, 2)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (2, 2)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (3, 3)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (4, 3)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (3, 4)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (4, 4)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (5, 5)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (6, 5)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (5, 6)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (6, 6)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (7, 7)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (8, 7)`)
-
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (7, 8)`)
-        await queryRunner.query(`INSERT INTO "boardGame_mechanic"( mechanic_id, "boardGame_id") VALUES (8, 8)`)
-
         await queryRunner.query(`INSERT INTO "boardGame_type"( type_id, "boardGame_id") VALUES (1, 1)`)
         await queryRunner.query(`INSERT INTO "boardGame_type"( type_id, "boardGame_id") VALUES (2, 1)`)
 
