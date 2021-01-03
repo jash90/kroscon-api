@@ -15,7 +15,7 @@ export class PrivilegesService {
 
   async findAll(): Promise<PrivilegeDto[]> {
     const privileges = await this.privilegesRepository.find({
-      relations: ['user'],
+      relations: ['users'],
     });
     return privileges.map(privilege => {
       return new PrivilegeDto(privilege);
@@ -24,7 +24,7 @@ export class PrivilegesService {
 
   async findOne(id: number): Promise<PrivilegeDto> {
     const privilege = await this.privilegesRepository.findOne(id, {
-      relations: ['user'],
+      relations: ['users'],
     });
     if (!privilege) {
       throw new HttpException('No privilege found', HttpStatus.NOT_FOUND);
@@ -46,7 +46,7 @@ export class PrivilegesService {
 
   private async getPrivilege(id: number): Promise<Privilege> {
     const privilege = await this.privilegesRepository.findOne(id, {
-      relations: ['user'],
+      relations: ['users'],
     });
     if (!privilege) {
       throw new HttpException('No privilege found', HttpStatus.NOT_FOUND);
@@ -77,7 +77,7 @@ export class PrivilegesService {
 
   async offset(index: number = 0): Promise<PrivilegeOffset> {
     const privileges = await this.privilegesRepository.findAndCount({
-      relations: ['user'],
+      relations: ['users'],
       take: 100,
       skip: index * 100,
       order: {
@@ -85,10 +85,10 @@ export class PrivilegesService {
       },
     });
 
-    const PrivilegesDto = privileges[0].map(privilege => {
-      return new PrivilegesDto(privilege);
+    const privilegesDto = privileges[0].map(privilege => {
+      return new PrivilegeDto(privilege);
     });
 
-    return { rows: PrivilegesDto, count: privileges[1] };
+    return { rows: privilegesDto, count: privileges[1] };
   }
 }

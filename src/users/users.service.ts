@@ -23,7 +23,7 @@ export class UsersService {
 
   async findAll(): Promise<UserDto[]> {
     const users = await this.usersRepository.find({
-      relations: ['privilege', 'reservation', 'loanGame', 'feedback'],
+      relations: ['privilege', 'reservations', 'loanGames', 'feedbacks'],
     });
     return users.map(user => {
       return new UserDto(user);
@@ -32,7 +32,7 @@ export class UsersService {
 
   async getUser(id: number): Promise<UserDto> {
     const user = await this.usersRepository.findOne(id, {
-      relations: ['privilege', 'reservation', 'loanGame', 'feedback'],
+      relations: ['privilege', 'reservations', 'loanGames', 'feedbacks'],
     });
     if (!user) {
       throw new HttpException(
@@ -46,7 +46,7 @@ export class UsersService {
 
   async getUserByEmail(email: string): Promise<User> {
     return await this.usersRepository.findOne({
-      relations: ['privilege', 'reservation', 'loanGame', 'feedback'],
+      relations: ['privilege', 'reservations', 'loanGames', 'feedbacks'],
       where: { email },
     });
   }
@@ -139,7 +139,7 @@ export class UsersService {
   }
   async offset(index: number = 0): Promise<UserOffset> {
     const users = await this.usersRepository.findAndCount({
-      relations: ['privilege', 'reservation', 'loanGame', 'feedback'],
+      relations: ['privilege', 'reservations', 'loanGames', 'feedbacks'],
       take: 100,
       skip: index * 100,
       order: {

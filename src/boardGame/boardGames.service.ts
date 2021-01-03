@@ -15,7 +15,7 @@ export class BoardGamesService {
 
   async findAll(): Promise<BoardGameDto[]> {
     const boardGames = await this.boardGamesRepository.find({
-      relations: ['feedback', 'loanGame', 'publisher', 'reservation'],
+      relations: ['feedbacks', 'loanGames', 'publisher', 'reservations'],
     });
     return boardGames.map(boardGame => {
       return new BoardGameDto(boardGame);
@@ -24,7 +24,7 @@ export class BoardGamesService {
 
   async findOne(id: number): Promise<BoardGameDto> {
     const boardGame = await this.boardGamesRepository.findOne(id, {
-      relations: ['feedback', 'loanGame', 'publisher', 'reservation'],
+      relations: ['feedbacks', 'loanGames', 'publisher', 'reservations'],
     });
     if (!boardGame) {
       throw new HttpException('No boardGame found', HttpStatus.NOT_FOUND);
@@ -51,7 +51,7 @@ export class BoardGamesService {
 
   private async getBoardGame(id: number): Promise<BoardGame> {
     const boardGame = await this.boardGamesRepository.findOne(id, {
-      relations: ['feedback', 'loanGame', 'publisher', 'reservation'],
+      relations: ['feedbacks', 'loanGames', 'publisher', 'reservations'],
     });
     if (!boardGame) {
       throw new HttpException('No boardGame found', HttpStatus.NOT_FOUND);
@@ -91,7 +91,7 @@ export class BoardGamesService {
   async offset(index: number = 0): Promise<BoardGameOffset> {
     try {
       const boardGames = await this.boardGamesRepository.findAndCount({
-        relations: ['feedback', 'loanGame', 'publisher', 'reservation'],
+        relations: ['feedbacks', 'loanGames', 'publisher', 'reservations'],
         take: 100,
         skip: index * 100,
         order: {
