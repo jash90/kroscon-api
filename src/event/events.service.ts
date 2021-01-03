@@ -15,7 +15,7 @@ export class EventsService {
 
   async findAll(): Promise<EventDto[]> {
     const events = await this.eventsRepository.find({
-      relations: ['lecture'],
+      relations: ['lectures'],
     });
     return events.map(event => {
       return new EventDto(event);
@@ -24,7 +24,7 @@ export class EventsService {
 
   async findOne(id: number): Promise<EventDto> {
     const event = await this.eventsRepository.findOne(id, {
-      relations: ['lecture'],
+      relations: ['lectures'],
     });
     if (!event) {
       throw new HttpException('No event found', HttpStatus.NOT_FOUND);
@@ -50,7 +50,7 @@ export class EventsService {
 
   private async getEvent(id: number): Promise<Event> {
     const event = await this.eventsRepository.findOne(id, {
-      relations: ['lecture'],
+      relations: ['lectures'],
     });
     if (!event) {
       throw new HttpException('No event found', HttpStatus.NOT_FOUND);
@@ -82,7 +82,7 @@ export class EventsService {
 
   async offset(index: number = 0): Promise<EventOffset> {
     const events = await this.eventsRepository.findAndCount({
-      relations: ['lecture'],
+      relations: ['lectures'],
       take: 100,
       skip: index * 100,
       order: {

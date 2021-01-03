@@ -15,7 +15,7 @@ export class LoanGamesService {
 
   async findAll(): Promise<LoanGameDto[]> {
     const loanGames = await this.loanGamesRepository.find({
-      relations: ['user', 'boardGame', 'table'],
+      relations: ['user', 'boardGame', 'table', 'hireUser'],
     });
     return loanGames.map(loanGame => {
       return new LoanGameDto(loanGame);
@@ -24,7 +24,7 @@ export class LoanGamesService {
 
   async findOne(id: number): Promise<LoanGameDto> {
     const loanGame = await this.loanGamesRepository.findOne(id, {
-      relations: ['user', 'boardGame', 'table'],
+      relations: ['user', 'boardGame', 'table', 'hireUser'],
     });
     if (!loanGame) {
       throw new HttpException('No loanGame found', HttpStatus.NOT_FOUND);
@@ -47,7 +47,7 @@ export class LoanGamesService {
 
   private async getLoanGame(id: number): Promise<LoanGame> {
     const loanGame = await this.loanGamesRepository.findOne(id, {
-      relations: ['user', 'boardGame', 'table'],
+      relations: ['user', 'boardGame', 'table', 'hireUser'],
     });
     if (!loanGame) {
       throw new HttpException('No loanGame found', HttpStatus.NOT_FOUND);
@@ -79,7 +79,7 @@ export class LoanGamesService {
 
   async offset(index: number = 0): Promise<LoanGameOffset> {
     const loanGames = await this.loanGamesRepository.findAndCount({
-      relations: ['user', 'boardGame', 'table'],
+      relations: ['user', 'boardGame', 'table', 'hireUser'],
       take: 100,
       skip: index * 100,
       order: {
