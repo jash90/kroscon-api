@@ -48,7 +48,95 @@ export class seeds1609258651869 implements MigrationInterface {
         await queryRunner.query(`INSERT INTO "boardGames"( name, uuid, min_players, max_players, playing_time, min_age, publisher_id) VALUES ('boardGame 7', '123452', 1, 4, 60, 8, 7)`);
         await queryRunner.query(`INSERT INTO "boardGames"( name, uuid, min_players, max_players, playing_time, min_age, publisher_id) VALUES ('boardGame 8', '123453', 1, 4, 60, 8, 8)`);
 
+        await queryRunner.query(`INSERT INTO "events" (name, start, "end", description, location) VALUES ('event 1', '2021-04-01 12:00', '2021-04-01 18:00', 'desc','Krosno')`);
+        await queryRunner.query(`INSERT INTO "events" (name, start, "end", description, location) VALUES ('event 2', '2021-04-01 12:00', '2021-04-01 18:00', 'desc','Krosno')`);
+        await queryRunner.query(`INSERT INTO "events" (name, start, "end", description, location) VALUES ('event 3', '2021-04-01 12:00', '2021-04-01 18:00', 'desc','Krosno')`);
+        await queryRunner.query(`INSERT INTO "events" (name, start, "end", description, location) VALUES ('event 4', '2021-04-01 12:00', '2021-04-01 18:00', 'desc','Krosno')`);
+        await queryRunner.query(`INSERT INTO "events" (name, start, "end", description, location) VALUES ('event 5', '2021-04-01 12:00', '2021-04-01 18:00', 'desc','Krosno')`);
+        await queryRunner.query(`INSERT INTO "events" (name, start, "end", description, location) VALUES ('event 6', '2021-04-01 12:00', '2021-04-01 18:00', 'desc','Krosno')`);
+        await queryRunner.query(`INSERT INTO "events" (name, start, "end", description, location) VALUES ('event 7', '2021-04-01 12:00', '2021-04-01 21:00', 'desc','Krosno')`);
+        await queryRunner.query(`INSERT INTO "events" (name, start, "end", description, location) VALUES ('event 8', '2021-04-01 12:00', '2021-04-01 20:00', 'desc','Krosno')`);
 
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 1', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 1)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 2', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 1)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 3', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 1)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 4', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 1)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 5', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 1)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 6', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 1)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 7', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 1)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 8', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 1)`);
+        
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 1', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 2)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 2', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 2)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 3', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 2)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 4', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 2)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 5', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 2)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 6', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 2)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 7', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 2)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 8', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 2)`);
+
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 1', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 3)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 2', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 3)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 3', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 3)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 4', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 3)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 5', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 3)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 6', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 3)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 7', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 3)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 8', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 3)`);
+
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 1', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 4)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 2', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 4)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 3', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 4)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 4', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 4)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 5', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 4)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 6', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 4)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 7', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 4)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 8', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 4)`);
+        
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 1', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 5)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 2', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 5)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 3', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 5)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 4', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 5)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 5', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 5)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 6', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 5)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 7', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 5)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 8', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 5)`);
+
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 1', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 6)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 2', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 6)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 3', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 6)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 4', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 6)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 5', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 6)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 6', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 6)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 7', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 6)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 8', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 6)`);
+
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 1', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 7)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 2', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 7)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 3', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 7)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 4', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 7)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 5', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 7)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 6', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 7)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 7', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 7)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 8', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 7)`);
+
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 1', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 8)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 2', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 8)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 3', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 8)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 4', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 8)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 5', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 8)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 6', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 8)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 7', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 8)`);
+        await queryRunner.query(`INSERT INTO "lectures" ( name, start, "end", description, event_id) VALUES ('lectures 8', '2021-04-01 12:20', '2021-04-01 13:00', 'desc', 8)`);
+
+        await queryRunner.query(`INSERT INTO "reservations" ( "time", user_id, "boardGame_id", table_id) VALUES ('2020-04-01 12:00', 1, 1, 1)`);
+        await queryRunner.query(`INSERT INTO "reservations" ( "time", user_id, "boardGame_id", table_id) VALUES ('2020-04-01 12:00', 1, 2, 2)`);
+        await queryRunner.query(`INSERT INTO "reservations" ( "time", user_id, "boardGame_id", table_id) VALUES ('2020-04-01 12:00', 1, 3, 3)`);
+        await queryRunner.query(`INSERT INTO "reservations" ( "time", user_id, "boardGame_id", table_id) VALUES ('2020-04-01 12:00', 1, 4, 4)`);
+        await queryRunner.query(`INSERT INTO "reservations" ( "time", user_id, "boardGame_id", table_id) VALUES ('2020-04-01 12:00', 1, 5, 5)`);
+        await queryRunner.query(`INSERT INTO "reservations" ( "time", user_id, "boardGame_id", table_id) VALUES ('2020-04-01 12:00', 1, 6, 6)`);
+        await queryRunner.query(`INSERT INTO "reservations" ( "time", user_id, "boardGame_id", table_id) VALUES ('2020-04-01 12:00', 1, 7, 7)`);
+        await queryRunner.query(`INSERT INTO "reservations" ( "time", user_id, "boardGame_id", table_id) VALUES ('2020-04-01 12:00', 1, 8, 8)`);
        }
    
        public async down(queryRunner: QueryRunner): Promise<void> {
