@@ -1,44 +1,40 @@
 import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-} from 'sequelize-typescript';
-import { BoardGameType } from 'src/boardGameType/boardGameType.entity';
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { BoardGame } from '../boardGame/boardGame.entity';
 
-@Table({
-    tableName: 'types',
-})
-export class Type extends Model<Type> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
-    id: number;
+@Entity('types')
+export class Type {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column(DataType.TEXT)
-    name: string;
+  @Column({ type: 'text', unique: true })
+  name: string;
 
-    @HasMany(() => BoardGameType)
-    BoardGameTypes: BoardGameType[];
+  @ManyToMany(
+    () => BoardGame,
+    boardGame => boardGame.types,
+  )
+  @JoinTable({
+    name: "boardGame_type",
+    joinColumns: [{ name: "type_id" }],
+    inverseJoinColumns: [{ name: "boardGame_id" }]
+  })
+  boardGames: BoardGame[];
 
-    @CreatedAt
-    @Column
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdatedAt
-    @Column
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @DeletedAt
-    @Column
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

@@ -1,12 +1,12 @@
-import { config as configDev } from './config/config.development';
-import { config as configProd } from './config/config.production';
+import { config as configDev } from "./config/config.development";
+import { config as configProd } from "./config/config.production";
 
 let config;
 
-if (process.env.NODE_ENV === 'production') {
-    config = configProd;
+if (process.env.NODE_ENV === "production") {
+  config = configProd;
 } else {
-    config = configDev;
+  config = configDev;
 }
 
 export default config;

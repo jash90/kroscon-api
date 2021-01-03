@@ -1,6 +1,5 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { Reservation } from '../reservation.entity';
-import { IsNumber, IsOptional } from 'class-validator';
 
 export class ReservationDto {
   @ApiModelProperty()
@@ -33,13 +32,9 @@ export class ReservationDto {
   constructor(reservation: Reservation) {
     this.id = reservation.id;
     this.time = reservation.time;
-    this.userId = reservation.userId;
     this.firstnameUser = reservation.user.firstname;
     this.lastnameUser = reservation.user.lastname;
-    this.tableId = reservation.tableId;
     this.nameTable = reservation.table.name;
-    this.boardGameId = reservation.boardGameId;
     this.nameBoardGame = reservation.boardGame.name;
-
   }
 }

@@ -1,98 +1,103 @@
 import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-    ForeignKey,
-    BelongsTo,
-    Min,
-    Max,
-} from 'sequelize-typescript';
-import { User } from 'src/users/user.entity';
-import { BoardGameMechanic } from '../boardGameMechanic/boardGameMechanic.entity';
-import { Publisher } from 'src/publisher/publisher.entity';
-import { Mechanic } from 'src/mechanic/mechanic.entity';
-import { BoardGameType } from 'src/boardGameType/boardGameType.entity';
-import { LoanGame } from 'src/loanGame/loanGame.entity';
-import { Reservation } from 'src/reservation/reservation.entity';
-import { Feedback } from 'src/feedback/feedback.entity';
-import { Table as Tab } from 'src/table/table.entity';
+  Check,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Feedback } from '../feedback/feedback.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
+import { Mechanic } from '../mechanic/mechanic.entity';
+import { Publisher } from '../publisher/publisher.entity';
+import { Reservation } from '../reservation/reservation.entity';
+import { Type } from '../type/type.entity';
 
-@Table({
-    tableName: 'boardGames',
-})
-export class BoardGame extends Model<BoardGame> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
-    id: number;
+@Entity('boardGames')
+@Check(`min_players > 0`)
+@Check(`max_players > 1`)
+@Check(`min_age > 1 AND min_age < 99`)
+export class BoardGame {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column(DataType.TEXT)
-    name: string;
+  @Column({ type: 'text', unique: true })
+  name: string;
 
-    @Unique(true)
-    @Column(DataType.TEXT)
-    uuid: string;
+  @Column({ type: 'text', unique: true })
+  uuid: string;
 
+  @Column({ type: 'smallint', name: 'min_players' })
+  minPlayers: number;
 
-    @Min(1)
-    @Column(DataType.INTEGER)
-    minPlayers: number;
+  @Column({ type: 'smallint', name: 'max_players' })
+  maxPlayers: number;
 
+  @Column({ type: 'smallint', name: 'playing_time' })
+  playingTime: number;
 
-    @Min(2)
-    @Column(DataType.INTEGER)
-    maxPlayers: number;
+  @Column({ type: 'smallint', name: 'min_age' })
+  minAge: number;
 
-    @Min(1)
-    @Column(DataType.INTEGER)
-    playingTime: number;
+  @ManyToMany(
+    () => Mechanic,
+    mechanic => mechanic.boardGames,
+  )
+  @JoinTable({
+    name: "boardGame_mechanic",
+    joinColumns: [{ name: "boardGame_id" }],
+    inverseJoinColumns: [{ name: "mechanic_id" }]
+  })
+  mechanics: Mechanic[];
 
-    @Min(1)
-    @Max(99)
-    @Column(DataType.INTEGER)
-    minAge: number;
+  @ManyToMany(
+    () => Type,
+    type => type.boardGames,
+  )
+  @JoinTable({
+    name: "boardGame_type",
+    joinColumns: [{ name: "boardGame_id" }],
+    inverseJoinColumns: [{ name: "type_id" }]
+  })
+  types: Type[];
 
-    @HasMany(() => BoardGameMechanic)
-    boardGameMechanics: BoardGameMechanic[];
+  @OneToMany(
+    () => LoanGame,
+    loanGame => loanGame.boardGame,
+  )
+  loanGames: LoanGame[];
 
-    @HasMany(() => BoardGameType)
-    boardGameTypes: BoardGameType[];
+  @OneToMany(
+    () => Reservation,
+    reservation => reservation.boardGame,
+  )
+  reservations: Reservation[];
 
-    @HasMany(() => LoanGame)
-    loanGames: LoanGame[];
+  @OneToMany(
+    () => Feedback,
+    feedback => feedback.boardGame,
+  )
+  feedbacks: Feedback[];
 
-    @HasMany(() => Reservation)
-    reservations: Reservation[];
+  @ManyToOne(
+    () => Publisher,
+    publisher => publisher.boardGames,
+  )
+  @JoinColumn({ name: 'publisher_id' })
+  publisher: Publisher;
 
-    @HasMany(() => Feedback)
-    feedbacks: Feedback[];
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @ForeignKey(() => Publisher)
-    @Column({ type: DataType.BIGINT })
-    publisherId: number;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @BelongsTo(() => Publisher)
-    publisher: Publisher;
-
-    @CreatedAt
-    @Column
-    createdAt: Date;
-
-    @UpdatedAt
-    @Column
-    updatedAt: Date;
-
-    @DeletedAt
-    @Column
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }
