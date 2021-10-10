@@ -1,10 +1,10 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { UserDto } from './user.dto';
 
 export class UserOffset {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly rows: UserDto[];
-  @ApiModelProperty()
+  @ApiProperty()
   readonly count: number;
 
   constructor(userOffset: UserOffset) {

@@ -13,9 +13,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { BoardGame } from './boardGame.entity';
 import { BoardGamesService } from './boardGames.service';
@@ -25,7 +25,7 @@ import { CreateBoardGameDto } from './dto/create-boardGame.dto';
 import { UpdateBoardGameDto } from './dto/update-boardGame.dto';
 
 @Controller('boardGames')
-@ApiUseTags('boardGames')
+@ApiTags('boardGames')
 export class BoardGamesController {
   constructor(private readonly boardGamesService: BoardGamesService) {}
 
@@ -37,7 +37,7 @@ export class BoardGamesController {
 
   @Get(':id')
   @ApiOkResponse({ type: BoardGameDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   findOne(@Param('id', new ParseIntPipe()) id: number): Promise<BoardGameDto> {
     return this.boardGamesService.findOne(id);
   }
@@ -54,7 +54,7 @@ export class BoardGamesController {
 
   @Put(':id')
   @ApiOkResponse({ type: BoardGameDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   update(
@@ -66,7 +66,7 @@ export class BoardGamesController {
 
   @Delete(':id')
   @ApiOkResponse({ type: BoardGameDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   delete(@Param('id', new ParseIntPipe()) id: number): Promise<BoardGameDto> {
@@ -75,9 +75,7 @@ export class BoardGamesController {
 
   @Get('offset/:id')
   @ApiOkResponse({ type: BoardGameOffset })
-  offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
-  ): Promise<BoardGameOffset> {
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<BoardGameOffset> {
     return this.boardGamesService.offset(index);
   }
 }

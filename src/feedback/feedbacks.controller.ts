@@ -13,9 +13,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { FeedbackDto } from './dto/feedback.dto';
@@ -24,7 +24,7 @@ import { UpdateFeedbackDto } from './dto/update-feedback.dto';
 import { FeedbacksService } from './feedbacks.service';
 
 @Controller('feedbacks')
-@ApiUseTags('feedbacks')
+@ApiTags('feedbacks')
 export class FeedbacksController {
   constructor(private readonly feedbacksService: FeedbacksService) {}
 
@@ -36,7 +36,7 @@ export class FeedbacksController {
 
   @Get(':id')
   @ApiOkResponse({ type: FeedbackDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   findOne(@Param('id', new ParseIntPipe()) id: number): Promise<FeedbackDto> {
     return this.feedbacksService.findOne(id);
   }
@@ -51,7 +51,7 @@ export class FeedbacksController {
 
   @Put(':id')
   @ApiOkResponse({ type: FeedbackDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   update(
@@ -63,7 +63,7 @@ export class FeedbacksController {
 
   @Delete(':id')
   @ApiOkResponse({ type: FeedbackDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   delete(@Param('id', new ParseIntPipe()) id: number): Promise<FeedbackDto> {
@@ -72,9 +72,7 @@ export class FeedbacksController {
 
   @Get('offset/:id')
   @ApiOkResponse({ type: FeedbackOffset })
-  offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
-  ): Promise<FeedbackOffset> {
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<FeedbackOffset> {
     return this.feedbacksService.offset(index);
   }
 }

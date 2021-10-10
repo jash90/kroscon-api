@@ -13,9 +13,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CreateMechanicDto } from './dto/create-mechanic.dto';
 import { MechanicDto } from './dto/mechanic.dto';
@@ -25,7 +25,7 @@ import { Mechanic as MechanicEntity } from './mechanic.entity';
 import { MechanicsService } from './mechanics.service';
 
 @Controller('mechanics')
-@ApiUseTags('mechanics')
+@ApiTags('mechanics')
 export class MechanicsController {
   constructor(private readonly mechanicsService: MechanicsService) {}
 
@@ -37,7 +37,7 @@ export class MechanicsController {
 
   @Get(':id')
   @ApiOkResponse({ type: MechanicDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   findOne(@Param('id', new ParseIntPipe()) id: number): Promise<MechanicDto> {
     return this.mechanicsService.findOne(id);
   }
@@ -52,7 +52,7 @@ export class MechanicsController {
 
   @Put(':id')
   @ApiOkResponse({ type: MechanicEntity })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   update(
@@ -64,7 +64,7 @@ export class MechanicsController {
 
   @Delete(':id')
   @ApiOkResponse({ type: MechanicEntity })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   delete(@Param('id', new ParseIntPipe()) id: number): Promise<MechanicDto> {
@@ -73,9 +73,7 @@ export class MechanicsController {
 
   @Get('offset/:id')
   @ApiOkResponse({ type: MechanicOffset })
-  offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
-  ): Promise<MechanicOffset> {
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<MechanicOffset> {
     return this.mechanicsService.offset(index);
   }
 }

@@ -1,10 +1,10 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { BoardGameDto } from './boardGame.dto';
 
 export class BoardGameOffset {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly rows: BoardGameDto[];
-  @ApiModelProperty()
+  @ApiProperty()
   readonly count: number;
 
   constructor(boardGameOffset: BoardGameOffset) {

@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class createDatabase1609449650539 implements MigrationInterface {
-    name = 'createDatabase1609449650539'
+export class createDatabase1633821665294 implements MigrationInterface {
+    name = 'createDatabase1633821665294'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "privileges" ("id" SERIAL NOT NULL, "name" text NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "deletedAt" TIMESTAMP, CONSTRAINT "UQ_913e0b87d35069ac7bd7982d889" UNIQUE ("name"), CONSTRAINT "PK_13f3ff98ae4d5565ec5ed6036cd" PRIMARY KEY ("id"))`);
@@ -35,10 +35,10 @@ export class createDatabase1609449650539 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "feedbacks" ADD CONSTRAINT "FK_da6cdb581bb6673c09f24e8f6a9" FOREIGN KEY ("boardGame_id") REFERENCES "boardGames"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "boardGames" ADD CONSTRAINT "FK_b1bdcf45730dd050d3faf579ecd" FOREIGN KEY ("publisher_id") REFERENCES "publishers"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "lectures" ADD CONSTRAINT "FK_14745f06787f71fbed78300d96a" FOREIGN KEY ("event_id") REFERENCES "events"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE "boardGame_mechanic" ADD CONSTRAINT "FK_85112f64e86883179bbc965bb33" FOREIGN KEY ("mechanic_id") REFERENCES "mechanics"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE "boardGame_mechanic" ADD CONSTRAINT "FK_fcac64ab27d6d327cdda0d6dc5a" FOREIGN KEY ("boardGame_id") REFERENCES "boardGames"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE "boardGame_type" ADD CONSTRAINT "FK_2b6a4257915fe3e14c330a59a55" FOREIGN KEY ("type_id") REFERENCES "types"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
-        await queryRunner.query(`ALTER TABLE "boardGame_type" ADD CONSTRAINT "FK_7b5b5d3f53aab0abfb4a1bfea32" FOREIGN KEY ("boardGame_id") REFERENCES "boardGames"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "boardGame_mechanic" ADD CONSTRAINT "FK_85112f64e86883179bbc965bb33" FOREIGN KEY ("mechanic_id") REFERENCES "mechanics"("id") ON DELETE CASCADE ON UPDATE CASCADE`);
+        await queryRunner.query(`ALTER TABLE "boardGame_mechanic" ADD CONSTRAINT "FK_fcac64ab27d6d327cdda0d6dc5a" FOREIGN KEY ("boardGame_id") REFERENCES "boardGames"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "boardGame_type" ADD CONSTRAINT "FK_2b6a4257915fe3e14c330a59a55" FOREIGN KEY ("type_id") REFERENCES "types"("id") ON DELETE CASCADE ON UPDATE CASCADE`);
+        await queryRunner.query(`ALTER TABLE "boardGame_type" ADD CONSTRAINT "FK_7b5b5d3f53aab0abfb4a1bfea32" FOREIGN KEY ("boardGame_id") REFERENCES "boardGames"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
@@ -59,11 +59,11 @@ export class createDatabase1609449650539 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "reservations" DROP CONSTRAINT "FK_da6e121752dd09f1e263d3e624b"`);
         await queryRunner.query(`ALTER TABLE "reservations" DROP CONSTRAINT "FK_4af5055a871c46d011345a255a6"`);
         await queryRunner.query(`ALTER TABLE "users" DROP CONSTRAINT "FK_743b787d0e656e7209523f1c5ec"`);
-        await queryRunner.query(`DROP INDEX "IDX_7b5b5d3f53aab0abfb4a1bfea3"`);
-        await queryRunner.query(`DROP INDEX "IDX_2b6a4257915fe3e14c330a59a5"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_7b5b5d3f53aab0abfb4a1bfea3"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_2b6a4257915fe3e14c330a59a5"`);
         await queryRunner.query(`DROP TABLE "boardGame_type"`);
-        await queryRunner.query(`DROP INDEX "IDX_fcac64ab27d6d327cdda0d6dc5"`);
-        await queryRunner.query(`DROP INDEX "IDX_85112f64e86883179bbc965bb3"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_fcac64ab27d6d327cdda0d6dc5"`);
+        await queryRunner.query(`DROP INDEX "public"."IDX_85112f64e86883179bbc965bb3"`);
         await queryRunner.query(`DROP TABLE "boardGame_mechanic"`);
         await queryRunner.query(`DROP TABLE "events"`);
         await queryRunner.query(`DROP TABLE "lectures"`);

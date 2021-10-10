@@ -1,10 +1,10 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { TypeDto } from './type.dto';
 
 export class TypeOffset {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly rows: TypeDto[];
-  @ApiModelProperty()
+  @ApiProperty()
   readonly count: number;
 
   constructor(typeOffset: TypeOffset) {

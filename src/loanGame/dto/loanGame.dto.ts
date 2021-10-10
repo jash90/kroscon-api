@@ -1,44 +1,44 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { LoanGame } from '../loanGame.entity';
 
 export class LoanGameDto {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly id: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly start: Date;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly end: Date;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly userId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly firstnameUser: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly lastnameUser: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly boardGameId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly nameBoardGame: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly tableId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly nameTable: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly hireUserId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly firstnameHireUser: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly lastnameHireUser: string;
 
   constructor(loanGame: LoanGame) {

@@ -1,22 +1,22 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { BoardGameDto } from '../../boardGame/dto/boardGame.dto';
 import { Publisher } from '../publisher.entity';
 
 export class PublisherDto {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly id: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly name: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly boardGames: BoardGameDto[];
 
   constructor(publisher: Publisher) {
     this.id = publisher.id;
     this.name = publisher.name;
     this.boardGames = publisher.boardGames.map(
-      boardGames => new BoardGameDto(boardGames),
+      (boardGames) => new BoardGameDto(boardGames),
     );
   }
 }

@@ -1,10 +1,10 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { PublisherDto } from './publisher.dto';
 
 export class PublisherOffset {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly rows: PublisherDto[];
-  @ApiModelProperty()
+  @ApiProperty()
   readonly count: number;
 
   constructor(publisherOffset: PublisherOffset) {

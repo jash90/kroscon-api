@@ -13,9 +13,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CreatePrivilegeDto } from './dto/create-privilege.dto';
 import { PrivilegeDto } from './dto/privilege.dto';
@@ -24,7 +24,7 @@ import { UpdatePrivilegeDto } from './dto/update-privilege.dto';
 import { PrivilegesService } from './privileges.service';
 
 @Controller('privileges')
-@ApiUseTags('privileges')
+@ApiTags('privileges')
 export class PrivilegesController {
   constructor(private readonly privilegesService: PrivilegesService) {}
 
@@ -36,7 +36,7 @@ export class PrivilegesController {
 
   @Get(':id')
   @ApiOkResponse({ type: PrivilegeDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   findOne(@Param('id', new ParseIntPipe()) id: number): Promise<PrivilegeDto> {
     return this.privilegesService.findOne(id);
   }
@@ -53,7 +53,7 @@ export class PrivilegesController {
 
   @Put(':id')
   @ApiOkResponse({ type: PrivilegeDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   update(
@@ -65,7 +65,7 @@ export class PrivilegesController {
 
   @Delete(':id')
   @ApiOkResponse({ type: PrivilegeDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   delete(@Param('id', new ParseIntPipe()) id: number): Promise<PrivilegeDto> {
@@ -74,9 +74,7 @@ export class PrivilegesController {
 
   @Get('offset/:id')
   @ApiOkResponse({ type: PrivilegeOffset })
-  offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
-  ): Promise<PrivilegeOffset> {
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<PrivilegeOffset> {
     return this.privilegesService.offset(index);
   }
 }

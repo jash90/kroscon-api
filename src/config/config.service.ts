@@ -1,6 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-// tslint:disable-next-line: no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
 class ConfigService {
@@ -16,30 +16,30 @@ class ConfigService {
   }
 
   public ensureValues(keys: string[]) {
-    keys.forEach(k => this.getValue(k, true));
+    keys.forEach((k) => this.getValue(k, true));
     return this;
   }
 
   public getPort() {
-    return this.getValue('APP_PORT', true);
+    return this.getValue('PORT', true);
   }
 
   public isProduction() {
-    const mode = this.getValue('APP_MODE', false);
-    return mode !== 'DEV';
+    const mode = this.getValue('MODE', false);
+    return mode != 'DEV';
   }
 
   public getTypeOrmConfig(): TypeOrmModuleOptions {
     return {
       type: 'postgres',
 
-      host: this.getValue('DB_HOST'),
-      port: parseInt(this.getValue('DB_PORT'), 10),
-      username: this.getValue('DB_USERNAME'),
-      password: this.getValue('DB_PASSWORD'),
-      database: this.getValue('DB_NAME'),
+      host: this.getValue('POSTGRES_HOST'),
+      port: parseInt(this.getValue('POSTGRES_PORT')),
+      username: this.getValue('POSTGRES_USER'),
+      password: this.getValue('POSTGRES_PASSWORD'),
+      database: this.getValue('POSTGRES_DATABASE'),
 
-      entities: ['./**/*.entity.{ts,js}'],
+      entities: ['**/*.entity{.ts,.js}'],
 
       migrationsTableName: 'migration',
 
@@ -55,11 +55,11 @@ class ConfigService {
 }
 
 const configService = new ConfigService(process.env).ensureValues([
-  'DB_HOST',
-  'DB_PORT',
-  'DB_USERNAME',
-  'DB_PASSWORD',
-  'DB_NAME',
+  'POSTGRES_HOST',
+  'POSTGRES_PORT',
+  'POSTGRES_USER',
+  'POSTGRES_PASSWORD',
+  'POSTGRES_DATABASE',
 ]);
 
-export { configService, ConfigService };
+export { configService };

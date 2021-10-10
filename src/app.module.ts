@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BoardGamesModule } from './boardGame/boardGames.module';
-import { configService } from './config/config.service';
 import { EventsModule } from './event/events.module';
 import { FeedbacksModule } from './feedback/feedbacks.module';
 import { LecturesModule } from './lecture/lectures.module';
@@ -13,6 +12,9 @@ import { ReservationsModule } from './reservation/reservations.module';
 import { TableModule } from './table/table.module';
 import { TypesModule } from './type/types.module';
 import { UsersModule } from './users/users.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { configService } from './config/config.service';
 
 @Module({
   imports: [
@@ -30,7 +32,7 @@ import { UsersModule } from './users/users.module';
     TypesModule,
     PrivilegesModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

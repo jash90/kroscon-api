@@ -1,35 +1,35 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { Feedback } from '../feedback.entity';
 
 export class FeedbackDto {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly id: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly rating: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly userId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly firstnameUser: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly lastnameUser: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly boardGameId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly nameBoardGame: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly loanGameId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly startLoanGame: Date;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly endLoanGame: Date;
 
   constructor(feedback: Feedback) {

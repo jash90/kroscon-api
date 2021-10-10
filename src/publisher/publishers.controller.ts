@@ -13,9 +13,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { PublisherDto } from './dto/publisher.dto';
@@ -24,7 +24,7 @@ import { UpdatePublisherDto } from './dto/update-publisher.dto';
 import { PublishersService } from './publishers.service';
 
 @Controller('publishers')
-@ApiUseTags('publishers')
+@ApiTags('publishers')
 export class PublishersController {
   constructor(private readonly publishersService: PublishersService) {}
 
@@ -36,7 +36,7 @@ export class PublishersController {
 
   @Get(':id')
   @ApiOkResponse({ type: PublisherDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   findOne(@Param('id', new ParseIntPipe()) id: number): Promise<PublisherDto> {
     return this.publishersService.findOne(id);
   }
@@ -53,7 +53,7 @@ export class PublishersController {
 
   @Put(':id')
   @ApiOkResponse({ type: PublisherDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   update(
@@ -65,7 +65,7 @@ export class PublishersController {
 
   @Delete(':id')
   @ApiOkResponse({ type: PublisherDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   delete(@Param('id', new ParseIntPipe()) id: number): Promise<PublisherDto> {
@@ -74,9 +74,7 @@ export class PublishersController {
 
   @Get('offset/:id')
   @ApiOkResponse({ type: PublisherOffset })
-  offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
-  ): Promise<PublisherOffset> {
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<PublisherOffset> {
     return this.publishersService.offset(index);
   }
 }

@@ -1,20 +1,20 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, Max, Min } from 'class-validator';
 
 export class CreateFeedbackDto {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   readonly userId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   readonly boardGameId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   readonly loanGameId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   @Min(1)
   @Max(10)

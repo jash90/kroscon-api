@@ -13,9 +13,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CreateLectureDto } from './dto/create-lecture.dto';
 import { LectureDto } from './dto/lecture.dto';
@@ -24,7 +24,7 @@ import { UpdateLectureDto } from './dto/update-lecture.dto';
 import { LecturesService } from './lectures.service';
 
 @Controller('lectures')
-@ApiUseTags('lectures')
+@ApiTags('lectures')
 export class LecturesController {
   constructor(private readonly lecturesService: LecturesService) {}
 
@@ -36,7 +36,7 @@ export class LecturesController {
 
   @Get(':id')
   @ApiOkResponse({ type: LectureDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   findOne(@Param('id', new ParseIntPipe()) id: number): Promise<LectureDto> {
     return this.lecturesService.findOne(id);
   }
@@ -51,7 +51,7 @@ export class LecturesController {
 
   @Put(':id')
   @ApiOkResponse({ type: LectureDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   update(
@@ -63,7 +63,7 @@ export class LecturesController {
 
   @Delete(':id')
   @ApiOkResponse({ type: LectureDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   delete(@Param('id', new ParseIntPipe()) id: number): Promise<LectureDto> {
@@ -72,9 +72,7 @@ export class LecturesController {
 
   @Get('offset/:id')
   @ApiOkResponse({ type: LectureOffset })
-  offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
-  ): Promise<LectureOffset> {
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<LectureOffset> {
     return this.lecturesService.offset(index);
   }
 }

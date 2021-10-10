@@ -1,44 +1,44 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
 
 export class UpdateBoardGameDto {
   @IsOptional()
-  @ApiModelProperty()
+  @ApiProperty()
   @IsString()
   name: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsOptional()
   @IsString()
   uuid: string;
 
   @IsOptional()
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   @Min(1)
   minPlayers: number;
 
   @IsOptional()
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   @Min(2)
   maxPlayers: number;
 
   @IsOptional()
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   @Min(1)
   playingTime: number;
 
   @IsOptional()
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   @Min(1)
   @Max(99)
   minAge: number;
 
   @IsOptional()
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   publisherId: number;
 }

@@ -1,32 +1,32 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { BoardGame } from '../boardGame.entity';
 
 export class BoardGameDto {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly id: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly name: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly uuid: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly minPlayers: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly maxPlayers: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly playingTime: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly minAge: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly publisherId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly namePublisher: string;
 
   constructor(boardGame: BoardGame) {

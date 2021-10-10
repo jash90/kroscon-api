@@ -1,29 +1,29 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateLoanGameDto {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsDate()
   readonly start: Date;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsOptional()
   @IsDate()
   readonly end: Date;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   readonly userId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   readonly boardGameId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   readonly tableId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   readonly hireUserId: number;
 }

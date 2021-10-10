@@ -13,9 +13,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CreateEventDto } from './dto/create-event.dto';
 import { EventDto } from './dto/event.dto';
@@ -24,7 +24,7 @@ import { UpdateEventDto } from './dto/update-event.dto';
 import { EventsService } from './events.service';
 
 @Controller('events')
-@ApiUseTags('events')
+@ApiTags('events')
 export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
@@ -36,7 +36,7 @@ export class EventsController {
 
   @Get(':id')
   @ApiOkResponse({ type: EventDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   findOne(@Param('id', new ParseIntPipe()) id: number): Promise<EventDto> {
     return this.eventsService.findOne(id);
   }
@@ -51,7 +51,7 @@ export class EventsController {
 
   @Put(':id')
   @ApiOkResponse({ type: EventDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   update(
@@ -63,7 +63,7 @@ export class EventsController {
 
   @Delete(':id')
   @ApiOkResponse({ type: EventDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   delete(@Param('id', new ParseIntPipe()) id: number): Promise<EventDto> {
@@ -72,9 +72,7 @@ export class EventsController {
 
   @Get('offset/:id')
   @ApiOkResponse({ type: EventOffset })
-  offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
-  ): Promise<EventOffset> {
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<EventOffset> {
     return this.eventsService.offset(index);
   }
 }

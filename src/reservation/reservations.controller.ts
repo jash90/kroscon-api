@@ -13,9 +13,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { ReservationDto } from './dto/reservation.dto';
@@ -24,7 +24,7 @@ import { UpdateReservationDto } from './dto/update-reservation.dto';
 import { ReservationsService } from './reservations.service';
 
 @Controller('reservations')
-@ApiUseTags('reservations')
+@ApiTags('reservations')
 export class ReservationsController {
   constructor(private readonly reservationsService: ReservationsService) {}
 
@@ -36,7 +36,7 @@ export class ReservationsController {
 
   @Get(':id')
   @ApiOkResponse({ type: ReservationDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   findOne(
     @Param('id', new ParseIntPipe()) id: number,
   ): Promise<ReservationDto> {
@@ -55,7 +55,7 @@ export class ReservationsController {
 
   @Put(':id')
   @ApiOkResponse({ type: ReservationDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   update(
@@ -67,7 +67,7 @@ export class ReservationsController {
 
   @Delete(':id')
   @ApiOkResponse({ type: ReservationDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   delete(@Param('id', new ParseIntPipe()) id: number): Promise<ReservationDto> {
@@ -77,7 +77,7 @@ export class ReservationsController {
   @Get('offset/:id')
   @ApiOkResponse({ type: ReservationOffset })
   offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
+    @Param('id', new ParseIntPipe()) index = 0,
   ): Promise<ReservationOffset> {
     return this.reservationsService.offset(index);
   }

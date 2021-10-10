@@ -1,10 +1,10 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { TableDto } from './table.dto';
 
 export class TableOffset {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly rows: TableDto[];
-  @ApiModelProperty()
+  @ApiProperty()
   readonly count: number;
 
   constructor(tableOffset: TableOffset) {

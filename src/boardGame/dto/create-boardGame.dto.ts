@@ -1,37 +1,37 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsString, Max, Min } from 'class-validator';
 
 export class CreateBoardGameDto {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsString()
   readonly name: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsString()
   readonly uuid: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   @Min(1)
   readonly minPlayers: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   @Min(2)
   readonly maxPlayers: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   @Min(1)
   readonly playingTime: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   @Min(1)
   @Max(99)
   readonly minAge: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   readonly publisherId: number;
 }

@@ -13,9 +13,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CreateLoanGameDto } from './dto/create-loanGame.dto';
 import { LoanGameDto } from './dto/loanGame.dto';
@@ -24,7 +24,7 @@ import { UpdateLoanGameDto } from './dto/update-loanGame.dto';
 import { LoanGamesService } from './loanGames.service';
 
 @Controller('loanGames')
-@ApiUseTags('loanGames')
+@ApiTags('loanGames')
 export class LoanGamesController {
   constructor(private readonly loanGamesService: LoanGamesService) {}
 
@@ -36,7 +36,7 @@ export class LoanGamesController {
 
   @Get(':id')
   @ApiOkResponse({ type: LoanGameDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   findOne(@Param('id', new ParseIntPipe()) id: number): Promise<LoanGameDto> {
     return this.loanGamesService.findOne(id);
   }
@@ -51,7 +51,7 @@ export class LoanGamesController {
 
   @Put(':id')
   @ApiOkResponse({ type: LoanGameDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   update(
@@ -63,7 +63,7 @@ export class LoanGamesController {
 
   @Delete(':id')
   @ApiOkResponse({ type: LoanGameDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   delete(@Param('id', new ParseIntPipe()) id: number): Promise<LoanGameDto> {
@@ -72,9 +72,7 @@ export class LoanGamesController {
 
   @Get('offset/:id')
   @ApiOkResponse({ type: LoanGameOffset })
-  offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
-  ): Promise<LoanGameOffset> {
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<LoanGameOffset> {
     return this.loanGamesService.offset(index);
   }
 }

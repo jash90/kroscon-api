@@ -1,27 +1,27 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { Lecture } from '../../lecture/lecture.entity';
 import { Event } from '../event.entity';
 
 export class EventDto {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly id: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly name: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly start: Date;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly end: Date;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly description: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly location: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly lectures: Lecture[];
 
   constructor(event: Event) {

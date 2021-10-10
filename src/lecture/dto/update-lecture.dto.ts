@@ -1,28 +1,28 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateLectureDto {
-  @ApiModelProperty()
+  @ApiProperty()
   @IsString()
   @IsOptional()
   name: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsDate()
   @IsOptional()
   start: Date;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsDate()
   @IsOptional()
   end: Date;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsString()
   @IsOptional()
   description: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   @IsOptional()
   eventId: number;

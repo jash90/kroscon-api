@@ -12,9 +12,9 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDto } from './dto/user.dto';
@@ -22,7 +22,7 @@ import { UserOffset } from './dto/user.offset';
 import { UsersService } from './users.service';
 
 @Controller('users')
-@ApiUseTags('users')
+@ApiTags('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -38,7 +38,7 @@ export class UsersController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @ApiOkResponse({ type: UserDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   async getUser(@Param('id', new ParseIntPipe()) id): Promise<UserDto> {
     return this.usersService.getUser(id);
   }
@@ -64,9 +64,7 @@ export class UsersController {
 
   @Get('offset/:id')
   @ApiOkResponse({ type: UserOffset })
-  offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
-  ): Promise<UserOffset> {
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<UserOffset> {
     return this.usersService.offset(index);
   }
 }

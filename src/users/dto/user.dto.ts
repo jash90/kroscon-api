@@ -1,24 +1,24 @@
 // import { Gender } from "../../shared/enum/enums";
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { User } from '../user.entity';
 
 export class UserDto {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly id: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly email: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly firstname: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly lastname: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly age: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly privilegeName: string;
 
   constructor(user: User) {

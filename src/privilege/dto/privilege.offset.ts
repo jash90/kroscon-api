@@ -1,10 +1,10 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { PrivilegeDto } from './privilege.dto';
 
 export class PrivilegeOffset {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly rows: PrivilegeDto[];
-  @ApiModelProperty()
+  @ApiProperty()
   readonly count: number;
 
   constructor(privilegeOffset: PrivilegeOffset) {

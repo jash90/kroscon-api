@@ -1,24 +1,24 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsNumber, IsOptional } from 'class-validator';
 
 export class UpdateReservationDto {
   @IsOptional()
-  @ApiModelProperty()
+  @ApiProperty()
   @IsDate()
   time: Date;
 
   @IsOptional()
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   userId: number;
 
   @IsOptional()
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   boardGameId: number;
 
   @IsOptional()
-  @ApiModelProperty()
+  @ApiProperty()
   @IsNumber()
   tableId: number;
 }

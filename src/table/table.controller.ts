@@ -13,9 +13,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
-  ApiImplicitParam,
+  ApiParam,
   ApiOkResponse,
-  ApiUseTags,
+  ApiTags,
 } from '@nestjs/swagger';
 import { CreateTableDto } from './dto/create-table.dto';
 import { TableDto } from './dto/table.dto';
@@ -24,7 +24,7 @@ import { UpdateTableDto } from './dto/update-table.dto';
 import { TableService } from './table.service';
 
 @Controller('tables')
-@ApiUseTags('tables')
+@ApiTags('tables')
 export class TableController {
   constructor(private readonly tablesService: TableService) {}
 
@@ -36,7 +36,7 @@ export class TableController {
 
   @Get(':id')
   @ApiOkResponse({ type: TableDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   findOne(@Param('id', new ParseIntPipe()) id: number): Promise<TableDto> {
     return this.tablesService.findOne(id);
   }
@@ -51,7 +51,7 @@ export class TableController {
 
   @Put(':id')
   @ApiOkResponse({ type: TableDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   update(
@@ -63,7 +63,7 @@ export class TableController {
 
   @Delete(':id')
   @ApiOkResponse({ type: TableDto })
-  @ApiImplicitParam({ name: 'id', required: true })
+  @ApiParam({ name: 'id', required: true })
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   delete(@Param('id', new ParseIntPipe()) id: number): Promise<TableDto> {
@@ -72,9 +72,7 @@ export class TableController {
 
   @Get('offset/:id')
   @ApiOkResponse({ type: TableOffset })
-  offset(
-    @Param('id', new ParseIntPipe()) index: number = 0,
-  ): Promise<TableOffset> {
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<TableOffset> {
     return this.tablesService.offset(index);
   }
 }
