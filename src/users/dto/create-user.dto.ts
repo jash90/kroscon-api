@@ -1,58 +1,41 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
-    IsString,
-    IsEmail,
-    IsEnum,
-    IsISO8601,
-    IsOptional,
-    MinLength,
-    IsNumber,
-    Min,
-    Max,
+  IsEmail,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+  MinLength,
 } from 'class-validator';
-import { Gender } from '../../shared/enum/enums';
-import { ApiModelProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
-    @ApiModelProperty()
-    @IsEmail()
-    readonly email: string;
+  @ApiProperty()
+  @IsEmail()
+  readonly email: string;
 
-    @ApiModelProperty()
-    @IsString()
-    @MinLength(6)
-    readonly password: string;
+  @ApiProperty()
+  @IsString()
+  @MinLength(6)
+  readonly password: string;
 
-    @ApiModelProperty()
-    @IsString()
-    readonly firstname: string;
+  @ApiProperty()
+  @IsString()
+  readonly firstname: string;
 
-    @ApiModelProperty()
-    @IsString()
-    readonly lastname: string;
+  @ApiProperty()
+  @IsString()
+  readonly lastname: string;
 
-    @ApiModelProperty()
-    @IsString()
-    @IsOptional()
-    readonly city: string;
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  readonly city: string;
 
-    @ApiModelProperty()
-    @IsNumber()
-    @IsOptional()
-    @Min(1)
-    @Max(99)
-    readonly age: number;
-
-    @ApiModelProperty()
-    @IsOptional()
-    @IsEnum(Gender)
-    readonly gender: Gender;
-
-    @ApiModelProperty()
-    @IsOptional()
-    @IsISO8601()
-    readonly birthday: string;
-
-    @ApiModelProperty()
-    @IsNumber()
-    readonly privilegeId:number;
+  @ApiProperty()
+  @IsNumber()
+  @IsOptional()
+  @Min(1)
+  @Max(99)
+  readonly age: number;
 }

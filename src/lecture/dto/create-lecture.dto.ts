@@ -1,25 +1,24 @@
-import { ApiModelProperty } from '@nestjs/swagger';
-import { IsString, IsDate, IsNumber, } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsDate, IsNumber, IsString } from 'class-validator';
 
 export class CreateLectureDto {
+  @ApiProperty()
+  @IsString()
+  readonly name: string;
 
-    @ApiModelProperty()
-    @IsString()
-    readonly name: string;
+  @ApiProperty()
+  @IsDate()
+  readonly start: Date;
 
-    @ApiModelProperty()
-    @IsDate()
-    readonly start: Date;
+  @ApiProperty()
+  @IsDate()
+  readonly end: Date;
 
-    @ApiModelProperty()
-    @IsDate()
-    readonly end:Date;
+  @ApiProperty()
+  @IsString()
+  readonly description: string;
 
-    @ApiModelProperty()
-    @IsString()
-    readonly description: string;
-
-    @ApiModelProperty()
-    @IsNumber()
-    readonly eventId: number;
+  @ApiProperty()
+  @IsNumber()
+  readonly eventId: number;
 }

@@ -1,45 +1,40 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { Reservation } from '../reservation.entity';
-import { IsNumber, IsOptional } from 'class-validator';
 
 export class ReservationDto {
-  @ApiModelProperty()
+  @ApiProperty()
   readonly id: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly time: Date;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly userId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly firstnameUser: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly lastnameUser: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly boardGameId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly nameBoardGame: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly tableId: number;
 
-  @ApiModelProperty()
+  @ApiProperty()
   readonly nameTable: string;
 
   constructor(reservation: Reservation) {
     this.id = reservation.id;
     this.time = reservation.time;
-    this.userId = reservation.userId;
     this.firstnameUser = reservation.user.firstname;
     this.lastnameUser = reservation.user.lastname;
-    this.tableId = reservation.tableId;
     this.nameTable = reservation.table.name;
-    this.boardGameId = reservation.boardGameId;
     this.nameBoardGame = reservation.boardGame.name;
-
   }
 }

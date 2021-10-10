@@ -1,98 +1,94 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Privilege } from '../privilege/privilege.entity';
-import { PrivilegeDto } from '../privilege/dto/privilege.dto';
-import { CreatePrivilegeDto } from '../privilege/dto/create-privilege.dto';
-import { UpdatePrivilegeDto } from '../privilege/dto/update-privilege.dto';
-import { PrivilegeOffset } from '../privilege/dto/privilege.offset';
-import { User } from '../users/user.entity';
+import { getRepository, Repository } from 'typeorm';
+import { CreatePrivilegeDto } from './dto/create-privilege.dto';
+import { PrivilegeDto } from './dto/privilege.dto';
+import { PrivilegeOffset } from './dto/privilege.offset';
+import { UpdatePrivilegeDto } from './dto/update-privilege.dto';
+import { Privilege } from './privilege.entity';
 
 @Injectable()
 export class PrivilegesService {
-    constructor(
-        @Inject('PrivilegesRepository')
-        private readonly privilegesRepository: typeof Privilege,
-    ) { }
+  constructor(
+    @Inject('PrivilegesRepository')
+    private readonly privilegesRepository: Repository<Privilege>,
+  ) {}
 
-    async findAll(): Promise<PrivilegeDto[]> {
-        const privileges = await this.privilegesRepository.findAll<Privilege>({
-            include: [User],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-        });
-        return privileges.map(privilege => {
-            return new PrivilegeDto(privilege);
-        });
+  async findAll(): Promise<PrivilegeDto[]> {
+    const privileges = await this.privilegesRepository.find({
+      relations: ['users'],
+    });
+    return privileges.map((privilege) => {
+      return new PrivilegeDto(privilege);
+    });
+  }
+
+  async findOne(id: number): Promise<PrivilegeDto> {
+    const privilege = await this.privilegesRepository.findOne(id, {
+      relations: ['users'],
+    });
+    if (!privilege) {
+      throw new HttpException('No privilege found', HttpStatus.NOT_FOUND);
     }
 
-    async findOne(id: number): Promise<PrivilegeDto> {
-        const privilege = await this.privilegesRepository.findByPk<Privilege>(id, {
-            include: [User],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-        });
-        if (!privilege) {
-            throw new HttpException('No privilege found', HttpStatus.NOT_FOUND);
-        }
+    return new PrivilegeDto(privilege);
+  }
 
-        return new PrivilegeDto(privilege);
+  async create(createPrivilegeDto: CreatePrivilegeDto): Promise<PrivilegeDto> {
+    const privilege = new Privilege();
+    privilege.name = createPrivilegeDto.name;
+
+    try {
+      return new PrivilegeDto(await getRepository(Privilege).save(privilege));
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  private async getPrivilege(id: number): Promise<Privilege> {
+    const privilege = await this.privilegesRepository.findOne(id, {
+      relations: ['users'],
+    });
+    if (!privilege) {
+      throw new HttpException('No privilege found', HttpStatus.NOT_FOUND);
     }
 
-    async create(createPrivilegeDto: CreatePrivilegeDto): Promise<Privilege> {
-        const privilege = new Privilege();
-        privilege.name = createPrivilegeDto.name;
+    return privilege;
+  }
 
-        try {
-            return await privilege.save();
-        } catch (err) {
-            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+  async update(
+    id: number,
+    updatePrivilegeDto: UpdatePrivilegeDto,
+  ): Promise<PrivilegeDto> {
+    const privilege = await this.getPrivilege(id);
+
+    privilege.name = updatePrivilegeDto.name || privilege.name;
+
+    try {
+      return new PrivilegeDto(await getRepository(Privilege).save(privilege));
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
 
-    private async getPrivilege(id: number): Promise<Privilege> {
-        const privilege = await this.privilegesRepository.findByPk<Privilege>(id, {
-            include: [User],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-        });
-        if (!privilege) {
-            throw new HttpException('No privilege found', HttpStatus.NOT_FOUND);
-        }
+  async delete(id: number): Promise<PrivilegeDto> {
+    const privilege = await this.getPrivilege(id);
+    return new PrivilegeDto(await getRepository(Privilege).remove(privilege));
+  }
 
-        return privilege;
-    }
+  async offset(index = 0): Promise<PrivilegeOffset> {
+    const privileges = await this.privilegesRepository.findAndCount({
+      relations: ['users'],
+      take: 100,
+      skip: index * 100,
+      order: {
+        id: 'ASC',
+      },
+    });
 
-    async update(
-        id: number,
-        updatePrivilegeDto: UpdatePrivilegeDto,
-    ): Promise<Privilege> {
-        const privilege = await this.getPrivilege(id);
+    const privilegesDto = privileges[0].map((privilege) => {
+      return new PrivilegeDto(privilege);
+    });
 
-        privilege.name = updatePrivilegeDto.name || privilege.name;
-
-        try {
-            return await privilege.save();
-        } catch (err) {
-            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    async delete(id: number): Promise<Privilege> {
-        const privilege = await this.getPrivilege(id);
-        await privilege.destroy();
-        return privilege;
-    }
-
-    async offset(index: number = 0): Promise<PrivilegeOffset> {
-        const privileges = await this.privilegesRepository.findAndCountAll({
-            include: [User],
-            limit: 100,
-            offset: index * 100,
-            order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-        });
-
-        const PrivilegesDto = privileges.rows.map(privilege => {
-            return new PrivilegesDto(privilege);
-        });
-
-        return { rows: PrivilegesDto, count: privileges.count };
-    }
-
+    return { rows: privilegesDto, count: privileges[1] };
+  }
 }

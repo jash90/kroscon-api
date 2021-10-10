@@ -1,8 +1,9 @@
-import { ApiModelProperty } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString, Length } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 
 export class UpdateTableDto {
-    @ApiModelProperty()
-    @IsString()
-    readonly name: string;
+  @IsOptional()
+  @ApiProperty()
+  @IsString()
+  name: string;
 }

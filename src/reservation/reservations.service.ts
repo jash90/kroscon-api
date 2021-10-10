@@ -1,106 +1,102 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { Reservation } from '../reservation/reservation.entity';
-import { ReservationDto } from '../reservation/dto/reservation.dto';
-import { CreateReservationDto } from '../reservation/dto/create-reservation.dto';
-import { UpdateReservationDto } from '../reservation/dto/update-reservation.dto';
-import { ReservationOffset } from '../reservation/dto/reservation.offset';
-import { User } from '../users/user.entity';
-import { BoardGame } from '../boardGame/boardGame.entity';
-import { Table } from '../table/table.entity';
+import { getRepository, Repository } from 'typeorm';
+import { CreateReservationDto } from './dto/create-reservation.dto';
+import { ReservationDto } from './dto/reservation.dto';
+import { ReservationOffset } from './dto/reservation.offset';
+import { UpdateReservationDto } from './dto/update-reservation.dto';
+import { Reservation } from './reservation.entity';
 
 @Injectable()
 export class ReservationsService {
-    constructor(
-        @Inject('ReservationsRepository')
-        private readonly reservationsRepository: typeof Reservation,
-    ) { }
+  constructor(
+    @Inject('ReservationsRepository')
+    private readonly reservationsRepository: Repository<Reservation>,
+  ) {}
 
-    async findAll(): Promise<ReservationDto[]> {
-        const reservations = await this.reservationsRepository.findAll<Reservation>({
-            include: [User, BoardGame, Table],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-        });
-        return reservations.map(reservation => {
-            return new ReservationDto(reservation);
-        });
+  async findAll(): Promise<ReservationDto[]> {
+    const reservations = await this.reservationsRepository.find({
+      relations: ['user', 'boardGame', 'table'],
+    });
+    return reservations.map((reservation) => {
+      return new ReservationDto(reservation);
+    });
+  }
+
+  async findOne(id: number): Promise<ReservationDto> {
+    const reservation = await this.reservationsRepository.findOne(id, {
+      relations: ['user', 'boardGame', 'table'],
+    });
+    if (!reservation) {
+      throw new HttpException('No reservation found', HttpStatus.NOT_FOUND);
     }
 
-    async findOne(id: number): Promise<ReservationDto> {
-        const reservation = await this.reservationsRepository.findByPk<Reservation>(id, {
-            include: [User, BoardGame, Table],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-        });
-        if (!reservation) {
-            throw new HttpException('No reservation found', HttpStatus.NOT_FOUND);
-        }
+    return new ReservationDto(reservation);
+  }
 
-        return new ReservationDto(reservation);
+  async create(
+    createReservationDto: CreateReservationDto,
+  ): Promise<ReservationDto> {
+    const reservation = new Reservation();
+    reservation.time = createReservationDto.time;
+
+    try {
+      return new ReservationDto(
+        await getRepository(Reservation).save(reservation),
+      );
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  private async getReservation(id: number): Promise<Reservation> {
+    const reservation = await this.reservationsRepository.findOne(id, {
+      relations: ['user', 'boardGame', 'table'],
+    });
+    if (!reservation) {
+      throw new HttpException('No reservation found', HttpStatus.NOT_FOUND);
     }
 
-    async create(createReservationDto: CreateReservationDto): Promise<Reservation> {
-        const reservation = new Reservation();
-        reservation.time = createReservationDto.time;
-        reservation.userId = createReservationDto.userId;
-        reservation.tableId = createReservationDto.tableId;
-        reservation.boardGameId = createReservationDto.boardGameId;
+    return reservation;
+  }
 
-        try {
-            return await reservation.save();
-        } catch (err) {
-            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+  async update(
+    id: number,
+    updateReservationDto: UpdateReservationDto,
+  ): Promise<ReservationDto> {
+    const reservation = await this.getReservation(id);
+
+    reservation.time = updateReservationDto.time || reservation.time;
+
+    try {
+      return new ReservationDto(
+        await getRepository(Reservation).save(reservation),
+      );
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
 
-    private async getReservation(id: number): Promise<Reservation> {
-        const reservation = await this.reservationsRepository.findByPk<Reservation>(id, {
-            include: [User, BoardGame, Table],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-        });
-        if (!reservation) {
-            throw new HttpException('No reservation found', HttpStatus.NOT_FOUND);
-        }
+  async delete(id: number): Promise<ReservationDto> {
+    const reservation = await this.getReservation(id);
+    return new ReservationDto(
+      await getRepository(Reservation).remove(reservation),
+    );
+  }
 
-        return reservation;
-    }
+  async offset(index = 0): Promise<ReservationOffset> {
+    const reservations = await this.reservationsRepository.findAndCount({
+      relations: ['user', 'boardGame', 'table'],
+      take: 100,
+      skip: index * 100,
+      order: {
+        id: 'ASC',
+      },
+    });
 
-    async update(
-        id: number,
-        updateReservationDto: UpdateReservationDto,
-    ): Promise<Reservation> {
-        const reservation = await this.getReservation(id);
+    const ReservationsDto = reservations[0].map((reservation) => {
+      return new ReservationsDto(reservation);
+    });
 
-        reservation.time = updateReservationDto.time || reservation.time;
-        reservation.userId = updateReservationDto.userId || reservation.userId;
-        reservation.tableId = updateReservationDto.tableId || reservation.tableId;
-        reservation.boardGameId = updateReservationDto.boardGameId || reservation.boardGameId;
-
-        try {
-            return await reservation.save();
-        } catch (err) {
-            throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    async delete(id: number): Promise<Reservation> {
-        const reservation = await this.getReservation(id);
-        await reservation.destroy();
-        return reservation;
-    }
-
-    async offset(index: number = 0): Promise<ReservationOffset> {
-        const reservations = await this.reservationsRepository.findAndCountAll({
-            include: [User, BoardGame, Table],
-            limit: 100,
-            offset: index * 100,
-            order: ['id'],
-            attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
-        });
-
-        const ReservationsDto = reservations.rows.map(reservation => {
-            return new ReservationsDto(reservation);
-        });
-
-        return { rows: ReservationsDto, count: reservations.count };
-    }
-
+    return { rows: ReservationsDto, count: reservations[1] };
+  }
 }

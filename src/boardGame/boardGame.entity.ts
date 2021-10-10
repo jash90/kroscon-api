@@ -1,102 +1,85 @@
 import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-    ForeignKey,
-    BelongsTo,
-    Min,
-    Max,
-} from 'sequelize-typescript';
-import { User } from '../users/user.entity';
-import { BoardGameMechanic } from '../boardGameMechanic/boardGameMechanic.entity';
-import { Publisher } from '../publisher/publisher.entity';
-import { Mechanic } from '../mechanic/mechanic.entity';
-import { BoardGameType } from '../boardGameType/boardGameType.entity';
-import { LoanGame } from '../loanGame/loanGame.entity';
-import { Reservation } from '../reservation/reservation.entity';
+  Check,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Feedback } from '../feedback/feedback.entity';
-import { Table as Tab } from '../table/table.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
+import { Mechanic } from '../mechanic/mechanic.entity';
+import { Publisher } from '../publisher/publisher.entity';
+import { Reservation } from '../reservation/reservation.entity';
+import { Type } from '../type/type.entity';
 
-@Table({
-    tableName: 'boardGame',
-})
-export class BoardGame extends Model<BoardGame> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
-    id: number;
+@Entity('boardGames')
+@Check(`min_players > 0`)
+@Check(`max_players > 1`)
+@Check(`min_age > 1 AND min_age < 99`)
+export class BoardGame {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column(DataType.TEXT)
-    name: string;
+  @Column({ type: 'text', unique: true })
+  name: string;
 
+  @Column({ type: 'text', unique: true })
+  uuid: string;
 
-    @Unique(true)
-    @Column(DataType.TEXT)
-    uuid: string;
+  @Column({ type: 'smallint', name: 'min_players' })
+  minPlayers: number;
 
-    @Min(1)
-    @Column(DataType.INTEGER)
-    minPlayers: number;
+  @Column({ type: 'smallint', name: 'max_players' })
+  maxPlayers: number;
 
+  @Column({ type: 'smallint', name: 'playing_time' })
+  playingTime: number;
 
-    @Min(2)
-    @Column(DataType.INTEGER)
-    maxPlayers: number;
+  @Column({ type: 'smallint', name: 'min_age' })
+  minAge: number;
 
-    @Min(1)
-    @Column(DataType.INTEGER)
-    playingTime: number;
+  @ManyToMany(() => Mechanic, (mechanic) => mechanic.boardGames)
+  @JoinTable({
+    name: 'boardGame_mechanic',
+    joinColumns: [{ name: 'boardGame_id' }],
+    inverseJoinColumns: [{ name: 'mechanic_id' }],
+  })
+  mechanics: Mechanic[];
 
+  @ManyToMany(() => Type, (type) => type.boardGames)
+  @JoinTable({
+    name: 'boardGame_type',
+    joinColumns: [{ name: 'boardGame_id' }],
+    inverseJoinColumns: [{ name: 'type_id' }],
+  })
+  types: Type[];
 
-    @Min(1)
-    @Max(99)
-    @Column(DataType.INTEGER)
-    minAge: number;
+  @OneToMany(() => LoanGame, (loanGame) => loanGame.boardGame)
+  loanGames: LoanGame[];
 
-    @HasMany(() => BoardGameMechanic)
-    boardGameMechanics: BoardGameMechanic[];
+  @OneToMany(() => Reservation, (reservation) => reservation.boardGame)
+  reservations: Reservation[];
 
-    @HasMany(() => BoardGameType)
-    boardGameTypes: BoardGameType[];
+  @OneToMany(() => Feedback, (feedback) => feedback.boardGame)
+  feedbacks: Feedback[];
 
-    @HasMany(() => LoanGame)
-    loanGames: LoanGame[];
+  @ManyToOne(() => Publisher, (publisher) => publisher.boardGames)
+  @JoinColumn({ name: 'publisher_id' })
+  publisher: Publisher;
 
-    @HasMany(() => Reservation)
-    reservations: Reservation[];
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @HasMany(() => Feedback)
-    feedbacks: Feedback[];
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @HasMany(() => Tab)
-    tables: Tab[];
-
-    @ForeignKey(() => Publisher)
-    @Column({ type: DataType.BIGINT, field: 'publisher_id' })
-    publisherId: number;
-
-    @BelongsTo(() => Publisher)
-    publisher: Publisher;
-
-    @CreatedAt
-    @Column({ field: 'created_at' })
-    createdAt: Date;
-
-    @UpdatedAt
-    @Column({ field: 'updated_at' })
-    updatedAt: Date;
-
-    @DeletedAt
-    @Column({ field: 'deleted_at' })
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

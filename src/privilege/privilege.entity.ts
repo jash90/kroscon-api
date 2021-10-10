@@ -1,44 +1,31 @@
 import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-} from 'sequelize-typescript';
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { User } from '../users/user.entity';
 
-@Table({
-    tableName: 'privilege',
-})
-export class Privilege extends Model<Privilege> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
-    id: number;
+@Entity('privileges')
+export class Privilege {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column(DataType.TEXT)
-    name: string;
+  @Column({ type: 'text', unique: true })
+  name: string;
 
-    @HasMany(() => User)
-    users: User[];
+  @OneToMany(() => User, (user) => user.privilege)
+  users: User[];
 
-    @CreatedAt
-    @Column({ field: 'created_at' })
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdatedAt
-    @Column({ field: 'updated_at' })
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @DeletedAt
-    @Column({ field: 'deleted_at' })
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

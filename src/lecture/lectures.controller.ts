@@ -1,69 +1,78 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiCreatedResponse, ApiImplicitParam, ApiOkResponse, ApiUseTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { LectureDto } from './dto/lecture.dto';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiParam,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateLectureDto } from './dto/create-lecture.dto';
-import { UpdateLectureDto } from './dto/update-lecture.dto';
+import { LectureDto } from './dto/lecture.dto';
 import { LectureOffset } from './dto/lecture.offset';
-import { Lecture as LectureEntity } from './lecture.entity';
+import { UpdateLectureDto } from './dto/update-lecture.dto';
 import { LecturesService } from './lectures.service';
 
 @Controller('lectures')
-@ApiUseTags('lectures')
+@ApiTags('lectures')
 export class LecturesController {
-    constructor(private readonly lecturesService: LecturesService) { }
+  constructor(private readonly lecturesService: LecturesService) {}
 
-    @Get()
-    @ApiOkResponse({ type: [LectureDto] })
-    findAll(): Promise<LectureDto[]> {
-        return this.lecturesService.findAll();
-    }
+  @Get()
+  @ApiOkResponse({ type: [LectureDto] })
+  findAll(): Promise<LectureDto[]> {
+    return this.lecturesService.findAll();
+  }
 
-    @Get(':id')
-    @ApiOkResponse({ type: LectureDto })
-    @ApiImplicitParam({ name: 'id', required: true })
-    findOne(@Param('id', new ParseIntPipe()) id: number): Promise<LectureDto> {
-        return this.lecturesService.findOne(id);
-    }
+  @Get(':id')
+  @ApiOkResponse({ type: LectureDto })
+  @ApiParam({ name: 'id', required: true })
+  findOne(@Param('id', new ParseIntPipe()) id: number): Promise<LectureDto> {
+    return this.lecturesService.findOne(id);
+  }
 
-    @Post()
-    @ApiCreatedResponse({ type: LectureEntity })
-    @ApiBearerAuth()
-    @UseGuards(AuthGuard('jwt'))
-    create(
-        @Body() createLectureDto: CreateLectureDto,
-    ): Promise<LectureEntity> {
-        return this.lecturesService.create(createLectureDto);
-    }
+  @Post()
+  @ApiCreatedResponse({ type: LectureDto })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  create(@Body() createLectureDto: CreateLectureDto): Promise<LectureDto> {
+    return this.lecturesService.create(createLectureDto);
+  }
 
-    @Put(':id')
-    @ApiOkResponse({ type: LectureEntity })
-    @ApiImplicitParam({ name: 'id', required: true })
-    @ApiBearerAuth()
-    @UseGuards(AuthGuard('jwt'))
-    update(
-        @Param('id', new ParseIntPipe()) id: number,
-        @Body() updateLectureDto: UpdateLectureDto,
-    ): Promise<LectureEntity> {
-        return this.lecturesService.update(id, updateLectureDto);
-    }
+  @Put(':id')
+  @ApiOkResponse({ type: LectureDto })
+  @ApiParam({ name: 'id', required: true })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  update(
+    @Param('id', new ParseIntPipe()) id: number,
+    @Body() updateLectureDto: UpdateLectureDto,
+  ): Promise<LectureDto> {
+    return this.lecturesService.update(id, updateLectureDto);
+  }
 
-    @Delete(':id')
-    @ApiOkResponse({ type: LectureEntity })
-    @ApiImplicitParam({ name: 'id', required: true })
-    @ApiBearerAuth()
-    @UseGuards(AuthGuard('jwt'))
-    delete(
-        @Param('id', new ParseIntPipe()) id: number,
-    ): Promise<LectureEntity> {
-        return this.lecturesService.delete(id);
-    }
+  @Delete(':id')
+  @ApiOkResponse({ type: LectureDto })
+  @ApiParam({ name: 'id', required: true })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  delete(@Param('id', new ParseIntPipe()) id: number): Promise<LectureDto> {
+    return this.lecturesService.delete(id);
+  }
 
-    @Get(':id')
-    @ApiOkResponse({ type: LectureOffset })
-    offset(@Param('id', new ParseIntPipe()) index: number = 0): Promise<LectureOffset> {
-        return this.lecturesService.offset(index);
-    }
-
-
+  @Get('offset/:id')
+  @ApiOkResponse({ type: LectureOffset })
+  offset(@Param('id', new ParseIntPipe()) index = 0): Promise<LectureOffset> {
+    return this.lecturesService.offset(index);
+  }
 }

@@ -1,76 +1,55 @@
 import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-    ForeignKey,
-    BelongsTo,
-} from 'sequelize-typescript';
-import { User } from '../users/user.entity';
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { BoardGame } from '../boardGame/boardGame.entity';
-import { Table as Tab } from '../table/table.entity';
+import { Feedback } from '../feedback/feedback.entity';
+import { Table } from '../table/table.entity';
+import { User } from '../users/user.entity';
 
-@Table({
-    tableName: 'loanGame',
-})
-export class LoanGame extends Model<LoanGame> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
-    id: number;
+@Entity('loanGames')
+export class LoanGame {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column(DataType.DATE)
-    start: Date;
+  @Column('date')
+  start: Date;
 
-    @Column(DataType.DATE)
-    end: Date;
+  @Column({ type: 'date', nullable: true })
+  end: Date;
 
-    @ForeignKey(() => User)
-    @Column({ type: DataType.UUID, field: 'user_id' })
-    userId: number;
+  @ManyToOne(() => User, (user) => user.hireGames)
+  @JoinColumn({ name: 'hireUser_id' })
+  hireUser: User;
 
-    @BelongsTo(() => User)
-    user: User;
+  @ManyToOne(() => User, (user) => user.loanGames)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
-    @ForeignKey(() => BoardGame)
-    @Column({ type: DataType.BIGINT, field: 'boardGame_id' })
-    boardGameId: number;
+  @ManyToOne(() => Table, (table) => table.loanGames)
+  @JoinColumn({ name: 'table_id' })
+  table: Table;
 
-    @BelongsTo(() => BoardGame)
-    boardGame: BoardGame;
+  @ManyToOne(() => BoardGame, (boardGame) => boardGame.loanGames)
+  @JoinColumn({ name: 'boardGame_id' })
+  boardGame: BoardGame;
 
-    @ForeignKey(() => Tab)
-    @Column({ type: DataType.BIGINT, field: 'table_id' })
-    tableId: number;
+  @OneToMany(() => Feedback, (feedback) => feedback.loanGame)
+  feedbacks: Feedback[];
 
-    @BelongsTo(() => Tab)
-    table: Tab;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @ForeignKey(() => User)
-    @Column({ type: DataType.UUID, field: 'hireuser_id' })
-    hireUserId: number;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @BelongsTo(() => User)
-    hireUser: User;
-
-    @CreatedAt
-    @Column({ field: 'created_at' })
-    createdAt: Date;
-
-    @UpdatedAt
-    @Column({ field: 'updated_at' })
-    updatedAt: Date;
-
-    @DeletedAt
-    @Column({ field: 'deleted_at' })
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

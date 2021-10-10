@@ -1,59 +1,55 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { LoanGame } from '../loanGame.entity';
 
 export class LoanGameDto {
-    @ApiModelProperty()
-    readonly id: number;
+  @ApiProperty()
+  readonly id: number;
 
-    @ApiModelProperty()
-    readonly start: Date;
+  @ApiProperty()
+  readonly start: Date;
 
-    @ApiModelProperty()
-    readonly end: Date;
+  @ApiProperty()
+  readonly end: Date;
 
-    @ApiModelProperty()
-    readonly userId: number;
+  @ApiProperty()
+  readonly userId: number;
 
-    @ApiModelProperty()
-    readonly firstnameUser: string;
+  @ApiProperty()
+  readonly firstnameUser: string;
 
-    @ApiModelProperty()
-    readonly lastnameUser: string;
+  @ApiProperty()
+  readonly lastnameUser: string;
 
-    @ApiModelProperty()
-    readonly boardGameId: number;
+  @ApiProperty()
+  readonly boardGameId: number;
 
-    @ApiModelProperty()
-    readonly nameBoardGame: string;
+  @ApiProperty()
+  readonly nameBoardGame: string;
 
-    @ApiModelProperty()
-    readonly tableId: number;
+  @ApiProperty()
+  readonly tableId: number;
 
-    @ApiModelProperty()
-    readonly nameTable: string;
+  @ApiProperty()
+  readonly nameTable: string;
 
-    @ApiModelProperty()
-    readonly hireUserId: number;
+  @ApiProperty()
+  readonly hireUserId: number;
 
-    @ApiModelProperty()
-    readonly firstnameHireUser: string;
+  @ApiProperty()
+  readonly firstnameHireUser: string;
 
-    @ApiModelProperty()
-    readonly lastnameHireUser: string;
+  @ApiProperty()
+  readonly lastnameHireUser: string;
 
-    constructor(loanGame: LoanGame) {
-        this.id = loanGame.id;
-        this.start = loanGame.start;
-        this.end = loanGame.end;
-        this.userId = loanGame.userId;
-        this.firstnameUser = loanGame.user.firstname;
-        this.lastnameUser = loanGame.user.lastname;
-        this.boardGameId = loanGame.boardGameId;
-        this.nameBoardGame = loanGame.boardGame.name;
-        this.tableId = loanGame.tableId;
-        this.nameTable = loanGame.table.name;
-        this.hireUserId = loanGame.hireUserId;
-        this.firstnameHireUser = loanGame.hireUser.firstname;
-        this.lastnameHireUser = loanGame.hireUser.lastname;
-    }
+  constructor(loanGame: LoanGame) {
+    this.id = loanGame.id;
+    this.start = loanGame.start;
+    this.end = loanGame.end;
+    this.firstnameUser = loanGame.user.firstname;
+    this.lastnameUser = loanGame.user.lastname;
+    this.nameBoardGame = loanGame.boardGame.name;
+    this.nameTable = loanGame.table.name;
+    this.firstnameHireUser = loanGame.hireUser.firstname;
+    this.lastnameHireUser = loanGame.hireUser.lastname;
+  }
 }

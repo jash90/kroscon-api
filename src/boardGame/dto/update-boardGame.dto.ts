@@ -1,44 +1,44 @@
-import { ApiModelProperty } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString, Length, IsNumber, Min, Max } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
 
 export class UpdateBoardGameDto {
-    @IsOptional()
-    @ApiModelProperty()
-    @IsString()
-    readonly name: string;
+  @IsOptional()
+  @ApiProperty()
+  @IsString()
+  name: string;
 
-    @ApiModelProperty()
-    @IsString()
-    readonly uuid: string;
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  uuid: string;
 
-    @IsOptional()
-    @ApiModelProperty()
-    @IsNumber()
-    @Min(1)
-    readonly minPlayers: number;
+  @IsOptional()
+  @ApiProperty()
+  @IsNumber()
+  @Min(1)
+  minPlayers: number;
 
-    @IsOptional()
-    @ApiModelProperty()
-    @IsNumber()
-    @Min(2)
-    readonly maxPlayers: number;
+  @IsOptional()
+  @ApiProperty()
+  @IsNumber()
+  @Min(2)
+  maxPlayers: number;
 
-    @IsOptional()
-    @ApiModelProperty()
-    @IsNumber()
-    @Min(1)
-    readonly playingTime: number;
+  @IsOptional()
+  @ApiProperty()
+  @IsNumber()
+  @Min(1)
+  playingTime: number;
 
-    @IsOptional()
-    @ApiModelProperty()
-    @IsNumber()
-    @Min(1)
-    @Max(99)
-    readonly minAge: number;
+  @IsOptional()
+  @ApiProperty()
+  @IsNumber()
+  @Min(1)
+  @Max(99)
+  minAge: number;
 
-    @IsOptional()
-    @ApiModelProperty()
-    @IsNumber()
-    readonly publisherId: number;
-
+  @IsOptional()
+  @ApiProperty()
+  @IsNumber()
+  publisherId: number;
 }

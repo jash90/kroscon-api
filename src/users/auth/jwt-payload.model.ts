@@ -1,4 +1,4 @@
 export interface JwtPayload {
-    email: string;
-    iat?: Date;
+  email: string;
+  iat?: Date;
 }

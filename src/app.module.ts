@@ -1,40 +1,38 @@
-import { Module } from "@nestjs/common";
-import { UsersModule } from "./users/users.module";
-import { SharedModule } from "./shared/shared.module";
-import { PrivilegesModule } from "./privilege/privileges.module";
-import { BoardGamesModule } from "./boardGame/boardGames.module";
-import { BoardGameMechanicsModule } from "./boardGameMechanic/boardGameMechanics.module";
-import { BoardGameTypesModule } from "./boardGameType/boardGameTypes.module";
-import { EventsModule } from "./event/events.module";
-import { FeedbacksModule } from "./feedback/feedbacks.module";
-import { LecturesModule } from "./lecture/lectures.module";
-import { LoanGamesModule } from "./loanGame/loanGames.module";
-import { MechanicsModule } from "./mechanic/mechanics.module";
-import { PublishersModule } from "./publisher/publishers.module";
-import { ReservationsModule } from "./reservation/reservations.module";
-import { TableModule } from "./table/table.module";
-import { TypesModule } from "./type/types.module";
-import { DatabaseModule } from "./database/database.module";
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { BoardGamesModule } from './boardGame/boardGames.module';
+import { EventsModule } from './event/events.module';
+import { FeedbacksModule } from './feedback/feedbacks.module';
+import { LecturesModule } from './lecture/lectures.module';
+import { LoanGamesModule } from './loanGame/loanGames.module';
+import { MechanicsModule } from './mechanic/mechanics.module';
+import { PrivilegesModule } from './privilege/privileges.module';
+import { PublishersModule } from './publisher/publishers.module';
+import { ReservationsModule } from './reservation/reservations.module';
+import { TableModule } from './table/table.module';
+import { TypesModule } from './type/types.module';
+import { UsersModule } from './users/users.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { configService } from './config/config.service';
 
 @Module({
-    imports: [
-        UsersModule,
-        SharedModule,
-        PrivilegesModule,
-        BoardGamesModule,
-        BoardGameMechanicsModule,
-        BoardGameTypesModule,
-        EventsModule,
-        FeedbacksModule,
-        LecturesModule,
-        LoanGamesModule,
-        MechanicsModule,
-        PublishersModule,
-        ReservationsModule,
-        TableModule,
-        TypesModule,
-    ],
-    controllers: [],
-    providers: []
+  imports: [
+    TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
+    UsersModule,
+    BoardGamesModule,
+    EventsModule,
+    FeedbacksModule,
+    LecturesModule,
+    LoanGamesModule,
+    MechanicsModule,
+    PublishersModule,
+    ReservationsModule,
+    TableModule,
+    TypesModule,
+    PrivilegesModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

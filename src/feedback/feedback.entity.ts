@@ -1,68 +1,45 @@
 import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-    Min,
-    Max, BelongsTo, ForeignKey
-} from 'sequelize-typescript';
+  Check,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { BoardGame } from '../boardGame/boardGame.entity';
 import { LoanGame } from '../loanGame/loanGame.entity';
 import { User } from '../users/user.entity';
-import { BoardGame } from '../boardGame/boardGame.entity';
 
-@Table({
-    tableName: 'feedback',
-})
-export class Feedback extends Model<Feedback> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
-    id: number;
+@Entity('feedbacks')
+@Check(`rating > 1 AND rating < 10`)
+export class Feedback {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Min(1)
-    @Max(10)
-    @Column(DataType.INTEGER)
-    rating: number;
+  @Column('integer')
+  rating: number;
 
-    @ForeignKey(() => LoanGame)
-    @Column({ type: DataType.BIGINT, field: 'loanGame_id' })
-    loanGameId: number;
+  @ManyToOne(() => LoanGame, (loanGame) => loanGame.feedbacks)
+  @JoinColumn({ name: 'loanGame_id' })
+  loanGame: LoanGame;
 
-    @BelongsTo(() => LoanGame)
-    loanGame: LoanGame;
+  @ManyToOne(() => User, (user) => user.feedbacks)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
-    @ForeignKey(() => User)
-    @Column({ type: DataType.UUID, field: 'user_id' })
-    userId: number;
+  @ManyToOne(() => BoardGame, (boardgame) => boardgame.feedbacks)
+  @JoinColumn({ name: 'boardGame_id' })
+  boardGame: BoardGame;
 
-    @BelongsTo(() => User)
-    user: User;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @ForeignKey(() => BoardGame)
-    @Column({ type: DataType.BIGINT, field: 'boardGame_id' })
-    boardGameId: number;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @BelongsTo(() => BoardGame)
-    boardGame: BoardGame;
-
-    @CreatedAt
-    @Column({ field: 'created_at' })
-    createdAt: Date;
-
-    @UpdatedAt
-    @Column({ field: 'updated_at' })
-    updatedAt: Date;
-
-    @DeletedAt
-    @Column({ field: 'deleted_at' })
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

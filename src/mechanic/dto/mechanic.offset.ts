@@ -1,14 +1,14 @@
-import { ApiModelProperty } from '@nestjs/swagger';
-import { MechanicDto } from '../../mechanic/dto/mechanic.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { MechanicDto } from './mechanic.dto';
 
 export class MechanicOffset {
-    @ApiModelProperty()
-    readonly rows: MechanicDto[];
-    @ApiModelProperty()
-    readonly count: number;
+  @ApiProperty()
+  readonly rows: MechanicDto[];
+  @ApiProperty()
+  readonly count: number;
 
-    constructor(mechanicOffset: MechanicOffset) {
-        this.rows = mechanicOffset.rows;
-        this.count = mechanicOffset.count;
-    }
+  constructor(mechanicOffset: MechanicOffset) {
+    this.rows = mechanicOffset.rows;
+    this.count = mechanicOffset.count;
+  }
 }

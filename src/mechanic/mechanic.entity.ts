@@ -1,44 +1,37 @@
 import {
-    AutoIncrement,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt,
-    HasMany,
-    Length,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-} from 'sequelize-typescript';
-import { BoardGameMechanic } from '../boardGameMechanic/boardGameMechanic.entity';
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { BoardGame } from '../boardGame/boardGame.entity';
 
-@Table({
-    tableName: 'mechanic',
-})
-export class Mechanic extends Model<Mechanic> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
-    id: number;
+@Entity('mechanics')
+export class Mechanic {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column(DataType.TEXT)
-    name: string;
+  @Column({ type: 'text', unique: true })
+  name: string;
 
-    @HasMany(() => BoardGameMechanic)
-    BoardGameMechanics: BoardGameMechanic[];
+  @ManyToMany(() => BoardGame, (boardGame) => boardGame.mechanics)
+  @JoinTable({
+    name: 'boardGame_mechanic',
+    joinColumns: [{ name: 'mechanic_id' }],
+    inverseJoinColumns: [{ name: 'boardGame_id' }],
+  })
+  boardGames: BoardGame[];
 
-    @CreatedAt
-    @Column({ field: 'created_at' })
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdatedAt
-    @Column({ field: 'updated_at' })
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @DeletedAt
-    @Column({ field: 'deleted_at' })
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

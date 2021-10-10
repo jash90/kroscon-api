@@ -1,63 +1,43 @@
 import {
-    AutoIncrement, BelongsTo,
-    Column,
-    CreatedAt,
-    DataType,
-    DeletedAt, ForeignKey,
-    HasMany,
-    Model,
-    PrimaryKey,
-    Table,
-    Unique,
-    UpdatedAt,
-} from 'sequelize-typescript';
-
-import { User } from '../users/user.entity';
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { BoardGame } from '../boardGame/boardGame.entity';
-import { Table as Tab } from '../table/table.entity';
-@Table({
-    tableName: 'reservation',
-})
-export class Reservation extends Model<Reservation> {
-    @PrimaryKey
-    @AutoIncrement
-    @Column(DataType.BIGINT)
-    id: number;
+import { Table } from '../table/table.entity';
+import { User } from '../users/user.entity';
 
-    @Column(DataType.DATE)
-    time: Date;
+@Entity('reservations')
+export class Reservation {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @ForeignKey(() => User)
-    @Column({ type: DataType.UUID, field: 'user_id' })
-    userId: number;
+  @Column('date')
+  time: Date;
 
-    @BelongsTo(() => User)
-    user: User;
+  @ManyToOne(() => User, (user) => user.reservations)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
-    @ForeignKey(() => BoardGame)
-    @Column({ type: DataType.BIGINT, field: 'boardGame_id' })
-    boardGameId: number;
+  @ManyToOne(() => BoardGame, (boardGame) => boardGame.reservations)
+  @JoinColumn({ name: 'boardGame_id' })
+  boardGame: BoardGame;
 
-    @BelongsTo(() => BoardGame)
-    boardGame: BoardGame;
+  @ManyToOne(() => Table, (table) => table.reservations)
+  @JoinColumn({ name: 'table_id' })
+  table: Table;
 
-    @ForeignKey(() => Tab)
-    @Column({ type: DataType.BIGINT, field: 'table_id' })
-    tableId: number;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @BelongsTo(() => Tab)
-    table: Tab;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @CreatedAt
-    @Column({ field: 'created_at' })
-    createdAt: Date;
-
-    @UpdatedAt
-    @Column({ field: 'updated_at' })
-    updatedAt: Date;
-
-    @DeletedAt
-    @Column({ field: 'deleted_at' })
-    deletedAt: Date;
-
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

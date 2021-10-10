@@ -1,14 +1,14 @@
-import { ApiModelProperty } from '@nestjs/swagger';
-import { PublisherDto } from '../../publisher/dto/publisher.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { PublisherDto } from './publisher.dto';
 
 export class PublisherOffset {
-    @ApiModelProperty()
-    readonly rows: PublisherDto[];
-    @ApiModelProperty()
-    readonly count: number;
+  @ApiProperty()
+  readonly rows: PublisherDto[];
+  @ApiProperty()
+  readonly count: number;
 
-    constructor(publisherOffset: PublisherOffset) {
-        this.rows = publisherOffset.rows;
-        this.count = publisherOffset.count;
-    }
+  constructor(publisherOffset: PublisherOffset) {
+    this.rows = publisherOffset.rows;
+    this.count = publisherOffset.count;
+  }
 }

@@ -1,29 +1,29 @@
-import { ApiModelProperty } from '@nestjs/swagger';
-import { IsEnum, IsOptional, IsString, Length, IsDate } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsDate, IsOptional, IsString } from 'class-validator';
 
 export class UpdateEventDto {
-    @IsOptional()
-    @ApiModelProperty()
-    @IsString()
-    readonly name: string;
+  @IsOptional()
+  @ApiProperty()
+  @IsString()
+  name: string;
 
-    @ApiModelProperty()
-    @IsDate()
-    @IsOptional()
-    readonly start: Date;
+  @ApiProperty()
+  @IsDate()
+  @IsOptional()
+  start: Date;
 
-    @ApiModelProperty()
-    @IsDate()
-    @IsOptional()
-    readonly end: Date;
+  @ApiProperty()
+  @IsDate()
+  @IsOptional()
+  end: Date;
 
-    @ApiModelProperty()
-    @IsString()
-    @IsOptional()
-    readonly description: string;
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  description: string;
 
-    @ApiModelProperty()
-    @IsString()
-    @IsOptional()
-    readonly location: string;
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  location: string;
 }

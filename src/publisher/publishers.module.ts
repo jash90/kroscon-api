@@ -1,13 +1,14 @@
-import { DatabaseModule } from '../database/database.module';
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { BoardGame } from '../boardGame/boardGame.entity';
+import { Publisher } from './publisher.entity';
 import { PublishersController } from './publishers.controller';
-import { PublishersService } from './publishers.service';
 import { publishersProviders } from './publishers.providers';
+import { PublishersService } from './publishers.service';
 
 @Module({
-    imports: [DatabaseModule],
-    controllers: [PublishersController],
-    providers: [PublishersService, ...publishersProviders],
-    exports: [],
+  imports: [TypeOrmModule.forFeature([Publisher, BoardGame])],
+  controllers: [PublishersController],
+  providers: [publishersProviders, PublishersService],
 })
-export class PublishersModule { }
+export class PublishersModule {}

@@ -1,65 +1,65 @@
-import { Column, CreatedAt, DataType, DeletedAt, IsEmail, Model, Table, Unique, UpdatedAt, BelongsTo, ForeignKey, HasMany } from 'sequelize-typescript';
-import { Gender } from '../shared/enum/enums';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Feedback } from '../feedback/feedback.entity';
+import { LoanGame } from '../loanGame/loanGame.entity';
+// import { Gender } from "../shared/enum/enums";
 import { Privilege } from '../privilege/privilege.entity';
 import { Reservation } from '../reservation/reservation.entity';
-import { LoanGame } from '../loanGame/loanGame.entity';
-import { Feedback } from '../feedback/feedback.entity';
 
-@Table({
-    tableName: 'user',
-})
-export class User extends Model<User> {
-    @Column({
-        type: DataType.UUID,
-        defaultValue: DataType.UUIDV4,
-        primaryKey: true,
-    })
-    id: string;
+@Entity('users')
+export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Unique(true)
-    @Column({ type: DataType.TEXT, validate: { IsEmail: true } })
-    email: string;
+  @Column({ type: 'text', unique: true })
+  email: string;
 
-    @Column(DataType.TEXT)
-    password: string;
+  @Column('text')
+  password: string;
 
-    @Column({ field: 'first_name' })
-    firstname: string;
+  @Column('text')
+  firstname: string;
 
-    @Column({ field: 'last_name' })
-    lastname: string;
+  @Column('text')
+  lastname: string;
 
-    @Column({ type: DataType.ENUM(Gender.female, Gender.male) })
-    gender: Gender;
+  @Column({ type: 'smallint', nullable: true })
+  age: number;
 
-    @Column(DataType.DATEONLY)
-    birthday: string;
+  @Column({ type: 'text', nullable: true })
+  city: string;
 
-    @ForeignKey(() => Privilege)
-    @Column({ type: DataType.BIGINT, field: 'privilege_id' })
-    privilegeId: number;
+  @ManyToOne(() => Privilege, (privilege) => privilege.users)
+  @JoinColumn({ name: 'privilege_id' })
+  privilege: Privilege;
 
-    @BelongsTo(() => Privilege)
-    privilege: Privilege;
+  @OneToMany(() => LoanGame, (loanGame) => loanGame.user)
+  loanGames: LoanGame[];
 
-    @HasMany(() => Reservation)
-    reservations: Reservation[];
+  @OneToMany(() => LoanGame, (loanGame) => loanGame.hireUser)
+  hireGames: LoanGame[];
 
-    @HasMany(() => LoanGame)
-    loanGames: LoanGame[];
+  @OneToMany(() => Reservation, (reservation) => reservation.user)
+  reservations: Reservation[];
 
-    @HasMany(() => Feedback)
-    feedbacks: Feedback[];
+  @OneToMany(() => Feedback, (feedback) => feedback.user)
+  feedbacks: Feedback[];
 
-    @CreatedAt
-    @Column({ field: 'created_at' })
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdatedAt
-    @Column({ field: 'updated_at' })
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @DeletedAt
-    @Column({ field: 'deleted_at' })
-    deletedAt: Date;
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

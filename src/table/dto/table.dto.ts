@@ -1,15 +1,15 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { Table } from '../table.entity';
 
 export class TableDto {
-    @ApiModelProperty()
-    readonly id: number;
+  @ApiProperty()
+  readonly id: number;
 
-    @ApiModelProperty()
-    readonly name: string;
+  @ApiProperty()
+  readonly name: string;
 
-    constructor(table: Table) {
-        this.id = table.id;
-        this.name = table.name;
-    }
+  constructor(table: Table) {
+    this.id = table.id;
+    this.name = table.name;
+  }
 }

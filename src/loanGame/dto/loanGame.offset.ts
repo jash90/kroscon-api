@@ -1,14 +1,14 @@
-import { ApiModelProperty } from '@nestjs/swagger';
-import { LoanGameDto } from '../../loanGame/dto/loanGame.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { LoanGameDto } from './loanGame.dto';
 
 export class LoanGameOffset {
-    @ApiModelProperty()
-    readonly rows: LoanGameDto[];
-    @ApiModelProperty()
-    readonly count: number;
+  @ApiProperty()
+  readonly rows: LoanGameDto[];
+  @ApiProperty()
+  readonly count: number;
 
-    constructor(loanGameOffset: LoanGameOffset) {
-        this.rows = loanGameOffset.rows;
-        this.count = loanGameOffset.count;
-    }
+  constructor(loanGameOffset: LoanGameOffset) {
+    this.rows = loanGameOffset.rows;
+    this.count = loanGameOffset.count;
+  }
 }
